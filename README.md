@@ -33,14 +33,14 @@ If Unity prompts errors about missing packages:
 ## Development Guidelines
 
 ### Folder Structure
-
-- `Code` → Gameplay logic (AI, movement, UI handling, etc.)
-- `Prefabs` → Reusable game objects (enemies, towers, projectiles)
-- `Scenes` → Level design & game world setup
-- `Art` → 3D models, textures, animations
-- `UI` → Menus, HUD elements
-- `Audio` → Sound effects and music
-- `Shaders` → Custom rendering effects
+`Assets/`
+- `Code/` → Gameplay logic (AI, movement, UI handling, etc.)
+- `Prefabs/` → Reusable game objects (enemies, towers, projectiles)
+- `Scenes/` → Level design & game world setup
+- `Art/` → 3D models, textures, animations
+- `UI/` → Menus, HUD elements
+- `Audio/` → Sound effects and music
+- `Shaders/` → Custom rendering effects
 
 ### Git Workflow
 
@@ -66,11 +66,11 @@ git push origin main
 
 ## Contributors
 
-- [Ethan Wheat]
-- [Gavin Kirwan]
-- [Tanner Barcus]
-- [Edgar Mendez]
-- [Mario Sumanasekara]
+- Ethan Wheat
+- Gavin Kirwan
+- Tanner Barcus
+- Edgar Mendez
+- Mario Sumanasekara
 
 ## License
 
