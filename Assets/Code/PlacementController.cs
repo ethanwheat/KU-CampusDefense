@@ -10,7 +10,15 @@ public class PlacementController : MonoBehaviour
 
     public PlacementMethod placementMethod;
 
-    [SerializeField] private Camera mainCamera;
+    private Camera mainCamera;
+    private Outline outline;
+
+    void Start()
+    {
+        mainCamera = Camera.main;
+        outline = gameObject.GetComponent<Outline>();
+        outline.enabled = true;
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,26 +30,72 @@ public class PlacementController : MonoBehaviour
         int layerMask = LayerMask.GetMask("Placement");
 
         // Create raycast.
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
         {
-            GameObject placement = raycastHit.collider.gameObject;
-            string tag = placement.tag;
+            string tag = hit.collider.gameObject.tag;
 
             // If placementMethod is OnRoad and tag is RoadPlacement, then snap to road.
-            if (placementMethod == PlacementMethod.OnRoad && tag == "RoadPlacement")
+            if (placementMethod == PlacementMethod.OnRoad)
             {
-                Vector3 mousePosition = raycastHit.point;
-                Vector3 targetPosition = raycastHit.transform.position;
-                Quaternion targetRotation = raycastHit.transform.rotation;
+                if (tag == "RoadPlacement")
+                {
+                    snapToRoad(hit);
+                    setValidPlacement();
 
-                transform.position = new Vector3(mousePosition.x, 0, targetPosition.z);
-                transform.rotation = targetRotation;
+                    return;
+                }
+
+                freePlace(hit);
+                setInvalidPlacement();
+
+                return;
             }
-            else
+
+            if (placementMethod == PlacementMethod.SideOfRoad)
             {
-                transform.position = raycastHit.point;
-                transform.rotation = Quaternion.identity;
+                if (tag == "SideOfRoadPlacement")
+                {
+                    setValidPlacement();
+                }
+                else
+                {
+                    setInvalidPlacement();
+                }
+
+                freePlace(hit);
             }
         }
+    }
+
+    void freePlace(RaycastHit hit)
+    {
+        transform.position = hit.point;
+        transform.rotation = Quaternion.identity;
+    }
+
+    void snapToRoad(RaycastHit hit)
+    {
+        Vector3 objectPosition = hit.transform.position;
+        Quaternion objectRotation = hit.transform.rotation;
+        Vector3 objectDirection = hit.transform.rotation * Vector3.right;
+
+        Vector3 movementDirection = hit.point - objectPosition;
+        float distanceAlongDirection = Vector3.Dot(movementDirection, objectDirection);
+
+        Vector3 targetPosition = objectPosition + objectDirection * distanceAlongDirection;
+        targetPosition.y = 0;
+
+        transform.position = targetPosition;
+        transform.rotation = objectRotation;
+    }
+
+    void setValidPlacement()
+    {
+        outline.OutlineColor = Color.green;
+    }
+
+    void setInvalidPlacement()
+    {
+        outline.OutlineColor = Color.red;
     }
 }

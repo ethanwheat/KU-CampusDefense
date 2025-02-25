@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - RoadPlacement
+  - SideOfRoadPlacement
   layers:
   - Default
   - TransparentFX
