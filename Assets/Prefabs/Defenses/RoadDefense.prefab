@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6011275747530973252}
   - component: {fileID: 915168035614716050}
   - component: {fileID: 2020841808770597912}
-  - component: {fileID: 2852273750867980980}
+  - component: {fileID: 7677997720448427082}
   m_Layer: 0
   m_Name: RoadDefense
   m_TagString: Untagged
@@ -130,7 +130,7 @@ MonoBehaviour:
   bakeValues: []
   outlineMaskMaterial: {fileID: 2100000, guid: 106f3ff43a17d4967a2b64c7a92e49ec, type: 2}
   outlineFillMaterial: {fileID: 2100000, guid: 311313efa011949e98b6761d652ad13c, type: 2}
---- !u!114 &2852273750867980980
+--- !u!114 &7677997720448427082
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,4 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558a84c28b97184479a4d097786accc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlaced: 0
   placementMethod: 1
+  onDefensePlace:
+    m_PersistentCalls:
+      m_Calls: []

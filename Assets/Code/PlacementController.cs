@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlacementController : MonoBehaviour
 {
@@ -7,11 +8,14 @@ public class PlacementController : MonoBehaviour
         SideOfRoad,
         OnRoad
     };
+    public bool isPlaced;
+    public UnityEvent onDefensePlace;
 
-    public PlacementMethod placementMethod;
+    [SerializeField] private PlacementMethod placementMethod;
 
     private Camera mainCamera;
     private Outline outline;
+    private bool validPlacement = false;
 
     void Start()
     {
@@ -41,16 +45,15 @@ public class PlacementController : MonoBehaviour
                 {
                     snapToRoad(hit);
                     setValidPlacement();
-
-                    return;
                 }
-
-                freePlace(hit);
-                setInvalidPlacement();
-
-                return;
+                else
+                {
+                    freePlace(hit);
+                    setInvalidPlacement();
+                }
             }
 
+            // If placementMethod is OnRoad and tag is SideOfRoad, then allow free placement on the side of road.
             if (placementMethod == PlacementMethod.SideOfRoad)
             {
                 if (tag == "SideOfRoadPlacement")
@@ -64,15 +67,26 @@ public class PlacementController : MonoBehaviour
 
                 freePlace(hit);
             }
+
+            // Check if placed.
+            if (Input.GetMouseButtonDown(0))
+            {
+                // Place defense.
+                placeDefense();
+            }
         }
     }
 
+    // Allow defense to be dragged over any part of the map.
     void freePlace(RaycastHit hit)
     {
-        transform.position = hit.point;
+        Vector3 targetPosition = hit.point;
+        targetPosition.y = 2.4f;
+        transform.position = targetPosition;
         transform.rotation = Quaternion.identity;
     }
 
+    // Snap defense to roads.
     void snapToRoad(RaycastHit hit)
     {
         Vector3 objectPosition = hit.transform.position;
@@ -83,19 +97,68 @@ public class PlacementController : MonoBehaviour
         float distanceAlongDirection = Vector3.Dot(movementDirection, objectDirection);
 
         Vector3 targetPosition = objectPosition + objectDirection * distanceAlongDirection;
-        targetPosition.y = 0;
+        targetPosition.y = 2.5f;
 
         transform.position = targetPosition;
         transform.rotation = objectRotation;
     }
 
+    // Set the placement as valid.
     void setValidPlacement()
     {
+        validPlacement = true;
         outline.OutlineColor = Color.green;
     }
 
+    // Set the placement as invalid.
     void setInvalidPlacement()
     {
+        validPlacement = false;
         outline.OutlineColor = Color.red;
+    }
+
+    // Cancel the placement
+    public void cancelPlacement()
+    {
+        Destroy(gameObject);
+    }
+
+    // Place the defense, disable this script, and disable outline script.
+    void placeDefense()
+    {
+        // Check if valid placement is true.
+        if (validPlacement)
+        {
+            // Send event to reset the defense panel.
+            onDefensePlace.Invoke();
+
+            // Set isPlaced to true.
+            isPlaced = true;
+
+            // Disable this script.
+            this.enabled = false;
+
+            // Disable outline script.
+            outline.enabled = false;
+
+            // Set the parent of the new defense.
+            GameObject parent = GameObject.Find("Defenses");
+
+            if (!parent)
+            {
+                parent = new GameObject("Defenses");
+            }
+
+            Transform parentTransform = parent.transform;
+            transform.parent = parentTransform;
+
+            // Delete placement gameobject.
+            GameObject placementGameObject = GameObject.Find("Placement");
+
+            if (placementGameObject)
+            {
+                Destroy(placementGameObject);
+            }
+        }
     }
 }
