@@ -9,12 +9,13 @@ public class EnemyMovement : MonoBehaviour
     }
 
     public PathNode currentNode; // The waypoint the object is moving toward
-    public float speed = 5f;
+    public float speed;
+    private bool isBlocked = false;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-      if (currentNode == null) return;
+      if (currentNode == null || isBlocked) return;
 
       // Rotate toward the next waypoint
       Vector3 direction = currentNode.transform.position - transform.position;
@@ -30,6 +31,32 @@ public class EnemyMovement : MonoBehaviour
       if (Vector3.Distance(transform.position, currentNode.transform.position) < 0.1f)
       {
         currentNode = currentNode.GetNextNode();
+      }
+    }
+    
+    // Stop movement when touching an obstacle
+    private void OnTriggerEnter(Collider other)
+    {
+      if (other.CompareTag("Obstacle"))
+      {
+        isBlocked = true;
+      } 
+      else if (other.CompareTag("Ice")) 
+      {
+        speed /= 5;
+      }
+    }
+
+    // Resume movement when no longer touching an obstacle
+    private void OnTriggerExit(Collider other)
+    {
+      if (other.CompareTag("Obstacle"))
+      {
+        isBlocked = false;
+      } 
+      else if (other.CompareTag("Ice")) 
+      {
+        speed *= 5;
       }
     }
 }

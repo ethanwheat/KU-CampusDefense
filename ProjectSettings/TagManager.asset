@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 3
   tags:
   - RoadPlacement
+  - Obstacle
+  - Ice
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Obstacle
   - Water
   - UI
   - Placement
