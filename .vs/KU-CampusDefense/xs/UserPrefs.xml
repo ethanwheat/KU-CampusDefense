@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{2E39523C-6053-8407-724E-8878BCD6362E}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="211b74d0-f2d7-4da8-b7c3-0e0cdd701c81" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/RoundManager.cs">
+    <Files>
+      <File FileName="Assets/Code/RoundManager.cs" Line="35" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="KU-CampusDefense">
+            <Node name="Assets" expanded="True">
+              <Node name="Code" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
