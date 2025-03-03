@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlacementController : MonoBehaviour
 {
@@ -7,10 +8,21 @@ public class PlacementController : MonoBehaviour
         SideOfRoad,
         OnRoad
     };
+    public bool isPlaced;
+    public UnityEvent onDefensePlace;
 
-    public PlacementMethod placementMethod;
+    [SerializeField] private PlacementMethod placementMethod;
 
-    [SerializeField] private Camera mainCamera;
+    private Camera mainCamera;
+    private Outline outline;
+    private bool validPlacement = false;
+
+    void Start()
+    {
+        mainCamera = Camera.main;
+        outline = gameObject.GetComponent<Outline>();
+        outline.enabled = true;
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,25 +34,130 @@ public class PlacementController : MonoBehaviour
         int layerMask = LayerMask.GetMask("Placement");
 
         // Create raycast.
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
         {
-            GameObject placement = raycastHit.collider.gameObject;
-            string tag = placement.tag;
+            string tag = hit.collider.gameObject.tag;
 
             // If placementMethod is OnRoad and tag is RoadPlacement, then snap to road.
-            if (placementMethod == PlacementMethod.OnRoad && tag == "RoadPlacement")
+            if (placementMethod == PlacementMethod.OnRoad)
             {
-                Vector3 mousePosition = raycastHit.point;
-                Vector3 targetPosition = raycastHit.transform.position;
-                Quaternion targetRotation = raycastHit.transform.rotation;
-
-                transform.position = new Vector3(mousePosition.x, 0, targetPosition.z);
-                transform.rotation = targetRotation;
+                if (tag == "RoadPlacement")
+                {
+                    snapToRoad(hit);
+                    setValidPlacement();
+                }
+                else
+                {
+                    freePlace(hit);
+                    setInvalidPlacement();
+                }
             }
-            else
+
+            // If placementMethod is OnRoad and tag is SideOfRoad, then allow free placement on the side of road.
+            if (placementMethod == PlacementMethod.SideOfRoad)
             {
-                transform.position = raycastHit.point;
-                transform.rotation = Quaternion.identity;
+                if (tag == "SideOfRoadPlacement")
+                {
+                    setValidPlacement();
+                }
+                else
+                {
+                    setInvalidPlacement();
+                }
+
+                freePlace(hit);
+            }
+
+            // Check if placed.
+            if (Input.GetMouseButtonDown(0))
+            {
+                // Place defense.
+                placeDefense();
+            }
+        }
+    }
+
+    // Allow defense to be dragged over any part of the map.
+    void freePlace(RaycastHit hit)
+    {
+        Vector3 targetPosition = hit.point;
+        targetPosition.y = 2.4f;
+        transform.position = targetPosition;
+        transform.rotation = Quaternion.identity;
+    }
+
+    // Snap defense to roads.
+    void snapToRoad(RaycastHit hit)
+    {
+        Vector3 objectPosition = hit.transform.position;
+        Quaternion objectRotation = hit.transform.rotation;
+        Vector3 objectDirection = hit.transform.rotation * Vector3.right;
+
+        Vector3 movementDirection = hit.point - objectPosition;
+        float distanceAlongDirection = Vector3.Dot(movementDirection, objectDirection);
+
+        Vector3 targetPosition = objectPosition + objectDirection * distanceAlongDirection;
+        targetPosition.y = 2.5f;
+
+        transform.position = targetPosition;
+        transform.rotation = objectRotation;
+    }
+
+    // Set the placement as valid.
+    void setValidPlacement()
+    {
+        validPlacement = true;
+        outline.OutlineColor = Color.green;
+    }
+
+    // Set the placement as invalid.
+    void setInvalidPlacement()
+    {
+        validPlacement = false;
+        outline.OutlineColor = Color.red;
+    }
+
+    // Cancel the placement
+    public void cancelPlacement()
+    {
+        Destroy(gameObject);
+    }
+
+    // Place the defense, disable this script, and disable outline script.
+    void placeDefense()
+    {
+        // Check if valid placement is true.
+        if (validPlacement)
+        {
+            // Send event to reset the defense panel.
+            onDefensePlace.Invoke();
+
+            // Set isPlaced to true.
+            isPlaced = true;
+
+            // Disable this script.
+            this.enabled = false;
+
+            // Disable outline script.
+            outline.enabled = false;
+
+            // Set the parent of the new defense.
+            GameObject parent = GameObject.Find("Defenses");
+
+            if (!parent)
+            {
+                parent = new GameObject("Defenses");
+            }
+
+            Transform parentTransform = parent.transform;
+            transform.parent = parentTransform;
+
+            // Delete placement gameobject.
+            GameObject placementGameObject = GameObject.Find("Placement");
+
+            if (placementGameObject)
+            {
+                Destroy(placementGameObject);
             }
         }
     }
