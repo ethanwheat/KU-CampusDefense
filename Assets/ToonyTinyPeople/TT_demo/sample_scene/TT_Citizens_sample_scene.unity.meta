@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ef84f0feb37c21e4f9485ac11ec74c35
+timeCreated: 1520446429
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 113188
+  packageName: Toony Tiny People Demo
+  packageVersion: 1.01
+  assetPath: Assets/ToonyTinyPeople/TT_demo/sample_scene/TT_Citizens_sample_scene.unity
+  uploadId: 374152
