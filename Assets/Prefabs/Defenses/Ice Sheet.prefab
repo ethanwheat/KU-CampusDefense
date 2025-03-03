@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1895444062019230447
+--- !u!1 &5472060738618537860
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 162193467385464946}
-  - component: {fileID: 2133741345444520908}
-  - component: {fileID: 6510967142083755263}
-  - component: {fileID: 8778185877212511230}
-  - component: {fileID: 2901288876829108705}
-  - component: {fileID: 8052478842750017930}
+  - component: {fileID: 6243491642953469208}
+  - component: {fileID: 3329112843081774123}
+  - component: {fileID: 8212800759176748460}
+  - component: {fileID: 4637707034543251701}
+  - component: {fileID: -5059742201954983613}
+  - component: {fileID: 3625628534460288557}
   m_Layer: 7
-  m_Name: SideOfRoadDefense
-  m_TagString: Untagged
+  m_Name: Ice Sheet
+  m_TagString: Ice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &162193467385464946
+--- !u!4 &6243491642953469208
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895444062019230447}
+  m_GameObject: {fileID: 5472060738618537860}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 20, y: 0.2, z: 14}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2133741345444520908
+--- !u!33 &3329112843081774123
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895444062019230447}
+  m_GameObject: {fileID: 5472060738618537860}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6510967142083755263
+--- !u!23 &8212800759176748460
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895444062019230447}
+  m_GameObject: {fileID: 5472060738618537860}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -89,13 +89,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8778185877212511230
+--- !u!65 &4637707034543251701
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895444062019230447}
+  m_GameObject: {fileID: 5472060738618537860}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -110,13 +110,13 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2901288876829108705
+--- !u!114 &-5059742201954983613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895444062019230447}
+  m_GameObject: {fileID: 5472060738618537860}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
@@ -128,15 +128,13 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
-  outlineMaskMaterial: {fileID: 2100000, guid: 106f3ff43a17d4967a2b64c7a92e49ec, type: 2}
-  outlineFillMaterial: {fileID: 2100000, guid: 311313efa011949e98b6761d652ad13c, type: 2}
---- !u!114 &8052478842750017930
+--- !u!114 &3625628534460288557
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1895444062019230447}
+  m_GameObject: {fileID: 5472060738618537860}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 558a84c28b97184479a4d097786accc8, type: 3}
@@ -146,4 +144,4 @@ MonoBehaviour:
   onDefensePlace:
     m_PersistentCalls:
       m_Calls: []
-  placementMethod: 0
+  placementMethod: 1

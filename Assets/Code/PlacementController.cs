@@ -83,7 +83,7 @@ public class PlacementController : MonoBehaviour
         Vector3 targetPosition = hit.point;
         float hitBottom = hit.collider.bounds.min.y;
         float objectSize = transform.localScale.y;
-        targetPosition.y = hitBottom + (objectSize / 2);
+        targetPosition.y = Mathf.Max(0, hitBottom + (objectSize / 2));
         transform.position = targetPosition;
         transform.rotation = Quaternion.identity;
     }
@@ -101,7 +101,7 @@ public class PlacementController : MonoBehaviour
         Vector3 targetPosition = objectPosition + objectDirection * distanceAlongDirection;
         float hitBottom = hit.collider.bounds.min.y;
         float objectSize = transform.localScale.y;
-        targetPosition.y = hitBottom + (objectSize / 2);
+        targetPosition.y = Mathf.Max(0, hitBottom + (objectSize / 2));
 
         transform.position = targetPosition;
         transform.rotation = objectRotation;
