@@ -35,6 +35,26 @@ public class RoundManager : MonoBehaviour
             {
                 enemyScript.currentNode = startNodes[spawnIndex];
             }
+            
+            // Set the parent of the new enemy.
+            GameObject parent = GameObject.Find("Enemies");
+
+            if (!parent)
+            {
+                parent = new GameObject("Enemies");
+            }
+
+            Transform parentTransform = parent.transform;
+
+            GameObject enemy = Instantiate(enemyPrefab, parentTransform);
+            Transform enemyTransform = enemy.transform;
+            enemyTransform.position = randomPosition;
+            enemyTransform.rotation = Quaternion.identity;
+
+            //Enemy enemyScript = enemy.GetComponent<Enemy>();
+            //if (enemyScript != null)
+            //{
+            //enemyScript.spawnPoint = randomSpawnArea.transform; // Store spawn area
 
             yield return new WaitForSeconds(1f);
         }
