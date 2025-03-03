@@ -43,7 +43,7 @@ public class DefensePanelUIController : MonoBehaviour
             // Update position on panel.
             RectTransform newPlacementButtonTransform = newPlacementButtonGameObject.GetComponent<RectTransform>();
             Vector2 newPosition = newPlacementButtonTransform.anchoredPosition;
-            newPosition.x += 160 * i;
+            newPosition.x += 130 * i;
             newPlacementButtonTransform.anchoredPosition = newPosition;
 
             // Update text on button.
