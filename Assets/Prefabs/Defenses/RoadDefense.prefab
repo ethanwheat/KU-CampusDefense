@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 915168035614716050}
   - component: {fileID: 2020841808770597912}
   - component: {fileID: 7677997720448427082}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RoadDefense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 6437141830629844252}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.9765, y: 2.466, z: 14.59}
-  m_LocalScale: {x: 5, y: 5, z: 14.04295}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 14}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlaced: 0
-  placementMethod: 1
   onDefensePlace:
     m_PersistentCalls:
       m_Calls: []
+  placementMethod: 1

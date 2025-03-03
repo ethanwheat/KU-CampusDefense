@@ -81,7 +81,9 @@ public class PlacementController : MonoBehaviour
     void freePlace(RaycastHit hit)
     {
         Vector3 targetPosition = hit.point;
-        targetPosition.y = 2.4f;
+        float hitBottom = hit.collider.bounds.min.y;
+        float objectSize = transform.localScale.y;
+        targetPosition.y = hitBottom + (objectSize / 2);
         transform.position = targetPosition;
         transform.rotation = Quaternion.identity;
     }
@@ -97,7 +99,9 @@ public class PlacementController : MonoBehaviour
         float distanceAlongDirection = Vector3.Dot(movementDirection, objectDirection);
 
         Vector3 targetPosition = objectPosition + objectDirection * distanceAlongDirection;
-        targetPosition.y = 2.5f;
+        float hitBottom = hit.collider.bounds.min.y;
+        float objectSize = transform.localScale.y;
+        targetPosition.y = hitBottom + (objectSize / 2);
 
         transform.position = targetPosition;
         transform.rotation = objectRotation;

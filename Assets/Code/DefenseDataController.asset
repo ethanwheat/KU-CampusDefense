@@ -19,3 +19,9 @@ MonoBehaviour:
   - name: Side Of Road Defense
     id: 1
     prefab: {fileID: 1895444062019230447, guid: ce45b6164b3601342b1f81b86b0285b6, type: 3}
+  - name: Obstacle
+    id: 2
+    prefab: {fileID: 6409600301112067378, guid: d3d63af395e5cd241ac6d9aecc737ba4, type: 3}
+  - name: Ice
+    id: 1
+    prefab: {fileID: 5472060738618537860, guid: 78c738e9591c76944b96413f9c505efb, type: 3}
