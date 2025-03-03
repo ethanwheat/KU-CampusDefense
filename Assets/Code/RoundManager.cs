@@ -7,6 +7,7 @@ public class RoundManager : MonoBehaviour
 {
     public GameObject enemyPrefab;   // Assign enemy prefab (to spawn)
     public BoxCollider[] spawnAreas;  // Where enemies will spawn
+    public PathNode[] startNodes;
     public int enemiesPerRound = 20;  // How many enemies spawn per round
 
     private int currentRound = 0;
@@ -22,11 +23,19 @@ public class RoundManager : MonoBehaviour
         for (int i = 0; i < enemiesPerRound; i++)
         {
 
+            int spawnIndex = Random.Range(0, spawnAreas.Length);
+            BoxCollider randomSpawnArea = spawnAreas[spawnIndex];
 
-            BoxCollider randomSpawnArea = spawnAreas[Random.Range(0, spawnAreas.Length)];
+            Vector3 spawnPosition = GetRandomPointInBounds(randomSpawnArea.bounds);
 
-            Vector3 randomPosition = GetRandomPointInBounds(randomSpawnArea.bounds);
+            GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
 
+            EnemyMovement enemyScript = enemy.GetComponent<EnemyMovement>();
+            if (enemyScript != null)
+            {
+                enemyScript.currentNode = startNodes[spawnIndex];
+            }
+            
             // Set the parent of the new enemy.
             GameObject parent = GameObject.Find("Enemies");
 
@@ -46,7 +55,6 @@ public class RoundManager : MonoBehaviour
             //if (enemyScript != null)
             //{
             //enemyScript.spawnPoint = randomSpawnArea.transform; // Store spawn area
-            //}
 
             yield return new WaitForSeconds(1f);
         }

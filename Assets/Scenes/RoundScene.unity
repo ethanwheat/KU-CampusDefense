@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &13701586 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3515790946622534553, guid: b614f1a6df5d5e548bd7ce88ddecd642, type: 3}
+  m_PrefabInstance: {fileID: 200899605}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc673eccc17085c468f5c80477bd21f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &50272556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -652,6 +663,17 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1814519648 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9166778809005408723, guid: b614f1a6df5d5e548bd7ce88ddecd642, type: 3}
+  m_PrefabInstance: {fileID: 200899605}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc673eccc17085c468f5c80477bd21f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1860691913
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,6 +816,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f0e633918e3148e09d76de297230ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2090411627 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2201660736964528294, guid: b614f1a6df5d5e548bd7ce88ddecd642, type: 3}
+  m_PrefabInstance: {fileID: 200899605}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc673eccc17085c468f5c80477bd21f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2096923300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -899,9 +932,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1111286898719251194, guid: 5ff9db9cc8f91cb478047c3a7997447f, type: 3}
+      propertyPath: m_Name
+      value: WestSpawn
+      objectReference: {fileID: 0}
     - target: {fileID: 1760835229617230166, guid: 5ff9db9cc8f91cb478047c3a7997447f, type: 3}
       propertyPath: m_Name
       value: SpawnPoints
+      objectReference: {fileID: 0}
+    - target: {fileID: 3855309577669031653, guid: 5ff9db9cc8f91cb478047c3a7997447f, type: 3}
+      propertyPath: m_Name
+      value: SouthSpawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 5487716098365262637, guid: 5ff9db9cc8f91cb478047c3a7997447f, type: 3}
+      propertyPath: m_Name
+      value: EastSpawn
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -929,6 +974,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
+      propertyPath: startNodes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
       propertyPath: 'spawnAreas.Array.data[0]'
       value: 
       objectReference: {fileID: 519468349}
@@ -940,6 +989,18 @@ PrefabInstance:
       propertyPath: 'spawnAreas.Array.data[2]'
       value: 
       objectReference: {fileID: 1944656995}
+    - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
+      propertyPath: 'startNodes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2090411627}
+    - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
+      propertyPath: 'startNodes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1814519648}
+    - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
+      propertyPath: 'startNodes.Array.data[2]'
+      value: 
+      objectReference: {fileID: 13701586}
     - target: {fileID: 7768121656922897829, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 77.41163

@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 7542408296283930808, guid: a5b61f46f314e1c40b39cd474c3f0c92, type: 3}
-  spawnAreas:
-  - {fileID: 0}
+  spawnAreas: []
+  startNodes: []
   enemiesPerRound: 5
