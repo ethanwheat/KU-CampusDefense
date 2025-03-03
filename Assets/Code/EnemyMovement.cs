@@ -38,17 +38,21 @@ public class EnemyMovement : MonoBehaviour
   private void OnTriggerEnter(Collider other)
   {
     PlacementController placementController = other.gameObject.GetComponent<PlacementController>();
-    bool isPlaced = placementController.isPlaced;
 
-    if (isPlaced)
+    if (placementController)
     {
-      if (other.CompareTag("Obstacle"))
+      bool isPlaced = placementController.isPlaced;
+
+      if (isPlaced)
       {
-        isBlocked = true;
-      }
-      else if (other.CompareTag("Ice"))
-      {
-        speed /= 5;
+        if (other.CompareTag("Obstacle"))
+        {
+          isBlocked = true;
+        }
+        else if (other.CompareTag("Ice"))
+        {
+          speed /= 5;
+        }
       }
     }
   }
@@ -57,17 +61,21 @@ public class EnemyMovement : MonoBehaviour
   private void OnTriggerExit(Collider other)
   {
     PlacementController placementController = other.gameObject.GetComponent<PlacementController>();
-    bool isPlaced = placementController.isPlaced;
 
-    if (isPlaced)
+    if (placementController)
     {
-      if (other.CompareTag("Obstacle"))
+      bool isPlaced = placementController.isPlaced;
+
+      if (isPlaced)
       {
-        isBlocked = false;
-      }
-      else if (other.CompareTag("Ice"))
-      {
-        speed *= 5;
+        if (other.CompareTag("Obstacle"))
+        {
+          isBlocked = false;
+        }
+        else if (other.CompareTag("Ice"))
+        {
+          speed *= 5;
+        }
       }
     }
   }

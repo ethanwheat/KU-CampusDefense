@@ -28,14 +28,6 @@ public class RoundManager : MonoBehaviour
 
             Vector3 spawnPosition = GetRandomPointInBounds(randomSpawnArea.bounds);
 
-            GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-
-            EnemyMovement enemyScript = enemy.GetComponent<EnemyMovement>();
-            if (enemyScript != null)
-            {
-                enemyScript.currentNode = startNodes[spawnIndex];
-            }
-            
             // Set the parent of the new enemy.
             GameObject parent = GameObject.Find("Enemies");
 
@@ -48,13 +40,14 @@ public class RoundManager : MonoBehaviour
 
             GameObject enemy = Instantiate(enemyPrefab, parentTransform);
             Transform enemyTransform = enemy.transform;
-            enemyTransform.position = randomPosition;
+            enemyTransform.position = spawnPosition;
             enemyTransform.rotation = Quaternion.identity;
 
-            //Enemy enemyScript = enemy.GetComponent<Enemy>();
-            //if (enemyScript != null)
-            //{
-            //enemyScript.spawnPoint = randomSpawnArea.transform; // Store spawn area
+            EnemyMovement enemyScript = enemy.GetComponent<EnemyMovement>();
+            if (enemyScript != null)
+            {
+                enemyScript.currentNode = startNodes[spawnIndex];
+            }
 
             yield return new WaitForSeconds(1f);
         }
