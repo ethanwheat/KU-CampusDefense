@@ -47,7 +47,7 @@ namespace RTS_Cam
 
         public float maxHeight = 10f; //maximal height
         public float minHeight = 15f; //minimnal height
-        public float heightDampening = 5f; 
+        public float heightDampening = 5f;
         public float keyboardZoomingSensitivity = 2f;
         public float scrollWheelZoomingSensitivity = 25f;
 
@@ -139,7 +139,7 @@ namespace RTS_Cam
                     return 1;
                 else if (zoomIn && !zoomOut)
                     return -1;
-                else 
+                else
                     return 0;
             }
         }
@@ -150,13 +150,13 @@ namespace RTS_Cam
             {
                 bool rotateRight = Input.GetKey(rotateRightKey);
                 bool rotateLeft = Input.GetKey(rotateLeftKey);
-                if(rotateLeft && rotateRight)
+                if (rotateLeft && rotateRight)
                     return 0;
-                else if(rotateLeft && !rotateRight)
+                else if (rotateLeft && !rotateRight)
                     return -1;
-                else if(!rotateLeft && rotateRight)
+                else if (!rotateLeft && rotateRight)
                     return 1;
-                else 
+                else
                     return 0;
             }
         }
@@ -236,9 +236,9 @@ namespace RTS_Cam
                 desiredMove = m_Transform.InverseTransformDirection(desiredMove);
 
                 m_Transform.Translate(desiredMove, Space.Self);
-            }       
-        
-            if(usePanning && Input.GetKey(panningKey) && MouseAxis != Vector2.zero)
+            }
+
+            if (usePanning && Input.GetKey(panningKey) && MouseAxis != Vector2.zero)
             {
                 Vector3 desiredMove = new Vector3(-MouseAxis.x, 0, -MouseAxis.y);
 
@@ -257,20 +257,20 @@ namespace RTS_Cam
         private void HeightCalculation()
         {
             float distanceToGround = DistanceToGround();
-            if(useScrollwheelZooming)
-                zoomPos += ScrollWheel * Time.deltaTime * scrollWheelZoomingSensitivity;
+            if (useScrollwheelZooming)
+                zoomPos -= ScrollWheel * Time.deltaTime * scrollWheelZoomingSensitivity;
             if (useKeyboardZooming)
                 zoomPos += ZoomDirection * Time.deltaTime * keyboardZoomingSensitivity;
 
             zoomPos = Mathf.Clamp01(zoomPos);
 
             float targetHeight = Mathf.Lerp(minHeight, maxHeight, zoomPos);
-            float difference = 0; 
+            float difference = 0;
 
-            if(distanceToGround != targetHeight)
+            if (distanceToGround != targetHeight)
                 difference = targetHeight - distanceToGround;
 
-            m_Transform.position = Vector3.Lerp(m_Transform.position, 
+            m_Transform.position = Vector3.Lerp(m_Transform.position,
                 new Vector3(m_Transform.position.x, targetHeight + difference, m_Transform.position.z), Time.deltaTime * heightDampening);
         }
 
@@ -279,7 +279,7 @@ namespace RTS_Cam
         /// </summary>
         private void Rotation()
         {
-            if(useKeyboardRotation)
+            if (useKeyboardRotation)
                 transform.Rotate(Vector3.up, RotationDirection * Time.deltaTime * rotationSped, Space.World);
 
             if (useMouseRotation && Input.GetKey(mouseRotationKey))
@@ -302,7 +302,7 @@ namespace RTS_Cam
         {
             if (!limitMap)
                 return;
-                
+
             m_Transform.position = new Vector3(Mathf.Clamp(m_Transform.position.x, -limitX, limitX),
                 m_Transform.position.y,
                 Mathf.Clamp(m_Transform.position.z, -limitY, limitY));
