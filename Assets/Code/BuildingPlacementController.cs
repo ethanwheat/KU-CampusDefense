@@ -2,17 +2,17 @@ using TMPro;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-public enum BuildingType
-{
-    Defense,
-    Dorm
-}
-
 public class BuildingPlacementController : MonoBehaviour
 {
+    private enum ObjectDataType
+    {
+        Defense,
+        Bonus
+    }
+
     [Header("Building Information")]
     [SerializeField] private string buildingName;
-    [SerializeField] private BuildingType buildingType;
+    [SerializeField] private ObjectDataType objectDataType;
     [SerializeField] private int id;
 
     [Header("Scene Information")]
@@ -33,6 +33,8 @@ public class BuildingPlacementController : MonoBehaviour
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
+    private ObjectData objectData;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,39 +42,29 @@ public class BuildingPlacementController : MonoBehaviour
         showPlacementArea();
     }
 
-    ObjectData getData()
+    public string getBuildingName()
     {
-        ObjectData[] objectData = null;
+        return buildingName;
+    }
 
-        if (buildingType == BuildingType.Defense)
-        {
-            objectData = gameDataController.getDefenseData();
-        }
-
-        if (buildingType == BuildingType.Dorm)
-        {
-            objectData = gameDataController.getDormData();
-        }
-
-        // Set defesense to current defense.
-        foreach (var data in objectData)
-        {
-            int dataId = data.getId();
-
-            if (dataId == id)
-            {
-                return data;
-            }
-        }
-
-        return null;
+    public ObjectData getObjectData()
+    {
+        return objectData;
     }
 
     void showPlacementArea()
     {
         resetPlacementArea();
 
-        ObjectData objectData = getData();
+        if (objectDataType == ObjectDataType.Defense)
+        {
+            objectData = gameDataController.getDefenseObjectData(id);
+        }
+
+        if (objectDataType == ObjectDataType.Bonus)
+        {
+            objectData = gameDataController.getBonusObjectData(id);
+        }
 
         // Throw error if invalid defense id.
         if (objectData == null)
@@ -82,7 +74,7 @@ public class BuildingPlacementController : MonoBehaviour
             return;
         }
 
-        int cost = objectData.getBuildingCurrencyCost();
+        int cost = objectData.getDiamondCost();
         bool isBought = objectData.isBought();
         bool isUnlocked = objectData.getUnlockRound() <= gameDataController.getRoundNumber();
 
@@ -183,11 +175,5 @@ public class BuildingPlacementController : MonoBehaviour
         }
 
         return overlays;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

@@ -7974,6 +7974,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: objectDataType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: availableMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ec452e413d43fd84ba912fbde87c7d50, type: 2}
@@ -8234,6 +8238,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: objectDataType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: availableMaterial
       value: 
       objectReference: {fileID: 2100000, guid: ec452e413d43fd84ba912fbde87c7d50, type: 2}
@@ -8365,6 +8373,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: objectDataType
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
@@ -9015,6 +9027,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: objectDataType
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
@@ -9811,6 +9827,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: objectDataType
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}

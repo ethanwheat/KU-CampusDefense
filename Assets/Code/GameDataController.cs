@@ -9,12 +9,17 @@ public class ObjectData
     [SerializeField] private int unlockRound;
     [SerializeField] private bool bought;
 
-    [Header("Building Costs")]
-    [SerializeField] private int buildingCurrencyCost;
+    [Header("Diamond Cost")]
+    [SerializeField] private int diamondCost;
 
     public string getName()
     {
         return name;
+    }
+
+    public string getDescription()
+    {
+        return description;
     }
 
     public int getId()
@@ -32,17 +37,17 @@ public class ObjectData
         return bought;
     }
 
-    public int getBuildingCurrencyCost()
+    public int getDiamondCost()
     {
-        return buildingCurrencyCost;
+        return diamondCost;
     }
 }
 
 [System.Serializable]
 public class DefenseData : ObjectData
 {
-    [Header("Round Costs")]
-    [SerializeField] private int roundCurrencyCost;
+    [Header("Coin Cost")]
+    [SerializeField] private int coinCost;
 
     [Header("Level")]
     [SerializeField] private int level;
@@ -55,21 +60,27 @@ public class DefenseData : ObjectData
         return prefab;
     }
 
-    public int getRoundCurrencyCost()
+    public int getCoinCost()
     {
-        return roundCurrencyCost;
+        return coinCost;
     }
 }
 
 [System.Serializable]
-public class DormData : ObjectData
+public class BonusData : ObjectData
 {
     [Header("Currency Bonus")]
-    [SerializeField] private float buildingCurrencyBonus;
+    [SerializeField] private float diamondBonus;
+    [SerializeField] private float coinBonus;
 
-    public float getBuildingCurrencyBonus()
+    public float getDiamondBonus()
     {
-        return buildingCurrencyBonus;
+        return diamondBonus;
+    }
+
+    public float getCoinBonus()
+    {
+        return coinBonus;
     }
 }
 
@@ -81,7 +92,7 @@ public class GameDataController : ScriptableObject
 
     [Header("Game Data")]
     [SerializeField] private DefenseData[] defenseData;
-    [SerializeField] private DormData[] dormData;
+    [SerializeField] private BonusData[] bonusData;
 
     public int getRoundNumber()
     {
@@ -93,8 +104,35 @@ public class GameDataController : ScriptableObject
         return defenseData;
     }
 
-    public DormData[] getDormData()
+    public DefenseData getDefenseObjectData(int id)
     {
-        return dormData;
+        // Set defesense to current defense.
+        foreach (var data in defenseData)
+        {
+            int dataId = data.getId();
+
+            if (dataId == id)
+            {
+                return data;
+            }
+        }
+
+        return null;
+    }
+
+    public BonusData getBonusObjectData(int id)
+    {
+        // Set defesense to current defense.
+        foreach (var data in bonusData)
+        {
+            int dataId = data.getId();
+
+            if (dataId == id)
+            {
+                return data;
+            }
+        }
+
+        return null;
     }
 }

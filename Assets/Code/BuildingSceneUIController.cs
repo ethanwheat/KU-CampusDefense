@@ -1,9 +1,13 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class BuildingSceneUIController : MonoBehaviour
 {
-    [SerializeField] private Button startRoundButton;
+    [Header("Prefabs")]
+    [SerializeField] private GameObject purchasePanelPrefab;
+
+    private GameObject purchasePanel;
 
     private Camera mainCamera;
 
@@ -11,26 +15,41 @@ public class BuildingSceneUIController : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-
-        startRoundButton.onClick.AddListener(startRound);
     }
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             int layerMask = LayerMask.GetMask("Building");
 
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
             {
-                Debug.Log("Hit");
-                Debug.Log(hit.collider.gameObject);
+                if (purchasePanel)
+                {
+                    PurchasePanelController controller = purchasePanel.GetComponent<PurchasePanelController>();
+                    controller.closePanel();
+                }
+
+                purchasePanel = Instantiate(purchasePanelPrefab, transform);
+                PurchasePanelController purchasePanelController = purchasePanel.GetComponent<PurchasePanelController>();
+                BuildingPlacementController buildingPlacementController = hit.collider.GetComponent<BuildingPlacementController>();
+
+                string buildingName = buildingPlacementController.getBuildingName();
+                ObjectData objectData = buildingPlacementController.getObjectData();
+
+                purchasePanelController.loadData(buildingName, objectData);
             }
         }
     }
 
-    void startRound()
+    public void startRound()
     {
         // Start round.
     }
