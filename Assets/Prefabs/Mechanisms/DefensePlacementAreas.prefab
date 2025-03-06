@@ -328,7 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 755917832195739683}
   m_Layer: 0
-  m_Name: PlacementAreas
+  m_Name: DefensePlacementAreas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

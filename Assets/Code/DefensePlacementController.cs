@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-public class PlacementController : MonoBehaviour
+public class DefencePlacementController : MonoBehaviour
 {
     public enum PlacementMethod
     {
@@ -146,7 +147,16 @@ public class PlacementController : MonoBehaviour
             outline.enabled = false;
 
             // Set the parent of the new defense.
-            GameObject parent = GameObject.Find("Defenses");
+            GameObject parent = null;
+
+            foreach (GameObject t in SceneManager.GetActiveScene().GetRootGameObjects())
+            {
+                if (t.name == "Defenses")
+                {
+                    parent = t.gameObject;
+                    break;
+                }
+            }
 
             if (!parent)
             {
@@ -157,7 +167,16 @@ public class PlacementController : MonoBehaviour
             transform.parent = parentTransform;
 
             // Delete placement gameobject.
-            GameObject placementGameObject = GameObject.Find("Placement");
+            GameObject placementGameObject = null;
+
+            foreach (GameObject t in SceneManager.GetActiveScene().GetRootGameObjects())
+            {
+                if (t.name == "Placement")
+                {
+                    placementGameObject = t.gameObject;
+                    break;
+                }
+            }
 
             if (placementGameObject)
             {

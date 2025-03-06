@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -6149619948121836139}
   - component: {fileID: -9099519208738707270}
   m_Layer: 7
-  m_Name: Barrier
+  m_Name: Road Block
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

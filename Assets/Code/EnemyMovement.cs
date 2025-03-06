@@ -37,7 +37,7 @@ public class EnemyMovement : MonoBehaviour
   // Stop movement when touching an obstacle
   private void OnTriggerEnter(Collider other)
   {
-    PlacementController placementController = other.gameObject.GetComponent<PlacementController>();
+    DefencePlacementController placementController = other.gameObject.GetComponent<DefencePlacementController>();
 
     if (placementController)
     {
@@ -60,7 +60,7 @@ public class EnemyMovement : MonoBehaviour
   // Resume movement when no longer touching an obstacle
   private void OnTriggerExit(Collider other)
   {
-    PlacementController placementController = other.gameObject.GetComponent<PlacementController>();
+    DefencePlacementController placementController = other.gameObject.GetComponent<DefencePlacementController>();
 
     if (placementController)
     {

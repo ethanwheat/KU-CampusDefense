@@ -1,12 +1,13 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DefensePanelUIController : MonoBehaviour
 {
     [SerializeField] private GameObject defensePlacementButtonPrefab;
-    [SerializeField] private DefenseDataController defenseDataController;
+    [SerializeField] private GameDataController gameDataController;
     [SerializeField] private Button closeButton;
     [SerializeField] private Transform placementButtonsContainer;
 
@@ -26,29 +27,34 @@ public class DefensePanelUIController : MonoBehaviour
     void loadDefenses()
     {
         // Get updated defenses.
-        defenseData = defenseDataController.getData();
+        defenseData = gameDataController.getDefenseData();
 
         for (int i = 0; i < defenseData.Length; i++)
         {
             // Get current defense.
             DefenseData defense = defenseData[i];
-            string defenseName = defense.name;
-            GameObject defensePrefab = defense.prefab;
+            bool isBought = defense.isBought();
 
-            // Create defense button and add listeners.
-            GameObject newPlacementButtonGameObject = Instantiate(defensePlacementButtonPrefab, placementButtonsContainer);
-            Button newPlacementButton = newPlacementButtonGameObject.GetComponent<Button>();
-            newPlacementButton.onClick.AddListener(() => selectDefense(newPlacementButtonGameObject, defensePrefab));
+            if (isBought)
+            {
+                string defenseName = defense.getName();
+                GameObject defensePrefab = defense.getPrefab();
 
-            // Update position on panel.
-            RectTransform newPlacementButtonTransform = newPlacementButtonGameObject.GetComponent<RectTransform>();
-            Vector2 newPosition = newPlacementButtonTransform.anchoredPosition;
-            newPosition.x += 130 * i;
-            newPlacementButtonTransform.anchoredPosition = newPosition;
+                // Create defense button and add listeners.
+                GameObject newPlacementButtonGameObject = Instantiate(defensePlacementButtonPrefab, placementButtonsContainer);
+                Button newPlacementButton = newPlacementButtonGameObject.GetComponent<Button>();
+                newPlacementButton.onClick.AddListener(() => selectDefense(newPlacementButtonGameObject, defensePrefab));
 
-            // Update text on button.
-            TextMeshProUGUI buttonText = newPlacementButtonGameObject.GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.text = defenseName;
+                // Update position on panel.
+                RectTransform newPlacementButtonTransform = newPlacementButtonGameObject.GetComponent<RectTransform>();
+                Vector2 newPosition = newPlacementButtonTransform.anchoredPosition;
+                newPosition.x += 130 * i;
+                newPlacementButtonTransform.anchoredPosition = newPosition;
+
+                // Update text on button.
+                TextMeshProUGUI buttonText = newPlacementButtonGameObject.GetComponentInChildren<TextMeshProUGUI>();
+                buttonText.text = defenseName;
+            }
         }
     }
 
@@ -66,7 +72,16 @@ public class DefensePanelUIController : MonoBehaviour
         selectedPlacementButton = placementButton;
 
         // Set the parent of the new defense.
-        GameObject parent = GameObject.Find("Placement");
+        GameObject parent = null;
+
+        foreach (GameObject t in SceneManager.GetActiveScene().GetRootGameObjects())
+        {
+            if (t.name == "Placement")
+            {
+                parent = t.gameObject;
+                break;
+            }
+        }
 
         if (!parent)
         {
@@ -79,7 +94,7 @@ public class DefensePanelUIController : MonoBehaviour
         currentDefensePlacement = Instantiate(defensePrefab, parentTransform);
 
         // Add listener to reset the panel when a placement is made.
-        PlacementController placementController = currentDefensePlacement.GetComponent<PlacementController>();
+        DefencePlacementController placementController = currentDefensePlacement.GetComponent<DefencePlacementController>();
         placementController.onDefensePlace.AddListener(resetPanel);
     }
 
@@ -101,7 +116,7 @@ public class DefensePanelUIController : MonoBehaviour
         if (currentDefensePlacement)
         {
             // Get placementController.
-            PlacementController placementController = currentDefensePlacement.GetComponent<PlacementController>();
+            DefencePlacementController placementController = currentDefensePlacement.GetComponent<DefencePlacementController>();
 
             // Only delete if defense is not placed.
             if (!placementController.isPlaced)
