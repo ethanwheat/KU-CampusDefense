@@ -34,6 +34,7 @@ public class BuildingPlacementController : MonoBehaviour
     [SerializeField] private GameDataController gameDataController;
 
     private ObjectData objectData;
+    private bool locked;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,6 +51,11 @@ public class BuildingPlacementController : MonoBehaviour
     public ObjectData getObjectData()
     {
         return objectData;
+    }
+
+    public bool isLocked()
+    {
+        return locked;
     }
 
     void showPlacementArea()
@@ -74,9 +80,12 @@ public class BuildingPlacementController : MonoBehaviour
             return;
         }
 
-        int cost = objectData.getDiamondCost();
+        // Get cost and if object is bought.
+        int cost = objectData.getDollarCost();
         bool isBought = objectData.isBought();
-        bool isUnlocked = objectData.getUnlockRound() <= gameDataController.getRoundNumber();
+
+        // Set if the item is locked.
+        locked = objectData.getUnlockRound() > gameDataController.getRoundNumber();
 
         // Check if defense is bought.
         if (isBought)
@@ -93,18 +102,18 @@ public class BuildingPlacementController : MonoBehaviour
 
             if (!isRoundScene)
             {
-                if (isUnlocked)
+                if (locked)
                 {
-                    createUnlockedBuildingOverlay(cost);
+                    createLockedBuildingOverlay();
                 }
                 else
                 {
-                    createLockedBuildingOverlay();
+                    createUnlockedBuildingOverlay(cost);
                 }
             }
 
             // If defense is unlocked and is not round scene then change color to available material else set to unavailable color.
-            if (isUnlocked && !isRoundScene)
+            if (!locked && !isRoundScene)
             {
                 meshRenderer.material = availableMaterial;
             }

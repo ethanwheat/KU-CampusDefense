@@ -9,8 +9,8 @@ public class ObjectData
     [SerializeField] private int unlockRound;
     [SerializeField] private bool bought;
 
-    [Header("Diamond Cost")]
-    [SerializeField] private int diamondCost;
+    [Header("Dollar Cost")]
+    [SerializeField] private int dollarCost;
 
     public string getName()
     {
@@ -37,9 +37,9 @@ public class ObjectData
         return bought;
     }
 
-    public int getDiamondCost()
+    public int getDollarCost()
     {
-        return diamondCost;
+        return dollarCost;
     }
 }
 
@@ -70,12 +70,12 @@ public class DefenseData : ObjectData
 public class BonusData : ObjectData
 {
     [Header("Currency Bonus")]
-    [SerializeField] private float diamondBonus;
+    [SerializeField] private float dollarBonus;
     [SerializeField] private float coinBonus;
 
-    public float getDiamondBonus()
+    public float getDollarBonus()
     {
-        return diamondBonus;
+        return dollarBonus;
     }
 
     public float getCoinBonus()
@@ -91,12 +91,18 @@ public class GameDataController : ScriptableObject
     [SerializeField] private int roundNumber;
 
     [Header("Game Data")]
+    [SerializeField] private int dollars;
     [SerializeField] private DefenseData[] defenseData;
     [SerializeField] private BonusData[] bonusData;
 
     public int getRoundNumber()
     {
         return roundNumber;
+    }
+
+    public int getDollars()
+    {
+        return dollars;
     }
 
     public DefenseData[] getDefenseData()
@@ -106,7 +112,6 @@ public class GameDataController : ScriptableObject
 
     public DefenseData getDefenseObjectData(int id)
     {
-        // Set defesense to current defense.
         foreach (var data in defenseData)
         {
             int dataId = data.getId();
@@ -122,7 +127,6 @@ public class GameDataController : ScriptableObject
 
     public BonusData getBonusObjectData(int id)
     {
-        // Set defesense to current defense.
         foreach (var data in bonusData)
         {
             int dataId = data.getId();

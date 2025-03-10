@@ -12,68 +12,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9be8f6e82a8734b8ab39eaf09efea4, type: 3}
   m_Name: GameDataController
   m_EditorClassIdentifier: 
-  roundNumber: 25
+  roundNumber: 5
+  dollars: 0
   defenseData:
-  - name: Road Block
-    description: 
+  - name: Barrier
+    description: Blocks all types of defenders, breaks eventually.
     id: 0
     unlockRound: 0
     bought: 1
-    buildingCurrencyCost: 0
-    roundCurrencyCost: 0
+    dollarCost: 0
+    coinCost: 0
     level: 0
     prefab: {fileID: 6409600301112067378, guid: d3d63af395e5cd241ac6d9aecc737ba4, type: 3}
   - name: Ice Sheet
-    description: 
+    description: 'Slows down enemies walking on the ice sheet, and lowers their HP. '
     id: 1
     unlockRound: 5
     bought: 0
-    buildingCurrencyCost: 100
-    roundCurrencyCost: 0
+    dollarCost: 100
+    coinCost: 0
     level: 0
     prefab: {fileID: 5472060738618537860, guid: 78c738e9591c76944b96413f9c505efb, type: 3}
-  - name: Other Defenses
-    description: 
+  - name: Defense Placeholder
+    description: This is a placeholder until other defenses are implemented.
     id: 2
     unlockRound: 25
     bought: 0
-    buildingCurrencyCost: 200
-    roundCurrencyCost: 0
+    dollarCost: 1000000
+    coinCost: 0
     level: 0
     prefab: {fileID: 5472060738618537860, guid: 78c738e9591c76944b96413f9c505efb, type: 3}
   bonusData:
-  - name: 
-    description: 
+  - name: 1.5x Coin Bonus
+    description: Applies a 1.5x multiplier when collecting coins.
     id: 0
-    unlockRound: 0
+    unlockRound: 5
     bought: 0
-    buildingCurrencyCost: 0
-    buildingCurrencyBonus: 0
-  - name: 
-    description: 
+    dollarCost: 100
+    dollarBonus: 0
+    coinBonus: 1.5
+  - name: 1.5x Dollar Bonus
+    description: Applies a 1.5x multiplier when collecting dollars.
     id: 1
-    unlockRound: 0
+    unlockRound: 10
     bought: 0
-    buildingCurrencyCost: 0
-    buildingCurrencyBonus: 0
-  - name: 
-    description: 
+    dollarCost: 200
+    dollarBonus: 1.5
+    coinBonus: 0
+  - name: 2x Coin Bonus
+    description: Applies a 2x multiplier when collecting coins.
     id: 2
-    unlockRound: 0
+    unlockRound: 15
     bought: 0
-    buildingCurrencyCost: 0
-    buildingCurrencyBonus: 0
-  - name: 
-    description: 
+    dollarCost: 300
+    dollarBonus: 0
+    coinBonus: 2
+  - name: 2x Dollar Bonus
+    description: Applies a 2x multiplier when collecting dollars.
     id: 3
-    unlockRound: 0
+    unlockRound: 20
     bought: 0
-    buildingCurrencyCost: 0
-    buildingCurrencyBonus: 0
-  - name: 
-    description: 
+    dollarCost: 400
+    dollarBonus: 2
+    coinBonus: 0
+  - name: 3x Dollar Bonus and Coin Bonus
+    description: Applies a 1.5x multiplier when collecting dollars and coins.
     id: 4
-    unlockRound: 0
+    unlockRound: 25
     bought: 0
-    buildingCurrencyCost: 0
-    buildingCurrencyBonus: 0
+    dollarCost: 500
+    dollarBonus: 3
+    coinBonus: 3

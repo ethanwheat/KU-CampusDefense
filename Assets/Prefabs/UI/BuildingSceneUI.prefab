@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   purchasePanelPrefab: {fileID: 840601902235748873, guid: b6ae15801b8dd4ca5b5a8acc7dd2445d, type: 3}
+  messagePopupPanelPrefab: {fileID: 5807334836911716169, guid: 425879acaed8d854e8ddfbdd8dffaa15, type: 3}
 --- !u!1001 &1235957425190312097
 PrefabInstance:
   m_ObjectHideFlags: 0

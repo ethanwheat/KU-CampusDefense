@@ -153,7 +153,7 @@ public class DefencePlacementController : MonoBehaviour
             {
                 if (t.name == "Defenses")
                 {
-                    parent = t.gameObject;
+                    parent = t;
                     break;
                 }
             }
@@ -173,7 +173,7 @@ public class DefencePlacementController : MonoBehaviour
             {
                 if (t.name == "Placement")
                 {
-                    placementGameObject = t.gameObject;
+                    placementGameObject = t;
                     break;
                 }
             }

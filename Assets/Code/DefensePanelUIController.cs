@@ -78,7 +78,7 @@ public class DefensePanelUIController : MonoBehaviour
         {
             if (t.name == "Placement")
             {
-                parent = t.gameObject;
+                parent = t;
                 break;
             }
         }
