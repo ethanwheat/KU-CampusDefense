@@ -6,18 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class BuildingSceneUIController : MonoBehaviour
 {
-    [Header("Prefabs")]
-    [SerializeField] private GameObject purchasePanelPrefab;
-    [SerializeField] private GameObject messagePopupPanelPrefab;
-    [SerializeField] private GameObject backgroundPrefab;
+    [Header("UI Controllers")]
+    [SerializeField] private PurchasePanelController purchasePanelController;
+    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
+    [SerializeField] private LoadingBackgroundController loadingBackgroundController;
+
+    [Header("UI Game Objects")]
+    [SerializeField] private GameObject dollarUI;
 
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
-    private GameObject purchasePanel;
-    private GameObject messagePopupPanel;
-    private GameObject dollarUI;
-    private GameObject background;
     private Camera mainCamera;
     private Outline outline;
 
@@ -26,8 +25,7 @@ public class BuildingSceneUIController : MonoBehaviour
         // Set main camera.
         mainCamera = Camera.main;
 
-        // Set dollar UI and dollar UI text.
-        dollarUI = transform.Find("DollarUI").gameObject;
+        // Update dollar UI.
         updateDollarUI();
 
         // Fade out background.
@@ -48,12 +46,8 @@ public class BuildingSceneUIController : MonoBehaviour
     // Create message pop up panel.
     public void createMessagePopupPanel(string messageTitle, string messageText)
     {
-        // Close existing popup panel.
-        closePopupPanel();
-
         // Create message popup panel.
-        messagePopupPanel = Instantiate(messagePopupPanelPrefab, transform);
-        messagePopupPanel.GetComponent<MessagePopupPanelController>().setData(messageTitle, messageText);
+        messagePopupPanelController.showPanel(messageTitle, messageText);
     }
 
     // Update the dollar UI.
@@ -128,11 +122,7 @@ public class BuildingSceneUIController : MonoBehaviour
         // Close existing UI.
         closeExistingUI();
 
-        // Create purchase panel.
-        purchasePanel = Instantiate(purchasePanelPrefab, transform);
-
         // Load purchase panel with data.
-        PurchasePanelController purchasePanelController = purchasePanel.GetComponent<PurchasePanelController>();
         purchasePanelController.loadData(buildingPlacementController, objectData);
     }
 
@@ -177,49 +167,25 @@ public class BuildingSceneUIController : MonoBehaviour
     // Fade background in.
     IEnumerator fadeBackgroundIn()
     {
-        if (background)
-        {
-            Destroy(background);
-        }
-
-        background = Instantiate(backgroundPrefab, transform);
-        BackgroundController backgroundController = background.GetComponent<BackgroundController>();
-
-        yield return StartCoroutine(backgroundController.fadeInCoroutine(.5f));
+        yield return StartCoroutine(loadingBackgroundController.fadeInCoroutine(.5f));
     }
 
     // Fade background out.
     IEnumerator fadeBackgroundOut()
     {
-        background = Instantiate(backgroundPrefab, transform);
-        BackgroundController backgroundController = background.GetComponent<BackgroundController>();
-
-        yield return StartCoroutine(backgroundController.fadeOutCoroutine(.5f));
-
-        Destroy(background);
-
+        yield return StartCoroutine(loadingBackgroundController.fadeOutCoroutine(.5f));
     }
 
     // Close purchase panel.
     void closePurchasePanel()
     {
-        // Close purchase panel if it exists.
-        if (purchasePanel)
-        {
-            PurchasePanelController controller = purchasePanel.GetComponent<PurchasePanelController>();
-            controller.closePanel();
-        }
+        purchasePanelController.closePanel();
     }
 
     // Close popup panel.
     void closePopupPanel()
     {
-        // Close popup panel if it exists.
-        if (messagePopupPanel)
-        {
-            MessagePopupPanelController messagePopupPanelController = messagePopupPanel.GetComponent<MessagePopupPanelController>();
-            messagePopupPanelController.closePanel();
-        }
+        messagePopupPanelController.closePanel();
     }
 
     // Close existing UI.

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BackgroundController : MonoBehaviour
+public class LoadingBackgroundController : MonoBehaviour
 {
     // Fade background in slowly.
     public IEnumerator fadeInCoroutine(float duration)
