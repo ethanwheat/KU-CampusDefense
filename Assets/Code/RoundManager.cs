@@ -1,23 +1,71 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class RoundManager : MonoBehaviour
 {
-    public GameObject enemyPrefab;   // Assign enemy prefab (to spawn)
-    public BoxCollider[] spawnAreas;  // Where enemies will spawn
-    public PathNode[] startNodes;
-    public int enemiesPerRound = 20;  // How many enemies spawn per round
+    [Header("Prefabs")]
+    [SerializeField] private GameObject enemyPrefab;   // Assign enemy prefab (to spawn)
 
-    private int currentRound = 0;
+    [Header("Round Initialization")]
+    [SerializeField] private BoxCollider[] spawnAreas;  // Where enemies will spawn
+    [SerializeField] private PathNode[] startNodes;
+    [SerializeField] private int enemiesPerRound = 20;  // How many enemies spawn per round
 
+    [Header("Round Data")]
+    [SerializeField] private int coins;
+    [SerializeField] private int currentRound = 0;
+
+    private RoundSceneUIController roundSceneUIController;
+
+    void Start()
+    {
+        // Set roundSceneUIController.
+        foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
+        {
+            if (currentGameObject.name == "RoundSceneUI")
+            {
+                roundSceneUIController = currentGameObject.GetComponent<RoundSceneUIController>();
+                break;
+            }
+        }
+
+        StartRound();
+    }
+
+    // Start round.
     public void StartRound()
     {
         currentRound++;
         StartCoroutine(SpawnEnemies());
     }
 
+    // Get coin amount.
+    public int getCoinAmount()
+    {
+        return coins;
+    }
+
+    // Add coins.
+    public void addCoins(int amount)
+    {
+        coins += amount;
+        roundSceneUIController.updateCoinUI();
+    }
+
+    // Subtract coins.
+    public void subtractCoins(int amount)
+    {
+        int futureAmount = coins - amount;
+
+        if (futureAmount >= 0)
+        {
+            coins = futureAmount;
+            roundSceneUIController.updateCoinUI();
+        }
+    }
+
+    // Spawn enemies.
     IEnumerator SpawnEnemies()
     {
         for (int i = 0; i < enemiesPerRound; i++)
@@ -52,6 +100,8 @@ public class RoundManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
     }
+
+    // Get random point in bounds.
     Vector3 GetRandomPointInBounds(Bounds bounds)
     {
         float x = Random.Range(bounds.min.x, bounds.max.x);

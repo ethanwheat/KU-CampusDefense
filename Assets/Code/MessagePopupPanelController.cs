@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MessagePopupPanelController : MonoBehaviour
 {
+    // Set message popup panel data.
     public void setData(string messageTitle, string messageText)
     {
         TextMeshProUGUI title = transform.Find("Header").Find("HeaderText").GetComponent<TextMeshProUGUI>();
@@ -12,6 +13,7 @@ public class MessagePopupPanelController : MonoBehaviour
         message.text = messageText;
     }
 
+    // Close message popup panel.
     public void closePanel()
     {
         Destroy(gameObject);

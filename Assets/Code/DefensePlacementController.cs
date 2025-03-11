@@ -4,76 +4,189 @@ using UnityEngine.SceneManagement;
 
 public class DefencePlacementController : MonoBehaviour
 {
-    public enum PlacementMethod
+    private enum PlacementMethod
     {
         SideOfRoad,
         OnRoad
     };
-    public bool isPlaced;
-    public UnityEvent onDefensePlace;
 
+    [Header("Defense Information")]
     [SerializeField] private PlacementMethod placementMethod;
+
+    [Header("Unity Events")]
+    public UnityEvent onCancelPlacement;
 
     private Camera mainCamera;
     private Outline outline;
-    private bool validPlacement = false;
+    private DefenseData defenseData;
+    private RoundManager roundManager;
+    private RoundSceneUIController roundSceneUIController;
+    private bool placed;
+    private bool validPlacement;
 
     void Start()
     {
+        // Set camera.
         mainCamera = Camera.main;
+
+        // Set round manager.
+        foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
+        {
+            if (currentGameObject.name == "RoundManager")
+            {
+                roundManager = currentGameObject.GetComponent<RoundManager>();
+            }
+
+            if (currentGameObject.name == "RoundSceneUI")
+            {
+                roundSceneUIController = currentGameObject.GetComponent<RoundSceneUIController>();
+            }
+
+            if (roundManager && roundSceneUIController)
+            {
+                break;
+            }
+        }
+
+        // Set and enable outline
         outline = gameObject.GetComponent<Outline>();
         outline.enabled = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Create ray from point on screen to point on world.
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        startPlacement();
+    }
 
-        // Get layer mask.
-        int layerMask = LayerMask.GetMask("Placement");
+    public bool isPlaced()
+    {
+        // Return true if object is placed else false.
+        return placed;
+    }
 
-        // Create raycast.
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
+    public void setDefenseData(DefenseData data)
+    {
+        // Set defense data.
+        defenseData = data;
+    }
+
+    void startPlacement()
+    {
+        if (defenseData != null)
         {
-            string tag = hit.collider.gameObject.tag;
+            // Create ray from point on screen to point on world.
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-            // If placementMethod is OnRoad and tag is RoadPlacement, then snap to road.
-            if (placementMethod == PlacementMethod.OnRoad)
+            // Get layer mask.
+            int layerMask = LayerMask.GetMask("Placement");
+
+            // Create raycast.
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
             {
-                if (tag == "RoadPlacement")
+                string tag = hit.collider.gameObject.tag;
+
+                // If placementMethod is OnRoad and tag is RoadPlacement, then snap to road.
+                if (placementMethod == PlacementMethod.OnRoad)
                 {
-                    snapToRoad(hit);
-                    setValidPlacement();
+                    if (tag == "RoadPlacement")
+                    {
+                        snapToRoad(hit);
+                        setValidPlacement();
+                    }
+                    else
+                    {
+                        freePlace(hit);
+                        setInvalidPlacement();
+                    }
                 }
-                else
+
+                // If placementMethod is OnRoad and tag is SideOfRoad, then allow free placement on the side of road.
+                if (placementMethod == PlacementMethod.SideOfRoad)
                 {
+                    if (tag == "SideOfRoadPlacement")
+                    {
+                        setValidPlacement();
+                    }
+                    else
+                    {
+                        setInvalidPlacement();
+                    }
+
                     freePlace(hit);
-                    setInvalidPlacement();
+                }
+
+                // Check if placed.
+                if (Input.GetMouseButtonDown(0))
+                {
+                    // Place defense.
+                    placeDefense();
                 }
             }
+        }
+    }
 
-            // If placementMethod is OnRoad and tag is SideOfRoad, then allow free placement on the side of road.
-            if (placementMethod == PlacementMethod.SideOfRoad)
+    // Place the defense, disable this script, and disable outline script.
+    void placeDefense()
+    {
+        // Check if valid placement is true.
+        if (validPlacement)
+        {
+            // Check if defense can be purchased
+            if (roundManager.getCoinAmount() >= defenseData.getCoinCost())
             {
-                if (tag == "SideOfRoadPlacement")
+                // Set isPlaced to true, and disable outline script, send event to reset the defense panel.
+                placed = true;
+                outline.enabled = false;
+                onCancelPlacement.Invoke();
+
+                // Subtract coin amount from round manager.
+                roundManager.subtractCoins(defenseData.getCoinCost());
+
+                // Set the parent of the new defense.
+                GameObject defenseParent = null;
+
+                foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
                 {
-                    setValidPlacement();
-                }
-                else
-                {
-                    setInvalidPlacement();
+                    if (gameObject.name == "Defenses")
+                    {
+                        defenseParent = currentGameObject;
+                        break;
+                    }
                 }
 
-                freePlace(hit);
+                if (!defenseParent)
+                {
+                    defenseParent = new GameObject("Defenses");
+                }
+
+                Transform parentTransform = defenseParent.transform;
+                transform.parent = parentTransform;
+
+                // Delete placement gameObject.
+                GameObject placementParent = null;
+
+                foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
+                {
+                    if (currentGameObject.name == "Placement")
+                    {
+                        placementParent = currentGameObject;
+                        break;
+                    }
+                }
+
+                if (placementParent)
+                {
+                    Destroy(placementParent);
+                }
+
+                // Disable this script.
+                this.enabled = false;
             }
-
-            // Check if placed.
-            if (Input.GetMouseButtonDown(0))
+            else
             {
-                // Place defense.
-                placeDefense();
+                // Show error popup panel and cancel placement.
+                roundSceneUIController.createMessagePopupPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.getName() + "!");
+                onCancelPlacement.Invoke();
             }
         }
     }
@@ -108,80 +221,17 @@ public class DefencePlacementController : MonoBehaviour
         transform.rotation = objectRotation;
     }
 
-    // Set the placement as valid.
     void setValidPlacement()
     {
+        // Set the placement as valid and set outline color to green.
         validPlacement = true;
         outline.OutlineColor = Color.green;
     }
 
-    // Set the placement as invalid.
     void setInvalidPlacement()
     {
+        // Set the placement as invalid and set outline color to red.
         validPlacement = false;
         outline.OutlineColor = Color.red;
-    }
-
-    // Cancel the placement
-    public void cancelPlacement()
-    {
-        Destroy(gameObject);
-    }
-
-    // Place the defense, disable this script, and disable outline script.
-    void placeDefense()
-    {
-        // Check if valid placement is true.
-        if (validPlacement)
-        {
-            // Send event to reset the defense panel.
-            onDefensePlace.Invoke();
-
-            // Set isPlaced to true.
-            isPlaced = true;
-
-            // Disable this script.
-            this.enabled = false;
-
-            // Disable outline script.
-            outline.enabled = false;
-
-            // Set the parent of the new defense.
-            GameObject parent = null;
-
-            foreach (GameObject t in SceneManager.GetActiveScene().GetRootGameObjects())
-            {
-                if (t.name == "Defenses")
-                {
-                    parent = t;
-                    break;
-                }
-            }
-
-            if (!parent)
-            {
-                parent = new GameObject("Defenses");
-            }
-
-            Transform parentTransform = parent.transform;
-            transform.parent = parentTransform;
-
-            // Delete placement gameobject.
-            GameObject placementGameObject = null;
-
-            foreach (GameObject t in SceneManager.GetActiveScene().GetRootGameObjects())
-            {
-                if (t.name == "Placement")
-                {
-                    placementGameObject = t;
-                    break;
-                }
-            }
-
-            if (placementGameObject)
-            {
-                Destroy(placementGameObject);
-            }
-        }
     }
 }

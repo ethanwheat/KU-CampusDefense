@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditor.Build.Reporting;
 using UnityEngine;
 
 public class BuildingPlacementController : MonoBehaviour
@@ -36,40 +35,45 @@ public class BuildingPlacementController : MonoBehaviour
     private ObjectData objectData;
     private bool locked;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // Show placement area.
-        showPlacementArea();
+        updatePlacementArea();
     }
 
+    // Get builind name.
     public string getBuildingName()
     {
         return buildingName;
     }
 
+    // Get object data.
     public ObjectData getObjectData()
     {
         return objectData;
     }
 
+    // Get if building is locked.
     public bool isLocked()
     {
         return locked;
     }
 
-    void showPlacementArea()
+    // Update the placement area.
+    public void updatePlacementArea()
     {
+        // Reset placement area.
         resetPlacementArea();
 
+        // Set objectData depending on if objectDataType is defense or bonus.
         if (objectDataType == ObjectDataType.Defense)
         {
-            objectData = gameDataController.getDefenseObjectData(id);
+            objectData = gameDataController.getDefenseDataById(id);
         }
 
         if (objectDataType == ObjectDataType.Bonus)
         {
-            objectData = gameDataController.getBonusObjectData(id);
+            objectData = gameDataController.getBonusObjectDataById(id);
         }
 
         // Throw error if invalid defense id.
@@ -127,6 +131,7 @@ public class BuildingPlacementController : MonoBehaviour
         }
     }
 
+    // Reset placement area.
     void resetPlacementArea()
     {
         // Set placement and building to not be active.
@@ -142,6 +147,7 @@ public class BuildingPlacementController : MonoBehaviour
         }
     }
 
+    // Create locked building overlay.
     void createLockedBuildingOverlay()
     {
         // Show overlay.
@@ -154,6 +160,7 @@ public class BuildingPlacementController : MonoBehaviour
         text.text = buildingName;
     }
 
+    // Create unlocked building overlay.
     void createUnlockedBuildingOverlay(int cost)
     {
         // Show overlay.
@@ -163,15 +170,14 @@ public class BuildingPlacementController : MonoBehaviour
         // Get the overlay transform
         Transform overlayTransform = unlockedBuildingOverlay.transform;
 
-        // Set the text on the overlay to building name.
+        // Set the text on the overlay to building name and set the cost on the overlay.
         TextMeshProUGUI buildingText = overlayTransform.Find("BuildingText").GetComponent<TextMeshProUGUI>();
-        buildingText.text = buildingName;
-
-        // Set the cost on the overlay.
         TextMeshProUGUI costText = overlayTransform.Find("Cost/CostText").GetComponent<TextMeshProUGUI>();
+        buildingText.text = buildingName;
         costText.text = cost.ToString();
     }
 
+    // Get overlay parent.
     Transform getOverlayParent()
     {
         Transform overlays = transform.Find("Overlays");

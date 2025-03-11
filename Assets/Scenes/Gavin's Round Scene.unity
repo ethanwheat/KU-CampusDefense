@@ -1047,8 +1047,16 @@ PrefabInstance:
       value: RoundManager
       objectReference: {fileID: 0}
     - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
+      propertyPath: coins
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
       propertyPath: startRoundButton
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
+      propertyPath: startingCoinAmount
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
       propertyPath: spawnAreas.Array.size

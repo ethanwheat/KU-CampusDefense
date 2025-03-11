@@ -41,7 +41,7 @@ public class EnemyMovement : MonoBehaviour
 
     if (placementController)
     {
-      bool isPlaced = placementController.isPlaced;
+      bool isPlaced = placementController.isPlaced();
 
       if (isPlaced)
       {
@@ -64,7 +64,7 @@ public class EnemyMovement : MonoBehaviour
 
     if (placementController)
     {
-      bool isPlaced = placementController.isPlaced;
+      bool isPlaced = placementController.isPlaced();
 
       if (isPlaced)
       {
