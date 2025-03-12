@@ -99,7 +99,7 @@ public class BuildingSceneUIController : MonoBehaviour
     {
         yield return StartCoroutine(loadingBackgroundController.fadeInCoroutine(.5f));
 
-        SceneManager.LoadScene("Gavin's Round Scene");
+        SceneManager.LoadScene("Round Scene");
     }
 
     // Update the dollar UI.

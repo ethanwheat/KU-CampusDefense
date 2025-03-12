@@ -44,7 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f0e633918e3148e09d76de297230ad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 7447163605589988728, guid: 907fd825e3988774caab4234b943bf44, type: 3}
+  fanPrefab: {fileID: 7447163605589988728, guid: 907fd825e3988774caab4234b943bf44, type: 3}
+  coachPrefab: {fileID: 7478225697116208144, guid: 6fb37f825ee63264b9c2600bf1a52006, type: 3}
+  cheerleaderPrefab: {fileID: 6252356961377389083, guid: 2db03e7c8a8135146b280e5da7e0289c, type: 3}
+  fanSpeed: 15
+  coachSpeed: 10
+  cheerleaderSpeed: 25
+  fanHealth: 100
+  coachHealth: 200
+  cheerleaderHealth: 50
   spawnAreas: []
   startNodes: []
-  enemiesPerRound: 5
+  currentRound: {fileID: 11400000, guid: 7445b25413fd67f419735e828df62608, type: 2}
+  coins: 0
+  currentWave: 0
