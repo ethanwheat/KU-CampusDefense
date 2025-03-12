@@ -117,7 +117,7 @@ public class DefensePanelController : MonoBehaviour
     void placementPlaced()
     {
         currentDefensePlacement = null;
-        destroyCurrentPlacement();
+        resetCurrentPlacementButton();
     }
 
     // Reset placement button and destroy current placement.
