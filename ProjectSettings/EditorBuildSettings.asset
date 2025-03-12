@@ -9,14 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
-    path: Assets/Scenes/Gavin's Building Scene.unity
+    path: Assets/Scenes/Building Scene.unity
     guid: d1ee800aeeb956c4ca65147f14964621
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RoundScene.unity
     guid: 120b67862826b4c4496caf97dc2bcde3
   - enabled: 1
-    path: Assets/Scenes/Gavin's Round Scene.unity
+    path: Assets/Scenes/Round Scene.unity
     guid: 1726fb7b5c734864e8c651eb094d2d7c
+  - enabled: 1
+    path: Assets/Scenes/Main Menu Scene.unity
+    guid: aaf3aa8eebd202645a215797305a1116
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
