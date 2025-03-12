@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5573496035772160191}
   - component: {fileID: 437087065469657452}
   m_Layer: 0
-  m_Name: SpawnPoint (1)
+  m_Name: WestSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4477756854964420860}
   - component: {fileID: 1835137503201759875}
   m_Layer: 0
-  m_Name: SpawnPoint
+  m_Name: SouthSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 6887123903824005100}
   - component: {fileID: 9037480744127361081}
   m_Layer: 0
-  m_Name: SpawnPoint (2)
+  m_Name: EastSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4637707034543251701}
   - component: {fileID: -5059742201954983613}
   - component: {fileID: 3625628534460288557}
+  - component: {fileID: 6978164879378355700}
   m_Layer: 7
   m_Name: Ice Sheet
   m_TagString: Ice
@@ -140,8 +141,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558a84c28b97184479a4d097786accc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlaced: 0
-  onDefensePlace:
+  placementMethod: 1
+  onCancelPlacement:
     m_PersistentCalls:
       m_Calls: []
-  placementMethod: 1
+--- !u!114 &6978164879378355700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5472060738618537860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b353fafe277ba846ab128492590e745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowMultiplier: 0.2
+  damagePerSecond: 5
