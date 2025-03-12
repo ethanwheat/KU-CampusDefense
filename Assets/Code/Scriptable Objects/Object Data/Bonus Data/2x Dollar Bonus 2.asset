@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d426029acf486a2489f7a9a1baeff3fb, type: 3}
+  m_Name: 2x Dollar Bonus 2
+  m_EditorClassIdentifier: 
+  objectName: 2x Dollar Bonus
+  description: Gives a 1.5x multiplier when collecting dollars.
+  dollarCost: 400
+  unlockRound: 20
+  boughtAtStart: 0
+  bought: 0
+  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
+  dollarBonus: 2
+  coinBonus: 0
