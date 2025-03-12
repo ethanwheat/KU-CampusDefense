@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class MessagePopupPanelController : MonoBehaviour
 {
-    // Show message popup panel and set message popup panel data.
-    public void showPanel(string messageTitle, string messageText)
-    {
-        TextMeshProUGUI title = transform.Find("Header").Find("HeaderText").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI message = transform.Find("PanelContent").Find("MessageText").GetComponent<TextMeshProUGUI>();
+    [SerializeField] private TextMeshProUGUI headerText;
+    [SerializeField] private TextMeshProUGUI messageText;
 
-        title.text = messageTitle;
-        message.text = messageText;
+    // Show message popup panel and set message popup panel data.
+    public void showPanel(string title, string message)
+    {
+        headerText.text = title;
+        messageText.text = message;
 
         gameObject.SetActive(true);
     }

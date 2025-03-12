@@ -18,7 +18,7 @@ public class BuildingSceneUIController : MonoBehaviour
     [SerializeField] private GameDataController gameDataController;
 
     private Camera mainCamera;
-    private Outline outline;
+    private BuildingPlacementController buildingPlacementController;
 
     void Start()
     {
@@ -33,12 +33,6 @@ public class BuildingSceneUIController : MonoBehaviour
     }
 
     void Update()
-    {
-        checkHoverOverBuilding();
-    }
-
-    // Check if mouse is hovering over building.
-    void checkHoverOverBuilding()
     {
         // Create raycast.
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -55,24 +49,20 @@ public class BuildingSceneUIController : MonoBehaviour
                 return;
             }
 
-            // Get placement collider and transform.
+            // Get placementCollider, building placement controller, and object data.
             Collider placementCollider = hit.collider;
-
-            // Get building placement controller.
-            BuildingPlacementController buildingPlacementController = placementCollider.GetComponent<BuildingPlacementController>();
+            buildingPlacementController = placementCollider.GetComponent<BuildingPlacementController>();
+            ObjectData objectData = buildingPlacementController.getObjectData();
 
             // Only show panels and outlines if building is not locked.
-            if (!buildingPlacementController.isLocked())
+            if (!objectData.isLocked())
             {
                 // Show outline.
-                outline = showOutline(placementCollider);
+                buildingPlacementController.showOutline(true);
 
                 // Check if mouse is clicked.
                 if (Input.GetMouseButtonDown(0))
                 {
-                    // Get object data.
-                    ObjectData objectData = buildingPlacementController.getObjectData();
-
                     // Check if object is bought or not.
                     if (objectData.isBought())
                     {
@@ -91,41 +81,11 @@ public class BuildingSceneUIController : MonoBehaviour
         }
         else
         {
-            if (outline)
+            if (buildingPlacementController)
             {
-                outline.enabled = false;
+                buildingPlacementController.showOutline(false);
             }
         }
-    }
-
-    // Show outline on placement.
-    Outline showOutline(Collider placementCollider)
-    {
-        // Get placement transform.
-        Transform placementTransform = placementCollider.transform;
-
-        // Get placement game object and building game object.
-        GameObject placementGameObject = placementTransform.Find("Placement").gameObject;
-        GameObject buildingGameObject = placementTransform.Find("Building").gameObject;
-
-        // Show outlines.
-        if (placementGameObject.activeSelf)
-        {
-            Outline outline = placementGameObject.GetComponent<Outline>();
-            outline.enabled = true;
-
-            return outline;
-        }
-
-        if (buildingGameObject.activeSelf)
-        {
-            Outline outline = buildingGameObject.GetComponent<Outline>();
-            outline.enabled = true;
-
-            return outline;
-        }
-
-        return null;
     }
 
     // Start round.

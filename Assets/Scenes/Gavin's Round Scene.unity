@@ -663,6 +663,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb3fe084cceddf64b8121c9cc5a2be15, type: 3}
+--- !u!114 &1526208559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5771053496741340049, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+  m_PrefabInstance: {fileID: 1696650594}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5259aefe30938564d905146a691aeb44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1696650594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -755,6 +766,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RoundSceneUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5305107557871034894, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: roundManager
+      value: 
+      objectReference: {fileID: 5932463853283302187}
     - target: {fileID: 5771053496741340049, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
       propertyPath: roundManager
       value: 
@@ -1070,6 +1085,10 @@ PrefabInstance:
       propertyPath: startNodes.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
+      propertyPath: roundSceneUIController
+      value: 
+      objectReference: {fileID: 1526208559}
     - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
       propertyPath: 'spawnAreas.Array.data[0]'
       value: 

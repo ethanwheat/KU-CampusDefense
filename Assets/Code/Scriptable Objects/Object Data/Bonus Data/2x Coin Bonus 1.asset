@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: 2x Coin Bonus 1
   m_EditorClassIdentifier: 
   objectName: 2x Coin Bonus
-  id: 2
   description: Gives a 1.5x multiplier when collecting coins.
   dollarCost: 300
   unlockRound: 15
   boughtAtStart: 0
   bought: 0
+  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
   dollarBonus: 0
   coinBonus: 2

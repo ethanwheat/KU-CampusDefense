@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: IceSheetDefense
   m_EditorClassIdentifier: 
   objectName: Ice Sheet
-  id: 1
   description: Slows down enemies walking on the ice sheet, and lowers their HP.
   dollarCost: 100
   unlockRound: 5
   boughtAtStart: 0
-  bought: 0
+  bought: 1
+  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
   coinCost: 20
   level: 0
   prefab: {fileID: 5472060738618537860, guid: 78c738e9591c76944b96413f9c505efb, type: 3}

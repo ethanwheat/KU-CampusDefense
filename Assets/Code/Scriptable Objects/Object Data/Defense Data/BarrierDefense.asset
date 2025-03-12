@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: BarrierDefense
   m_EditorClassIdentifier: 
   objectName: Barrier
-  id: 0
   description: 'Blocks all types of defenders, breaks eventually '
   dollarCost: 0
   unlockRound: 0
   boughtAtStart: 1
-  bought: 0
+  bought: 1
+  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
   coinCost: 10
   level: 0
   prefab: {fileID: 6409600301112067378, guid: d3d63af395e5cd241ac6d9aecc737ba4, type: 3}

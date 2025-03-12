@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,6 +12,9 @@ public class DefensePanelController : MonoBehaviour
 
     [Header("UI Transforms")]
     [SerializeField] private Transform placementButtonsParent;
+
+    [Header("Round Manager")]
+    [SerializeField] private RoundManager roundManager;
 
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
@@ -73,7 +75,7 @@ public class DefensePanelController : MonoBehaviour
     // Select a defense in the UI and create placement.
     void startPlacement(GameObject placementButton, DefenseData defense)
     {
-        // Reset the defense panel and cancel previous placement.
+        // Cancel previous placement.
         cancelPlacement();
 
         // Set the new placement button.
@@ -83,58 +85,59 @@ public class DefensePanelController : MonoBehaviour
         selectedPlacementButton.GetComponent<DefensePlacementButtonController>().onSelect();
 
         // Create and set new placement.
-        Transform parentTransform = getPlacementParent().transform;
+        Transform parentTransform = getRootGameObject("Placement").transform;
         currentDefensePlacement = Instantiate(defense.getPrefab(), parentTransform);
 
         // Set defense data on placement controller and add listener to reset the panel when a placement is made.
-        DefencePlacementController placementController = currentDefensePlacement.GetComponent<DefencePlacementController>();
-        placementController.setDefenseData(defense);
+        DefensePlacementController placementController = currentDefensePlacement.GetComponent<DefensePlacementController>();
+        placementController.loadData(defense, roundManager, messagePopupPanelController);
         placementController.onCancelPlacement.AddListener(cancelPlacement);
     }
 
-    // Cancel placement
+    // Cancel placement and reset placement button
     void cancelPlacement()
     {
-        // Reset placement button.
+        // Deselect placement button.
         if (selectedPlacementButton)
         {
             selectedPlacementButton.GetComponent<DefensePlacementButtonController>().onDeselect();
         }
 
-        // Cancel placement.
         if (currentDefensePlacement)
         {
-            DefencePlacementController placementController = currentDefensePlacement.GetComponent<DefencePlacementController>();
+            DefensePlacementController defensePlacementController = currentDefensePlacement.GetComponent<DefensePlacementController>();
 
-            if (!placementController.isPlaced())
+            // Only delete if not placed.
+            if (!defensePlacementController.isPlaced())
             {
                 Destroy(currentDefensePlacement);
             }
         }
     }
 
-    GameObject getPlacementParent()
+    // Get root game object
+    GameObject getRootGameObject(string name)
     {
-        // Set the parent of the new defense.
-        GameObject parent = null;
+        GameObject gameObject = null;
 
         foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
         {
-            if (currentGameObject.name == "Placement")
+            if (currentGameObject.name == name)
             {
-                parent = currentGameObject;
+                gameObject = currentGameObject;
                 break;
             }
         }
 
-        if (!parent)
+        if (!gameObject)
         {
-            parent = new GameObject("Placement");
+            gameObject = new GameObject(name);
         }
 
-        return parent;
+        return gameObject;
     }
 
+    // Reset panel.
     void resetPanel()
     {
         // Delete all placement buttons.

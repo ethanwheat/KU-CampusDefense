@@ -7,6 +7,9 @@ public class RoundManager : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject enemyPrefab;   // Assign enemy prefab (to spawn)
 
+    [Header("UI Controllers")]
+    [SerializeField] private RoundSceneUIController roundSceneUIController;
+
     [Header("Round Initialization")]
     [SerializeField] private BoxCollider[] spawnAreas;  // Where enemies will spawn
     [SerializeField] private PathNode[] startNodes;
@@ -16,20 +19,8 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private int coins;
     [SerializeField] private int currentRound = 0;
 
-    private RoundSceneUIController roundSceneUIController;
-
     void Start()
     {
-        // Set roundSceneUIController.
-        foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
-        {
-            if (currentGameObject.name == "RoundSceneUI")
-            {
-                roundSceneUIController = currentGameObject.GetComponent<RoundSceneUIController>();
-                break;
-            }
-        }
-
         StartRound();
     }
 

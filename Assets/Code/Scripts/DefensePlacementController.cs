@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class DefencePlacementController : MonoBehaviour
+public class DefensePlacementController : MonoBehaviour
 {
     private enum PlacementMethod
     {
@@ -13,9 +13,6 @@ public class DefencePlacementController : MonoBehaviour
     [Header("Defense Information")]
     [SerializeField] private PlacementMethod placementMethod;
 
-    [Header("UI Controllers")]
-    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
-
     [Header("Unity Events")]
     public UnityEvent onCancelPlacement;
 
@@ -23,7 +20,8 @@ public class DefencePlacementController : MonoBehaviour
     private Outline outline;
     private DefenseData defenseData;
     private RoundManager roundManager;
-    private RoundSceneUIController roundSceneUIController;
+    private MessagePopupPanelController messagePopupPanelController;
+    private bool dataLoaded = false;
     private bool placed;
     private bool validPlacement;
 
@@ -32,28 +30,8 @@ public class DefencePlacementController : MonoBehaviour
         // Set camera.
         mainCamera = Camera.main;
 
-        // Set round manager.
-        foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
-        {
-            if (currentGameObject.name == "RoundManager")
-            {
-                roundManager = currentGameObject.GetComponent<RoundManager>();
-            }
-
-            if (currentGameObject.name == "RoundSceneUI")
-            {
-                roundSceneUIController = currentGameObject.GetComponent<RoundSceneUIController>();
-            }
-
-            if (roundManager && roundSceneUIController)
-            {
-                break;
-            }
-        }
-
-        // Set and enable outline
+        // Set outline
         outline = gameObject.GetComponent<Outline>();
-        outline.enabled = true;
     }
 
     void Update()
@@ -61,21 +39,10 @@ public class DefencePlacementController : MonoBehaviour
         startPlacement();
     }
 
-    public bool isPlaced()
-    {
-        // Return true if object is placed else false.
-        return placed;
-    }
-
-    public void setDefenseData(DefenseData data)
-    {
-        // Set defense data.
-        defenseData = data;
-    }
-
+    // Start the placement on the map following the mouse.
     void startPlacement()
     {
-        if (defenseData != null)
+        if (dataLoaded)
         {
             // Create ray from point on screen to point on world.
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -128,6 +95,22 @@ public class DefencePlacementController : MonoBehaviour
         }
     }
 
+    // Return true if object is placed else false.
+    public bool isPlaced()
+    {
+        return placed;
+    }
+
+    // Load data to be used in the placement.
+    public void loadData(DefenseData data, RoundManager manager, MessagePopupPanelController controller)
+    {
+        // Set data.
+        defenseData = data;
+        roundManager = manager;
+        messagePopupPanelController = controller;
+        dataLoaded = true;
+    }
+
     // Place the defense, disable this script, and disable outline script.
     void placeDefense()
     {
@@ -140,47 +123,16 @@ public class DefencePlacementController : MonoBehaviour
                 // Set isPlaced to true, and disable outline script, send event to reset the defense panel.
                 placed = true;
                 outline.enabled = false;
-                onCancelPlacement.Invoke();
 
                 // Subtract coin amount from round manager.
                 roundManager.subtractCoins(defenseData.getCoinCost());
 
                 // Set the parent of the new defense.
-                GameObject defenseParent = null;
-
-                foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
-                {
-                    if (gameObject.name == "Defenses")
-                    {
-                        defenseParent = currentGameObject;
-                        break;
-                    }
-                }
-
-                if (!defenseParent)
-                {
-                    defenseParent = new GameObject("Defenses");
-                }
-
-                Transform parentTransform = defenseParent.transform;
-                transform.parent = parentTransform;
+                transform.parent = getRootGameObject("Defenses").transform;
 
                 // Delete placement gameObject.
-                GameObject placementParent = null;
-
-                foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
-                {
-                    if (currentGameObject.name == "Placement")
-                    {
-                        placementParent = currentGameObject;
-                        break;
-                    }
-                }
-
-                if (placementParent)
-                {
-                    Destroy(placementParent);
-                }
+                GameObject placementParent = getRootGameObject("Placement");
+                Destroy(placementParent);
 
                 // Disable this script.
                 this.enabled = false;
@@ -189,8 +141,10 @@ public class DefencePlacementController : MonoBehaviour
             {
                 // Show error popup panel and cancel placement.
                 messagePopupPanelController.showPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.getName() + "!");
-                onCancelPlacement.Invoke();
             }
+
+            // Send event to cancel placement and reset placement button on the defense panel.
+            onCancelPlacement.Invoke();
         }
     }
 
@@ -224,6 +178,7 @@ public class DefencePlacementController : MonoBehaviour
         transform.rotation = objectRotation;
     }
 
+    // Set placement to valid and change outline to green.
     void setValidPlacement()
     {
         // Set the placement as valid and set outline color to green.
@@ -231,10 +186,33 @@ public class DefencePlacementController : MonoBehaviour
         outline.OutlineColor = Color.green;
     }
 
+    // Set placement to invalid and change outline to red.
     void setInvalidPlacement()
     {
         // Set the placement as invalid and set outline color to red.
         validPlacement = false;
         outline.OutlineColor = Color.red;
+    }
+
+    // Get root game object
+    GameObject getRootGameObject(string name)
+    {
+        GameObject gameObject = null;
+
+        foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
+        {
+            if (currentGameObject.name == name)
+            {
+                gameObject = currentGameObject;
+                break;
+            }
+        }
+
+        if (!gameObject)
+        {
+            gameObject = new GameObject(name);
+        }
+
+        return gameObject;
     }
 }

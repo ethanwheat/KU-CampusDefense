@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 4226152238118625762}
   - component: {fileID: 4354145971539539948}
   - component: {fileID: 1556536293429234083}
+  - component: {fileID: 202787368898474870}
   m_Layer: 0
   m_Name: UnlockedBuildingOverlay
   m_TagString: Untagged
@@ -297,7 +298,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &1556536293429234083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +316,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &202787368898474870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6356352093745791629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 365a8be73e13e8c4d900a63b893eb60a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingText: {fileID: 3549835582469609102}
+  costText: {fileID: 595030351296519513}
 --- !u!1 &6703787483921565815
 GameObject:
   m_ObjectHideFlags: 0

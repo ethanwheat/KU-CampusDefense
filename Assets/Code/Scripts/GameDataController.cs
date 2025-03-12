@@ -59,38 +59,6 @@ public class GameDataController : ScriptableObject
         return bonusData;
     }
 
-    // Get defense data by id.
-    public DefenseData getDefenseDataById(int id)
-    {
-        foreach (var data in defenseData)
-        {
-            int dataId = data.getId();
-
-            if (dataId == id)
-            {
-                return data;
-            }
-        }
-
-        return null;
-    }
-
-    // Get bonus data by id.
-    public BonusData getBonusObjectDataById(int id)
-    {
-        foreach (var data in bonusData)
-        {
-            int dataId = data.getId();
-
-            if (dataId == id)
-            {
-                return data;
-            }
-        }
-
-        return null;
-    }
-
     // Reset game data.
     public void resetGameData()
     {

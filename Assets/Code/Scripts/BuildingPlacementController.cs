@@ -3,16 +3,9 @@ using UnityEngine;
 
 public class BuildingPlacementController : MonoBehaviour
 {
-    private enum ObjectDataType
-    {
-        Defense,
-        Bonus
-    }
-
     [Header("Building Information")]
     [SerializeField] private string buildingName;
-    [SerializeField] private ObjectDataType objectDataType;
-    [SerializeField] private int id;
+    [SerializeField] private ObjectData objectData;
 
     [Header("Scene Information")]
     [SerializeField] private bool isRoundScene;
@@ -32,8 +25,7 @@ public class BuildingPlacementController : MonoBehaviour
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
-    private ObjectData objectData;
-    private bool locked;
+    private Transform overlays;
 
     void Start()
     {
@@ -41,7 +33,93 @@ public class BuildingPlacementController : MonoBehaviour
         updatePlacementArea();
     }
 
-    // Get builind name.
+    // Update the placement area.
+    public void updatePlacementArea()
+    {
+        // Reset placement area.
+        resetPlacementArea();
+
+        // Store if object is bought and locked.
+        bool isBought = objectData.isBought();
+        bool isLocked = objectData.isLocked();
+        string objectCost = objectData.getDollarCost().ToString();
+
+        // Check if defense is bought.
+        if (isBought)
+        {
+            // Show building if defense is bought.
+            buildingGameObject.SetActive(true);
+
+            return;
+        }
+
+        // Create overlay if not round scene.
+        if (!isRoundScene)
+        {
+            createOverlay(isLocked, objectCost);
+        }
+
+        // Set placement material
+        setPlacementMaterial(isLocked);
+
+        // Set placement as active.
+        placementGameObject.SetActive(true);
+
+    }
+
+    // Reset placement area.
+    void resetPlacementArea()
+    {
+        // Set placement and building to not be active.
+        placementGameObject.SetActive(false);
+        buildingGameObject.SetActive(false);
+
+        // Delete overlays
+        if (overlays)
+        {
+            Destroy(overlays.gameObject);
+        }
+    }
+
+    // If defense is unlocked and is not round scene then change color to available material else set to unavailable color.
+    void setPlacementMaterial(bool isLocked)
+    {
+        // Get mesh renderer.
+        MeshRenderer meshRenderer = placementGameObject.GetComponent<MeshRenderer>();
+
+        if (!isLocked && !isRoundScene)
+        {
+            meshRenderer.material = availableMaterial;
+        }
+        else
+        {
+            meshRenderer.material = unavailableMaterial;
+        }
+    }
+
+    // Create overlay.
+    void createOverlay(bool isLocked, string cost)
+    {
+        if (!overlays)
+        {
+            overlays = new GameObject("Overlays").transform;
+            overlays.parent = transform;
+            overlays.localPosition = new Vector3(0, 1, 0);
+        }
+
+        if (isLocked)
+        {
+            GameObject overlay = Instantiate(lockedBuildingOverlayPrefab, overlays);
+            overlay.GetComponent<LockedBuildingOverlayController>().setData(buildingName);
+        }
+        else
+        {
+            GameObject overlay = Instantiate(unlockedBuildingOverlayPrefab, overlays);
+            overlay.GetComponent<UnlockedBuildingOverlayController>().setData(buildingName, cost);
+        }
+    }
+
+    // Get building name.
     public string getBuildingName()
     {
         return buildingName;
@@ -53,142 +131,17 @@ public class BuildingPlacementController : MonoBehaviour
         return objectData;
     }
 
-    // Get if building is locked.
-    public bool isLocked()
+    // Show outline on placement.
+    public void showOutline(bool visible)
     {
-        return locked;
-    }
-
-    // Update the placement area.
-    public void updatePlacementArea()
-    {
-        // Reset placement area.
-        resetPlacementArea();
-
-        // Set objectData depending on if objectDataType is defense or bonus.
-        if (objectDataType == ObjectDataType.Defense)
+        // Show outlines.
+        if (objectData.isBought())
         {
-            objectData = gameDataController.getDefenseDataById(id);
-        }
-
-        if (objectDataType == ObjectDataType.Bonus)
-        {
-            objectData = gameDataController.getBonusObjectDataById(id);
-        }
-
-        // Throw error if invalid defense id.
-        if (objectData == null)
-        {
-            Debug.LogError("No object found in game data controller for Id " + id + ".");
-
-            return;
-        }
-
-        // Get cost and if object is bought.
-        int cost = objectData.getDollarCost();
-        bool isBought = objectData.isBought();
-
-        // Set if the item is locked.
-        locked = objectData.getUnlockRound() > gameDataController.getRoundNumber();
-
-        // Check if defense is bought.
-        if (isBought)
-        {
-            // Show building if defense is bought.
-            buildingGameObject.SetActive(true);
+            buildingGameObject.GetComponent<Outline>().enabled = visible;
         }
         else
         {
-            // Show placement area if defense is not bought.
-
-            // Get mesh renderer.
-            MeshRenderer meshRenderer = placementGameObject.GetComponent<MeshRenderer>();
-
-            if (!isRoundScene)
-            {
-                if (locked)
-                {
-                    createLockedBuildingOverlay();
-                }
-                else
-                {
-                    createUnlockedBuildingOverlay(cost);
-                }
-            }
-
-            // If defense is unlocked and is not round scene then change color to available material else set to unavailable color.
-            if (!locked && !isRoundScene)
-            {
-                meshRenderer.material = availableMaterial;
-            }
-            else
-            {
-                meshRenderer.material = unavailableMaterial;
-            }
-
-            // Set placement as active.
-            placementGameObject.SetActive(true);
+            placementGameObject.GetComponent<Outline>().enabled = visible;
         }
-    }
-
-    // Reset placement area.
-    void resetPlacementArea()
-    {
-        // Set placement and building to not be active.
-        placementGameObject.SetActive(false);
-        buildingGameObject.SetActive(false);
-
-        // Delete overlays
-        Transform overlays = transform.Find("Overlays");
-
-        if (overlays)
-        {
-            Destroy(overlays.gameObject);
-        }
-    }
-
-    // Create locked building overlay.
-    void createLockedBuildingOverlay()
-    {
-        // Show overlay.
-        Transform overlayParent = getOverlayParent();
-        GameObject lockedBuildingOverlay = Instantiate(lockedBuildingOverlayPrefab, overlayParent);
-
-        // Set the text on the overlay to building name.
-        Transform overlayTransform = lockedBuildingOverlay.transform;
-        TextMeshProUGUI text = overlayTransform.Find("BuildingText").GetComponent<TextMeshProUGUI>();
-        text.text = buildingName;
-    }
-
-    // Create unlocked building overlay.
-    void createUnlockedBuildingOverlay(int cost)
-    {
-        // Show overlay.
-        Transform overlayParent = getOverlayParent();
-        GameObject unlockedBuildingOverlay = Instantiate(unlockedBuildingOverlayPrefab, overlayParent);
-
-        // Get the overlay transform
-        Transform overlayTransform = unlockedBuildingOverlay.transform;
-
-        // Set the text on the overlay to building name and set the cost on the overlay.
-        TextMeshProUGUI buildingText = overlayTransform.Find("BuildingText").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI costText = overlayTransform.Find("Cost/CostText").GetComponent<TextMeshProUGUI>();
-        buildingText.text = buildingName;
-        costText.text = cost.ToString();
-    }
-
-    // Get overlay parent.
-    Transform getOverlayParent()
-    {
-        Transform overlays = transform.Find("Overlays");
-
-        if (!overlays)
-        {
-            overlays = new GameObject("Overlays").transform;
-            overlays.parent = transform;
-            overlays.localPosition = new Vector3(0, 1, 0);
-        }
-
-        return overlays;
     }
 }

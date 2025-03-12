@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: 3x Dollar and Coin Bonus 3
   m_EditorClassIdentifier: 
   objectName: 3x Dollar and Coin Bonus
-  id: 4
   description: Gives a 3x multiplier when collecting dollars and coins.
   dollarCost: 500
   unlockRound: 25
   boughtAtStart: 0
   bought: 0
+  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
   dollarBonus: 3
   coinBonus: 3

@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: OtherDefenses
   m_EditorClassIdentifier: 
   objectName: Other Defenses
-  id: 2
   description: This is a placeholder until other defenses are implemented.
   dollarCost: 1000
   unlockRound: 100
   boughtAtStart: 0
   bought: 0
+  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
   coinCost: 1000
   level: 0
   prefab: {fileID: 6409600301112067378, guid: d3d63af395e5cd241ac6d9aecc737ba4, type: 3}
