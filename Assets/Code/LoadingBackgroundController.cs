@@ -7,6 +7,8 @@ public class LoadingBackgroundController : MonoBehaviour
     // Fade background in slowly.
     public IEnumerator fadeInCoroutine(float duration)
     {
+        gameObject.SetActive(true);
+
         Image image = gameObject.GetComponent<Image>();
 
         float timeElapsed = 0;
@@ -30,6 +32,8 @@ public class LoadingBackgroundController : MonoBehaviour
     // Fade background out slowly.
     public IEnumerator fadeOutCoroutine(float duration)
     {
+        gameObject.SetActive(true);
+
         Image image = gameObject.GetComponent<Image>();
 
         float timeElapsed = 0;
@@ -48,5 +52,7 @@ public class LoadingBackgroundController : MonoBehaviour
 
         // Ensure it's fully opaque after the fade
         image.color = endColor;
+
+        gameObject.SetActive(false);
     }
 }

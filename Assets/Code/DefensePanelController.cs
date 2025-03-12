@@ -8,11 +8,11 @@ public class DefensePanelController : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject defensePlacementButtonPrefab;
 
-    [Header("Sprites")]
-    [SerializeField] private Sprite unselectedPressedSprite;
-    [SerializeField] private Sprite unselectedUnpressedSprite;
-    [SerializeField] private Sprite selectedPressedSprite;
-    [SerializeField] private Sprite selectedUnpressedSprite;
+    [Header("UI Controllers")]
+    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
+
+    [Header("UI Transforms")]
+    [SerializeField] private Transform placementButtonsParent;
 
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
@@ -20,12 +20,6 @@ public class DefensePanelController : MonoBehaviour
     private DefenseData[] defenseData;
     private GameObject selectedPlacementButton;
     private GameObject currentDefensePlacement;
-
-    void Start()
-    {
-        // Load the defenses.
-        loadDefenses();
-    }
 
     void Update()
     {
@@ -36,17 +30,12 @@ public class DefensePanelController : MonoBehaviour
         }
     }
 
-    // Close defense panel.
-    public void closePanel()
-    {
-        // Destroys the panel and cancels placement.
-        cancelPlacement();
-        Destroy(gameObject);
-    }
-
     // Load defenses in UI.
-    void loadDefenses()
+    public void showPanel()
     {
+        // Reset panel.
+        resetPanel();
+
         // Get updated defenses.
         defenseData = gameDataController.getDefenseData();
 
@@ -57,39 +46,32 @@ public class DefensePanelController : MonoBehaviour
 
             if (defense.isBought())
             {
-                // Get placementButtonContainer.
-                Transform placementButtonsContainer = transform.Find("PlacementButtons");
-
                 // Create defense button and add listeners.
-                GameObject placementButton = Instantiate(defensePlacementButtonPrefab, placementButtonsContainer);
-                Transform placementButtonTransform = placementButton.transform;
-                placementButton.GetComponent<Button>().onClick.AddListener(() => selectDefense(placementButton, defense));
+                GameObject placementButton = Instantiate(defensePlacementButtonPrefab, placementButtonsParent);
+                placementButton.GetComponent<DefensePlacementButtonController>().setData(defense);
+                placementButton.GetComponent<Button>().onClick.AddListener(() => startPlacement(placementButton, defense));
 
                 // Update position on panel.
-                Vector3 newPosition = new Vector3(125, 125, 0);
-                newPosition.x += 130 * i;
+                Vector3 newPosition = new Vector3(125 + (130 * i), 125, 0);
                 placementButton.GetComponent<RectTransform>().anchoredPosition = newPosition;
-
-                // Update image, name, and cost on button.
-                Image defenseImage = placementButtonTransform.Find("DefenseImage").GetComponentInChildren<Image>();
-                TextMeshProUGUI defenseText = placementButtonTransform.Find("DefenseText").GetComponentInChildren<TextMeshProUGUI>();
-                TextMeshProUGUI defenseCostText = placementButtonTransform.Find("Cost/CostText").GetComponentInChildren<TextMeshProUGUI>();
-
-                Sprite sprite = defense.getSprite();
-
-                if (sprite)
-                {
-                    defenseImage.sprite = sprite;
-                }
-
-                defenseText.text = defense.getName();
-                defenseCostText.text = defense.getCoinCost().ToString();
             }
         }
+
+        // Show panel.
+        gameObject.SetActive(true);
+    }
+
+    // Close defense panel.
+    public void closePanel()
+    {
+        // Cancel placement, reset panel, hide panel.
+        cancelPlacement();
+        resetPanel();
+        gameObject.SetActive(false);
     }
 
     // Select a defense in the UI and create placement.
-    void selectDefense(GameObject placementButton, DefenseData defense)
+    void startPlacement(GameObject placementButton, DefenseData defense)
     {
         // Reset the defense panel and cancel previous placement.
         cancelPlacement();
@@ -97,16 +79,42 @@ public class DefensePanelController : MonoBehaviour
         // Set the new placement button.
         selectedPlacementButton = placementButton;
 
-        // Change current button to be selected.
-        Image buttonImage = placementButton.GetComponent<Image>();
-        buttonImage.sprite = selectedUnpressedSprite;
+        // Set button to selected.
+        selectedPlacementButton.GetComponent<DefensePlacementButtonController>().onSelect();
 
-        // Reset unpressed button sprite.
-        Button selectedButton = selectedPlacementButton.GetComponent<Button>();
-        SpriteState spriteState;
-        spriteState.pressedSprite = selectedPressedSprite;
-        selectedButton.spriteState = spriteState;
+        // Create and set new placement.
+        Transform parentTransform = getPlacementParent().transform;
+        currentDefensePlacement = Instantiate(defense.getPrefab(), parentTransform);
 
+        // Set defense data on placement controller and add listener to reset the panel when a placement is made.
+        DefencePlacementController placementController = currentDefensePlacement.GetComponent<DefencePlacementController>();
+        placementController.setDefenseData(defense);
+        placementController.onCancelPlacement.AddListener(cancelPlacement);
+    }
+
+    // Cancel placement
+    void cancelPlacement()
+    {
+        // Reset placement button.
+        if (selectedPlacementButton)
+        {
+            selectedPlacementButton.GetComponent<DefensePlacementButtonController>().onDeselect();
+        }
+
+        // Cancel placement.
+        if (currentDefensePlacement)
+        {
+            DefencePlacementController placementController = currentDefensePlacement.GetComponent<DefencePlacementController>();
+
+            if (!placementController.isPlaced())
+            {
+                Destroy(currentDefensePlacement);
+            }
+        }
+    }
+
+    GameObject getPlacementParent()
+    {
         // Set the parent of the new defense.
         GameObject parent = null;
 
@@ -124,43 +132,15 @@ public class DefensePanelController : MonoBehaviour
             parent = new GameObject("Placement");
         }
 
-        Transform parentTransform = parent.transform;
-
-        // Create and set new placement.
-        currentDefensePlacement = Instantiate(defense.getPrefab(), parentTransform);
-
-        // Set defense data on placement controller and add listener to reset the panel when a placement is made.
-        DefencePlacementController placementController = currentDefensePlacement.GetComponent<DefencePlacementController>();
-        placementController.setDefenseData(defense);
-        placementController.onCancelPlacement.AddListener(cancelPlacement);
+        return parent;
     }
 
-    // Cancel placement
-    void cancelPlacement()
+    void resetPanel()
     {
-        // Reset old button if it exists.
-        if (selectedPlacementButton)
+        // Delete all placement buttons.
+        foreach (Transform button in placementButtonsParent)
         {
-            // Reset pressed button sprite.
-            Image selectedButtonImage = selectedPlacementButton.GetComponent<Image>();
-            selectedButtonImage.sprite = unselectedUnpressedSprite;
-
-            // Reset unpressed button sprite.
-            Button selectedButton = selectedPlacementButton.GetComponent<Button>();
-            SpriteState spriteState;
-            spriteState.pressedSprite = unselectedPressedSprite;
-            selectedButton.spriteState = spriteState;
-        }
-
-        // Cancel placement.
-        if (currentDefensePlacement)
-        {
-            DefencePlacementController placementController = currentDefensePlacement.GetComponent<DefencePlacementController>();
-
-            if (!placementController.isPlaced())
-            {
-                Destroy(currentDefensePlacement);
-            }
+            Destroy(button.gameObject);
         }
     }
 }

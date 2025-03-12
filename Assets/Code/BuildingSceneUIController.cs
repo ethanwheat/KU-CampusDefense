@@ -11,8 +11,8 @@ public class BuildingSceneUIController : MonoBehaviour
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
 
-    [Header("UI Game Objects")]
-    [SerializeField] private GameObject dollarUI;
+    [Header("UI Text")]
+    [SerializeField] private TextMeshProUGUI dollarText;
 
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
@@ -29,33 +29,12 @@ public class BuildingSceneUIController : MonoBehaviour
         updateDollarUI();
 
         // Fade out background.
-        StartCoroutine(fadeBackgroundOut());
+        StartCoroutine(loadingBackgroundController.fadeOutCoroutine(.5f));
     }
 
     void Update()
     {
         checkHoverOverBuilding();
-    }
-
-    // Start round.
-    public void startRound()
-    {
-        StartCoroutine(startRoundCoroutine());
-    }
-
-    // Create message pop up panel.
-    public void createMessagePopupPanel(string messageTitle, string messageText)
-    {
-        // Create message popup panel.
-        messagePopupPanelController.showPanel(messageTitle, messageText);
-    }
-
-    // Update the dollar UI.
-    public void updateDollarUI()
-    {
-        // Update dollar text.
-        TextMeshProUGUI dollarText = dollarUI.transform.Find("DollarText").GetComponent<TextMeshProUGUI>();
-        dollarText.text = gameDataController.getDollarAmount().ToString();
     }
 
     // Check if mouse is hovering over building.
@@ -101,8 +80,11 @@ public class BuildingSceneUIController : MonoBehaviour
                     }
                     else
                     {
-                        // Show purchase panel.
-                        createPurchasePanel(buildingPlacementController, objectData);
+                        // Close existing UI.
+                        closeExistingUI();
+
+                        // Show purchase panel with data.
+                        purchasePanelController.showPanel(buildingPlacementController, objectData);
                     }
                 }
             }
@@ -114,16 +96,6 @@ public class BuildingSceneUIController : MonoBehaviour
                 outline.enabled = false;
             }
         }
-    }
-
-    // Create purchase panel.
-    void createPurchasePanel(BuildingPlacementController buildingPlacementController, ObjectData objectData)
-    {
-        // Close existing UI.
-        closeExistingUI();
-
-        // Load purchase panel with data.
-        purchasePanelController.loadData(buildingPlacementController, objectData);
     }
 
     // Show outline on placement.
@@ -156,42 +128,31 @@ public class BuildingSceneUIController : MonoBehaviour
         return null;
     }
 
+    // Start round.
+    public void startRound()
+    {
+        StartCoroutine(startRoundCoroutine());
+    }
+
     // Fade background in and load round scene.
     IEnumerator startRoundCoroutine()
     {
-        yield return fadeBackgroundIn();
+        yield return StartCoroutine(loadingBackgroundController.fadeInCoroutine(.5f));
 
         SceneManager.LoadScene("Gavin's Round Scene");
     }
 
-    // Fade background in.
-    IEnumerator fadeBackgroundIn()
+    // Update the dollar UI.
+    public void updateDollarUI()
     {
-        yield return StartCoroutine(loadingBackgroundController.fadeInCoroutine(.5f));
-    }
-
-    // Fade background out.
-    IEnumerator fadeBackgroundOut()
-    {
-        yield return StartCoroutine(loadingBackgroundController.fadeOutCoroutine(.5f));
-    }
-
-    // Close purchase panel.
-    void closePurchasePanel()
-    {
-        purchasePanelController.closePanel();
-    }
-
-    // Close popup panel.
-    void closePopupPanel()
-    {
-        messagePopupPanelController.closePanel();
+        // Update dollar text.
+        dollarText.text = gameDataController.getDollarAmount().ToString();
     }
 
     // Close existing UI.
     void closeExistingUI()
     {
-        closePopupPanel();
-        closePurchasePanel();
+        messagePopupPanelController.closePanel();
+        purchasePanelController.closePanel();
     }
 }

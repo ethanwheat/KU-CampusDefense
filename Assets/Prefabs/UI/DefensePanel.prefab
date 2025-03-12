@@ -276,6 +276,8 @@ MonoBehaviour:
   unselectedUnpressedSprite: {fileID: -333465279, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   selectedPressedSprite: {fileID: -2082850274, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   selectedUnpressedSprite: {fileID: 1319191705, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  messagePopupPanelController: {fileID: 0}
+  placementButtonsParent: {fileID: 8969030159490705421}
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!1001 &8938521929885644991
 PrefabInstance:

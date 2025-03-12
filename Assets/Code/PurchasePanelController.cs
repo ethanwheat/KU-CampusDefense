@@ -9,21 +9,18 @@ public class PurchasePanelController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemDescription;
     [SerializeField] private TextMeshProUGUI costText;
 
+    [Header("UI Controllers")]
+    [SerializeField] private BuildingSceneUIController buildingSceneUIController;
+    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
+
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
     private ObjectData objectData;
-
-    private BuildingSceneUIController buildingSceneUIController;
     private BuildingPlacementController buildingPlacementController;
 
-    public void Start()
-    {
-        buildingSceneUIController = transform.parent.GetComponent<BuildingSceneUIController>();
-    }
-
     // Load purchase panel data.
-    public void loadData(BuildingPlacementController controller, ObjectData data)
+    public void showPanel(BuildingPlacementController controller, ObjectData data)
     {
         // Set building name and set object data.
         buildingPlacementController = controller;
@@ -34,6 +31,9 @@ public class PurchasePanelController : MonoBehaviour
         itemText.text = objectData.getName();
         itemDescription.text = objectData.getDescription();
         costText.text = objectData.getDollarCost().ToString();
+
+        // Show panel
+        gameObject.SetActive(true);
     }
 
     // Set object to bought, subtract dollars, create message popup panel, and update dollar UI
@@ -51,7 +51,7 @@ public class PurchasePanelController : MonoBehaviour
             // update dollar amounts on dollar UI, close purchase panel, and refresh building placement controller.
             objectData.setBought(true);
             gameDataController.subtractDollars(objectCost);
-            buildingSceneUIController.createMessagePopupPanel("Item Purchased", "You have bought " + buildingName + " for " + objectCost.ToString() + " dollars!");
+            messagePopupPanelController.showPanel("Item Purchased", "You have bought " + buildingName + " for " + objectCost.ToString() + " dollars!");
             buildingSceneUIController.updateDollarUI();
             buildingPlacementController.updatePlacementArea();
             closePanel();
@@ -59,7 +59,7 @@ public class PurchasePanelController : MonoBehaviour
         else
         {
             // Show error popup panel and close purchase panel.
-            buildingSceneUIController.createMessagePopupPanel("Insufficient Dollars", "You do not have enough dollars to buy " + buildingName + "!");
+            messagePopupPanelController.showPanel("Insufficient Dollars", "You do not have enough dollars to buy " + buildingName + "!");
             closePanel();
         }
     }
@@ -67,6 +67,6 @@ public class PurchasePanelController : MonoBehaviour
     // Close purchase panel.
     public void closePanel()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

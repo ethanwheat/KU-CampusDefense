@@ -471,6 +471,7 @@ GameObject:
   - component: {fileID: 1951260004828164153}
   - component: {fileID: 5920824551847248340}
   - component: {fileID: 5138299905297172231}
+  - component: {fileID: 2813302077446625166}
   m_Layer: 5
   m_Name: DefensePlacementButton
   m_TagString: Untagged
@@ -582,3 +583,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2813302077446625166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5647939800688894606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97a26077127c28441bb091bc73ac3423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defenseText: {fileID: 4973505043576945330}
+  defenseCostText: {fileID: 129471423087328040}
+  defenseImage: {fileID: 7438593926446044942}
+  unselectedPressedSprite: {fileID: -987095383, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  unselectedUnpressedSprite: {fileID: -333465279, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  selectedPressedSprite: {fileID: -2082850274, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  selectedUnpressedSprite: {fileID: 1319191705, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}

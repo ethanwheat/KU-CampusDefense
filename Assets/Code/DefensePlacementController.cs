@@ -13,6 +13,9 @@ public class DefencePlacementController : MonoBehaviour
     [Header("Defense Information")]
     [SerializeField] private PlacementMethod placementMethod;
 
+    [Header("UI Controllers")]
+    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
+
     [Header("Unity Events")]
     public UnityEvent onCancelPlacement;
 
@@ -185,7 +188,7 @@ public class DefencePlacementController : MonoBehaviour
             else
             {
                 // Show error popup panel and cancel placement.
-                roundSceneUIController.createMessagePopupPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.getName() + "!");
+                messagePopupPanelController.showPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.getName() + "!");
                 onCancelPlacement.Invoke();
             }
         }
