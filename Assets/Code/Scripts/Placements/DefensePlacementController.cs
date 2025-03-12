@@ -14,7 +14,8 @@ public class DefensePlacementController : MonoBehaviour
     [SerializeField] private PlacementMethod placementMethod;
 
     [Header("Unity Events")]
-    public UnityEvent onCancelPlacement;
+    public UnityEvent onPlacementSuccess;
+    public UnityEvent onPlacementFail;
 
     private Camera mainCamera;
     private Outline outline;
@@ -136,15 +137,16 @@ public class DefensePlacementController : MonoBehaviour
 
                 // Disable this script.
                 this.enabled = false;
+
+                // Call onPlacementSuccess.
+                onPlacementSuccess.Invoke();
             }
             else
             {
-                // Show error popup panel and cancel placement.
+                // Show error popup panel and call onPlacementFail.
                 messagePopupPanelController.showPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.getName() + "!");
+                onPlacementFail.Invoke();
             }
-
-            // Send event to cancel placement and reset placement button on the defense panel.
-            onCancelPlacement.Invoke();
         }
     }
 

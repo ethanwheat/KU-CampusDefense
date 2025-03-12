@@ -35,8 +35,8 @@ public class DefensePanelController : MonoBehaviour
     // Load defenses in UI.
     public void showPanel()
     {
-        // Reset panel.
-        resetPanel();
+        // Destroy current placement
+        destroyCurrentPlacement();
 
         // Get updated defenses.
         defenseData = gameDataController.getDefenseData();
@@ -66,8 +66,8 @@ public class DefensePanelController : MonoBehaviour
     // Close defense panel.
     public void closePanel()
     {
-        // Cancel placement, reset panel, hide panel.
-        cancelPlacement();
+        // Destroy current placement, reset panel, and hide panel.
+        destroyCurrentPlacement();
         resetPanel();
         gameObject.SetActive(false);
     }
@@ -88,31 +88,43 @@ public class DefensePanelController : MonoBehaviour
         Transform parentTransform = getRootGameObject("Placement").transform;
         currentDefensePlacement = Instantiate(defense.getPrefab(), parentTransform);
 
-        // Set defense data on placement controller and add listener to reset the panel when a placement is made.
+        // Set defense data on placement controller and add listeners to reset the panel and destroy current placement when a placement is made.
         DefensePlacementController placementController = currentDefensePlacement.GetComponent<DefensePlacementController>();
         placementController.loadData(defense, roundManager, messagePopupPanelController);
-        placementController.onCancelPlacement.AddListener(cancelPlacement);
+        placementController.onPlacementSuccess.AddListener(placementPlaced);
+        placementController.onPlacementFail.AddListener(cancelPlacement);
     }
 
-    // Cancel placement and reset placement button
-    void cancelPlacement()
+    // Reset current placement button.
+    void resetCurrentPlacementButton()
     {
-        // Deselect placement button.
         if (selectedPlacementButton)
         {
             selectedPlacementButton.GetComponent<DefensePlacementButtonController>().onDeselect();
         }
+    }
 
+    // Destroys current placement.
+    void destroyCurrentPlacement()
+    {
         if (currentDefensePlacement)
         {
-            DefensePlacementController defensePlacementController = currentDefensePlacement.GetComponent<DefensePlacementController>();
-
-            // Only delete if not placed.
-            if (!defensePlacementController.isPlaced())
-            {
-                Destroy(currentDefensePlacement);
-            }
+            Destroy(currentDefensePlacement);
         }
+    }
+
+    // Set current defense placement to null and reset current placement button.
+    void placementPlaced()
+    {
+        currentDefensePlacement = null;
+        destroyCurrentPlacement();
+    }
+
+    // Reset placement button and destroy current placement.
+    void cancelPlacement()
+    {
+        resetCurrentPlacementButton();
+        destroyCurrentPlacement();
     }
 
     // Get root game object
