@@ -9,8 +9,15 @@ public class EnemyMovement : MonoBehaviour
   }
 
   public PathNode currentNode; // The waypoint the object is moving toward
-  public float speed;
+  [SerializeField] private float speed;
+  [SerializeField] private float health;
+  [SerializeField] private HealthBar healthBar; // Reference to the HealthBar script
+
+  private float baseSpeed;
+  private float maxHealth;
   private bool isBlocked = false;
+
+  public float Health => health; // read only access
 
   // Update is called once per frame
   void FixedUpdate()
@@ -30,53 +37,80 @@ public class EnemyMovement : MonoBehaviour
     // If close enough, pick the next waypoint
     if (Vector3.Distance(transform.position, currentNode.transform.position) < 0.1f)
     {
-      currentNode = currentNode.GetNextNode();
+      var nextNode = currentNode.GetNextNode();
+      if (nextNode != null)
+      {
+        currentNode = currentNode.GetNextNode();
+      }
+      else
+      {
+        Destroy(gameObject);
+      }
     }
   }
 
-  // Stop movement when touching an obstacle
+  // defense reactions
   private void OnTriggerEnter(Collider other)
   {
-    DefensePlacementController placementController = other.gameObject.GetComponent<DefensePlacementController>();
+    if (!other.TryGetComponent(out DefensePlacementController placementController)) return;
+    if (!placementController.isPlaced()) return;
 
-    if (placementController)
+    if (other.TryGetComponent(out IDefenseEffect defenseEffect))
     {
-      bool isPlaced = placementController.isPlaced();
-
-      if (isPlaced)
-      {
-        if (other.CompareTag("Obstacle"))
-        {
-          isBlocked = true;
-        }
-        else if (other.CompareTag("Ice"))
-        {
-          speed /= 5;
-        }
-      }
+      defenseEffect.ApplyEffect(this);
     }
   }
 
-  // Resume movement when no longer touching an obstacle
   private void OnTriggerExit(Collider other)
   {
-    DefensePlacementController placementController = other.gameObject.GetComponent<DefensePlacementController>();
+    if (!other.TryGetComponent(out DefensePlacementController placementController)) return;
+    if (!placementController.isPlaced()) return;
 
-    if (placementController)
+    if (other.TryGetComponent(out IDefenseEffect defenseEffect))
     {
-      bool isPlaced = placementController.isPlaced();
-
-      if (isPlaced)
-      {
-        if (other.CompareTag("Obstacle"))
-        {
-          isBlocked = false;
-        }
-        else if (other.CompareTag("Ice"))
-        {
-          speed *= 5;
-        }
-      }
+      defenseEffect.RemoveEffect(this);
     }
+  }
+
+  public void SetSpeed(float initSpeed)
+  {
+    speed = initSpeed;
+    baseSpeed = initSpeed;
+  }
+
+  public void SetHealth(float initHealth)
+  {
+    health = initHealth;
+    maxHealth = initHealth;
+  }
+
+  public void TakeDamage(float amount)
+  {
+    health -= amount;
+    healthBar.UpdateHealthBar(health, maxHealth);
+    if (health <= 0)
+    {
+      Die();
+    }
+  }
+
+  private void Die()
+  {
+    Destroy(gameObject); // Or trigger a death animation, effects, etc.
+  }
+
+  public void SetSpeedMultiplier(float multiplier)
+  {
+    speed = baseSpeed * multiplier;
+  }
+
+  public void ResetSpeedMultiplier()
+  {
+    speed = baseSpeed;
+  }
+
+  public void BlockMovement(bool isBlocked)
+  {
+    this.isBlocked = isBlocked;
   }
 }

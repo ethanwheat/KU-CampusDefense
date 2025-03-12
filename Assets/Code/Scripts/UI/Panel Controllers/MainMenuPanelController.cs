@@ -32,6 +32,6 @@ public class MainMenuPanelController : MonoBehaviour
         gameDataController.resetGameData();
 
         // Load building scene.
-        SceneManager.LoadScene("Gavin's Building Scene");
+        SceneManager.LoadScene("Building Scene");
     }
 }
