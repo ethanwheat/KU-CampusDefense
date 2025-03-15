@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 652107f36a28e44479c0b827dee5852a, type: 2}
+  - {fileID: 2100000, guid: 74ee6eea288ae0f4da42083b50e996a7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -105,7 +105,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -142,7 +142,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementMethod: 1
-  onCancelPlacement:
+  onPlacementSuccess:
+    m_PersistentCalls:
+      m_Calls: []
+  onPlacementFail:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &7928821663012954953
@@ -157,3 +160,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e29c3a36c845540b8587cae8bd253b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  damagePerSecond: 10

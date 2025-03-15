@@ -6,9 +6,15 @@ public class IceDefense : MonoBehaviour, IDefenseEffect
 {
     [SerializeField] private float slowMultiplier = 0.2f;
     [SerializeField] private float damagePerSecond = 5f;
+    [SerializeField] private float duration = 30f;
 
     private Dictionary<EnemyMovement, Coroutine> activeCoroutines = new Dictionary<EnemyMovement, Coroutine>();
 
+    private void Start()
+    {
+        // Automatically destroy the ice after 'duration' seconds
+        StartCoroutine(DestroyAfterTime());
+    }
     public void ApplyEffect(EnemyMovement enemy)
     {
         enemy.SetSpeedMultiplier(slowMultiplier);
@@ -42,5 +48,19 @@ public class IceDefense : MonoBehaviour, IDefenseEffect
             yield return new WaitForSeconds(1f);
         }
     }
-}
 
+    // Coroutine to remove ice after a set time
+    private IEnumerator DestroyAfterTime()
+    {
+        yield return new WaitForSeconds(duration);
+        
+        // Ensure all enemies are freed from the effect before destruction
+        foreach (var enemy in activeCoroutines.Keys)
+        {
+            RemoveEffect(enemy);
+        }
+
+        activeCoroutines.Clear();
+        Destroy(gameObject);
+    }
+}
