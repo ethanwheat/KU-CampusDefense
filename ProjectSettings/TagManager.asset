@@ -8,6 +8,7 @@ TagManager:
   - Obstacle
   - Ice
   - SideOfRoadPlacement
+  - Turret
   layers:
   - Default
   - TransparentFX
