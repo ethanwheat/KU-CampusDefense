@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 60c3ddc2e66359b479f2a7d7c20faa1a
+timeCreated: 1429285649
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34901
+  packageName: Traffic Barrier
+  packageVersion: 1.0
+  assetPath: Assets/IndustrialEnvironment/TrafficBarrier/Prefabs/TrafficBarrierHazards.prefab
+  uploadId: 59765

@@ -87,6 +87,7 @@ public class EnemyMovement : MonoBehaviour
   public void TakeDamage(float amount)
   {
     health -= amount;
+    //Debug.Log("Enemy took damage. Current Health: " + health);
     healthBar.UpdateHealthBar(health, maxHealth);
     if (health <= 0)
     {
@@ -96,6 +97,7 @@ public class EnemyMovement : MonoBehaviour
 
   private void Die()
   {
+    Debug.Log("Enemy died.");
     Destroy(gameObject); // Or trigger a death animation, effects, etc.
   }
 
