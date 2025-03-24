@@ -219,7 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowMultiplier: 0.2
   damagePerSecond: 5
-  duration: 60
+  duration: 5
   healthBar: {fileID: 6074170264989432044}
 --- !u!1001 &3555971344166432938
 PrefabInstance:

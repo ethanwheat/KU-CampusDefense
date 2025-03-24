@@ -18,15 +18,27 @@ public class IceDefense : MonoBehaviour, IDefenseEffect
 
     private void Start()
     {
-        // Automatically destroy the ice after 'duration' seconds
-        StartCoroutine(DestroyAfterTime());
-
         destroyTime = Time.time + duration;
     }
 
     private void Update()
     {
-        healthBar.UpdateHealthBar(destroyTime - Time.time, duration);
+        float time = Time.time;
+
+        healthBar.UpdateHealthBar(destroyTime - time, duration);
+
+        // Destroy if destroy time is less then current time.
+        if (destroyTime <= time)
+        {
+            // Ensure all enemies are freed from the effect before destruction
+            foreach (var enemy in new List<EnemyMovement>(activeCoroutines.Keys))
+            {
+                RemoveEffect(enemy);
+            }
+
+            activeCoroutines.Clear();
+            Destroy(gameObject);
+        }
     }
 
     public void ApplyEffect(EnemyMovement enemy)
@@ -61,20 +73,5 @@ public class IceDefense : MonoBehaviour, IDefenseEffect
             enemy.TakeDamage(damagePerSecond);
             yield return new WaitForSeconds(1f);
         }
-    }
-
-    // Coroutine to remove ice after a set time
-    private IEnumerator DestroyAfterTime()
-    {
-        yield return new WaitForSeconds(duration);
-
-        // Ensure all enemies are freed from the effect before destruction
-        foreach (var enemy in activeCoroutines.Keys)
-        {
-            RemoveEffect(enemy);
-        }
-
-        activeCoroutines.Clear();
-        Destroy(gameObject);
     }
 }
