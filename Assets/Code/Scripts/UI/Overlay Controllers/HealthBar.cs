@@ -11,9 +11,9 @@ public class HealthBar : MonoBehaviour
         healthBarFill.fillAmount = fillAmount;
 
         // Optional: Color change for visual clarity
-        if (fillAmount > 0.5f)
+        if (fillAmount > 0.75f)
             healthBarFill.color = Color.green;
-        else if (fillAmount > 0.2f)
+        else if (fillAmount > 0.25f)
             healthBarFill.color = Color.yellow;
         else
             healthBarFill.color = Color.red;

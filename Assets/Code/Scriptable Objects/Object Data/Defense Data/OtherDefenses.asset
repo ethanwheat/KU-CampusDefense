@@ -17,7 +17,7 @@ MonoBehaviour:
   dollarCost: 1000
   unlockRound: 100
   boughtAtStart: 0
-  bought: 0
+  bought: 1
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
   coinCost: 1000
   level: 0

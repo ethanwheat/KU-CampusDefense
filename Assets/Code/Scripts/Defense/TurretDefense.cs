@@ -4,16 +4,36 @@ using UnityEngine;
 public class TurretDefense : MonoBehaviour, IDefenseEffect
 {
     [Header("Turret Settings")]
-    public float range = 10f; // Range of the turret
-    public float fireRate = 1f; // Shots per second
-    public GameObject bulletPrefab; // Reference to the bullet prefab
-    public Transform firePoint; // Point where bullets are spawned
+    [SerializeField] private float range = 10f; // Range of the turret
+    [SerializeField] private float fireRate = 1f; // Shots per second
+    [SerializeField] private float duration = 30; // Duratio 
+    [SerializeField] private GameObject bulletPrefab; // Reference to the bullet prefab
+    [SerializeField] private Transform firePoint; // Point where bullets are spawned
+
+    [Header("Health Bar Script")]
+    [SerializeField] private HealthBar healthBar;
 
     private float fireCountdown = 0f;
     private List<EnemyMovement> enemiesInRange = new List<EnemyMovement>();
+    private float destroyTime;
+
+    void Start()
+    {
+        destroyTime = Time.time + duration;
+    }
 
     void Update()
     {
+        float time = Time.time;
+
+        healthBar.UpdateHealthBar(destroyTime - time, duration);
+
+        // Destroy if destroy time is less then current time.
+        if (destroyTime <= time)
+        {
+            Destroy(gameObject);
+        }
+
         // Find the nearest enemy in range
         EnemyMovement nearestEnemy = GetNearestEnemy();
 
