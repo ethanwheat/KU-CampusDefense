@@ -60,11 +60,13 @@ public class TurretDefense : MonoBehaviour, IDefenseEffect
         if (enabled)
         {
             // Add enemy to the list when it enters the range
-            EnemyMovement enemy = other.GetComponent<EnemyMovement>();
-            if (enemy != null && !enemiesInRange.Contains(enemy))
+            if (other.TryGetComponent(out EnemyMovement enemy))
             {
-                enemiesInRange.Add(enemy);
-                //Debug.Log("Enemy entered range: " + enemy.name);
+                if (!enemiesInRange.Contains(enemy))
+                {
+                    enemiesInRange.Add(enemy);
+                    //Debug.Log("Enemy entered range: " + enemy.name);
+                }
             }
         }
     }
@@ -74,11 +76,13 @@ public class TurretDefense : MonoBehaviour, IDefenseEffect
         if (enabled)
         {
             // Remove enemy from the list when it leaves the range
-            EnemyMovement enemy = other.GetComponent<EnemyMovement>();
-            if (enemy != null && enemiesInRange.Contains(enemy))
+            if (other.TryGetComponent(out EnemyMovement enemy))
             {
-                enemiesInRange.Remove(enemy);
-                //Debug.Log("Enemy left range: " + enemy.name);
+                if (enemy != null && enemiesInRange.Contains(enemy))
+                {
+                    enemiesInRange.Remove(enemy);
+                    //Debug.Log("Enemy left range: " + enemy.name);
+                }
             }
         }
     }
@@ -93,14 +97,9 @@ public class TurretDefense : MonoBehaviour, IDefenseEffect
 
         //Debug.Log("Shooting at target: " + target.name);
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
-        if (bulletScript != null)
+        if (bullet.TryGetComponent(out Bullet bulletScript))
         {
             bulletScript.SetTarget(target);
-        }
-        else
-        {
-            //Debug.LogError("Bullet script not found on bullet prefab.");
         }
     }
 

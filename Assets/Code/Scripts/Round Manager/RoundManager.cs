@@ -81,8 +81,7 @@ public class RoundManager : MonoBehaviour
             enemy.transform.position = spawnPosition;
             enemy.transform.rotation = Quaternion.identity;
 
-            EnemyMovement enemyScript = enemy.GetComponent<EnemyMovement>();
-            if (enemyScript != null)
+            if (enemy.TryGetComponent(out EnemyMovement enemyScript))
             {
                 enemyScript.SetSpeed(speed);
                 enemyScript.SetHealth(health);

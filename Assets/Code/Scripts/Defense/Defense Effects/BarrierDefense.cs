@@ -16,8 +16,7 @@ public class BarrierDefense : MonoBehaviour, IDefenseEffect
     {
         if (enabled)
         {
-            EnemyMovement enemy = other.GetComponent<EnemyMovement>();
-            if (enemy != null)
+            if (other.TryGetComponent(out EnemyMovement enemy))
             {
                 ApplyEffect(enemy);
                 TakeDamage(damagePerSecond * Time.deltaTime);
@@ -29,8 +28,7 @@ public class BarrierDefense : MonoBehaviour, IDefenseEffect
     {
         if (enabled)
         {
-            EnemyMovement enemy = other.GetComponent<EnemyMovement>();
-            if (enemy != null)
+            if (other.TryGetComponent(out EnemyMovement enemy))
             {
                 RemoveEffect(enemy);
             }
@@ -63,8 +61,7 @@ public class BarrierDefense : MonoBehaviour, IDefenseEffect
         Collider[] colliders = Physics.OverlapBox(transform.position, transform.localScale / 2);
         foreach (Collider collider in colliders)
         {
-            EnemyMovement enemy = collider.GetComponent<EnemyMovement>();
-            if (enemy != null)
+            if (collider.TryGetComponent(out EnemyMovement enemy))
             {
                 RemoveEffect(enemy);
             }
