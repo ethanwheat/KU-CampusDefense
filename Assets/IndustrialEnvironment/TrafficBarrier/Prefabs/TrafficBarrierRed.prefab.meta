@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8f28b0369af3a5d4bb1e7e9293b809d7
+timeCreated: 1429282586
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34901
+  packageName: Traffic Barrier
+  packageVersion: 1.0
+  assetPath: Assets/IndustrialEnvironment/TrafficBarrier/Prefabs/TrafficBarrierRed.prefab
+  uploadId: 59765

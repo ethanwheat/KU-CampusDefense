@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public interface IDefenseEffect
 {
     void ApplyEffect(EnemyMovement enemy);   // Called on Enter

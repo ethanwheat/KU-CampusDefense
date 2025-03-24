@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 74ee6eea288ae0f4da42083b50e996a7
+timeCreated: 1429285676
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 34901
+  packageName: Traffic Barrier
+  packageVersion: 1.0
+  assetPath: Assets/IndustrialEnvironment/TrafficBarrier/Materials/TrafficBarrierHazards.mat
+  uploadId: 59765
