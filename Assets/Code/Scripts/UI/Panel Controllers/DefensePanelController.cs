@@ -41,11 +41,11 @@ public class DefensePanelController : MonoBehaviour
         // Get updated defenses.
         defenseData = gameDataController.getDefenseData();
 
-        for (int i = 0; i < defenseData.Length; i++)
-        {
-            // Get current defense.
-            DefenseData defense = defenseData[i];
+        // Set intial index to 0.
+        int index = 0;
 
+        foreach (var defense in defenseData)
+        {
             if (defense.isBought())
             {
                 // Create defense button and add listeners.
@@ -54,8 +54,11 @@ public class DefensePanelController : MonoBehaviour
                 placementButton.GetComponent<Button>().onClick.AddListener(() => startPlacement(placementButton, defense));
 
                 // Update position on panel.
-                Vector3 newPosition = new Vector3(125 + (130 * i), 125, 0);
+                Vector3 newPosition = new Vector3(125 + (130 * index), 125, 0);
                 placementButton.GetComponent<RectTransform>().anchoredPosition = newPosition;
+
+                // Update index
+                index++;
             }
         }
 

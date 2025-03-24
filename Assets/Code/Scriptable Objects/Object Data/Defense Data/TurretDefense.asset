@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Shoots T-Shirts at enemies and lowers their HP.
   dollarCost: 100
   unlockRound: 5
-  boughtAtStart: 1
+  boughtAtStart: 0
   bought: 1
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
   coinCost: 50
