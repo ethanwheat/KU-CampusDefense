@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BarrierDefense : MonoBehaviour, IDefenseEffect
@@ -13,20 +14,26 @@ public class BarrierDefense : MonoBehaviour, IDefenseEffect
 
     private void OnTriggerStay(Collider other)
     {
-        EnemyMovement enemy = other.GetComponent<EnemyMovement>();
-        if (enemy != null)
+        if (enabled)
         {
-            ApplyEffect(enemy);
-            TakeDamage(damagePerSecond * Time.deltaTime);
+            EnemyMovement enemy = other.GetComponent<EnemyMovement>();
+            if (enemy != null)
+            {
+                ApplyEffect(enemy);
+                TakeDamage(damagePerSecond * Time.deltaTime);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        EnemyMovement enemy = other.GetComponent<EnemyMovement>();
-        if (enemy != null)
+        if (enabled)
         {
-            RemoveEffect(enemy);
+            EnemyMovement enemy = other.GetComponent<EnemyMovement>();
+            if (enemy != null)
+            {
+                RemoveEffect(enemy);
+            }
         }
     }
 
@@ -43,7 +50,6 @@ public class BarrierDefense : MonoBehaviour, IDefenseEffect
     private void TakeDamage(float damage)
     {
         currentHealth -= damage;
-        Debug.Log("Barrier Health: " + currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -53,8 +59,6 @@ public class BarrierDefense : MonoBehaviour, IDefenseEffect
 
     private void DestroyBarrier()
     {
-        Debug.Log("Barrier Destroyed!");
-
         // Resume movement for all enemies within the barrier area
         Collider[] colliders = Physics.OverlapBox(transform.position, transform.localScale / 2);
         foreach (Collider collider in colliders)

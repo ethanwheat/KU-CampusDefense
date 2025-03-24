@@ -22,7 +22,7 @@ public class TurretDefense : MonoBehaviour, IDefenseEffect
             // Rotate turret head to face the enemy
             Vector3 direction = nearestEnemy.transform.position - transform.position;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10);
 
             // Shoot at the enemy
             if (fireCountdown <= 0f)
@@ -57,23 +57,29 @@ public class TurretDefense : MonoBehaviour, IDefenseEffect
 
     private void OnTriggerEnter(Collider other)
     {
-        // Add enemy to the list when it enters the range
-        EnemyMovement enemy = other.GetComponent<EnemyMovement>();
-        if (enemy != null && !enemiesInRange.Contains(enemy))
+        if (enabled)
         {
-            enemiesInRange.Add(enemy);
-            //Debug.Log("Enemy entered range: " + enemy.name);
+            // Add enemy to the list when it enters the range
+            EnemyMovement enemy = other.GetComponent<EnemyMovement>();
+            if (enemy != null && !enemiesInRange.Contains(enemy))
+            {
+                enemiesInRange.Add(enemy);
+                //Debug.Log("Enemy entered range: " + enemy.name);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        // Remove enemy from the list when it leaves the range
-        EnemyMovement enemy = other.GetComponent<EnemyMovement>();
-        if (enemy != null && enemiesInRange.Contains(enemy))
+        if (enabled)
         {
-            enemiesInRange.Remove(enemy);
-            //Debug.Log("Enemy left range: " + enemy.name);
+            // Remove enemy from the list when it leaves the range
+            EnemyMovement enemy = other.GetComponent<EnemyMovement>();
+            if (enemy != null && enemiesInRange.Contains(enemy))
+            {
+                enemiesInRange.Remove(enemy);
+                //Debug.Log("Enemy left range: " + enemy.name);
+            }
         }
     }
 

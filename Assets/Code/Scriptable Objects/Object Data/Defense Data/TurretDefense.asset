@@ -22,4 +22,4 @@ MonoBehaviour:
   coinCost: 50
   level: 0
   prefab: {fileID: 6275403238126932213, guid: 8d82c162b0e69488c98b2fb79b282eae, type: 3}
-  sprite: {fileID: -1788049881, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  sprite: {fileID: 1697800366, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
