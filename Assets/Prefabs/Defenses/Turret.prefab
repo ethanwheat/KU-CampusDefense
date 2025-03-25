@@ -5456,7 +5456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6176315813413253274}
-  - component: {fileID: 4379118762053907925}
+  - component: {fileID: 7576337430299301618}
   - component: {fileID: -7304589485350312657}
   - component: {fileID: -4916939944773675550}
   - component: {fileID: 5734486265036961990}
@@ -5485,8 +5485,8 @@ Transform:
   - {fileID: 5995862459789861501}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4379118762053907925
-BoxCollider:
+--- !u!135 &7576337430299301618
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5500,11 +5500,11 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 50, y: 1, z: 50}
+  m_Radius: 25
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-7304589485350312657
 MonoBehaviour:
@@ -5591,7 +5591,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd350c1e70cee460c818023535bd2e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 100
   fireRate: 1
   duration: 30
   bulletPrefab: {fileID: 4376966964805629839, guid: 9961c4610855d449b88a3b3afac28201, type: 3}

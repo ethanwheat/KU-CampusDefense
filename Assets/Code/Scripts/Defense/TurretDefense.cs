@@ -4,7 +4,6 @@ using UnityEngine;
 public class TurretDefense : MonoBehaviour, IDefenseEffect
 {
     [Header("Turret Settings")]
-    [SerializeField] private float range = 10f; // Range of the turret
     [SerializeField] private float fireRate = 1f; // Shots per second
     [SerializeField] private float duration = 30; // Duratio 
     [SerializeField] private GameObject bulletPrefab; // Reference to the bullet prefab
