@@ -78,14 +78,15 @@ public class BuildingSceneUIController : MonoBehaviour
                     }
                 }
             }
+
+            return;
         }
-        else
+
+        if (buildingPlacementController)
         {
-            if (buildingPlacementController)
-            {
-                buildingPlacementController.showOutline(false);
-            }
+            buildingPlacementController.showOutline(false);
         }
+
     }
 
     // Start round.
