@@ -131,6 +131,8 @@ public class BuildingPlacementController : MonoBehaviour
         return objectData;
     }
 
+
+
     // Show outline on placement.
     public void showOutline(bool visible)
     {

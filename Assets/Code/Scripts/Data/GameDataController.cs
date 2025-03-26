@@ -69,6 +69,7 @@ public class GameDataController : ScriptableObject
         {
             bool isBoughtAtStart = data.isBoughtAtStart();
             data.setBought(isBoughtAtStart);
+            data.resetLevel();
         }
 
         foreach (var data in bonusData)

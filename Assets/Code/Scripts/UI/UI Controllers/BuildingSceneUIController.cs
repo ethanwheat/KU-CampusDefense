@@ -8,6 +8,7 @@ public class BuildingSceneUIController : MonoBehaviour
 {
     [Header("UI Controllers")]
     [SerializeField] private PurchasePanelController purchasePanelController;
+    [SerializeField] private UpgradePanelController upgradePanelController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
 
@@ -63,16 +64,16 @@ public class BuildingSceneUIController : MonoBehaviour
                 // Check if mouse is clicked.
                 if (Input.GetMouseButtonDown(0))
                 {
+                    // Close existing UI.
+                    closeExistingUI();
+
                     // Check if object is bought or not.
                     if (objectData.isBought())
                     {
-                        // Show defense upgrade panel.
+                        upgradePanelController.showPanel(buildingPlacementController.getBuildingName(), (DefenseData)objectData);
                     }
                     else
                     {
-                        // Close existing UI.
-                        closeExistingUI();
-
                         // Show purchase panel with data.
                         purchasePanelController.showPanel(buildingPlacementController, objectData);
                     }
@@ -113,7 +114,8 @@ public class BuildingSceneUIController : MonoBehaviour
     // Close existing UI.
     void closeExistingUI()
     {
-        messagePopupPanelController.closePanel();
         purchasePanelController.closePanel();
+        upgradePanelController.closePanel();
+        messagePopupPanelController.closePanel();
     }
 }

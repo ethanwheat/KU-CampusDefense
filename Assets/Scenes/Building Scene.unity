@@ -294,6 +294,10 @@ PrefabInstance:
       propertyPath: m_RenderMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6361784035872765708, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6651519775747354749, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
       propertyPath: m_UiScaleMode
       value: 1
