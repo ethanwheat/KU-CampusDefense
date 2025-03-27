@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5514313030912324790}
   - component: {fileID: 7939662602704879385}
   m_Layer: 0
-  m_Name: FlagImage
+  m_Name: ItemImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -328,6 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365a8be73e13e8c4d900a63b893eb60a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemImage: {fileID: 7939662602704879385}
   buildingText: {fileID: 3549835582469609102}
   costText: {fileID: 595030351296519513}
 --- !u!1 &6703787483921565815
@@ -402,7 +403,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -5, y: 0}
-  m_SizeDelta: {x: 7.5, y: 5}
+  m_SizeDelta: {x: 7.5, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8808516688523526161
 CanvasRenderer:

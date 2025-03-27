@@ -50,44 +50,58 @@ public class BuildingSceneUIController : MonoBehaviour
                 return;
             }
 
-            // Get placementCollider, building placement controller, and object data.
-            Collider placementCollider = hit.collider;
-            buildingPlacementController = placementCollider.GetComponent<BuildingPlacementController>();
+            // Get building placement controller and object data.
+            buildingPlacementController = hit.collider.GetComponent<BuildingPlacementController>();
             ObjectData objectData = buildingPlacementController.getObjectData();
 
-            // Only show panels and outlines if building is not locked.
-            if (!objectData.isLocked())
+            // Make sure the object is not locked.
+            if (objectData.isLocked())
             {
-                // Show outline.
-                buildingPlacementController.showOutline(true);
-
-                // Check if mouse is clicked.
-                if (Input.GetMouseButtonDown(0))
-                {
-                    // Close existing UI.
-                    closeExistingUI();
-
-                    // Check if object is bought or not.
-                    if (objectData.isBought())
-                    {
-                        upgradePanelController.showPanel(buildingPlacementController.getBuildingName(), (DefenseData)objectData);
-                    }
-                    else
-                    {
-                        // Show purchase panel with data.
-                        purchasePanelController.showPanel(buildingPlacementController, objectData);
-                    }
-                }
+                return;
             }
+
+            // Show outline.
+            if (!objectData.isBought() || objectData.getType() == ObjectTypes.defense)
+            {
+                buildingPlacementController.showOutline(true);
+            }
+
+            // Handle on building click.
+            handleBuildingClick(objectData);
 
             return;
         }
 
+        // If no raycat hit and there is a buildingPlacementController then hide outline.
         if (buildingPlacementController)
         {
             buildingPlacementController.showOutline(false);
         }
 
+    }
+
+    public void handleBuildingClick(ObjectData objectData)
+    {
+        // Check if mouse is clicked.
+        if (Input.GetMouseButtonDown(0))
+        {
+            // Close existing UI.
+            closeExistingUI();
+
+            // Show purchase panel with data if not bought.
+            if (!objectData.isBought())
+            {
+                purchasePanelController.showPanel(buildingPlacementController, objectData);
+                return;
+            }
+
+            // Show upgrade panel if object type is defense.
+            if (objectData.getType() == ObjectTypes.defense)
+            {
+                upgradePanelController.showPanel(buildingPlacementController.getBuildingName(), (DefenseData)objectData);
+                return;
+            }
+        }
     }
 
     // Start round.

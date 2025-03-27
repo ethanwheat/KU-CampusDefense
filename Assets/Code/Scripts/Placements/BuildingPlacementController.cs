@@ -56,7 +56,7 @@ public class BuildingPlacementController : MonoBehaviour
         // Create overlay if not round scene.
         if (!isRoundScene)
         {
-            createOverlay(isLocked, objectCost);
+            createOverlay();
         }
 
         // Set placement material
@@ -98,7 +98,7 @@ public class BuildingPlacementController : MonoBehaviour
     }
 
     // Create overlay.
-    void createOverlay(bool isLocked, string cost)
+    void createOverlay()
     {
         if (!overlays)
         {
@@ -107,7 +107,7 @@ public class BuildingPlacementController : MonoBehaviour
             overlays.localPosition = new Vector3(0, 1, 0);
         }
 
-        if (isLocked)
+        if (objectData.isLocked())
         {
             GameObject overlay = Instantiate(lockedBuildingOverlayPrefab, overlays);
             overlay.GetComponent<LockedBuildingOverlayController>().setData(buildingName);
@@ -115,7 +115,7 @@ public class BuildingPlacementController : MonoBehaviour
         else
         {
             GameObject overlay = Instantiate(unlockedBuildingOverlayPrefab, overlays);
-            overlay.GetComponent<UnlockedBuildingOverlayController>().setData(buildingName, cost);
+            overlay.GetComponent<UnlockedBuildingOverlayController>().setData(buildingName, objectData);
         }
     }
 

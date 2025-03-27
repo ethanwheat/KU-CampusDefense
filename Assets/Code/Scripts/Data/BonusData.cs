@@ -18,4 +18,9 @@ public class BonusData : ObjectData
     {
         return coinBonus;
     }
+
+    public override ObjectTypes getType()
+    {
+        return ObjectTypes.bonus;
+    }
 }

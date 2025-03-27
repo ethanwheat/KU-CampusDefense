@@ -1,6 +1,13 @@
 using UnityEngine;
 
+public enum ObjectTypes
+{
+    defense,
+    bonus
+}
+
 [CreateAssetMenu(fileName = "DefenseData", menuName = "Scriptable Objects/DefenseData")]
+
 public class DefenseData : ObjectData
 {
     [Header("Defense Information")]
@@ -14,15 +21,6 @@ public class DefenseData : ObjectData
 
     [Header("Prefabs")]
     [SerializeField] private GameObject prefab;
-
-    [Header("Sprites")]
-    [SerializeField] private Sprite sprite;
-
-    // Get defense sprite.
-    public Sprite getSprite()
-    {
-        return sprite;
-    }
 
     // Get defense prefab.
     public GameObject getPrefab()
@@ -66,5 +64,10 @@ public class DefenseData : ObjectData
     public void resetLevel()
     {
         level = 1;
+    }
+
+    public override ObjectTypes getType()
+    {
+        return ObjectTypes.defense;
     }
 }

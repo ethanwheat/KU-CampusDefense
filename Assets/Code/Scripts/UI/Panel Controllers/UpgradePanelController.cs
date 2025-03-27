@@ -13,17 +13,12 @@ public class UpgradePanelController : MonoBehaviour
     [SerializeField] private GameObject upgradeContent;
     [SerializeField] private GameObject fullyUpgradedText;
     [SerializeField] private TextMeshProUGUI costText;
-    [SerializeField] private Image star1;
-    [SerializeField] private Image star2;
-    [SerializeField] private Image star3;
-
-    [Header("Sprites")]
-    [SerializeField] private Sprite unfilledStarSprite;
-    [SerializeField] private Sprite filledStarSprite;
 
     [Header("UI Controllers")]
     [SerializeField] private BuildingSceneUIController buildingSceneUIController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
+
+    [SerializeField] private StarImagesController starImagesController;
 
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
@@ -56,32 +51,7 @@ public class UpgradePanelController : MonoBehaviour
     {
         int defenseLevel = defenseData.getLevel();
 
-        if (defenseLevel >= 1)
-        {
-            star1.sprite = filledStarSprite;
-        }
-        else
-        {
-            star1.sprite = unfilledStarSprite;
-        }
-
-        if (defenseLevel >= 2)
-        {
-            star2.sprite = filledStarSprite;
-        }
-        else
-        {
-            star2.sprite = unfilledStarSprite;
-        }
-
-        if (defenseLevel == 3)
-        {
-            star3.sprite = filledStarSprite;
-        }
-        else
-        {
-            star3.sprite = unfilledStarSprite;
-        }
+        starImagesController.updateStars(defenseLevel);
 
         itemLevelText.text = "Level " + defenseLevel.ToString();
 
