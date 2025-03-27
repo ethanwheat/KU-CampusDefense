@@ -1,5 +1,12 @@
 using UnityEngine;
 
+public enum ObjectTypes
+{
+    defense,
+    bonus,
+    loan
+}
+
 [CreateAssetMenu(fileName = "ObjectData", menuName = "Scriptable Objects/ObjectData")]
 public abstract class ObjectData : ScriptableObject
 {

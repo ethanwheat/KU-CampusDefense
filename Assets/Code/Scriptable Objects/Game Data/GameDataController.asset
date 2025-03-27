@@ -26,3 +26,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 72bbba30305c9e540a48e1ccd2c542c2, type: 2}
   - {fileID: 11400000, guid: 8a96bcd9567a0094d8f1a0cb80ac2021, type: 2}
   - {fileID: 11400000, guid: 03ccf100e81c1ba45aea928dbda026f0, type: 2}
+  loanData:
+  - {fileID: 11400000, guid: b72a0b0ee95c5470896a96ba9e87e2f0, type: 2}

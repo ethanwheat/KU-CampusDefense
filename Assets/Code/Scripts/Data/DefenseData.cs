@@ -1,11 +1,5 @@
 using UnityEngine;
 
-public enum ObjectTypes
-{
-    defense,
-    bonus
-}
-
 [CreateAssetMenu(fileName = "DefenseData", menuName = "Scriptable Objects/DefenseData")]
 
 public class DefenseData : ObjectData

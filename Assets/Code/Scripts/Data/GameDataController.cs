@@ -11,6 +11,7 @@ public class GameDataController : ScriptableObject
     [SerializeField] private int dollars;
     [SerializeField] private DefenseData[] defenseData;
     [SerializeField] private BonusData[] bonusData;
+    [SerializeField] private LoanData[] loanData;
 
     // Get round number.
     public int getRoundNumber()
@@ -59,12 +60,30 @@ public class GameDataController : ScriptableObject
         return bonusData;
     }
 
+    public LoanData[] getLoanData()
+    {
+        return loanData;
+    }
+
+    public int getDebt()
+    {
+        int debt = 0;
+
+        foreach (var data in loanData)
+        {
+            debt += data.getDebt();
+        }
+
+        return debt;
+    }
+
     // Reset game data.
     public void resetGameData()
     {
         // Reset dollars to starting dollar amount.
         dollars = startingDollarAmount;
 
+        // Reset defense data.
         foreach (var data in defenseData)
         {
             bool isBoughtAtStart = data.isBoughtAtStart();
@@ -72,10 +91,17 @@ public class GameDataController : ScriptableObject
             data.resetLevel();
         }
 
+        // Reset bonus data.
         foreach (var data in bonusData)
         {
             bool isBoughtAtStart = data.isBoughtAtStart();
             data.setBought(isBoughtAtStart);
+        }
+
+        // Reset loan data.
+        foreach (var data in loanData)
+        {
+            data.resetLoan();
         }
     }
 }

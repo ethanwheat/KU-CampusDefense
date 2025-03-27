@@ -42,7 +42,6 @@ public class BuildingPlacementController : MonoBehaviour
         // Store if object is bought and locked.
         bool isBought = objectData.isBought();
         bool isLocked = objectData.isLocked();
-        string objectCost = objectData.getDollarCost().ToString();
 
         // Check if defense is bought.
         if (isBought)
