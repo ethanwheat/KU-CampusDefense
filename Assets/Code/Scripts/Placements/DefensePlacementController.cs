@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class DefensePlacementController : MonoBehaviour
@@ -21,7 +22,6 @@ public class DefensePlacementController : MonoBehaviour
     private Outline outline;
     private DefenseData defenseData;
     private RoundManager roundManager;
-    private MessagePopupPanelController messagePopupPanelController;
     private bool dataLoaded = false;
     private bool placed;
     private bool validPlacement;
@@ -54,6 +54,7 @@ public class DefensePlacementController : MonoBehaviour
             // Create raycast.
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
             {
+                // Get hit tag.
                 string tag = hit.collider.gameObject.tag;
 
                 // If placementMethod is OnRoad and tag is RoadPlacement, then snap to road.
@@ -86,8 +87,8 @@ public class DefensePlacementController : MonoBehaviour
                     freePlace(hit);
                 }
 
-                // Check if placed.
-                if (Input.GetMouseButtonDown(0))
+                // Check if mouse clicked and mouse is not over UI.
+                if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
                     // Place defense.
                     placeDefense();
@@ -103,12 +104,11 @@ public class DefensePlacementController : MonoBehaviour
     }
 
     // Load data to be used in the placement.
-    public void loadData(DefenseData data, RoundManager manager, MessagePopupPanelController controller)
+    public void loadData(DefenseData data, RoundManager manager)
     {
         // Set data.
         defenseData = data;
         roundManager = manager;
-        messagePopupPanelController = controller;
         dataLoaded = true;
     }
 
@@ -143,8 +143,7 @@ public class DefensePlacementController : MonoBehaviour
             }
             else
             {
-                // Show error popup panel and call onPlacementFail.
-                messagePopupPanelController.showPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.getName() + "!");
+                // Call onPlacementFail.
                 onPlacementFail.Invoke();
             }
         }

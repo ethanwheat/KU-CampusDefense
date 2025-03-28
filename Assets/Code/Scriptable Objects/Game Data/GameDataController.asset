@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingDollarAmount: 100
   roundNumber: 5
-  dollars: 200
+  dollars: 0
   defenseData:
   - {fileID: 11400000, guid: e095c808540afb14598316299453f91e, type: 2}
   - {fileID: 11400000, guid: 5175263242d8f9e418b2fbb6aa05f414, type: 2}
@@ -28,3 +28,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 03ccf100e81c1ba45aea928dbda026f0, type: 2}
   loanData:
   - {fileID: 11400000, guid: b72a0b0ee95c5470896a96ba9e87e2f0, type: 2}
+  - {fileID: 11400000, guid: 9564b5bbdf8acdf478a1741db1c53a69, type: 2}
+  - {fileID: 11400000, guid: 487bdd464198fb84f9f21553a74d2dd7, type: 2}

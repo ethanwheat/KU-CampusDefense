@@ -227,8 +227,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61c5c2b46d6ad42728add87efdd97b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debtText: {fileID: 6542262759088157710}
-  loanInformationTransform: {fileID: 2822098560212802655}
+  debtCostText: {fileID: 4302686290354324883}
+  loanInformation: {fileID: 2822098560212802655}
+  loanInformationPanelPrefab: {fileID: 4340971345862549433, guid: b9fb97de9a5c147bbbf0fb5b0189ffe0, type: 3}
+  buildingSceneUIController: {fileID: 0}
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!1 &1792429381352113694
 GameObject:
@@ -295,7 +297,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Building Name
+  m_text: CapFed Hall
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f62e15ed17a32b34f94f102ff4500aaa, type: 2}
   m_sharedMaterial: {fileID: -1414198600157777338, guid: f62e15ed17a32b34f94f102ff4500aaa, type: 2}
@@ -1134,6 +1136,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6279514106984305420, guid: 7d33896d54f881c489db908b72eabe77, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2536853213404295063}
+    - target: {fileID: 6279514106984305420, guid: 7d33896d54f881c489db908b72eabe77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -1143,7 +1149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6279514106984305420, guid: 7d33896d54f881c489db908b72eabe77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PurchasePanelController, Assembly-CSharp
+      value: LoanPanelController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6279514106984305420, guid: 7d33896d54f881c489db908b72eabe77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

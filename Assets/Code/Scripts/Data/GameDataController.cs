@@ -60,11 +60,13 @@ public class GameDataController : ScriptableObject
         return bonusData;
     }
 
+    // Get loan data.
     public LoanData[] getLoanData()
     {
         return loanData;
     }
 
+    // Get debt.
     public int getDebt()
     {
         int debt = 0;
@@ -80,8 +82,9 @@ public class GameDataController : ScriptableObject
     // Reset game data.
     public void resetGameData()
     {
-        // Reset dollars to starting dollar amount.
+        // Reset dollars to starting dollar amount and round number to 1.
         dollars = startingDollarAmount;
+        roundNumber = 1;
 
         // Reset defense data.
         foreach (var data in defenseData)

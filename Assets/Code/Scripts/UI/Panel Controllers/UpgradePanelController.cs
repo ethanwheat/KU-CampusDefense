@@ -70,7 +70,7 @@ public class UpgradePanelController : MonoBehaviour
 
     // Set object to bought, subtract dollars, create message popup panel, and update dollar UI
     // if player has enough dollars, else show error popup panel and close purchase panel.
-    public void onPurchase()
+    public void onUpgrade()
     {
         // Get dollar amount and building name.
         int dollars = gameDataController.getDollarAmount();

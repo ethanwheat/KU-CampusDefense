@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 7283859591606454320}
   m_Layer: 8
   m_Name: BuildingPlacement
-  m_TagString: Untagged
+  m_TagString: ObjectDataBuilding
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,8 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: Building Name
-  objectDataType: 0
-  id: 0
+  objectData: {fileID: 0}
   isRoundScene: 0
   placementGameObject: {fileID: 1532221252337747740}
   buildingGameObject: {fileID: 7557617786830668019}

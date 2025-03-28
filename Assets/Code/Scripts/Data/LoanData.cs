@@ -28,13 +28,24 @@ public class LoanData : ScriptableObject
         return amount;
     }
 
-    public bool isUnlocked()
+    public int getUnlockRound()
+    {
+        return unlockRound;
+    }
+
+    public bool isLocked()
     {
         return unlockRound > gameDataController.getRoundNumber();
     }
 
+    public Sprite getSprite()
+    {
+        return sprite;
+    }
+
     public void takeLoan()
     {
+        gameDataController.addDollars(amount);
         debt += amount;
     }
 
@@ -47,6 +58,7 @@ public class LoanData : ScriptableObject
     {
         if (debt - amount >= 0)
         {
+            gameDataController.subtractDollars(amount);
             debt -= amount;
         }
     }
