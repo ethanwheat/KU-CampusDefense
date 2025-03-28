@@ -1,37 +1,61 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class MainMenuPanelController : MonoBehaviour
+public class MenuController : MonoBehaviour
 {
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
+    [Header("Panel Controllers")]
+    public PanelFadeController currentSavedGamesPanelFade;
+    public PanelFadeController settingsPanelFade;
+    public PanelFadeController aboutPanelFade;
+    public PanelFadeController quitConfirmPanelFade;
 
-    private MainMenuUIController mainMenuUIController;
-
-    void Start()
+    // Called by Play Game button
+    public void ShowCurrentSavedGamesPanel()
     {
-        // Set main menu UI controller.
-        mainMenuUIController = transform.parent.GetComponent<MainMenuUIController>();
+        currentSavedGamesPanelFade.Show();
     }
 
-    // Start game.
-    public void startGame()
+    public void HideCurrentSavedGamesPanel()
     {
-        // Start game coroutine.
-        StartCoroutine(startGameCoroutine());
+        currentSavedGamesPanelFade.Hide();
     }
 
-    // Fade background in, reset game data, and load building scene.
-    IEnumerator startGameCoroutine()
+    // Called by Settings button
+    public void ShowSettingsPanel()
     {
-        // Wait until background fades in completly.
-        yield return StartCoroutine(mainMenuUIController.fadeBackgroundIn());
+        settingsPanelFade.Show();
+    }
 
-        // Reset game data.
-        gameDataController.resetGameData();
+    public void HideSettingsPanel()
+    {
+        settingsPanelFade.Hide();
+    }
 
-        // Load building scene.
-        SceneManager.LoadScene("Building Scene");
+    // Called by About button
+    public void ShowAboutPanel()
+    {
+        aboutPanelFade.Show();
+    }
+
+    public void HideAboutPanel()
+    {
+        aboutPanelFade.Hide();
+    }
+
+    // Called by Quit button
+    public void ShowQuitConfirmPanel()
+    {
+        quitConfirmPanelFade.Show();
+    }
+
+    public void HideQuitConfirmPanel()
+    {
+        quitConfirmPanelFade.Hide();
+    }
+
+    // Called by "Yes" on Quit Confirm
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Game Quit"); // For testing in the editor
     }
 }
