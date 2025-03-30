@@ -9,16 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d426029acf486a2489f7a9a1baeff3fb, type: 3}
-  m_Name: 2x Dollar Bonus 2
+  m_Script: {fileID: 11500000, guid: efea62128a3924f2aa3df006d75a4e30, type: 3}
+  m_Name: Small Loan
   m_EditorClassIdentifier: 
-  objectName: 2x Dollar Bonus
-  description: Gives a 1.5x multiplier when collecting dollars.
-  dollarCost: 400
-  unlockRound: 20
-  boughtAtStart: 0
-  bought: 0
+  loanName: Small Loan
+  amount: 100
+  unlockRound: 1
+  sprite: {fileID: -1060430459, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  debt: 0
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
-  sprite: {fileID: -1788049881, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
-  dollarBonus: 2
-  coinBonus: 0

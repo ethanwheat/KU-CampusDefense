@@ -1,10 +1,12 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PurchasePanelController : MonoBehaviour
 {
     [Header("Panel Objects")]
     [SerializeField] private TextMeshProUGUI headerText;
+    [SerializeField] private Image itemImage;
     [SerializeField] private TextMeshProUGUI itemText;
     [SerializeField] private TextMeshProUGUI itemDescription;
     [SerializeField] private TextMeshProUGUI costText;
@@ -25,6 +27,9 @@ public class PurchasePanelController : MonoBehaviour
         // Set building name and set object data.
         buildingPlacementController = controller;
         objectData = data;
+
+        // Set UI sprite.
+        itemImage.sprite = objectData.getSprite();
 
         // Set UI text.
         headerText.text = buildingPlacementController.getBuildingName();

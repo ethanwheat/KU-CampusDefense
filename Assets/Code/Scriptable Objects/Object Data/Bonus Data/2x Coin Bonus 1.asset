@@ -19,5 +19,6 @@ MonoBehaviour:
   boughtAtStart: 0
   bought: 0
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
+  sprite: {fileID: -1788049881, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   dollarBonus: 0
   coinBonus: 2
