@@ -25,24 +25,34 @@ public class RoundManager : MonoBehaviour
 
     [Header("Round Configuration")]
     [SerializeField] private RoundData currentRound;
+    [SerializeField] private GameDataController gameData;
+    [SerializeField] private float coinMultiplier = 1;
+    [SerializeField] private float dollarMultiplier = 1;
 
     [Header("Round Data")]
     [SerializeField] private int coins;
     [SerializeField] private int currentWave = 0;
+    [SerializeField] private int remainingEnemies;
 
-    private RoundSceneUIController roundSceneUIController;
+    [Header("Allen Fieldhouse")]
+    [SerializeField] private float fieldhouseHealth = 1000f;
+    [SerializeField] private HealthBar fieldhouseHealthBar; // Reference to UI HealthBar
+    private float maxFieldhouseHealth;
+
+    [SerializeField] private RoundSceneUIController roundSceneUIController;
+    [SerializeField] private LoadingBackgroundController loadingBackgroundController;
 
     void Start()
     {
-        // Set roundSceneUIController.
-        foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
+        fieldhouseHealth = currentRound.fieldhouseHealth;
+        maxFieldhouseHealth = fieldhouseHealth;
+
+        foreach (Wave wave in currentRound.waves)
         {
-            if (currentGameObject.name == "RoundSceneUI")
-            {
-                roundSceneUIController = currentGameObject.GetComponent<RoundSceneUIController>();
-                break;
-            }
+            remainingEnemies += wave.fans + wave.cheerleaders + wave.coaches;
         }
+
+        getBonuses();
 
         StartCoroutine(StartRound());
     }
@@ -58,6 +68,18 @@ public class RoundManager : MonoBehaviour
         }
 
         Debug.Log("All waves complete!");
+    }
+
+    private void EndRound()
+    {
+        StopAllCoroutines();
+        StartCoroutine(EndRoundCoroutine());
+    }
+
+    private IEnumerator EndRoundCoroutine()
+    {
+        yield return StartCoroutine(loadingBackgroundController.fadeInCoroutine(.5f));
+        SceneManager.LoadScene("Building Scene");
     }
 
     IEnumerator SpawnEnemies(Wave wave)
@@ -85,6 +107,7 @@ public class RoundManager : MonoBehaviour
             {
                 enemyScript.SetSpeed(speed);
                 enemyScript.SetHealth(health);
+                enemyScript.SetReward(currentRound.killPayout);
                 enemyScript.currentNode = startNodes[spawnIndex];
             }
 
@@ -101,6 +124,28 @@ public class RoundManager : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
+    void getBonuses()
+    {
+        BonusData[] bonuses = gameData.getBonusData();
+
+        // Find the highest unlocked coin bonus
+        foreach (BonusData bonus in bonuses)
+        {
+            if (bonus != null && bonus.isBought()) // Check if the bonus is unlocked
+            {
+                if (bonus.getCoinBonus() > coinMultiplier)
+                {
+                    coinMultiplier = bonus.getCoinBonus();
+                }
+
+                if (bonus.getDollarBonus() > dollarMultiplier)
+                {
+                    dollarMultiplier = bonus.getDollarBonus();
+                }
+            }
+        }
+    }
+
     // Get coin amount.
     public int getCoinAmount()
     {
@@ -110,7 +155,7 @@ public class RoundManager : MonoBehaviour
     // Add coins.
     public void addCoins(int amount)
     {
-        coins += amount;
+        coins += (int)(amount * coinMultiplier);
         roundSceneUIController.updateCoinUI();
     }
 
@@ -126,5 +171,31 @@ public class RoundManager : MonoBehaviour
         }
     }
 
+    public void EnemyDefeated()
+    {
+        remainingEnemies--;
+
+        // Check if the round is over (no remaining enemies)
+        if (remainingEnemies <= 0)
+        {
+            gameData.addDollars((int)(currentRound.winPayout * dollarMultiplier));
+            EndRound();
+        }
+    }
+
+    public void damageFieldhouse(float damage)
+    {
+        fieldhouseHealth -= damage;
+
+        if (fieldhouseHealthBar != null)
+        {
+            fieldhouseHealthBar.UpdateHealthBar(fieldhouseHealth, maxFieldhouseHealth);
+        }
+
+        if (fieldhouseHealth <= 0)
+        {
+            EndRound();
+        }
+    }
 }
 
