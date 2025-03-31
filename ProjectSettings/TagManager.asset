@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - RoadPlacement
-  - Obstacle
-  - Ice
   - SideOfRoadPlacement
+  - ObjectDataBuilding
+  - LoanDataBuilding
   layers:
   - Default
   - TransparentFX

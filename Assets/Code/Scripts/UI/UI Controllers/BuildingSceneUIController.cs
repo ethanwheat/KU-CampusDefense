@@ -1,5 +1,6 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,8 @@ public class BuildingSceneUIController : MonoBehaviour
 {
     [Header("UI Controllers")]
     [SerializeField] private PurchasePanelController purchasePanelController;
+    [SerializeField] private UpgradePanelController upgradePanelController;
+    [SerializeField] private LoanPanelController loanPanelController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
 
@@ -19,6 +22,7 @@ public class BuildingSceneUIController : MonoBehaviour
 
     private Camera mainCamera;
     private BuildingPlacementController buildingPlacementController;
+    private Outline loanBuildingOutline;
 
     void Start()
     {
@@ -49,42 +53,91 @@ public class BuildingSceneUIController : MonoBehaviour
                 return;
             }
 
-            // Get placementCollider, building placement controller, and object data.
-            Collider placementCollider = hit.collider;
-            buildingPlacementController = placementCollider.GetComponent<BuildingPlacementController>();
-            ObjectData objectData = buildingPlacementController.getObjectData();
+            // Get hit collider.
+            Collider collider = hit.collider;
 
-            // Only show panels and outlines if building is not locked.
-            if (!objectData.isLocked())
+            // If hit collider tag is ObjectDataBuilding then call handleObjectDataBuilding.
+            if (collider.CompareTag("ObjectDataBuilding"))
             {
-                // Show outline.
-                buildingPlacementController.showOutline(true);
+                handleObjectDataBuilding(hit);
+                return;
+            }
 
-                // Check if mouse is clicked.
-                if (Input.GetMouseButtonDown(0))
-                {
-                    // Check if object is bought or not.
-                    if (objectData.isBought())
-                    {
-                        // Show defense upgrade panel.
-                    }
-                    else
-                    {
-                        // Close existing UI.
-                        closeExistingUI();
+            // If hit collider tag is LoanDataBuilding then call handleLoanDataBuilding.
+            if (collider.CompareTag("LoanDataBuilding"))
+            {
+                handleLoanDataBuilding(hit);
+                return;
+            }
 
-                        // Show purchase panel with data.
-                        purchasePanelController.showPanel(buildingPlacementController, objectData);
-                    }
-                }
+            return;
+        }
+
+        // If no raycat hit and there is a buildingPlacementController then hide outline.
+        if (buildingPlacementController)
+        {
+            buildingPlacementController.showOutline(false);
+        }
+
+        // If no raycat hit and there is a loanBuildingOutline then hide outline.
+        if (loanBuildingOutline)
+        {
+            loanBuildingOutline.enabled = false;
+        }
+    }
+
+    void handleObjectDataBuilding(RaycastHit hit)
+    {
+        // Get building placement controller and object data.
+        buildingPlacementController = hit.collider.GetComponent<BuildingPlacementController>();
+        ObjectData objectData = buildingPlacementController.getObjectData();
+
+        // Make sure the object is not locked.
+        if (objectData.isLocked())
+        {
+            return;
+        }
+
+        // Show outline.
+        if (!objectData.isBought() || objectData.getType() == ObjectTypes.defense)
+        {
+            buildingPlacementController.showOutline(true);
+        }
+
+        // Check if mouse is clicked.
+        if (Input.GetMouseButtonDown(0))
+        {
+            // Close existing UI.
+            closeExistingUI();
+
+            // Show purchase panel with data if not bought.
+            if (!objectData.isBought())
+            {
+                purchasePanelController.showPanel(buildingPlacementController, objectData);
+                return;
+            }
+
+            // Show upgrade panel if object type is defense.
+            if (objectData.getType() == ObjectTypes.defense)
+            {
+                upgradePanelController.showPanel(buildingPlacementController.getBuildingName(), (DefenseData)objectData);
+                return;
             }
         }
-        else
+    }
+
+    void handleLoanDataBuilding(RaycastHit hit)
+    {
+        // Set loanBuildingOutline and enable outline.
+        loanBuildingOutline = hit.collider.GetComponent<Outline>();
+        loanBuildingOutline.enabled = true;
+
+        // Check if mouse is clicked.
+        if (Input.GetMouseButtonDown(0))
         {
-            if (buildingPlacementController)
-            {
-                buildingPlacementController.showOutline(false);
-            }
+            // Close existing UI and show loan panel.
+            closeExistingUI();
+            loanPanelController.showPanel();
         }
     }
 
@@ -112,7 +165,9 @@ public class BuildingSceneUIController : MonoBehaviour
     // Close existing UI.
     void closeExistingUI()
     {
-        messagePopupPanelController.closePanel();
         purchasePanelController.closePanel();
+        upgradePanelController.closePanel();
+        loanPanelController.closePanel();
+        messagePopupPanelController.closePanel();
     }
 }

@@ -1,7 +1,14 @@
 using UnityEngine;
 
+public enum ObjectTypes
+{
+    defense,
+    bonus,
+    loan
+}
+
 [CreateAssetMenu(fileName = "ObjectData", menuName = "Scriptable Objects/ObjectData")]
-public class ObjectData : ScriptableObject
+public abstract class ObjectData : ScriptableObject
 {
     [Header("Object Information")]
     [SerializeField] private string objectName;
@@ -15,6 +22,9 @@ public class ObjectData : ScriptableObject
 
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
+
+    [Header("Sprites")]
+    [SerializeField] private Sprite sprite;
 
     // Get the objects name.
     public string getName()
@@ -57,4 +67,12 @@ public class ObjectData : ScriptableObject
     {
         bought = boughtValue;
     }
+
+    // Get sprite.
+    public Sprite getSprite()
+    {
+        return sprite;
+    }
+
+    public abstract ObjectTypes getType();
 }

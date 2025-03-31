@@ -5,7 +5,7 @@ public class EnemyMovement : MonoBehaviour
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
   {
-
+      roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
   }
 
   public PathNode currentNode; // The waypoint the object is moving toward
@@ -13,9 +13,11 @@ public class EnemyMovement : MonoBehaviour
   [SerializeField] private float health;
   [SerializeField] private HealthBar healthBar; // Reference to the HealthBar script
 
+  private RoundManager roundManager;
   private float baseSpeed;
   private float maxHealth;
   private bool isBlocked = false;
+  private int killReward;
 
   public float Health => health; // read only access
 
@@ -42,8 +44,15 @@ public class EnemyMovement : MonoBehaviour
       {
         currentNode = currentNode.GetNextNode();
       }
-      else
+      else  // enemy has reached Allen fieldhouse
       {
+        
+        if (roundManager != null) 
+        {
+            roundManager.EnemyDefeated();
+            roundManager.damageFieldhouse(health);
+        }
+
         Destroy(gameObject);
       }
     }
@@ -84,9 +93,15 @@ public class EnemyMovement : MonoBehaviour
     maxHealth = initHealth;
   }
 
+  public void SetReward(int reward)
+  {
+    killReward = reward;
+  }
+
   public void TakeDamage(float amount)
   {
     health -= amount;
+    //Debug.Log("Enemy took damage. Current Health: " + health);
     healthBar.UpdateHealthBar(health, maxHealth);
     if (health <= 0)
     {
@@ -96,6 +111,13 @@ public class EnemyMovement : MonoBehaviour
 
   private void Die()
   {
+    Debug.Log("Enemy died.");
+
+    if (roundManager != null)
+    {
+        roundManager.EnemyDefeated();
+        roundManager.addCoins(killReward);
+    }
     Destroy(gameObject); // Or trigger a death animation, effects, etc.
   }
 

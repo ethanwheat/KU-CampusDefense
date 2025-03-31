@@ -35,17 +35,23 @@ public class DefensePanelController : MonoBehaviour
     // Load defenses in UI.
     public void showPanel()
     {
-        // Destroy current placement
+        // Destroy current placement.
         destroyCurrentPlacement();
+
+        // Delete all placement buttons.
+        foreach (Transform button in placementButtonsParent)
+        {
+            Destroy(button.gameObject);
+        }
 
         // Get updated defenses.
         defenseData = gameDataController.getDefenseData();
 
-        for (int i = 0; i < defenseData.Length; i++)
-        {
-            // Get current defense.
-            DefenseData defense = defenseData[i];
+        // Set intial index to 0.
+        int index = 0;
 
+        foreach (var defense in defenseData)
+        {
             if (defense.isBought())
             {
                 // Create defense button and add listeners.
@@ -54,22 +60,16 @@ public class DefensePanelController : MonoBehaviour
                 placementButton.GetComponent<Button>().onClick.AddListener(() => startPlacement(placementButton, defense));
 
                 // Update position on panel.
-                Vector3 newPosition = new Vector3(125 + (130 * i), 125, 0);
+                Vector3 newPosition = new Vector3(125 + (130 * index), 125, 0);
                 placementButton.GetComponent<RectTransform>().anchoredPosition = newPosition;
+
+                // Update index
+                index++;
             }
         }
 
         // Show panel.
         gameObject.SetActive(true);
-    }
-
-    // Close defense panel.
-    public void closePanel()
-    {
-        // Destroy current placement, reset panel, and hide panel.
-        destroyCurrentPlacement();
-        resetPanel();
-        gameObject.SetActive(false);
     }
 
     // Select a defense in the UI and create placement.
@@ -90,9 +90,23 @@ public class DefensePanelController : MonoBehaviour
 
         // Set defense data on placement controller and add listeners to reset the panel and destroy current placement when a placement is made.
         DefensePlacementController placementController = currentDefensePlacement.GetComponent<DefensePlacementController>();
-        placementController.loadData(defense, roundManager, messagePopupPanelController);
-        placementController.onPlacementSuccess.AddListener(placementPlaced);
-        placementController.onPlacementFail.AddListener(cancelPlacement);
+        placementController.loadData(defense, roundManager);
+        placementController.onPlacementSuccess.AddListener(placementSuccess);
+        placementController.onPlacementFail.AddListener(() => placementFailed(defense));
+    }
+
+    // Set current defense placement to null and reset current placement button.
+    void placementSuccess()
+    {
+        currentDefensePlacement = null;
+        resetCurrentPlacementButton();
+    }
+
+    // Show error popup message and close panel.
+    void placementFailed(DefenseData defenseData)
+    {
+        messagePopupPanelController.showPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.getName() + "!");
+        closePanel();
     }
 
     // Reset current placement button.
@@ -111,13 +125,6 @@ public class DefensePanelController : MonoBehaviour
         {
             Destroy(currentDefensePlacement);
         }
-    }
-
-    // Set current defense placement to null and reset current placement button.
-    void placementPlaced()
-    {
-        currentDefensePlacement = null;
-        resetCurrentPlacementButton();
     }
 
     // Reset placement button and destroy current placement.
@@ -149,13 +156,11 @@ public class DefensePanelController : MonoBehaviour
         return gameObject;
     }
 
-    // Reset panel.
-    void resetPanel()
+    // Close defense panel.
+    public void closePanel()
     {
-        // Delete all placement buttons.
-        foreach (Transform button in placementButtonsParent)
-        {
-            Destroy(button.gameObject);
-        }
+        // Destroy current placement and hide panel.
+        destroyCurrentPlacement();
+        gameObject.SetActive(false);
     }
 }
