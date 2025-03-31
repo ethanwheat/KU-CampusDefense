@@ -49,6 +49,13 @@ public class BuildingPlacementController : MonoBehaviour
             // Show building if defense is bought.
             buildingGameObject.SetActive(true);
 
+            // ✅ Activate baseball field shooting (if present)
+            BaseballFieldDefense baseballField = buildingGameObject.GetComponent<BaseballFieldDefense>();
+            if (baseballField != null && !baseballField.enabled)
+            {
+                baseballField.enabled = true;
+            }
+
             return;
         }
 

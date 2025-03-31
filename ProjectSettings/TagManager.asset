@@ -8,6 +8,7 @@ TagManager:
   - SideOfRoadPlacement
   - ObjectDataBuilding
   - LoanDataBuilding
+  - Ice
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BarrierDefense : MonoBehaviour, IDefenseEffect
@@ -11,6 +12,7 @@ public class BarrierDefense : MonoBehaviour, IDefenseEffect
     [SerializeField] private HealthBar healthBar;
 
     private float currentHealth;
+    private List<EnemyMovement> enemies = new List<EnemyMovement>();
 
     private void Start()
     {
@@ -23,7 +25,12 @@ public class BarrierDefense : MonoBehaviour, IDefenseEffect
         {
             if (other.TryGetComponent(out EnemyMovement enemy))
             {
-                ApplyEffect(enemy);
+                if (!enemies.Contains(enemy))
+                {
+                    ApplyEffect(enemy);
+                    enemies.Add(enemy);
+                }
+
                 TakeDamage(damagePerSecond * Time.deltaTime);
             }
         }
@@ -36,6 +43,7 @@ public class BarrierDefense : MonoBehaviour, IDefenseEffect
             if (other.TryGetComponent(out EnemyMovement enemy))
             {
                 RemoveEffect(enemy);
+                enemies.Remove(enemy);
             }
         }
     }
@@ -65,13 +73,9 @@ public class BarrierDefense : MonoBehaviour, IDefenseEffect
     private void DestroyBarrier()
     {
         // Resume movement for all enemies within the barrier area
-        Collider[] colliders = Physics.OverlapBox(transform.position, transform.localScale);
-        foreach (Collider collider in colliders)
+        foreach (EnemyMovement enemy in enemies)
         {
-            if (collider.TryGetComponent(out EnemyMovement enemy))
-            {
-                RemoveEffect(enemy);
-            }
+            RemoveEffect(enemy);
         }
 
         Destroy(gameObject);

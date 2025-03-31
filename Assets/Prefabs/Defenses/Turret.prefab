@@ -5462,7 +5462,7 @@ GameObject:
   - component: {fileID: 5734486265036961990}
   m_Layer: 7
   m_Name: Turret
-  m_TagString: Turret
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5611,6 +5611,10 @@ PrefabInstance:
     - target: {fileID: 606531805916880648, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458842129277994118, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1458842129277994118, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
       propertyPath: m_ReferencePixelsPerUnit

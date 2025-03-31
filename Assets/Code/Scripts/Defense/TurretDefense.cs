@@ -74,7 +74,7 @@ public class TurretDefense : MonoBehaviour, IDefenseEffect
         return nearestEnemy;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (enabled)
         {
