@@ -15,10 +15,7 @@ public class BaseballFieldDefense : MonoBehaviour, IDefenseEffect
 
     void Start()
     {
-        bool isRoundScene = buildingPlacementController.isRoundScene();
-        bool isBought = buildingPlacementController.getObjectData().isBought();
-
-        if (isRoundScene && isBought)
+        if (buildingPlacementController.isRoundScene())
         {
             StartCoroutine(FireBaseballWaves());
         }

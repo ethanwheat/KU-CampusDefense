@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MascotDefense : MonoBehaviour, IDefenseEffect
+public class MascotDistractionDefense : MonoBehaviour, IDefenseEffect
 {
     [Header("Settings")]
     [SerializeField] private float maxHealth = 75f;
