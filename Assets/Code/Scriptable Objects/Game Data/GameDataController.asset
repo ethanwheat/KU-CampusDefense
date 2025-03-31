@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingDollarAmount: 100
   roundNumber: 5
-  dollars: 0
+  dollars: 100
   defenseData:
   - {fileID: 11400000, guid: e095c808540afb14598316299453f91e, type: 2}
   - {fileID: 11400000, guid: 5175263242d8f9e418b2fbb6aa05f414, type: 2}
