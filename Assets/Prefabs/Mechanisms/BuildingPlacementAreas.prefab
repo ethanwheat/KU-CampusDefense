@@ -758,6 +758,7 @@ GameObject:
   - component: {fileID: 4493306915008378952}
   - component: {fileID: 2328499005722588358}
   - component: {fileID: 4488413344569295779}
+  - component: {fileID: 6782131252413644566}
   m_Layer: 0
   m_Name: Building
   m_TagString: Untagged
@@ -873,6 +874,23 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &6782131252413644566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291208493517806103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb90f4f073b0643798f3e34181cf069f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseballPrefab: {fileID: 4654403849997068961, guid: 419c964d5b9ab48099647fb3e92a1dd7, type: 3}
+  timeBetweenWaves: 5
+  ballsPerWave: 6
+  spreadAngle: 360
+  buildingPlacementController: {fileID: 6742927060989009400}
 --- !u!1 &1348653193328896384
 GameObject:
   m_ObjectHideFlags: 0
@@ -9809,6 +9827,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
   m_PrefabInstance: {fileID: 5266558141428708082}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6742927060989009400 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+  m_PrefabInstance: {fileID: 5266558141428708082}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50dac72c70bfb34ba488e25d00af8aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5370399444463164075
 PrefabInstance:
   m_ObjectHideFlags: 0

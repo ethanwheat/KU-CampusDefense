@@ -8,7 +8,7 @@ public class BuildingPlacementController : MonoBehaviour
     [SerializeField] private ObjectData objectData;
 
     [Header("Scene Information")]
-    [SerializeField] private bool isRoundScene;
+    [SerializeField] private bool roundScene;
 
     [Header("Placement Game Objects")]
     [SerializeField] private GameObject placementGameObject;
@@ -60,7 +60,7 @@ public class BuildingPlacementController : MonoBehaviour
         }
 
         // Create overlay if not round scene.
-        if (!isRoundScene)
+        if (!roundScene)
         {
             createOverlay();
         }
@@ -93,7 +93,7 @@ public class BuildingPlacementController : MonoBehaviour
         // Get mesh renderer.
         MeshRenderer meshRenderer = placementGameObject.GetComponent<MeshRenderer>();
 
-        if (!isLocked && !isRoundScene)
+        if (!isLocked && !roundScene)
         {
             meshRenderer.material = availableMaterial;
         }
@@ -137,8 +137,6 @@ public class BuildingPlacementController : MonoBehaviour
         return objectData;
     }
 
-
-
     // Show outline on placement.
     public void showOutline(bool visible)
     {
@@ -151,5 +149,10 @@ public class BuildingPlacementController : MonoBehaviour
         {
             placementGameObject.GetComponent<Outline>().enabled = visible;
         }
+    }
+
+    public bool isRoundScene()
+    {
+        return roundScene;
     }
 }

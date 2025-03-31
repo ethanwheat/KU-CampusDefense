@@ -285,7 +285,15 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 669023084892638772, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 669023084892638772, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: isRoundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1554492133443048575, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1554492133443048575, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
@@ -293,7 +301,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1576465609057687062, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1576465609057687062, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: isRoundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634666195294410416, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634666195294410416, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
@@ -301,11 +317,23 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2210169371239513719, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2210169371239513719, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: isRoundScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2294347230055140800, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294347230055140800, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: isRoundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2480243127908789585, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2480243127908789585, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
@@ -353,7 +381,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3108418566794125900, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108418566794125900, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: isRoundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4114736801110063640, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4114736801110063640, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
@@ -361,7 +397,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4391478199591739696, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4391478199591739696, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: isRoundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5270084209560974742, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5270084209560974742, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
@@ -373,7 +417,15 @@ PrefabInstance:
       value: BuildingPlacementAreas
       objectReference: {fileID: 0}
     - target: {fileID: 6281978705100464980, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281978705100464980, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: isRoundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6742927060989009400, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6742927060989009400, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
@@ -381,7 +433,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6774081247510295969, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6774081247510295969, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: isRoundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8264010799865620296, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8264010799865620296, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
@@ -389,11 +449,23 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8314148421168534868, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8314148421168534868, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: isRoundScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8921726352904882158, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8921726352904882158, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: isRoundScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8994401658124005911, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: roundScene
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8994401658124005911, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
