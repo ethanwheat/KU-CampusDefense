@@ -8,10 +8,7 @@ TagManager:
   - SideOfRoadPlacement
   - ObjectDataBuilding
   - LoanDataBuilding
-  - Obstacle
   - Ice
-  - Turret
-  - Librarian
   layers:
   - Default
   - TransparentFX

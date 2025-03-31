@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3331026822362025116}
   - component: {fileID: -4035614467236856753}
   - component: {fileID: -804895357363999155}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Baseball
   m_TagString: Untagged
   m_Icon: {fileID: 0}

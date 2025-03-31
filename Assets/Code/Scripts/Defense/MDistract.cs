@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MascotDefense : MonoBehaviour, IDefenseEffect
@@ -11,6 +12,7 @@ public class MascotDefense : MonoBehaviour, IDefenseEffect
     [SerializeField] private HealthBar healthBar;
 
     private float currentHealth;
+    private List<EnemyMovement> enemies = new List<EnemyMovement>();
 
     private void Start()
     {
@@ -23,7 +25,12 @@ public class MascotDefense : MonoBehaviour, IDefenseEffect
 
         if (other.TryGetComponent(out EnemyMovement enemy))
         {
-            ApplyEffect(enemy); // stop enemy
+            if (!enemies.Contains(enemy))
+            {
+                ApplyEffect(enemy);
+                enemies.Add(enemy);
+            }
+
             enemy.TakeDamage(damageToEnemyPerSecond * Time.deltaTime); // hurt enemy
             TakeDamage(damageToSelfPerSecond * Time.deltaTime); // mascot takes damage
         }
@@ -36,6 +43,7 @@ public class MascotDefense : MonoBehaviour, IDefenseEffect
         if (other.TryGetComponent(out EnemyMovement enemy))
         {
             RemoveEffect(enemy); // unfreeze enemy
+            enemies.Remove(enemy);
         }
     }
 
@@ -63,13 +71,9 @@ public class MascotDefense : MonoBehaviour, IDefenseEffect
     private void DestroyMascot()
     {
         // Free any enemies still affected
-        Collider[] colliders = Physics.OverlapBox(transform.position, transform.localScale / 2f);
-        foreach (Collider collider in colliders)
+        foreach (EnemyMovement enemy in enemies)
         {
-            if (collider.TryGetComponent(out EnemyMovement enemy))
-            {
-                RemoveEffect(enemy);
-            }
+            RemoveEffect(enemy);
         }
 
         Destroy(gameObject);

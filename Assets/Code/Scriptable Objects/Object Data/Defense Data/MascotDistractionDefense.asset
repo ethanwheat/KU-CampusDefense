@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 637175a8e599b204fbdb4e6f9dd3c859, type: 3}
-  m_Name: MDistractDefense 1
+  m_Name: MascotDistractionDefense
   m_EditorClassIdentifier: 
-  objectName: MDistract
+  objectName: Mascot Distraction
   description: 'Blocks all types of defenders and damages them, breaks eventually '
   dollarCost: 7
   unlockRound: 100
