@@ -73,7 +73,12 @@ public class RoundManager : MonoBehaviour
     private void EndRound()
     {
         StopAllCoroutines();
-        StartCoroutine(loadingBackgroundController.fadeOutCoroutine(.5f));
+        StartCoroutine(EndRoundCoroutine());
+    }
+
+    private IEnumerator EndRoundCoroutine()
+    {
+        yield return StartCoroutine(loadingBackgroundController.fadeInCoroutine(.5f));
         SceneManager.LoadScene("Building Scene");
     }
 
@@ -122,7 +127,7 @@ public class RoundManager : MonoBehaviour
     void getBonuses()
     {
         BonusData[] bonuses = gameData.getBonusData();
-        
+
         // Find the highest unlocked coin bonus
         foreach (BonusData bonus in bonuses)
         {
@@ -132,7 +137,7 @@ public class RoundManager : MonoBehaviour
                 {
                     coinMultiplier = bonus.getCoinBonus();
                 }
-                
+
                 if (bonus.getDollarBonus() > dollarMultiplier)
                 {
                     dollarMultiplier = bonus.getDollarBonus();
@@ -178,7 +183,7 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-    public void damageFieldhouse(float damage) 
+    public void damageFieldhouse(float damage)
     {
         fieldhouseHealth -= damage;
 
