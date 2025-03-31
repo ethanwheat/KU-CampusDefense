@@ -34,6 +34,7 @@ public class GameDataController : ScriptableObject
     // Add dollars.
     public void addDollars(int amount)
     {
+      Debug.Log("In addollars");
         dollars += amount;
     }
 
