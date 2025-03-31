@@ -6,6 +6,7 @@ public class DefenseData : ObjectData
 {
     [Header("Defense Information")]
     [SerializeField] private int coinCost;
+    [SerializeField] private bool showInDefensePanel;
     [SerializeField] private int level1UpgradeDollarCost;
     [SerializeField] private int level2UpgradeDollarCost;
     [SerializeField] private int level3UpgradeDollarCost;
@@ -26,6 +27,12 @@ public class DefenseData : ObjectData
     public int getCoinCost()
     {
         return coinCost;
+    }
+
+    // Get if shown in defense panel.
+    public bool isShownInDefensePanel()
+    {
+        return showInDefensePanel;
     }
 
     // Get defense level.

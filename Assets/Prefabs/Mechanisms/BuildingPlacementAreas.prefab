@@ -887,6 +887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseballPrefab: {fileID: 4654403849997068961, guid: 419c964d5b9ab48099647fb3e92a1dd7, type: 3}
+  timeBetweenBaseballs: 1
   timeBetweenWaves: 5
   ballsPerWave: 6
   spreadAngle: 360
@@ -9712,7 +9713,7 @@ PrefabInstance:
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: objectData
       value: 
-      objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
+      objectReference: {fileID: 11400000, guid: 628e1d1d39bb54e4c964c113b6cc5650, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingName
       value: Baseball Fields

@@ -19,8 +19,9 @@ MonoBehaviour:
   boughtAtStart: 0
   bought: 1
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
-  sprite: {fileID: 1697800366, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  sprite: {fileID: 143446417, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   coinCost: 50
+  showInDefensePanel: 1
   level1UpgradeDollarCost: 0
   level2UpgradeDollarCost: 0
   level3UpgradeDollarCost: 0

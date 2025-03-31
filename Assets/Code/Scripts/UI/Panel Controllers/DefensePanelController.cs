@@ -52,7 +52,7 @@ public class DefensePanelController : MonoBehaviour
 
         foreach (var defense in defenseData)
         {
-            if (defense.isBought())
+            if (defense.isBought() && defense.isShownInDefensePanel())
             {
                 // Create defense button and add listeners.
                 GameObject placementButton = Instantiate(defensePlacementButtonPrefab, placementButtonsParent);
