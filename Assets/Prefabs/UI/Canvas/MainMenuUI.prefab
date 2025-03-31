@@ -1860,6 +1860,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4726546136686168777}
     m_Modifications:
+    - target: {fileID: 3683790534852378833, guid: 1e34503f8a1a39945a5c0b545de717d8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7313200089782540089}
+    - target: {fileID: 3683790534852378833, guid: 1e34503f8a1a39945a5c0b545de717d8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683790534852378833, guid: 1e34503f8a1a39945a5c0b545de717d8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MainMenuUIController, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5586911945001224934, guid: 1e34503f8a1a39945a5c0b545de717d8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
