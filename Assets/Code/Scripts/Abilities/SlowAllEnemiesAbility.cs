@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SlowAllEnemiesAbility : AbilityController
 {
-    [SerializeField] private float speedMultiplier = 0.5f; // 50% speed
+    [SerializeField] private float speedMultiplier = 0.5f; // 50% speed (maybe more?)
     
     private List<EnemyMovement> activeEnemies = new List<EnemyMovement>();
     
