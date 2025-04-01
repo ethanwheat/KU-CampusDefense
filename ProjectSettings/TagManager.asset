@@ -9,6 +9,9 @@ TagManager:
   - ObjectDataBuilding
   - LoanDataBuilding
   - HealthDataBuilding
+  - HealthDefense
+  - NoHealthDefense
+  - Ice
   layers:
   - Default
   - TransparentFX

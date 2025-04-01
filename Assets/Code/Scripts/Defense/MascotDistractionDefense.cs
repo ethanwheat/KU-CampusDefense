@@ -1,23 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MascotDistractionDefense : MonoBehaviour, IDefenseEffect
+public class MascotDistractionDefense : HealthDefense, IDefenseEffect
 {
     [Header("Settings")]
-    [SerializeField] private float maxHealth = 75f;
     [SerializeField] private float damageToEnemyPerSecond = 10f;
     [SerializeField] private float damageToSelfPerSecond = 15f;
 
-    [Header("Health Bar Script")]
-    [SerializeField] private HealthBar healthBar;
-
-    private float currentHealth;
     private List<EnemyMovement> enemies = new List<EnemyMovement>();
-
-    private void Start()
-    {
-        currentHealth = maxHealth;
-    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -59,10 +49,9 @@ public class MascotDistractionDefense : MonoBehaviour, IDefenseEffect
 
     private void TakeDamage(float damage)
     {
-        currentHealth -= damage;
-        healthBar.UpdateHealthBar(currentHealth, maxHealth);
+        subtractHealth(damage);
 
-        if (currentHealth <= 0)
+        if (getHealth() <= 0)
         {
             DestroyMascot();
         }

@@ -2,30 +2,26 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class IceDefense : MonoBehaviour, IDefenseEffect
+public class IceSheetDefense : HealthDefense, IDefenseEffect
 {
     [Header("Settings")]
     [SerializeField] private float slowMultiplier = 0.2f;
     [SerializeField] private float damagePerSecond = 5f;
-    [SerializeField] private float duration = 30f;
 
     private float destroyTime;
-
-    [Header("Health Bar Script")]
-    [SerializeField] private HealthBar healthBar;
 
     private Dictionary<EnemyMovement, Coroutine> activeCoroutines = new Dictionary<EnemyMovement, Coroutine>();
 
     private void Start()
     {
-        destroyTime = Time.time + duration;
+        destroyTime = Time.time + getHealth();
     }
 
     private void Update()
     {
         float time = Time.time;
 
-        healthBar.UpdateHealthBar(destroyTime - time, duration);
+        setHealth(destroyTime - time);
 
         // Destroy if destroy time is less then current time.
         if (destroyTime <= time)

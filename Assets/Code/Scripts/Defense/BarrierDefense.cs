@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarrierDefense : Defense, IDefenseEffect
+public class BarrierDefense : HealthDefense, IDefenseEffect
 {
     [Header("Barrier Defense Settings")]
     [SerializeField] private float damagePerSecond = 10f;

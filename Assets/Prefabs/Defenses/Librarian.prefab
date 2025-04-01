@@ -3104,7 +3104,7 @@ GameObject:
   - component: {fileID: 3062359089179970735}
   m_Layer: 7
   m_Name: Librarian
-  m_TagString: Untagged
+  m_TagString: HealthDefense
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3255,11 +3255,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a36607017359b44f5a54c5be9c0755d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defenseData: {fileID: 11400000, guid: 2b2d76fc4badc4cda8c0a6bd4e330677, type: 2}
+  healthBar: {fileID: 58168574569903344}
+  maxHealth: 20
+  healthIncreasePerLevel: 5
   fireRate: 0.7
-  duration: 20
   bookPrefab: {fileID: 3333216577341784471, guid: 0ed2b4574dbdf4592b8a9d5a34b3b707, type: 3}
   firePoint: {fileID: 6342761048916866480}
-  healthBar: {fileID: 58168574569903344}
 --- !u!1 &6672386744193232201
 GameObject:
   m_ObjectHideFlags: 0

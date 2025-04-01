@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3761199809216812633}
   - component: {fileID: 2142926506160195796}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BaseballFieldDefense
-  m_TagString: Untagged
+  m_TagString: NoHealthDefense
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

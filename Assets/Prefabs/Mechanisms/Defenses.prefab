@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseballFieldDefense
       objectReference: {fileID: 0}
+    - target: {fileID: 174587544411707128, guid: 97da6248c34c1473a88a696bda8c90d0, type: 3}
+      propertyPath: m_TagString
+      value: NoHealthDefense
+      objectReference: {fileID: 0}
     - target: {fileID: 3761199809216812633, guid: 97da6248c34c1473a88a696bda8c90d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 66.43

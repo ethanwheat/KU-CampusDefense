@@ -1,16 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretDefense : MonoBehaviour, IDefenseEffect
+public class TurretDefense : HealthDefense, IDefenseEffect
 {
     [Header("Turret Settings")]
     [SerializeField] private float fireRate = 1f; // Shots per second
-    [SerializeField] private float duration = 30; // Duratio 
     [SerializeField] private GameObject bulletPrefab; // Reference to the bullet prefab
     [SerializeField] private Transform firePoint; // Point where bullets are spawned
-
-    [Header("Health Bar Script")]
-    [SerializeField] private HealthBar healthBar;
 
     private float fireCountdown = 0f;
     private List<EnemyMovement> enemiesInRange = new List<EnemyMovement>();
@@ -18,14 +14,14 @@ public class TurretDefense : MonoBehaviour, IDefenseEffect
 
     void Start()
     {
-        destroyTime = Time.time + duration;
+        destroyTime = Time.time + getHealth();
     }
 
     void Update()
     {
         float time = Time.time;
 
-        healthBar.UpdateHealthBar(destroyTime - time, duration);
+        setHealth(destroyTime - time);
 
         // Destroy if destroy time is less then current time.
         if (destroyTime <= time)
@@ -116,6 +112,7 @@ public class TurretDefense : MonoBehaviour, IDefenseEffect
 
         //Debug.Log("Shooting at target: " + target.name);
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        bullet.transform.parent = getProjectilesParent();
         if (bullet.TryGetComponent(out Bullet bulletScript))
         {
             bulletScript.SetTarget(target);
