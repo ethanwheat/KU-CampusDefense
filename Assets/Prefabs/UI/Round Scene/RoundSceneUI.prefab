@@ -1199,6 +1199,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilitiesPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 3629311412217591191, guid: 39689ed6b97c54d5085d1ea32b83edbe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8556521730936289378, guid: 39689ed6b97c54d5085d1ea32b83edbe, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1488,6 +1492,10 @@ PrefabInstance:
       propertyPath: mainAbilityButton
       value: 
       objectReference: {fileID: 7224507127419701715}
+    - target: {fileID: 8405851624750594457, guid: 8099599db392a4d6c9d6aa7e4996f800, type: 3}
+      propertyPath: slowAllEnemiesAbility
+      value: 
+      objectReference: {fileID: 4487268197574710349}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
