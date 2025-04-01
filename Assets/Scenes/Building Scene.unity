@@ -794,37 +794,8 @@ PrefabInstance:
     - {fileID: 66651253001335807, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
     - {fileID: 8269966628847537701, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1291208493517806103, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2529070627533754254}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
---- !u!1 &2529070627533754253 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1291208493517806103, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
-  m_PrefabInstance: {fileID: 2529070627533754251}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2529070627533754254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2529070627533754253}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb90f4f073b0643798f3e34181cf069f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  levelHealthMultiplier: 1.5
-  healthBar: {fileID: 0}
-  defenseData: {fileID: 0}
-  baseballPrefab: {fileID: 4654403849997068961, guid: 419c964d5b9ab48099647fb3e92a1dd7, type: 3}
-  timeBetweenBaseballs: 1
-  timeBetweenWaves: 5
-  ballsPerWave: 6
-  spreadAngle: 360
 --- !u!114 &8528934383466257993 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4457789779151986254, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
