@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5259aefe30938564d905146a691aeb44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defensePanelController: {fileID: 0}
+  defensePanelController: {fileID: 5305107557871034894}
   messagePopupPanelController: {fileID: 7595404376052086275}
   loadingBackgroundController: {fileID: 8647825447028577094}
   dollarText: {fileID: 7043421358521999637}
@@ -384,9 +384,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5305107557871034894}
-        m_TargetAssemblyTypeName: DefensePanelController, Assembly-CSharp
-        m_MethodName: showPanel
+      - m_Target: {fileID: 5771053496741340049}
+        m_TargetAssemblyTypeName: RoundSceneUIController, Assembly-CSharp
+        m_MethodName: showDefensePanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

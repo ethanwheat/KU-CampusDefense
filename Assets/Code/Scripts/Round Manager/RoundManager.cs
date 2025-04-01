@@ -22,6 +22,7 @@ public class RoundManager : MonoBehaviour
     [Header("Round Initialization")]
     [SerializeField] private BoxCollider[] spawnAreas;  // Where enemies will spawn
     [SerializeField] private PathNode[] startNodes;
+    [SerializeField] private int regenHealthCostPerDefense;
 
     [Header("Round Configuration")]
     [SerializeField] private RoundData currentRound;
@@ -196,6 +197,16 @@ public class RoundManager : MonoBehaviour
         {
             EndRound();
         }
+    }
+
+    public void regenHealthOnDefenses()
+    {
+
+    }
+
+    public int getRegenCost()
+    {
+        return remainingEnemies * regenHealthCostPerDefense;
     }
 }
 

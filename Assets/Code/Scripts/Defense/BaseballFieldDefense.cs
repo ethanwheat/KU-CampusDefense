@@ -1,33 +1,38 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class BaseballFieldDefense : MonoBehaviour, IDefenseEffect
+public class BaseballFieldDefense : Defense, IDefenseEffect
 {
     [Header("Baseball Field Settings")]
     [SerializeField] private GameObject baseballPrefab;
     [SerializeField] private float timeBetweenBaseballs = 1f;
     [SerializeField] private float timeBetweenWaves = 5f;
-    [SerializeField] private int ballsPerWave = 6;
     [SerializeField] private float spreadAngle = 360f;
 
-    [Header("Building Placement Controller")]
-    [SerializeField] private BuildingPlacementController buildingPlacementController;
+    [Header("Unity Events")]
+    [SerializeField] private UnityEvent onDefenseStart;
 
     void Start()
     {
-        if (buildingPlacementController.isRoundScene())
+        if (getDefenseData().isBought())
         {
+            onDefenseStart.Invoke();
             StartCoroutine(FireBaseballWaves());
         }
     }
 
     private IEnumerator FireBaseballWaves()
     {
-        for (int i = 0; i < ballsPerWave; i++)
+        for (int i = 0; i < getMaxHealth(); i++)
         {
+            subtractHealth(1);
             FireRandomBaseball();
             yield return new WaitForSeconds(timeBetweenBaseballs);
         }
+
+        resetHealth();
 
         yield return new WaitForSeconds(timeBetweenWaves);
 

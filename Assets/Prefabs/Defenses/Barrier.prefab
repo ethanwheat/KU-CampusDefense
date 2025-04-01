@@ -132,8 +132,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  damagePerSecond: 10
+  levelHealthMultiplier: 1.5
   healthBar: {fileID: 158758177496608957}
+  defenseData: {fileID: 11400000, guid: e095c808540afb14598316299453f91e, type: 2}
+  damagePerSecond: 10
 --- !u!1 &8626985468115213023
 GameObject:
   m_ObjectHideFlags: 0
