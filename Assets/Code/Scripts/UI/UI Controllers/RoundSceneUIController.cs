@@ -98,7 +98,7 @@ public class RoundSceneUIController : MonoBehaviour
     // Update coin UI.
     public void updateCoinUI()
     {
-        // Update dollar text.
+        // Update coin text.
         coinText.text = roundManager.getCoinAmount().ToString();
     }
 
