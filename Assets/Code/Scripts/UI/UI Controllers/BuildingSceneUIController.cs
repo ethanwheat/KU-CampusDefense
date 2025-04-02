@@ -90,9 +90,9 @@ public class BuildingSceneUIController : MonoBehaviour
     {
         // Get building placement controller, object data, isLocked, isBought, and isDefenseBuilding.
         buildingPlacementController = hit.collider.GetComponent<BuildingPlacementController>();
-        ObjectData objectData = buildingPlacementController.getObjectData();
-        bool isLocked = objectData.isLocked();
-        bool isBought = objectData.isBought();
+        PurchasableData purchasableData = buildingPlacementController.getPurchasableData();
+        bool isLocked = purchasableData.isLocked();
+        bool isBought = purchasableData.isBought();
         bool isDefenseBuilding = hit.collider.CompareTag("DefenseBuilding");
 
         // Make sure the object is not locked.
@@ -114,16 +114,16 @@ public class BuildingSceneUIController : MonoBehaviour
             closeExistingUI();
 
             // Show purchase panel with data if not bought.
-            if (!objectData.isBought())
+            if (!purchasableData.isBought())
             {
-                purchasePanelController.showPanel(buildingPlacementController, objectData);
+                purchasePanelController.showPanel(buildingPlacementController, purchasableData);
                 return;
             }
 
             // Show upgrade panel if object type is defense.
             if (isDefenseBuilding)
             {
-                upgradePanelController.showPanel(buildingPlacementController.getBuildingName(), (DefenseData)objectData);
+                upgradePanelController.showPanel(buildingPlacementController.getBuildingName(), (DefenseData)purchasableData);
                 return;
             }
         }

@@ -44,6 +44,7 @@ public class RegenHealthPanelController : MonoBehaviour
         if (coins >= regenCost)
         {
             roundManager.regenHealthOnDefenses();
+            messagePopupPanelController.showPanel("Defenses Health Regenerated", "You regenerated health on all defenses for " + regenCost + " coins!");
         }
         else
         {

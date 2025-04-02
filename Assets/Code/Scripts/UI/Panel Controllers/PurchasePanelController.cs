@@ -18,24 +18,24 @@ public class PurchasePanelController : MonoBehaviour
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
-    private ObjectData objectData;
+    private PurchasableData purchasableData;
     private BuildingPlacementController buildingPlacementController;
 
     // Load purchase panel data.
-    public void showPanel(BuildingPlacementController controller, ObjectData data)
+    public void showPanel(BuildingPlacementController controller, PurchasableData data)
     {
         // Set building name and set object data.
         buildingPlacementController = controller;
-        objectData = data;
+        purchasableData = data;
 
         // Set UI sprite.
-        itemImage.sprite = objectData.getSprite();
+        itemImage.sprite = purchasableData.getSprite();
 
         // Set UI text.
         headerText.text = buildingPlacementController.getBuildingName();
-        itemText.text = objectData.getName();
-        itemDescription.text = objectData.getDescription();
-        costText.text = objectData.getDollarCost().ToString();
+        itemText.text = purchasableData.getName();
+        itemDescription.text = purchasableData.getDescription();
+        costText.text = purchasableData.getDollarCost().ToString();
 
         // Show panel
         gameObject.SetActive(true);
@@ -47,14 +47,14 @@ public class PurchasePanelController : MonoBehaviour
     {
         // Get dollar amount and building name.
         int dollars = gameDataController.getDollarAmount();
-        int objectCost = objectData.getDollarCost();
+        int objectCost = purchasableData.getDollarCost();
         string buildingName = buildingPlacementController.getBuildingName();
 
         if (dollars >= objectCost)
         {
             // Set object as bought, subtract cost, create popup panel showing success,
             // update dollar amounts on dollar UI, close purchase panel, and refresh building placement controller.
-            objectData.setBought(true);
+            purchasableData.setBought(true);
             gameDataController.subtractDollars(objectCost);
             messagePopupPanelController.showPanel("Item Purchased", "You have bought " + buildingName + " for " + objectCost.ToString() + " dollars!");
             buildingSceneUIController.updateDollarUI();
