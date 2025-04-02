@@ -56,17 +56,17 @@ public class BuildingSceneUIController : MonoBehaviour
             // Get hit collider.
             Collider collider = hit.collider;
 
-            // If hit collider tag is ObjectDataBuilding then call handleObjectDataBuilding.
-            if (collider.CompareTag("ObjectDataBuilding"))
+            // If hit collider tag is ObjectBuilding then call handleObjectBuilding.
+            if (collider.CompareTag("ObjectBuilding"))
             {
-                handleObjectDataBuilding(hit);
+                handleObjectBuilding(hit);
                 return;
             }
 
-            // If hit collider tag is LoanDataBuilding then call handleLoanDataBuilding.
-            if (collider.CompareTag("LoanDataBuilding"))
+            // If hit collider tag is LoanBuilding then call handleLoanBuilding.
+            if (collider.CompareTag("LoanBuilding"))
             {
-                handleLoanDataBuilding(hit);
+                handleLoanBuilding(hit);
                 return;
             }
 
@@ -86,7 +86,7 @@ public class BuildingSceneUIController : MonoBehaviour
         }
     }
 
-    void handleObjectDataBuilding(RaycastHit hit)
+    void handleObjectBuilding(RaycastHit hit)
     {
         // Get building placement controller and object data.
         buildingPlacementController = hit.collider.GetComponent<BuildingPlacementController>();
@@ -126,7 +126,7 @@ public class BuildingSceneUIController : MonoBehaviour
         }
     }
 
-    void handleLoanDataBuilding(RaycastHit hit)
+    void handleLoanBuilding(RaycastHit hit)
     {
         // Set loanBuildingOutline and enable outline.
         loanBuildingOutline = hit.collider.GetComponent<Outline>();
