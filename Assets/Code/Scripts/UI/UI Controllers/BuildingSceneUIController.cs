@@ -56,10 +56,10 @@ public class BuildingSceneUIController : MonoBehaviour
             // Get hit collider.
             Collider collider = hit.collider;
 
-            // If hit collider tag is ObjectBuilding then call handleObjectBuilding.
-            if (collider.CompareTag("ObjectBuilding"))
+            // If hit collider tag is DefenseBuilding or BonusBuilding then call handleDefenseBonusBuilding.
+            if (collider.CompareTag("DefenseBuilding") || collider.CompareTag("BonusBuilding"))
             {
-                handleObjectBuilding(hit);
+                handleDefenseBonusBuilding(hit);
                 return;
             }
 
@@ -86,20 +86,23 @@ public class BuildingSceneUIController : MonoBehaviour
         }
     }
 
-    void handleObjectBuilding(RaycastHit hit)
+    void handleDefenseBonusBuilding(RaycastHit hit)
     {
-        // Get building placement controller and object data.
+        // Get building placement controller, object data, isLocked, isBought, and isDefenseBuilding.
         buildingPlacementController = hit.collider.GetComponent<BuildingPlacementController>();
         ObjectData objectData = buildingPlacementController.getObjectData();
+        bool isLocked = objectData.isLocked();
+        bool isBought = objectData.isBought();
+        bool isDefenseBuilding = hit.collider.CompareTag("DefenseBuilding");
 
         // Make sure the object is not locked.
-        if (objectData.isLocked())
+        if (isLocked)
         {
             return;
         }
 
         // Show outline.
-        if (!objectData.isBought() || objectData.getType() == ObjectTypes.defense)
+        if (!isBought || isDefenseBuilding)
         {
             buildingPlacementController.showOutline(true);
         }
@@ -118,7 +121,7 @@ public class BuildingSceneUIController : MonoBehaviour
             }
 
             // Show upgrade panel if object type is defense.
-            if (objectData.getType() == ObjectTypes.defense)
+            if (isDefenseBuilding)
             {
                 upgradePanelController.showPanel(buildingPlacementController.getBuildingName(), (DefenseData)objectData);
                 return;

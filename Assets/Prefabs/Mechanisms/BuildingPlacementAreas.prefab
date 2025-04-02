@@ -9476,7 +9476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: DefenseBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9623,7 +9623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: BonusBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9758,7 +9758,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: DefenseBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9905,7 +9905,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: BonusBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10052,7 +10052,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: BonusBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10183,7 +10183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: DefenseBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalScale.x
@@ -10326,7 +10326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: DefenseBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalScale.x
@@ -10473,7 +10473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: DefenseBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10604,7 +10604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: DefenseBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10751,7 +10751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: BonusBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10886,7 +10886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: DefenseBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalScale.x
@@ -11041,7 +11041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: DefenseBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11176,7 +11176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: DefenseBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11311,7 +11311,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: DefenseBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalScale.x
@@ -11462,7 +11462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: DefenseBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11609,7 +11609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: BonusBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11744,7 +11744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: DefenseBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalScale.x
@@ -11895,7 +11895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6389487686211444745, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_TagString
-      value: ObjectBuilding
+      value: DefenseBuilding
       objectReference: {fileID: 0}
     - target: {fileID: 6751596168457524003, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: m_LocalPosition.x
