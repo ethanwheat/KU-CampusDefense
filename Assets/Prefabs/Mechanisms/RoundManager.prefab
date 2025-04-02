@@ -55,6 +55,16 @@ MonoBehaviour:
   cheerleaderHealth: 50
   spawnAreas: []
   startNodes: []
+  regenHealthCostPerDefense: 10
   currentRound: {fileID: 11400000, guid: 7445b25413fd67f419735e828df62608, type: 2}
+  gameData: {fileID: 0}
+  coinMultiplier: 1
+  dollarMultiplier: 1
   coins: 0
   currentWave: 0
+  remainingEnemies: 0
+  fieldhouseHealth: 1000
+  fieldhouseHealthBar: {fileID: 0}
+  roundSceneUIController: {fileID: 0}
+  loadingBackgroundController: {fileID: 0}
+  defensesParent: {fileID: 0}

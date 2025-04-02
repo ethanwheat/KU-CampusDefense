@@ -8,6 +8,9 @@ TagManager:
   - SideOfRoadPlacement
   - ObjectDataBuilding
   - LoanDataBuilding
+  - HealthDataBuilding
+  - HealthDefense
+  - NoHealthDefense
   - Ice
   layers:
   - Default

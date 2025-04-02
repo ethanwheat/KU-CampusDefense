@@ -2,22 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BarrierDefense : MonoBehaviour, IDefenseEffect
+public class BarrierDefense : HealthDefense, IDefenseEffect
 {
-    [Header("Settings")]
-    [SerializeField] private float maxHealth = 100f;
+    [Header("Barrier Defense Settings")]
     [SerializeField] private float damagePerSecond = 10f;
 
-    [Header("Health Bar Script")]
-    [SerializeField] private HealthBar healthBar;
-
-    private float currentHealth;
     private List<EnemyMovement> enemies = new List<EnemyMovement>();
-
-    private void Start()
-    {
-        currentHealth = maxHealth;
-    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -60,11 +50,9 @@ public class BarrierDefense : MonoBehaviour, IDefenseEffect
 
     private void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        subtractHealth(damage);
 
-        healthBar.UpdateHealthBar(currentHealth, maxHealth);
-
-        if (currentHealth <= 0)
+        if (getHealth() <= 0)
         {
             DestroyBarrier();
         }

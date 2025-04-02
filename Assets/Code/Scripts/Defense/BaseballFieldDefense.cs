@@ -1,33 +1,52 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class BaseballFieldDefense : MonoBehaviour, IDefenseEffect
+public class BaseballFieldDefense : Defense, IDefenseEffect
 {
     [Header("Baseball Field Settings")]
-    [SerializeField] private GameObject baseballPrefab;
+    [SerializeField] private int ballsPerWave = 6;
+    [SerializeField] private int ballsIncreasePerLevel = 2;
     [SerializeField] private float timeBetweenBaseballs = 1f;
     [SerializeField] private float timeBetweenWaves = 5f;
-    [SerializeField] private int ballsPerWave = 6;
     [SerializeField] private float spreadAngle = 360f;
 
-    [Header("Building Placement Controller")]
-    [SerializeField] private BuildingPlacementController buildingPlacementController;
+    [Header("Prefabs")]
+    [SerializeField] private GameObject baseballPrefab;
+
+    [Header("Unity Events")]
+    [SerializeField] private UnityEvent onDefenseStart;
 
     void Start()
     {
-        if (buildingPlacementController.isRoundScene())
+        DefenseData defenseData = getDefenseData();
+        bool isBought = defenseData.isBought();
+        int level = defenseData.getLevel();
+
+        if (isBought)
         {
+            onDefenseStart.Invoke();
+            ballsPerWave += ballsIncreasePerLevel * (level - 1);
             StartCoroutine(FireBaseballWaves());
         }
     }
 
     private IEnumerator FireBaseballWaves()
     {
+        HealthBar healthBar = getHealthBar();
+
+        int ballsLeft = ballsPerWave;
+
         for (int i = 0; i < ballsPerWave; i++)
         {
+            ballsLeft--;
+            healthBar.UpdateHealthBar(ballsLeft, ballsPerWave);
             FireRandomBaseball();
             yield return new WaitForSeconds(timeBetweenBaseballs);
         }
+
+        healthBar.UpdateHealthBar(ballsPerWave, ballsPerWave);
 
         yield return new WaitForSeconds(timeBetweenWaves);
 
@@ -39,7 +58,8 @@ public class BaseballFieldDefense : MonoBehaviour, IDefenseEffect
         float angle = Random.Range(0f, spreadAngle);
         Vector3 direction = Quaternion.Euler(0, angle, 0) * Vector3.forward;
 
-        Instantiate(baseballPrefab, transform.position + Vector3.up * 1.5f, Quaternion.LookRotation(direction));
+        GameObject ball = Instantiate(baseballPrefab, transform.position + Vector3.up * 1.5f, Quaternion.LookRotation(direction));
+        ball.transform.parent = getProjectilesParent();
         // No need to manually apply speed — handled in Baseball.cs
     }
 

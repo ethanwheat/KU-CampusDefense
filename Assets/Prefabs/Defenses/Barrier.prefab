@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7928821663012954953}
   m_Layer: 7
   m_Name: Barrier
-  m_TagString: Untagged
+  m_TagString: HealthDefense
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,8 +132,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  damagePerSecond: 10
+  levelHealthMultiplier: 1.5
   healthBar: {fileID: 158758177496608957}
+  defenseData: {fileID: 11400000, guid: e095c808540afb14598316299453f91e, type: 2}
+  damagePerSecond: 10
 --- !u!1 &8626985468115213023
 GameObject:
   m_ObjectHideFlags: 0

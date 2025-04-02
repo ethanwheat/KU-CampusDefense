@@ -5462,7 +5462,7 @@ GameObject:
   - component: {fileID: 5734486265036961990}
   m_Layer: 7
   m_Name: Turret
-  m_TagString: Untagged
+  m_TagString: HealthDefense
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5591,11 +5591,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd350c1e70cee460c818023535bd2e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defenseData: {fileID: 11400000, guid: 4dd9f11bfb22340619a3c88e5b4a4d7b, type: 2}
+  healthBar: {fileID: 849613246939981802}
+  maxHealth: 30
+  healthIncreasePerLevel: 10
   fireRate: 1
-  duration: 30
   bulletPrefab: {fileID: 4376966964805629839, guid: 9961c4610855d449b88a3b3afac28201, type: 3}
   firePoint: {fileID: 6699522880739028948}
-  healthBar: {fileID: 849613246939981802}
 --- !u!1001 &7987413265313410988
 PrefabInstance:
   m_ObjectHideFlags: 0

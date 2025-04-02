@@ -2,34 +2,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))] // optional but helpful
-public class LibrarianDefense : MonoBehaviour, IDefenseEffect
+public class LibrarianDefense : HealthDefense, IDefenseEffect
 {
     [Header("Librarian Settings")]
     [SerializeField] private float fireRate = 0.7f; // Shots per second
-    [SerializeField] private float duration = 20; // Duratio 
     [SerializeField] private GameObject bookPrefab; // Reference to the book prefab
     [SerializeField] private Transform firePoint; // Point where books are spawned
 
-    [Header("Health Bar Script")]
-    [SerializeField] private HealthBar healthBar;
-
     private float fireCountdown = 0f;
     private List<EnemyMovement> enemiesInRange = new List<EnemyMovement>();
-    private float destroyTime;
-
-    void Start()
-    {
-        destroyTime = Time.time + duration;
-    }
+    private float timeElapsed = 0f;
 
     void Update()
     {
-        float time = Time.time;
+        timeElapsed += Time.deltaTime;
 
-        healthBar.UpdateHealthBar(destroyTime - time, duration);
+        if (timeElapsed >= 1f)
+        {
+            subtractHealth(1);
+            timeElapsed = 0f;
+        }
 
-        // Destroy if destroy time is less then current time.
-        if (destroyTime <= time)
+        // Destroy if health is 0.
+        if (getHealth() == 0)
         {
             Destroy(gameObject);
         }
@@ -117,6 +112,7 @@ public class LibrarianDefense : MonoBehaviour, IDefenseEffect
 
         //Debug.Log("Shooting at target: " + target.name);
         GameObject book = Instantiate(bookPrefab, firePoint.position, firePoint.rotation);
+        book.transform.parent = getProjectilesParent();
         if (book.TryGetComponent(out Book bookScript))
         {
             bookScript.SetTarget(target);
