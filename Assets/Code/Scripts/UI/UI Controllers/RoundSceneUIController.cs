@@ -56,10 +56,10 @@ public class RoundSceneUIController : MonoBehaviour
             // Get hit collider.
             Collider collider = hit.collider;
 
-            // If hit collider tag is ObjectDataBuilding then call handleObjectDataBuilding.
-            if (collider.CompareTag("HealthDataBuilding"))
+            // If hit collider tag is ObjectBuilding then call handleObjectBuilding.
+            if (collider.CompareTag("HealthBuilding"))
             {
-                handleHealthDataBuidling(hit);
+                handleHealthBuilding(hit);
                 return;
             }
 
@@ -73,7 +73,7 @@ public class RoundSceneUIController : MonoBehaviour
         }
     }
 
-    void handleHealthDataBuidling(RaycastHit hit)
+    void handleHealthBuilding(RaycastHit hit)
     {
         // Set loanBuildingOutline and enable outline.
         healthBuildingOutline = hit.collider.GetComponent<Outline>();
