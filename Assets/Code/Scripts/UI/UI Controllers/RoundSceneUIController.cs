@@ -11,7 +11,6 @@ public class RoundSceneUIController : MonoBehaviour
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
 
     [Header("UI Text")]
-    [SerializeField] private TextMeshProUGUI dollarText;
     [SerializeField] private TextMeshProUGUI coinText;
 
     [Header("Round Manager")]
@@ -28,8 +27,7 @@ public class RoundSceneUIController : MonoBehaviour
         // Set main camera.
         mainCamera = Camera.main;
 
-        // Update dollar UI and coin UI.
-        updateDollarUI();
+        // Update coin UI.
         updateCoinUI();
 
         // Fade background out.
@@ -88,17 +86,10 @@ public class RoundSceneUIController : MonoBehaviour
         }
     }
 
-    // Update dollar UI.
-    public void updateDollarUI()
-    {
-        // Update dollar text.
-        dollarText.text = gameDataController.getDollarAmount().ToString();
-    }
-
     // Update coin UI.
     public void updateCoinUI()
     {
-        // Update dollar text.
+        // Update coin text.
         coinText.text = roundManager.getCoinAmount().ToString();
     }
 
