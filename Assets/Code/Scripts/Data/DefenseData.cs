@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "DefenseData", menuName = "Scriptable Objects/DefenseData")]
 
-public class DefenseData : ObjectData
+public class DefenseData : PurchasableData
 {
     [Header("Defense Information")]
     [SerializeField] private int coinCost;

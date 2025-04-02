@@ -5,7 +5,7 @@ public class BuildingPlacementController : MonoBehaviour
 {
     [Header("Building Information")]
     [SerializeField] private string buildingName;
-    [SerializeField] private ObjectData objectData;
+    [SerializeField] private PurchasableData purchasableData;
 
     [Header("Scene Information")]
     [SerializeField] private bool roundScene;
@@ -40,8 +40,8 @@ public class BuildingPlacementController : MonoBehaviour
         resetPlacementArea();
 
         // Store if object is bought and locked.
-        bool isBought = objectData.isBought();
-        bool isLocked = objectData.isLocked();
+        bool isBought = purchasableData.isBought();
+        bool isLocked = purchasableData.isLocked();
 
         // Check if defense is bought.
         if (isBought)
@@ -113,7 +113,7 @@ public class BuildingPlacementController : MonoBehaviour
             overlays.localPosition = new Vector3(0, 1, 0);
         }
 
-        if (objectData.isLocked())
+        if (purchasableData.isLocked())
         {
             GameObject overlay = Instantiate(lockedBuildingOverlayPrefab, overlays);
             overlay.GetComponent<LockedBuildingOverlayController>().setData(buildingName);
@@ -121,7 +121,7 @@ public class BuildingPlacementController : MonoBehaviour
         else
         {
             GameObject overlay = Instantiate(unlockedBuildingOverlayPrefab, overlays);
-            overlay.GetComponent<UnlockedBuildingOverlayController>().setData(buildingName, objectData);
+            overlay.GetComponent<UnlockedBuildingOverlayController>().setData(buildingName, purchasableData);
         }
     }
 
@@ -132,16 +132,16 @@ public class BuildingPlacementController : MonoBehaviour
     }
 
     // Get object data.
-    public ObjectData getObjectData()
+    public PurchasableData getPurchasableData()
     {
-        return objectData;
+        return purchasableData;
     }
 
     // Show outline on placement.
     public void showOutline(bool visible)
     {
         // Show outlines.
-        if (objectData.isBought())
+        if (purchasableData.isBought())
         {
             buildingGameObject.GetComponent<Outline>().enabled = visible;
         }
