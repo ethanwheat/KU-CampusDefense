@@ -84,7 +84,7 @@ public class RoundSceneUIController : MonoBehaviour
         {
             // Close existing UI and show loan panel.
             closeExistingUI();
-            regenHealthPanelController.showPanel(roundManager.getRegenCost());
+            regenHealthPanelController.showPanel();
         }
     }
 
@@ -119,6 +119,7 @@ public class RoundSceneUIController : MonoBehaviour
     void closeExistingUI()
     {
         defensePanelController.closePanel();
+        regenHealthPanelController.closePanel();
         messagePopupPanelController.closePanel();
     }
 }

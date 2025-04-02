@@ -8,23 +8,22 @@ public class IceSheetDefense : HealthDefense, IDefenseEffect
     [SerializeField] private float slowMultiplier = 0.2f;
     [SerializeField] private float damagePerSecond = 5f;
 
-    private float destroyTime;
+    private float timeElapsed = 0f;
 
     private Dictionary<EnemyMovement, Coroutine> activeCoroutines = new Dictionary<EnemyMovement, Coroutine>();
 
-    private void Start()
-    {
-        destroyTime = Time.time + getHealth();
-    }
-
     private void Update()
     {
-        float time = Time.time;
+        timeElapsed += Time.deltaTime;
 
-        setHealth(destroyTime - time);
+        if (timeElapsed >= 1f)
+        {
+            subtractHealth(1);
+            timeElapsed = 0f;
+        }
 
         // Destroy if destroy time is less then current time.
-        if (destroyTime <= time)
+        if (getHealth() == 0)
         {
             // Ensure all enemies are freed from the effect before destruction
             foreach (var enemy in new List<EnemyMovement>(activeCoroutines.Keys))

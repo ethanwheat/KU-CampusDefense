@@ -5593,8 +5593,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defenseData: {fileID: 11400000, guid: 4dd9f11bfb22340619a3c88e5b4a4d7b, type: 2}
   healthBar: {fileID: 849613246939981802}
-  maxHealth: 100
-  healthIncreasePerLevel: 50
+  maxHealth: 30
+  healthIncreasePerLevel: 10
   fireRate: 1
   bulletPrefab: {fileID: 4376966964805629839, guid: 9961c4610855d449b88a3b3afac28201, type: 3}
   firePoint: {fileID: 6699522880739028948}

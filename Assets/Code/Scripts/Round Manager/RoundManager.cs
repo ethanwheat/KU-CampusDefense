@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class RoundManager : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class RoundManager : MonoBehaviour
     [Header("Round Initialization")]
     [SerializeField] private BoxCollider[] spawnAreas;  // Where enemies will spawn
     [SerializeField] private PathNode[] startNodes;
-    [SerializeField] private int regenHealthCostPerDefense;
 
     [Header("Round Configuration")]
     [SerializeField] private RoundData currentRound;
@@ -40,8 +40,12 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private HealthBar fieldhouseHealthBar; // Reference to UI HealthBar
     private float maxFieldhouseHealth;
 
+    [Header("UI Controllers")]
     [SerializeField] private RoundSceneUIController roundSceneUIController;
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
+
+    [Header("Transforms")]
+    [SerializeField] private Transform defensesParent;
 
     void Start()
     {
@@ -199,14 +203,48 @@ public class RoundManager : MonoBehaviour
         }
     }
 
+    private List<HealthDefense> getHealthDefenses()
+    {
+        List<HealthDefense> healthDefenses = new List<HealthDefense>();
+
+        foreach (Transform transform in defensesParent)
+        {
+            GameObject defense = transform.gameObject;
+
+            if (defense.CompareTag("HealthDefense"))
+            {
+                healthDefenses.Add(defense.GetComponent<HealthDefense>());
+            }
+        }
+
+        return healthDefenses;
+    }
+
     public void regenHealthOnDefenses()
     {
+        List<HealthDefense> healthDefenses = getHealthDefenses();
 
+        foreach (var healthDefense in healthDefenses)
+        {
+            healthDefense.resetHealth();
+        }
+
+        int regenCost = getRegenCost();
+
+        subtractCoins(regenCost);
     }
 
     public int getRegenCost()
     {
-        return remainingEnemies * regenHealthCostPerDefense;
+        int regenCost = 0;
+        List<HealthDefense> healthDefenses = getHealthDefenses();
+
+        foreach (var healthDefense in healthDefenses)
+        {
+            regenCost += healthDefense.getDefenseData().getCoinCost() / 2;
+        }
+
+        return regenCost;
     }
 }
 

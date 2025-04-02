@@ -10,21 +10,20 @@ public class TurretDefense : HealthDefense, IDefenseEffect
 
     private float fireCountdown = 0f;
     private List<EnemyMovement> enemiesInRange = new List<EnemyMovement>();
-    private float destroyTime;
-
-    void Start()
-    {
-        destroyTime = Time.time + getHealth();
-    }
+    private float timeElapsed = 0f;
 
     void Update()
     {
-        float time = Time.time;
+        timeElapsed += Time.deltaTime;
 
-        setHealth(destroyTime - time);
+        if (timeElapsed >= 1f)
+        {
+            subtractHealth(1);
+            timeElapsed = 0f;
+        }
 
-        // Destroy if destroy time is less then current time.
-        if (destroyTime <= time)
+        // Destroy if health is 0.
+        if (getHealth() == 0)
         {
             Destroy(gameObject);
         }

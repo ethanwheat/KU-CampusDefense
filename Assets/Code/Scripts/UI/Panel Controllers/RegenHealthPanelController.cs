@@ -4,14 +4,59 @@ using UnityEngine;
 public class RegenHealthPanelController : MonoBehaviour
 {
     [Header("Panel Objects")]
+    [SerializeField] private GameObject canRegenContent;
+    [SerializeField] private GameObject cannotRegenContent;
     [SerializeField] private TextMeshProUGUI costText;
 
-    // Show health regen panel.
-    public void showPanel(int cost)
-    {
-        costText.text = cost.ToString();
+    [Header("UI Controllers")]
+    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
-        // Show panel
+    [Header("Round Manager")]
+    [SerializeField] private RoundManager roundManager;
+
+    // Show health regen panel.
+    public void showPanel()
+    {
+        int regenCost = roundManager.getRegenCost();
+
+        if (regenCost > 0)
+        {
+            costText.text = regenCost.ToString();
+            canRegenContent.SetActive(true);
+            cannotRegenContent.SetActive(false);
+        }
+        else
+        {
+            cannotRegenContent.SetActive(true);
+            canRegenContent.SetActive(false);
+        }
+
+        // Show panel.
         gameObject.SetActive(true);
+    }
+
+    // Regen health.
+    public void regenHealth()
+    {
+        int coins = roundManager.getCoinAmount();
+        int regenCost = roundManager.getRegenCost();
+
+        if (coins >= regenCost)
+        {
+            roundManager.regenHealthOnDefenses();
+        }
+        else
+        {
+            messagePopupPanelController.showPanel("Insufficient Coins", "You do not have enough coins to regen all defenses!");
+        }
+
+        closePanel();
+    }
+
+    // Close panel.
+    public void closePanel()
+    {
+        // Hide panel.
+        gameObject.SetActive(false);
     }
 }
