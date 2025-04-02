@@ -1,14 +1,7 @@
 using UnityEngine;
 
-public enum ObjectTypes
-{
-    defense,
-    bonus,
-    loan
-}
-
 [CreateAssetMenu(fileName = "ObjectData", menuName = "Scriptable Objects/ObjectData")]
-public abstract class ObjectData : ScriptableObject
+public class ObjectData : ScriptableObject
 {
     [Header("Object Information")]
     [SerializeField] private string objectName;
@@ -73,6 +66,4 @@ public abstract class ObjectData : ScriptableObject
     {
         return sprite;
     }
-
-    public abstract ObjectTypes getType();
 }

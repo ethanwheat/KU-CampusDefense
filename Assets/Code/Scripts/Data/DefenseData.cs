@@ -66,9 +66,4 @@ public class DefenseData : ObjectData
     {
         level = 1;
     }
-
-    public override ObjectTypes getType()
-    {
-        return ObjectTypes.defense;
-    }
 }
