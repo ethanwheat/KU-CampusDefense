@@ -306,6 +306,8 @@ MonoBehaviour:
   cannotRegenContent: {fileID: 4770619943807261795}
   costText: {fileID: 9100029515775782333}
   messagePopupPanelController: {fileID: 0}
+  regenSoundEffect: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
+  errorSoundEffect: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
   roundManager: {fileID: 0}
 --- !u!1 &4015837284436633660
 GameObject:

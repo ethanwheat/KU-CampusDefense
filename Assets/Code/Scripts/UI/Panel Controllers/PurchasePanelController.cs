@@ -15,6 +15,9 @@ public class PurchasePanelController : MonoBehaviour
     [SerializeField] private BuildingSceneUIController buildingSceneUIController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip errorSoundEffect;
+
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
@@ -64,6 +67,7 @@ public class PurchasePanelController : MonoBehaviour
         else
         {
             // Show error popup panel and close purchase panel.
+            SoundManager.instance.playSoundEffect(errorSoundEffect, transform, .5f);
             messagePopupPanelController.showPanel("Insufficient Dollars", "You do not have enough dollars to buy " + buildingName + "!");
             closePanel();
         }

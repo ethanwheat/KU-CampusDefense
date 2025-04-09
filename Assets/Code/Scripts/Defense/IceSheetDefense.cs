@@ -8,6 +8,10 @@ public class IceSheetDefense : HealthDefense, IDefenseEffect
     [SerializeField] private float slowMultiplier = 0.2f;
     [SerializeField] private float damagePerSecond = 5f;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip slowSoundEffect;
+    [SerializeField] private AudioClip destroySoundEffect;
+
     private float timeElapsed = 0f;
 
     private Dictionary<EnemyMovement, Coroutine> activeCoroutines = new Dictionary<EnemyMovement, Coroutine>();
@@ -32,6 +36,7 @@ public class IceSheetDefense : HealthDefense, IDefenseEffect
             }
 
             activeCoroutines.Clear();
+            SoundManager.instance.playSoundEffect(destroySoundEffect, transform, .25f);
             Destroy(gameObject);
         }
     }
@@ -45,6 +50,7 @@ public class IceSheetDefense : HealthDefense, IDefenseEffect
         {
             Coroutine newCoroutine = StartCoroutine(ApplyDamageOverTime(enemy));
             activeCoroutines[enemy] = newCoroutine;
+            SoundManager.instance.playSoundEffect(slowSoundEffect, transform, .25f);
         }
     }
 

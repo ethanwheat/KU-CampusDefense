@@ -3201,6 +3201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementMethod: 0
+  placementSoundEffect: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
   onPlacementSuccess:
     m_PersistentCalls:
       m_Calls:
@@ -3262,6 +3263,8 @@ MonoBehaviour:
   fireRate: 0.7
   bookPrefab: {fileID: 3333216577341784471, guid: 0ed2b4574dbdf4592b8a9d5a34b3b707, type: 3}
   firePoint: {fileID: 6342761048916866480}
+  shootSoundEffect: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+  destroySoundEffect: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
 --- !u!1 &6672386744193232201
 GameObject:
   m_ObjectHideFlags: 0

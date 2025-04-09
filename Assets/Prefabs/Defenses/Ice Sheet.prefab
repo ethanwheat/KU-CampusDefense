@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementMethod: 1
+  placementSoundEffect: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
   onPlacementSuccess:
     m_PersistentCalls:
       m_Calls:
@@ -223,6 +224,8 @@ MonoBehaviour:
   healthIncreasePerLevel: 10
   slowMultiplier: 0.2
   damagePerSecond: 5
+  slowSoundEffect: {fileID: 8300000, guid: 0994c12e202f342459a4212e7287f7e8, type: 3}
+  destroySoundEffect: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
 --- !u!1001 &3555971344166432938
 PrefabInstance:
   m_ObjectHideFlags: 0

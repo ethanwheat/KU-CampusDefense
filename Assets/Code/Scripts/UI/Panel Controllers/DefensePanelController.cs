@@ -13,6 +13,9 @@ public class DefensePanelController : MonoBehaviour
     [Header("UI Transforms")]
     [SerializeField] private Transform placementButtonsParent;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip errorSoundEffect;
+
     [Header("Round Manager")]
     [SerializeField] private RoundManager roundManager;
 
@@ -105,6 +108,7 @@ public class DefensePanelController : MonoBehaviour
     // Show error popup message and close panel.
     void placementFailed(DefenseData defenseData)
     {
+        SoundManager.instance.playSoundEffect(errorSoundEffect, transform, .5f);
         messagePopupPanelController.showPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.getName() + "!");
         closePanel();
     }

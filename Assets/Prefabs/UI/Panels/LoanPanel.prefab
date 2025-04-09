@@ -231,6 +231,8 @@ MonoBehaviour:
   loanInformation: {fileID: 2822098560212802655}
   loanInformationPanelPrefab: {fileID: 4340971345862549433, guid: b9fb97de9a5c147bbbf0fb5b0189ffe0, type: 3}
   buildingSceneUIController: {fileID: 0}
+  messagePopupPanelController: {fileID: 0}
+  errorSoundEffect: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!1 &1792429381352113694
 GameObject:

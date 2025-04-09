@@ -9,6 +9,10 @@ public class LibrarianDefense : HealthDefense, IDefenseEffect
     [SerializeField] private GameObject bookPrefab; // Reference to the book prefab
     [SerializeField] private Transform firePoint; // Point where books are spawned
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip shootSoundEffect;
+    [SerializeField] private AudioClip destroySoundEffect;
+
     private float fireCountdown = 0f;
     private List<EnemyMovement> enemiesInRange = new List<EnemyMovement>();
     private float timeElapsed = 0f;
@@ -26,6 +30,7 @@ public class LibrarianDefense : HealthDefense, IDefenseEffect
         // Destroy if health is 0.
         if (getHealth() == 0)
         {
+            SoundManager.instance.playSoundEffect(destroySoundEffect, transform, .25f);
             Destroy(gameObject);
         }
 
@@ -117,6 +122,7 @@ public class LibrarianDefense : HealthDefense, IDefenseEffect
         {
             bookScript.SetTarget(target);
         }
+        SoundManager.instance.playSoundEffect(shootSoundEffect, transform, .25f);
     }
 
     public void ApplyEffect(EnemyMovement enemy)

@@ -8,6 +8,10 @@ public class TurretDefense : HealthDefense, IDefenseEffect
     [SerializeField] private GameObject bulletPrefab; // Reference to the bullet prefab
     [SerializeField] private Transform firePoint; // Point where bullets are spawned
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip shootSoundEffect;
+    [SerializeField] private AudioClip destroySoundEffect;
+
     private float fireCountdown = 0f;
     private List<EnemyMovement> enemiesInRange = new List<EnemyMovement>();
     private float timeElapsed = 0f;
@@ -26,6 +30,7 @@ public class TurretDefense : HealthDefense, IDefenseEffect
         if (getHealth() == 0)
         {
             Destroy(gameObject);
+            SoundManager.instance.playSoundEffect(destroySoundEffect, transform, .25f);
         }
 
         // Find the nearest enemy in range
@@ -116,6 +121,7 @@ public class TurretDefense : HealthDefense, IDefenseEffect
         {
             bulletScript.SetTarget(target);
         }
+        SoundManager.instance.playSoundEffect(shootSoundEffect, transform, .25f);
     }
 
     public void ApplyEffect(EnemyMovement enemy)

@@ -5,13 +5,16 @@ public class EnemyMovement : MonoBehaviour
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
   {
-      roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
+    roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
   }
 
   public PathNode currentNode; // The waypoint the object is moving toward
   [SerializeField] private float speed;
   [SerializeField] private float health;
   [SerializeField] private HealthBar healthBar; // Reference to the HealthBar script
+
+  [Header("Sounds")]
+  [SerializeField] private AudioClip dieSoundEffect;
 
   private RoundManager roundManager;
   private float baseSpeed;
@@ -46,11 +49,11 @@ public class EnemyMovement : MonoBehaviour
       }
       else  // enemy has reached Allen fieldhouse
       {
-        
-        if (roundManager != null) 
+
+        if (roundManager != null)
         {
-            roundManager.EnemyDefeated();
-            roundManager.damageFieldhouse(health);
+          roundManager.EnemyDefeated();
+          roundManager.damageFieldhouse(health);
         }
 
         Destroy(gameObject);
@@ -115,9 +118,10 @@ public class EnemyMovement : MonoBehaviour
 
     if (roundManager != null)
     {
-        roundManager.EnemyDefeated();
-        roundManager.addCoins(killReward);
+      roundManager.EnemyDefeated();
+      roundManager.addCoins(killReward);
     }
+    SoundManager.instance.playSoundEffect(dieSoundEffect, transform, .25f);
     Destroy(gameObject); // Or trigger a death animation, effects, etc.
   }
 

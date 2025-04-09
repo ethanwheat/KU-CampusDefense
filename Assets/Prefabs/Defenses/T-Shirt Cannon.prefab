@@ -5537,6 +5537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementMethod: 0
+  placementSoundEffect: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
   onPlacementSuccess:
     m_PersistentCalls:
       m_Calls:
@@ -5598,6 +5599,8 @@ MonoBehaviour:
   fireRate: 1
   bulletPrefab: {fileID: 4376966964805629839, guid: 9961c4610855d449b88a3b3afac28201, type: 3}
   firePoint: {fileID: 6699522880739028948}
+  shootSoundEffect: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
+  destroySoundEffect: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
 --- !u!1001 &7987413265313410988
 PrefabInstance:
   m_ObjectHideFlags: 0

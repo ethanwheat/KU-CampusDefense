@@ -272,12 +272,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defensePlacementButtonPrefab: {fileID: 5647939800688894606, guid: 473a110e17922af43b274049d9cf2caf, type: 3}
-  unselectedPressedSprite: {fileID: -987095383, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
-  unselectedUnpressedSprite: {fileID: -333465279, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
-  selectedPressedSprite: {fileID: -2082850274, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
-  selectedUnpressedSprite: {fileID: 1319191705, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   messagePopupPanelController: {fileID: 0}
   placementButtonsParent: {fileID: 8969030159490705421}
+  errorSoundEffect: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
+  roundManager: {fileID: 0}
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!1001 &8938521929885644991
 PrefabInstance:

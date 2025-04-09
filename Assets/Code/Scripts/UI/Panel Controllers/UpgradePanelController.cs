@@ -17,8 +17,10 @@ public class UpgradePanelController : MonoBehaviour
     [Header("UI Controllers")]
     [SerializeField] private BuildingSceneUIController buildingSceneUIController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
-
     [SerializeField] private StarImagesController starImagesController;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip errorSoundEffect;
 
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
@@ -87,6 +89,7 @@ public class UpgradePanelController : MonoBehaviour
         else
         {
             // Show error popup panel and close upgrade panel.
+            SoundManager.instance.playSoundEffect(errorSoundEffect, transform, .5f);
             messagePopupPanelController.showPanel("Insufficient Dollars", "You do not have enough dollars to upgrade " + buildingName + "!");
             closePanel();
         }

@@ -479,6 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementMethod: 1
+  placementSoundEffect: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
   onPlacementSuccess:
     m_PersistentCalls:
       m_Calls:
@@ -527,6 +528,8 @@ MonoBehaviour:
   healthIncreasePerLevel: 50
   damageToEnemyPerSecond: 10
   damageToSelfPerSecond: 15
+  stopSoundEffect: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
+  destroySoundEffect: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
 --- !u!1 &5328843363750501742
 GameObject:
   m_ObjectHideFlags: 0

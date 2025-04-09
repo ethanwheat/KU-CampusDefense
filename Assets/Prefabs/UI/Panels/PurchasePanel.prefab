@@ -98,6 +98,7 @@ MonoBehaviour:
   costText: {fileID: 6250680166868175968}
   buildingSceneUIController: {fileID: 0}
   messagePopupPanelController: {fileID: 0}
+  errorSoundEffect: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!1 &1218975471628804588
 GameObject:

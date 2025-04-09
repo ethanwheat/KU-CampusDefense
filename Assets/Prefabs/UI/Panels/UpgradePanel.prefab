@@ -1148,6 +1148,7 @@ MonoBehaviour:
   buildingSceneUIController: {fileID: 0}
   messagePopupPanelController: {fileID: 0}
   starImagesController: {fileID: 6312957848439950290}
+  errorSoundEffect: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
   gameDataController: {fileID: 0}
 --- !u!1 &7446158910204183604
 GameObject:

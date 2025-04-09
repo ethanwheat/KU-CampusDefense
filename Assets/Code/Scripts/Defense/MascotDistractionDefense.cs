@@ -7,6 +7,10 @@ public class MascotDistractionDefense : HealthDefense, IDefenseEffect
     [SerializeField] private float damageToEnemyPerSecond = 10f;
     [SerializeField] private float damageToSelfPerSecond = 15f;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip stopSoundEffect;
+    [SerializeField] private AudioClip destroySoundEffect;
+
     private List<EnemyMovement> enemies = new List<EnemyMovement>();
 
     private void OnTriggerStay(Collider other)
@@ -19,6 +23,7 @@ public class MascotDistractionDefense : HealthDefense, IDefenseEffect
             {
                 ApplyEffect(enemy);
                 enemies.Add(enemy);
+                SoundManager.instance.playSoundEffect(stopSoundEffect, transform, .25f);
             }
 
             enemy.TakeDamage(damageToEnemyPerSecond * Time.deltaTime); // hurt enemy
@@ -65,6 +70,7 @@ public class MascotDistractionDefense : HealthDefense, IDefenseEffect
             RemoveEffect(enemy);
         }
 
+        SoundManager.instance.playSoundEffect(destroySoundEffect, transform, .25f);
         Destroy(gameObject);
     }
 }

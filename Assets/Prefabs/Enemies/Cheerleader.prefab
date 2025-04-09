@@ -473,6 +473,7 @@ MonoBehaviour:
   speed: 0
   health: 0
   healthBar: {fileID: 742259188535242057}
+  dieSoundEffect: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
 --- !u!54 &-9019292628046269684
 Rigidbody:
   m_ObjectHideFlags: 0

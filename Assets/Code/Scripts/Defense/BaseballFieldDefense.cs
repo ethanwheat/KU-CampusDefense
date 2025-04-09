@@ -15,6 +15,10 @@ public class BaseballFieldDefense : Defense, IDefenseEffect
     [Header("Prefabs")]
     [SerializeField] private GameObject baseballPrefab;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip shootSoundEffect;
+    [SerializeField] private AudioClip destroySoundEffect;
+
     [Header("Unity Events")]
     [SerializeField] private UnityEvent onDefenseStart;
 
@@ -60,6 +64,7 @@ public class BaseballFieldDefense : Defense, IDefenseEffect
 
         GameObject ball = Instantiate(baseballPrefab, transform.position + Vector3.up * 1.5f, Quaternion.LookRotation(direction));
         ball.transform.parent = getProjectilesParent();
+        SoundManager.instance.playSoundEffect(shootSoundEffect, transform, .25f);
         // No need to manually apply speed — handled in Baseball.cs
     }
 
