@@ -8,6 +8,9 @@ public class MainMenuUIController : MonoBehaviour
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
     [SerializeField] private PanelFadeController menuPanelFadeController;
 
+    [Header("Music")]
+    [SerializeField] private AudioClip mainMenuMusic;
+
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
@@ -15,6 +18,9 @@ public class MainMenuUIController : MonoBehaviour
     {
         // Call show menu coroutine.
         StartCoroutine(showMenu());
+
+        // Play main menu music.
+        SoundManager.instance.playSoundEffect(mainMenuMusic, transform, .5f);
     }
 
     // Show menu.

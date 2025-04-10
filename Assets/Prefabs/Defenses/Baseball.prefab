@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5459022926676269308}
   - component: {fileID: -3331026822362025116}
   - component: {fileID: -4035614467236856753}
-  - component: {fileID: -804895357363999155}
+  - component: {fileID: -2853797478590213598}
   m_Layer: 7
   m_Name: Baseball
   m_TagString: NoHealthDefense
@@ -160,7 +160,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.075999975, y: 0.07599999, z: 0.075999975}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-804895357363999155
+--- !u!114 &-2853797478590213598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,5 +173,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 100
-  lifeTime: 2.5
-  damage: 20
+  damage: 25
+  lifeTime: 5

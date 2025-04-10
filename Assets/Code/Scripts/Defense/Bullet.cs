@@ -3,50 +3,20 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [Header("Bullet Settings")]
-    public float speed = 10f;
-    public int damage = 10;
+    [SerializeField] private float speed;
+    [SerializeField] private float damage;
 
-    private EnemyMovement target;
-
-    public void SetTarget(EnemyMovement newTarget)
+    void OnTriggerEnter(Collider other)
     {
-        target = newTarget;
-    }
-
-    void Start()
-    {
-        //Debug.Log("Bullet spawned at: " + transform.position);
-    }
-
-    void Update()
-    {
-        if (target == null)
+        if (other.TryGetComponent(out EnemyMovement enemy))
         {
-            //Debug.Log("Target is null. Destroying bullet.");
+            enemy.TakeDamage(damage);
             Destroy(gameObject);
-            return;
         }
-
-        // Move towards the target
-        Vector3 direction = target.transform.position - transform.position;
-        float distanceThisFrame = speed * Time.deltaTime;
-
-        if (direction.magnitude <= distanceThisFrame)
-        {
-            //Debug.Log("Bullet hit target: " + target.name);
-            HitTarget();
-            return;
-        }
-
-        transform.Translate(direction.normalized * distanceThisFrame, Space.World);
-        //Debug.Log("Bullet moving towards target: " + target.name);
     }
 
-    private void HitTarget()
+    public float GetSpeed()
     {
-        // Deal damage to the enemy
-        //Debug.Log("Bullet hit target: " + target.name);
-        target.TakeDamage(damage);
-        Destroy(gameObject);
+        return speed;
     }
 }

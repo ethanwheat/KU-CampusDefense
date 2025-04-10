@@ -127,6 +127,7 @@ MonoBehaviour:
   messagePopupPanelController: {fileID: 9155536170057261883}
   loadingBackgroundController: {fileID: 8084291624175720268}
   dollarText: {fileID: 1476515413953950980}
+  buildingMusic: {fileID: 8300000, guid: 596d0692cfef29d4a948500bd247dbdf, type: 3}
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!1001 &1235957425190312097
 PrefabInstance:

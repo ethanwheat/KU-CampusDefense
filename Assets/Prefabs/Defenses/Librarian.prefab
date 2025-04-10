@@ -3101,7 +3101,7 @@ GameObject:
   - component: {fileID: 1523935614215194817}
   - component: {fileID: 8453790566547876889}
   - component: {fileID: 5294964479199149261}
-  - component: {fileID: 3062359089179970735}
+  - component: {fileID: 4470209290486160131}
   m_Layer: 7
   m_Name: Librarian
   m_TagString: HealthDefense
@@ -3201,11 +3201,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementMethod: 0
-  placementSoundEffect: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
+  placementSoundEffect: {fileID: 8300000, guid: 667ce13d8d8e3754dbbe2f9548141d81, type: 3}
   onPlacementSuccess:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3062359089179970735}
+      - m_Target: {fileID: 4470209290486160131}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
@@ -3244,7 +3244,7 @@ MonoBehaviour:
   onPlacementFail:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3062359089179970735
+--- !u!114 &4470209290486160131
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3253,18 +3253,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 6672386744193232199}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a36607017359b44f5a54c5be9c0755d8, type: 3}
+  m_Script: {fileID: 11500000, guid: dd350c1e70cee460c818023535bd2e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defenseData: {fileID: 11400000, guid: 2b2d76fc4badc4cda8c0a6bd4e330677, type: 2}
   healthBar: {fileID: 58168574569903344}
-  maxHealth: 20
-  healthIncreasePerLevel: 5
-  fireRate: 0.7
-  bookPrefab: {fileID: 3333216577341784471, guid: 0ed2b4574dbdf4592b8a9d5a34b3b707, type: 3}
+  destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
+  maxHealth: 100
+  healthIncreasePerLevel: 50
+  bulletPrefab: {fileID: 3333216577341784471, guid: 0ed2b4574dbdf4592b8a9d5a34b3b707, type: 3}
+  shootSoundEffect: {fileID: 8300000, guid: d2329c56333ef254e920c0f3b272e64b, type: 3}
+  fireRate: 1
   firePoint: {fileID: 6342761048916866480}
-  shootSoundEffect: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
-  destroySoundEffect: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
 --- !u!1 &6672386744193232201
 GameObject:
   m_ObjectHideFlags: 0

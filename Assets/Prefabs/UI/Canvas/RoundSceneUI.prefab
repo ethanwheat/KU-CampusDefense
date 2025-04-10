@@ -127,6 +127,7 @@ MonoBehaviour:
   loadingBackgroundController: {fileID: 8647825447028577094}
   dollarText: {fileID: 7043421358521999637}
   coinText: {fileID: 1740722999357597077}
+  roundMusic: {fileID: 8300000, guid: 91e9423774546714ab6bab8e5dd4ace4, type: 3}
   roundManager: {fileID: 0}
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!1 &4656301278475521326

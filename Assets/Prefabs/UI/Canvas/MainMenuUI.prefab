@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingBackgroundController: {fileID: 5716891728201563717}
   menuPanelFadeController: {fileID: 6987268511834118930}
+  mainMenuMusic: {fileID: 8300000, guid: 2756eff9ed321e446892060dc30e800b, type: 3}
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!114 &5204553759205242153
 MonoBehaviour:

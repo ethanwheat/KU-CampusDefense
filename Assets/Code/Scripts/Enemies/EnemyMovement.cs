@@ -67,7 +67,7 @@ public class EnemyMovement : MonoBehaviour
     if (!other.TryGetComponent(out DefensePlacementController placementController)) return;
     if (!placementController.isPlaced()) return;
 
-    if (other.TryGetComponent(out IDefenseEffect defenseEffect))
+    if (other.TryGetComponent(out IDefense defenseEffect))
     {
       defenseEffect.ApplyEffect(this);
     }
@@ -78,7 +78,7 @@ public class EnemyMovement : MonoBehaviour
     if (!other.TryGetComponent(out DefensePlacementController placementController)) return;
     if (!placementController.isPlaced()) return;
 
-    if (other.TryGetComponent(out IDefenseEffect defenseEffect))
+    if (other.TryGetComponent(out IDefense defenseEffect))
     {
       defenseEffect.RemoveEffect(this);
     }

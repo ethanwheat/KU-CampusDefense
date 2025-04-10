@@ -203,9 +203,9 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-    private List<HealthDefense> getHealthDefenses()
+    private List<Defense> getHealthDefenses()
     {
-        List<HealthDefense> healthDefenses = new List<HealthDefense>();
+        List<Defense> healthDefenses = new List<Defense>();
 
         foreach (Transform transform in defensesParent)
         {
@@ -213,7 +213,7 @@ public class RoundManager : MonoBehaviour
 
             if (defense.CompareTag("HealthDefense"))
             {
-                healthDefenses.Add(defense.GetComponent<HealthDefense>());
+                healthDefenses.Add(defense.GetComponent<Defense>());
             }
         }
 
@@ -222,11 +222,11 @@ public class RoundManager : MonoBehaviour
 
     public void regenHealthOnDefenses()
     {
-        List<HealthDefense> healthDefenses = getHealthDefenses();
+        List<Defense> healthDefenses = getHealthDefenses();
 
         foreach (var healthDefense in healthDefenses)
         {
-            healthDefense.resetHealth();
+            healthDefense.ResetHealth();
         }
 
         int regenCost = getRegenCost();
@@ -237,11 +237,11 @@ public class RoundManager : MonoBehaviour
     public int getRegenCost()
     {
         int regenCost = 0;
-        List<HealthDefense> healthDefenses = getHealthDefenses();
+        List<Defense> healthDefenses = getHealthDefenses();
 
         foreach (var healthDefense in healthDefenses)
         {
-            regenCost += healthDefense.getDefenseData().getCoinCost() / 2;
+            regenCost += healthDefense.GetDefenseData().getCoinCost() / 2;
         }
 
         return regenCost;

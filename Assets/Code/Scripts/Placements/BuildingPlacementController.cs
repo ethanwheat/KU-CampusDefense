@@ -50,11 +50,11 @@ public class BuildingPlacementController : MonoBehaviour
             buildingGameObject.SetActive(true);
 
             // ✅ Activate baseball field shooting (if present)
-            BaseballFieldDefense baseballField = buildingGameObject.GetComponent<BaseballFieldDefense>();
-            if (baseballField != null && !baseballField.enabled)
-            {
-                baseballField.enabled = true;
-            }
+            // BaseballFieldDefense baseballField = buildingGameObject.GetComponent<BaseballFieldDefense>();
+            // if (baseballField != null && !baseballField.enabled)
+            // {
+            //     baseballField.enabled = true;
+            // }
 
             return;
         }

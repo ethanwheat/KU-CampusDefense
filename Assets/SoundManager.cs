@@ -15,6 +15,26 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void playMusic(AudioClip audioClip, Transform transform, float volume)
+    {
+        // Create audio game object.
+        GameObject audioObject = new GameObject();
+        audioObject.transform.parent = getSoundsParent();
+        audioObject.transform.position = transform.position;
+        audioObject.transform.rotation = Quaternion.identity;
+
+        // Create audio source.
+        AudioSource audioSource = audioObject.AddComponent<AudioSource>();
+        audioSource.transform.parent = getSoundsParent();
+        audioSource.clip = audioClip;
+        audioSource.volume = volume;
+        audioSource.Play();
+
+        // Destroy after audio plays.
+        float clipLength = audioSource.clip.length;
+        Destroy(audioObject, clipLength);
+    }
+
     public void playSoundEffect(AudioClip audioClip, Transform transform, float volume)
     {
         // Create audio game object.

@@ -14,6 +14,9 @@ public class RoundSceneUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dollarText;
     [SerializeField] private TextMeshProUGUI coinText;
 
+    [Header("Music")]
+    [SerializeField] private AudioClip roundMusic;
+
     [Header("Round Manager")]
     [SerializeField] private RoundManager roundManager;
 
@@ -34,6 +37,9 @@ public class RoundSceneUIController : MonoBehaviour
 
         // Fade background out.
         StartCoroutine(loadingBackgroundController.fadeOutCoroutine(.5f));
+
+        // Play round music.
+        SoundManager.instance.playSoundEffect(roundMusic, transform, .5f);
     }
 
     void Update()

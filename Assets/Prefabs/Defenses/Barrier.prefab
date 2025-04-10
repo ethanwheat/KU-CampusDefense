@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementMethod: 1
-  placementSoundEffect: {fileID: 8300000, guid: 3becec1909f194046945d85ac1077772, type: 3}
+  placementSoundEffect: {fileID: 8300000, guid: 667ce13d8d8e3754dbbe2f9548141d81, type: 3}
   onPlacementSuccess:
     m_PersistentCalls:
       m_Calls:
@@ -134,11 +134,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defenseData: {fileID: 11400000, guid: e095c808540afb14598316299453f91e, type: 2}
   healthBar: {fileID: 158758177496608957}
+  destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
   maxHealth: 100
   healthIncreasePerLevel: 50
-  damagePerSecond: 10
-  stopSoundEffect: {fileID: 8300000, guid: 80e397195ea2940b69ee7bdbded856a5, type: 3}
-  destroySoundEffect: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+  damageToDefense: 10
+  damageToEnemy: 0
 --- !u!1 &8626985468115213023
 GameObject:
   m_ObjectHideFlags: 0

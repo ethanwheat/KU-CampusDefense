@@ -17,6 +17,9 @@ public class BuildingSceneUIController : MonoBehaviour
     [Header("UI Text")]
     [SerializeField] private TextMeshProUGUI dollarText;
 
+    [Header("Music")]
+    [SerializeField] private AudioClip buildingMusic;
+
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
@@ -34,6 +37,9 @@ public class BuildingSceneUIController : MonoBehaviour
 
         // Fade out background.
         StartCoroutine(loadingBackgroundController.fadeOutCoroutine(.5f));
+
+        // Play building music.
+        SoundManager.instance.playSoundEffect(buildingMusic, transform, .5f);
     }
 
     void Update()
