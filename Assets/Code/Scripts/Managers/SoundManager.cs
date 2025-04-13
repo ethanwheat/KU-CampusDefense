@@ -108,7 +108,6 @@ public class SoundManager : MonoBehaviour
 
         // Destroy after audio plays.
         float clipLength = audioSource.clip.length + .1f;
-        Debug.Log(clipLength);
         Destroy(audioObject, clipLength);
     }
 
