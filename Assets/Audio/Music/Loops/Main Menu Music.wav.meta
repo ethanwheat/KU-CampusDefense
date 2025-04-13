@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2756eff9ed321e446892060dc30e800b
+guid: 79535d5216df07745a911434f1e464b3
 AudioImporter:
   externalObjects: {}
   serializedVersion: 8
@@ -21,10 +21,3 @@ AudioImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 315925
-  packageName: Mini Retro - retro music pack
-  packageVersion: 1.0
-  assetPath: Assets/Mini Retro music/Loops/WAV_Skyview_loop.wav
-  uploadId: 745492

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 91e9423774546714ab6bab8e5dd4ace4
+guid: 247ba853194e8484cadfd5edcbd5c5b7
 AudioImporter:
   externalObjects: {}
   serializedVersion: 8
@@ -21,10 +21,3 @@ AudioImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 315925
-  packageName: Mini Retro - retro music pack
-  packageVersion: 1.0
-  assetPath: Assets/Mini Retro music/Loops/WAV_Mega_G_loop.wav
-  uploadId: 745492

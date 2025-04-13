@@ -8,6 +8,12 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;
 
+    [Header("Sound Manager Settings")]
+    [SerializeField] private bool playMusicOnStart;
+
+    [Header("Music")]
+    [SerializeField] private AudioClip music;
+
     [Header("Settings Data Controller")]
     [SerializeField] private SettingsDataController settingsDataController;
 
@@ -19,6 +25,15 @@ public class SoundManager : MonoBehaviour
         if (!instance)
         {
             instance = this;
+        }
+    }
+
+    void Start()
+    {
+        // Play music if playMusicOnStart is true.
+        if (playMusicOnStart)
+        {
+            playMusic(music, transform, .5f, .5f);
         }
     }
 
