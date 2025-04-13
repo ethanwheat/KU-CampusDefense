@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9e07cbace3524df7a7363081820d6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicVolume: 1
-  soundEffectsVolume: 1
+  playMusicOnStart: 0
+  music: {fileID: 0}
   settingsDataController: {fileID: 11400000, guid: f0ac8e76433fc554e80e5e6b643dc761, type: 2}

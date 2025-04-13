@@ -250,6 +250,10 @@ PrefabInstance:
       propertyPath: music
       value: 
       objectReference: {fileID: 8300000, guid: 2df1053437957a24e99cf752b337de2e, type: 3}
+    - target: {fileID: 722898779665168410, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: playMusicOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3897313254114535511, guid: e95a76e6961844debbec3286b1035861, type: 3}
       propertyPath: m_Name
       value: SoundManager
