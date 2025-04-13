@@ -27,6 +27,9 @@ public class MainMenuUIController : MonoBehaviour
     // Start game.
     public void startGame()
     {
+        // Stop music.
+        SoundManager.instance.stopMusic(.5f);
+
         // Start game coroutine.
         StartCoroutine(startGameCoroutine());
     }

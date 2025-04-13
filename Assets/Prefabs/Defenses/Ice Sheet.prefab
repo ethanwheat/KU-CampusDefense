@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementMethod: 1
+  placementSoundEffect: {fileID: 8300000, guid: 667ce13d8d8e3754dbbe2f9548141d81, type: 3}
   onPlacementSuccess:
     m_PersistentCalls:
       m_Calls:
@@ -219,6 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defenseData: {fileID: 11400000, guid: 5175263242d8f9e418b2fbb6aa05f414, type: 2}
   healthBar: {fileID: 6074170264989432044}
+  destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
   maxHealth: 30
   healthIncreasePerLevel: 10
   slowMultiplier: 0.2

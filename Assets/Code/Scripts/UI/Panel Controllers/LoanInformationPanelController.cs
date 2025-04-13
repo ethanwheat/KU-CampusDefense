@@ -17,6 +17,10 @@ public class LoanInformationPanelController : MonoBehaviour
     [SerializeField] private Image takenLoanImage;
     [SerializeField] private TextMeshProUGUI takenDebtCost;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip takeLoanSoundEffect;
+    [SerializeField] private AudioClip makePaymentSoundEffect;
+
     [Header("Unity Events")]
     public UnityEvent onTakeLoan;
     public UnityEvent onLoanPayment;
@@ -58,16 +62,18 @@ public class LoanInformationPanelController : MonoBehaviour
         unlockedContent.SetActive(true);
     }
 
-    // Take loan and invoke onTakeLoan.
+    // Play take loan sound effect, take loan and invoke onTakeLoan.
     public void onTake()
     {
+        SoundManager.instance.playSoundEffect(takeLoanSoundEffect, transform, 1f);
         loanData.takeLoan();
         onTakeLoan.Invoke();
     }
 
-    // Invoke onLoanPayment.
+    // Play make payment sound effect, invoke onLoanPayment.
     public void onPayment()
     {
+        SoundManager.instance.playSoundEffect(makePaymentSoundEffect, transform, 1f);
         onLoanPayment.Invoke();
     }
 }

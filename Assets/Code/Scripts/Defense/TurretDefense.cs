@@ -1,11 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurretDefense : HealthDefense, IDefenseEffect
+public class TurretDefense : Defense, IDefense
 {
+    [Header("Turret Prefabs")]
+    [SerializeField] private GameObject bulletPrefab; // Reference to the bullet prefab
+
+    [Header("Turret Sounds")]
+    [SerializeField] private AudioClip shootSoundEffect;
+
     [Header("Turret Settings")]
     [SerializeField] private float fireRate = 1f; // Shots per second
-    [SerializeField] private GameObject bulletPrefab; // Reference to the bullet prefab
     [SerializeField] private Transform firePoint; // Point where bullets are spawned
 
     private float fireCountdown = 0f;
@@ -18,14 +23,8 @@ public class TurretDefense : HealthDefense, IDefenseEffect
 
         if (timeElapsed >= 1f)
         {
-            subtractHealth(1);
+            SubtractHealth(1);
             timeElapsed = 0f;
-        }
-
-        // Destroy if health is 0.
-        if (getHealth() == 0)
-        {
-            Destroy(gameObject);
         }
 
         // Find the nearest enemy in range
@@ -111,20 +110,26 @@ public class TurretDefense : HealthDefense, IDefenseEffect
 
         //Debug.Log("Shooting at target: " + target.name);
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        bullet.transform.parent = getProjectilesParent();
-        if (bullet.TryGetComponent(out Bullet bulletScript))
+        bullet.transform.parent = GetProjectilesParent();
+        if (bullet.TryGetComponent(out TrackedBullet bulletScript))
         {
             bulletScript.SetTarget(target);
         }
+        SoundManager.instance.playSoundEffect(shootSoundEffect, transform, .5f);
     }
 
     public void ApplyEffect(EnemyMovement enemy)
     {
-        // Not needed for turret, but required by IDefenseEffect
+        // Not needed for turret, but required by IDefense
     }
 
     public void RemoveEffect(EnemyMovement enemy)
     {
-        // Not needed for turret, but required by IDefenseEffect
+        // Not needed for turret, but required by IDefense
+    }
+
+    public override void OnDefenseDestroy()
+    {
+        base.OnDefenseDestroy();
     }
 }

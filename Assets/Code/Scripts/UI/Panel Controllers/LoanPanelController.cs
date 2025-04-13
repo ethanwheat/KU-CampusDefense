@@ -14,6 +14,9 @@ public class LoanPanelController : MonoBehaviour
     [SerializeField] private BuildingSceneUIController buildingSceneUIController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip errorSoundEffect;
+
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
@@ -83,6 +86,7 @@ public class LoanPanelController : MonoBehaviour
         }
 
         // Show error popup panel if user has no money and close panel.
+        SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
         messagePopupPanelController.showPanel("Insufficient Dollars", "You do not have enough dollars to make a payment on " + loanName + "!");
         closePanel();
     }

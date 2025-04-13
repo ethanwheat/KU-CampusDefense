@@ -17,6 +17,9 @@ public class BuildingSceneUIController : MonoBehaviour
     [Header("UI Text")]
     [SerializeField] private TextMeshProUGUI dollarText;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip clickSoundEffect;
+
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
@@ -113,6 +116,9 @@ public class BuildingSceneUIController : MonoBehaviour
             // Close existing UI.
             closeExistingUI();
 
+            // Play click sound effect.
+            SoundManager.instance.playSoundEffect(clickSoundEffect, transform, 1f);
+
             // Show purchase panel with data if not bought.
             if (!purchasableData.isBought())
             {
@@ -138,6 +144,9 @@ public class BuildingSceneUIController : MonoBehaviour
         // Check if mouse is clicked.
         if (Input.GetMouseButtonDown(0))
         {
+            // Play click sound effect.
+            SoundManager.instance.playSoundEffect(clickSoundEffect, transform, 1f);
+
             // Close existing UI and show loan panel.
             closeExistingUI();
             loanPanelController.showPanel();
@@ -147,6 +156,7 @@ public class BuildingSceneUIController : MonoBehaviour
     // Start round.
     public void startRound()
     {
+        SoundManager.instance.stopMusic(.5f);
         StartCoroutine(startRoundCoroutine());
     }
 

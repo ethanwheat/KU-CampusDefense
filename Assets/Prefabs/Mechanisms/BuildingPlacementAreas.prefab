@@ -9584,7 +9584,7 @@ PrefabInstance:
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: purchasableData
       value: 
-      objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
+      objectReference: {fileID: 11400000, guid: 03ccf100e81c1ba45aea928dbda026f0, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: availableMaterial
       value: 
@@ -9874,7 +9874,7 @@ PrefabInstance:
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: purchasableData
       value: 
-      objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
+      objectReference: {fileID: 11400000, guid: 8a96bcd9567a0094d8f1a0cb80ac2021, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: availableMaterial
       value: 
@@ -10025,7 +10025,7 @@ PrefabInstance:
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: purchasableData
       value: 
-      objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
+      objectReference: {fileID: 11400000, guid: 3f0a23819b0d0674c8df0cf1bcd7d2b6, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: availableMaterial
       value: 
@@ -10744,7 +10744,7 @@ PrefabInstance:
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: purchasableData
       value: 
-      objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
+      objectReference: {fileID: 11400000, guid: c9dda16791d6c1e45b79fdc07b2d22be, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: availableMaterial
       value: 
@@ -11046,7 +11046,7 @@ PrefabInstance:
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: purchasableData
       value: 
-      objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
+      objectReference: {fileID: 11400000, guid: 628e1d1d39bb54e4c964c113b6cc5650, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingGameObject
       value: 
@@ -11626,7 +11626,7 @@ PrefabInstance:
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: purchasableData
       value: 
-      objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
+      objectReference: {fileID: 11400000, guid: 72bbba30305c9e540a48e1ccd2c542c2, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: availableMaterial
       value: 
