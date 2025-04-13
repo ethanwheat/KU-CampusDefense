@@ -13,7 +13,6 @@ public class SoundManager : MonoBehaviour
 
     private Transform soundsParent;
     private GameObject musicObject;
-    private List<AudioSource> soundEffects = new List<AudioSource>();
 
     void Awake()
     {
@@ -40,9 +39,8 @@ public class SoundManager : MonoBehaviour
     {
         settingsDataController.setMusicVolume(volume);
 
-        float musicVolume = settingsDataController.getMusicVolume();
         AudioSource audioSource = musicObject.GetComponent<AudioSource>();
-        audioSource.volume = musicVolume;
+        audioSource.volume = volume / 2;
     }
 
     // Play music coroutine.
