@@ -6,6 +6,7 @@ public class RoundSceneUIController : MonoBehaviour
 {
     [Header("UI Controllers")]
     [SerializeField] private DefensePanelController defensePanelController;
+    [SerializeField] private AbilitiesPanelController abilitiesPanelController;
     [SerializeField] private RegenHealthPanelController regenHealthPanelController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
@@ -111,6 +112,11 @@ public class RoundSceneUIController : MonoBehaviour
     // Show defense panel.
     public void showDefensePanel()
     {
+        if (defensePanelController == null)
+        {
+            //Debug.LogError("DefensePanelController reference is null!");
+            return;
+        }
         bool showPanel = !defensePanelController.gameObject.activeSelf;
 
         closeExistingUI();
@@ -121,11 +127,44 @@ public class RoundSceneUIController : MonoBehaviour
         }
     }
 
-    // Close existing UI.
-    void closeExistingUI()
+    public void ShowAbilitiesPanel()
+    {
+        if (abilitiesPanelController == null)
+        {
+            //Debug.LogError("AbilitiesPanelController reference is missing!");
+            return;
+        }
+
+        bool showPanel = !abilitiesPanelController.gameObject.activeSelf;
+        closeExistingUI();
+
+        if (showPanel)
+        {
+            abilitiesPanelController.ShowAbilitiesPanel();
+        }
+    }
+
+    // Close existing UI (This is buggy with the abilities panel)
+    /*void closeExistingUI()
     {
         defensePanelController.closePanel();
         regenHealthPanelController.closePanel();
         messagePopupPanelController.closePanel();
+        abilitiesPanelController.CloseAbilitiesPanel();
+    }*/
+
+    void closeExistingUI()
+    {
+        if (defensePanelController != null) 
+            defensePanelController.closePanel();
+        
+        if (regenHealthPanelController != null) 
+            regenHealthPanelController.closePanel();
+        
+        if (messagePopupPanelController != null) 
+            messagePopupPanelController.closePanel();
+        
+        if (abilitiesPanelController != null) 
+            abilitiesPanelController.CloseAbilitiesPanel();
     }
 }

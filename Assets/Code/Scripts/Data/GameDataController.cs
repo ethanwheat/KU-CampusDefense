@@ -10,6 +10,7 @@ public class GameDataController : ScriptableObject
     [SerializeField] private int roundNumber;
     [SerializeField] private int dollars;
     [SerializeField] private DefenseData[] defenseData;
+    [SerializeField] private AbilityData[] abilityData;
     [SerializeField] private BonusData[] bonusData;
     [SerializeField] private LoanData[] loanData;
 
@@ -52,6 +53,12 @@ public class GameDataController : ScriptableObject
     public DefenseData[] getDefenseData()
     {
         return defenseData;
+    }
+
+    // Get ability data
+    public AbilityData[] getAbilityData()
+    {
+        return abilityData;
     }
 
     // Get bonus data.
