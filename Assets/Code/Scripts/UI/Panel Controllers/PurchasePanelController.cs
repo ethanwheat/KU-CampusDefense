@@ -16,6 +16,7 @@ public class PurchasePanelController : MonoBehaviour
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
     [Header("Sounds")]
+    [SerializeField] private AudioClip placementSoundEffect;
     [SerializeField] private AudioClip errorSoundEffect;
 
     [Header("Game Data Controller")]
@@ -55,10 +56,11 @@ public class PurchasePanelController : MonoBehaviour
 
         if (dollars >= objectCost)
         {
-            // Set object as bought, subtract cost, create popup panel showing success,
-            // update dollar amounts on dollar UI, close purchase panel, and refresh building placement controller.
+            // Set object as bought, subtract cost, play building placement sound,
+            // create popup panel showing success, update dollar amounts on dollar UI, and close purchase panel.
             purchasableData.setBought(true);
             gameDataController.subtractDollars(objectCost);
+            SoundManager.instance.playSoundEffect(placementSoundEffect, transform, 1f);
             messagePopupPanelController.showPanel("Item Purchased", "You have bought " + buildingName + " for " + objectCost.ToString() + " dollars!");
             buildingSceneUIController.updateDollarUI();
             buildingPlacementController.updatePlacementArea();
@@ -67,7 +69,7 @@ public class PurchasePanelController : MonoBehaviour
         else
         {
             // Show error popup panel and close purchase panel.
-            SoundManager.instance.playSoundEffect(errorSoundEffect, transform, .5f);
+            SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
             messagePopupPanelController.showPanel("Insufficient Dollars", "You do not have enough dollars to buy " + buildingName + "!");
             closePanel();
         }

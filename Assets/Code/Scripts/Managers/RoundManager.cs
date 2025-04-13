@@ -40,6 +40,9 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private HealthBar fieldhouseHealthBar; // Reference to UI HealthBar
     private float maxFieldhouseHealth;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip allenFieldHouseDamageSoundEffect;
+
     [Header("UI Controllers")]
     [SerializeField] private RoundSceneUIController roundSceneUIController;
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
@@ -78,6 +81,7 @@ public class RoundManager : MonoBehaviour
     private void EndRound()
     {
         StopAllCoroutines();
+        SoundManager.instance.stopMusic(.5f);
         StartCoroutine(EndRoundCoroutine());
     }
 
@@ -190,6 +194,8 @@ public class RoundManager : MonoBehaviour
 
     public void damageFieldhouse(float damage)
     {
+        SoundManager.instance.playSoundEffect(allenFieldHouseDamageSoundEffect, transform, .5f);
+
         fieldhouseHealth -= damage;
 
         if (fieldhouseHealthBar != null)

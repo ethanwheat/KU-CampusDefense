@@ -61,7 +61,7 @@ public class Defense : MonoBehaviour
     // Called when defense is out of health.
     public virtual void OnDefenseDestroy()
     {
-        SoundManager.instance.playSoundEffect(destroySoundEffect, transform, .25f);
+        SoundManager.instance.playSoundEffect(destroySoundEffect, transform, .5f);
         Destroy(gameObject);
     }
 

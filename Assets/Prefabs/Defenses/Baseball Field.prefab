@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defenseData: {fileID: 11400000, guid: 628e1d1d39bb54e4c964c113b6cc5650, type: 2}
   healthBar: {fileID: 815069342759200676}
-  destroySoundEffect: {fileID: 0}
+  destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
   maxHealth: 100
   healthIncreasePerLevel: 50
   ballsPerWave: 6
@@ -57,6 +57,7 @@ MonoBehaviour:
   spreadAngle: 360
   baseballPrefab: {fileID: 4654403849997068961, guid: 419c964d5b9ab48099647fb3e92a1dd7, type: 3}
   shootSoundEffect: {fileID: 8300000, guid: 825bc1a3f01050743a22c24776efcd16, type: 3}
+  rechargeSoundEffect: {fileID: 8300000, guid: ddcd51b53abc39b41be2acb1e98ee1a1, type: 3}
   onDefenseStart:
     m_PersistentCalls:
       m_Calls:

@@ -128,6 +128,7 @@ MonoBehaviour:
   dollarText: {fileID: 7043421358521999637}
   coinText: {fileID: 1740722999357597077}
   roundMusic: {fileID: 8300000, guid: 91e9423774546714ab6bab8e5dd4ace4, type: 3}
+  clickSoundEffect: {fileID: 8300000, guid: 3cdb04cb39150f8429e89b26e5a10b9e, type: 3}
   roundManager: {fileID: 0}
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!1 &4656301278475521326
@@ -278,6 +279,7 @@ GameObject:
   - component: {fileID: 7001715481364321809}
   - component: {fileID: 5595326943192596285}
   - component: {fileID: 1909876424538378594}
+  - component: {fileID: 1495890684964124571}
   m_Layer: 5
   m_Name: PlaceDefenseButton
   m_TagString: Untagged
@@ -399,6 +401,31 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1495890684964124571}
+        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
+        m_MethodName: onClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1495890684964124571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8965466870352711862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058ad179efe596c44a851d122962cbe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSoundEffect: {fileID: 8300000, guid: 3cdb04cb39150f8429e89b26e5a10b9e, type: 3}
 --- !u!1001 &1864245936660117389
 PrefabInstance:
   m_ObjectHideFlags: 0

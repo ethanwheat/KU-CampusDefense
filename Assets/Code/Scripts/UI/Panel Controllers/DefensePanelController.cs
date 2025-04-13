@@ -108,7 +108,7 @@ public class DefensePanelController : MonoBehaviour
     // Show error popup message and close panel.
     void placementFailed(DefenseData defenseData)
     {
-        SoundManager.instance.playSoundEffect(errorSoundEffect, transform, .5f);
+        SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
         messagePopupPanelController.showPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.getName() + "!");
         closePanel();
     }

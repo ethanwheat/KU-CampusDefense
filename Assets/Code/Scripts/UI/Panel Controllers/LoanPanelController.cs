@@ -86,7 +86,7 @@ public class LoanPanelController : MonoBehaviour
         }
 
         // Show error popup panel if user has no money and close panel.
-        SoundManager.instance.playSoundEffect(errorSoundEffect, transform, .5f);
+        SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
         messagePopupPanelController.showPanel("Insufficient Dollars", "You do not have enough dollars to make a payment on " + loanName + "!");
         closePanel();
     }

@@ -14,8 +14,9 @@ public class RoundSceneUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dollarText;
     [SerializeField] private TextMeshProUGUI coinText;
 
-    [Header("Music")]
+    [Header("Sounds")]
     [SerializeField] private AudioClip roundMusic;
+    [SerializeField] private AudioClip clickSoundEffect;
 
     [Header("Round Manager")]
     [SerializeField] private RoundManager roundManager;
@@ -39,7 +40,7 @@ public class RoundSceneUIController : MonoBehaviour
         StartCoroutine(loadingBackgroundController.fadeOutCoroutine(.5f));
 
         // Play round music.
-        SoundManager.instance.playSoundEffect(roundMusic, transform, .5f);
+        SoundManager.instance.playMusic(roundMusic, transform, .5f, .5f);
     }
 
     void Update()
@@ -88,6 +89,9 @@ public class RoundSceneUIController : MonoBehaviour
         // Check if mouse is clicked.
         if (Input.GetMouseButtonDown(0))
         {
+            // Play click sound effect.
+            SoundManager.instance.playSoundEffect(clickSoundEffect, transform, 1f);
+
             // Close existing UI and show loan panel.
             closeExistingUI();
             regenHealthPanelController.showPanel();

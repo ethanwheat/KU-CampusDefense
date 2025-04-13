@@ -14,7 +14,7 @@ public class EnemyMovement : MonoBehaviour
   [SerializeField] private HealthBar healthBar; // Reference to the HealthBar script
 
   [Header("Sounds")]
-  [SerializeField] private AudioClip dieSoundEffect;
+  [SerializeField] private AudioClip enemyKilledSoundEffect;
 
   private RoundManager roundManager;
   private float baseSpeed;
@@ -121,7 +121,7 @@ public class EnemyMovement : MonoBehaviour
       roundManager.EnemyDefeated();
       roundManager.addCoins(killReward);
     }
-    SoundManager.instance.playSoundEffect(dieSoundEffect, transform, .25f);
+    SoundManager.instance.playSoundEffect(enemyKilledSoundEffect, transform, .5f);
     Destroy(gameObject); // Or trigger a death animation, effects, etc.
   }
 

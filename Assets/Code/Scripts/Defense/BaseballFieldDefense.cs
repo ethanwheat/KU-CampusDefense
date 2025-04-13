@@ -18,6 +18,8 @@ public class BaseballFieldDefense : Defense, IDefense
     [Header("Baseball Field Sounds")]
     [SerializeField] private AudioClip shootSoundEffect;
 
+    [SerializeField] private AudioClip rechargeSoundEffect;
+
     [Header("Unity Events")]
     [SerializeField] private UnityEvent onDefenseStart;
 
@@ -49,6 +51,7 @@ public class BaseballFieldDefense : Defense, IDefense
             yield return new WaitForSeconds(timeBetweenBaseballs);
         }
 
+        SoundManager.instance.playSoundEffect(rechargeSoundEffect, transform, .5f);
         healthBar.UpdateHealthBar(ballsPerWave, ballsPerWave);
 
         yield return new WaitForSeconds(timeBetweenWaves);
@@ -63,7 +66,7 @@ public class BaseballFieldDefense : Defense, IDefense
 
         GameObject ball = Instantiate(baseballPrefab, transform.position + Vector3.up * 1.5f, Quaternion.LookRotation(direction));
         ball.transform.parent = GetProjectilesParent();
-        SoundManager.instance.playSoundEffect(shootSoundEffect, transform, .25f);
+        SoundManager.instance.playSoundEffect(shootSoundEffect, transform, .5f);
         // No need to manually apply speed — handled in Baseball.cs
     }
 

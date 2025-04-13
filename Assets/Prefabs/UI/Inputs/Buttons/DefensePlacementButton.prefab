@@ -472,6 +472,7 @@ GameObject:
   - component: {fileID: 5920824551847248340}
   - component: {fileID: 5138299905297172231}
   - component: {fileID: 2813302077446625166}
+  - component: {fileID: 4628974620429059041}
   m_Layer: 5
   m_Name: DefensePlacementButton
   m_TagString: Untagged
@@ -582,7 +583,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5920824551847248340}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4628974620429059041}
+        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
+        m_MethodName: onClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2813302077446625166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,3 +615,16 @@ MonoBehaviour:
   unselectedUnpressedSprite: {fileID: -333465279, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   selectedPressedSprite: {fileID: -2082850274, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   selectedUnpressedSprite: {fileID: 1319191705, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+--- !u!114 &4628974620429059041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5647939800688894606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058ad179efe596c44a851d122962cbe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSoundEffect: {fileID: 8300000, guid: 3cdb04cb39150f8429e89b26e5a10b9e, type: 3}
