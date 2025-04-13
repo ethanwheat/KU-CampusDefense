@@ -70,6 +70,8 @@ public class RoundManager : MonoBehaviour
     {
         while (currentWave < currentRound.waves.Length)
         {
+            WeatherController.Instance.ResetWeatherForNewRound();
+            WeatherController.Instance.TryActivateWeather();
             yield return StartCoroutine(SpawnEnemies(currentRound.waves[currentWave]));
             currentWave++;
             yield return new WaitForSeconds(3f);
