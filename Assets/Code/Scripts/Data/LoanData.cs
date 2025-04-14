@@ -63,6 +63,11 @@ public class LoanData : ScriptableObject
         }
     }
 
+    public void setDebt(int amount)
+    {
+        debt = amount;
+    }
+
     public void resetLoan()
     {
         debt = 0;
