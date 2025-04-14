@@ -48,7 +48,7 @@ public class DefensePanelController : MonoBehaviour
         }
 
         // Get updated defenses.
-        defenseData = gameDataController.getDefenseData();
+        defenseData = gameDataController.DefenseData;
 
         // Set intial index to 0.
         int index = 0;
@@ -62,20 +62,10 @@ public class DefensePanelController : MonoBehaviour
                 placementButton.GetComponent<DefensePlacementButtonController>().setData(defense);
                 placementButton.GetComponent<Button>().onClick.AddListener(() => startPlacement(placementButton, defense));
 
-                // Update position on panel.
-                Vector3 newPosition = new Vector3(125 + (130 * index), 125, 0);
-                placementButton.GetComponent<RectTransform>().anchoredPosition = newPosition;
-
                 // Update index
                 index++;
             }
         }
-
-        // Update content size.
-        RectTransform rectTransform = placementButtonsParent.GetComponent<RectTransform>();
-        int offset = 130 * (index - 1);
-        Vector2 newSize = new Vector2(125 + offset, rectTransform.sizeDelta.y);
-        rectTransform.sizeDelta = newSize;
 
         // Show panel.
         gameObject.SetActive(true);

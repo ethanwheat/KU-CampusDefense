@@ -9,7 +9,7 @@ public class AbilityManager : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] private RoundManager roundManager;
-    
+
     private List<EnemyMovement> activeEnemies = new List<EnemyMovement>();
 
     private void Awake()
@@ -44,14 +44,14 @@ public class AbilityManager : MonoBehaviour
     private IEnumerator ApplySlowEffect(AbilityData ability)
     {
         float multiplier = ability.SlowMultiplier; // This will be 1f for non-SlowAll Ability types
-        
+
         foreach (var enemy in activeEnemies)
         {
             enemy?.SetSpeedMultiplier(multiplier);
         }
-        
+
         yield return new WaitForSeconds(ability.EffectDuration);
-        
+
         foreach (var enemy in activeEnemies)
         {
             enemy?.ResetSpeedMultiplier();
@@ -66,16 +66,16 @@ public class AbilityManager : MonoBehaviour
         {
             enemy?.BlockMovement(true);
         }
-        
+
         yield return new WaitForSeconds(duration);
-        
+
         // Unfreeze enemies
         foreach (var enemy in activeEnemies)
         {
             enemy?.BlockMovement(false);
         }
     }
-    
+
     // *********** BIG JAY ABILITY ***********
     [Header("Prefabs")]
     [SerializeField] private GameObject bigJayRampagePrefab;
@@ -112,7 +112,7 @@ public class AbilityManager : MonoBehaviour
             Destroy(bigJay);
             yield break;
         }
-        
+
         // Wait until Big Jay is destroyed
         yield return new WaitWhile(() => bigJay != null);
     }
@@ -120,20 +120,20 @@ public class AbilityManager : MonoBehaviour
     public void ActivateAbility(AbilityData ability)
     {
         Debug.Log($"Activating ability: {ability.AbilityName}");
-        
+
         switch (ability.Type)
         {
             case AbilityData.AbilityType.SlowAll:
-                StartCoroutine(ApplySlowEffect(ability)); 
+                StartCoroutine(ApplySlowEffect(ability));
                 break;
-                
+
             case AbilityData.AbilityType.FreezeAll:
                 StartCoroutine(ApplyFreezeEffect(ability.EffectDuration));
                 break;
 
             case AbilityData.AbilityType.BigJayRampage:
-            StartCoroutine(ActivateBigJayRampage(ability));
-            break;
+                StartCoroutine(ActivateBigJayRampage(ability));
+                break;
         }
     }
 }

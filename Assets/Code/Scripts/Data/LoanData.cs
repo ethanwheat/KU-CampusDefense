@@ -35,7 +35,7 @@ public class LoanData : ScriptableObject
 
     public bool isLocked()
     {
-        return unlockRound > gameDataController.getRoundNumber();
+        return unlockRound > gameDataController.RoundNumber;
     }
 
     public Sprite getSprite()

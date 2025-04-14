@@ -76,7 +76,7 @@ public class UpgradePanelController : MonoBehaviour
     public void onUpgrade()
     {
         // Get dollar amount and building name.
-        int dollars = gameDataController.getDollarAmount();
+        int dollars = gameDataController.Dollars;
         int upgradeCost = defenseData.getUpgradeCost();
 
         if (dollars >= upgradeCost)

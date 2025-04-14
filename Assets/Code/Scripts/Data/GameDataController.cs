@@ -15,11 +15,13 @@ public class GameDataController : ScriptableObject
     [SerializeField] private BonusData[] bonusData;
     [SerializeField] private LoanData[] loanData;
 
-    // Get round number.
-    public int getRoundNumber()
-    {
-        return roundNumber;
-    }
+    public int RoundNumber => roundNumber;
+    public RoundData SelectedRound => selectedRound;
+    public int Dollars => dollars;
+    public DefenseData[] DefenseData => defenseData;
+    public BonusData[] BonusData => bonusData;
+    public LoanData[] LoanData => loanData;
+    public AbilityData[] AbilityData => abilityData;
 
     // Increment round number.
     public void incrementRoundNumber()
@@ -27,20 +29,9 @@ public class GameDataController : ScriptableObject
         roundNumber += 1;
     }
 
-    public RoundData getSelectedRound()
-    {
-        return selectedRound;
-    }
-
     public void setSelectedRound(RoundData currRound)
     {
         selectedRound = currRound;
-    }
-
-    // Get dollar amount.
-    public int getDollarAmount()
-    {
-        return dollars;
     }
 
     // Add dollars.
@@ -60,30 +51,6 @@ public class GameDataController : ScriptableObject
         }
     }
 
-    // Get defense data.
-    public DefenseData[] getDefenseData()
-    {
-        return defenseData;
-    }
-
-    // Get ability data
-    public AbilityData[] getAbilityData()
-    {
-        return abilityData;
-    }
-
-    // Get bonus data.
-    public BonusData[] getBonusData()
-    {
-        return bonusData;
-    }
-
-    // Get loan data.
-    public LoanData[] getLoanData()
-    {
-        return loanData;
-    }
-
     // Get debt.
     public int getDebt()
     {
@@ -96,7 +63,7 @@ public class GameDataController : ScriptableObject
 
         return debt;
     }
-  
+
     public void payDebt(int amount)
     {
         int remaining = amount;
@@ -107,7 +74,7 @@ public class GameDataController : ScriptableObject
 
             if (remaining > 0 && debt > 0)
             {
-                int payment = Mathf.Min(remaining, debt);    
+                int payment = Mathf.Min(remaining, debt);
                 data.setDebt(debt - payment);
                 remaining -= payment;
             }

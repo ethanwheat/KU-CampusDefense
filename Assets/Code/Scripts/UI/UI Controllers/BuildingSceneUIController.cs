@@ -172,7 +172,7 @@ public class BuildingSceneUIController : MonoBehaviour
     public void updateDollarUI()
     {
         // Update dollar text.
-        dollarText.text = gameDataController.getDollarAmount().ToString();
+        dollarText.text = gameDataController.Dollars.ToString();
     }
 
     // Close existing UI.

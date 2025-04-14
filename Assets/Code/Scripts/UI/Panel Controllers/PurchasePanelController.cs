@@ -50,7 +50,7 @@ public class PurchasePanelController : MonoBehaviour
     public void onPurchase()
     {
         // Get dollar amount and building name.
-        int dollars = gameDataController.getDollarAmount();
+        int dollars = gameDataController.Dollars;
         int objectCost = purchasableData.getDollarCost();
         string buildingName = buildingPlacementController.getBuildingName();
 

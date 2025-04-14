@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Slow All
   icon: {fileID: 1076768617, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  dollarCost: 100
   unlockRound: 5
   cooldownDuration: 20
   effectDuration: 10

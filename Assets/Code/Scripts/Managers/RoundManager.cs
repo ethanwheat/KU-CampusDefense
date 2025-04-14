@@ -22,7 +22,7 @@ public class RoundManager : MonoBehaviour
 
     [Header("Round Initialization")]
     [SerializeField] private BoxCollider[] spawnAreas;  // Where enemies will spawn
-    [SerializeField] private PathNode[] startNodes; 
+    [SerializeField] private PathNode[] startNodes;
 
     [Header("Round Configuration")]
     [SerializeField] private RoundData currentRound;
@@ -54,7 +54,7 @@ public class RoundManager : MonoBehaviour
 
     void Start()
     {
-        currentRound = gameData.getSelectedRound();
+        currentRound = gameData.SelectedRound;
         fieldhouseHealth = currentRound.fieldhouseHealth;
         maxFieldhouseHealth = fieldhouseHealth;
 
@@ -162,7 +162,7 @@ public class RoundManager : MonoBehaviour
 
     void getBonuses()
     {
-        BonusData[] bonuses = gameData.getBonusData();
+        BonusData[] bonuses = gameData.BonusData;
 
         // Find the highest unlocked coin bonus
         foreach (BonusData bonus in bonuses)
@@ -225,7 +225,7 @@ public class RoundManager : MonoBehaviour
                 gameData.payDebt(owed);
                 gameData.addDollars(reward - owed);
                 roundSceneUIController.showRoundWonPanel(
-                    gameData.getRoundNumber().ToString(),
+                    gameData.RoundNumber.ToString(),
                     reward.ToString(),
                     "- $" + owed.ToString(),
                     "$" + (reward - owed).ToString()
@@ -235,14 +235,14 @@ public class RoundManager : MonoBehaviour
             {
                 gameData.addDollars(reward);
                 roundSceneUIController.showRoundWonPanel(
-                    gameData.getRoundNumber().ToString(),
+                    gameData.RoundNumber.ToString(),
                     reward.ToString(),
                     "",
                     ""
                 );
             }
 
-            if (gameData.getRoundNumber() == currentRound.roundNumber)
+            if (gameData.RoundNumber == currentRound.roundNumber)
             {
                 gameData.incrementRoundNumber();  // unlock next round
             }
@@ -306,7 +306,7 @@ public class RoundManager : MonoBehaviour
 
         foreach (var healthDefense in healthDefenses)
         {
-            regenCost += healthDefense.GetDefenseData().getCoinCost() / 2;
+            regenCost += healthDefense.getDefenseData().getCoinCost() / 2;
         }
 
         return regenCost;

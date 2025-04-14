@@ -42,7 +42,7 @@ public class LoanPanelController : MonoBehaviour
         }
 
         // Get loan data.
-        LoanData[] loanData = gameDataController.getLoanData();
+        LoanData[] loanData = gameDataController.LoanData;
 
         // Create loan information panels.
         for (int i = 0; i < loanData.Length; i++)
@@ -70,7 +70,7 @@ public class LoanPanelController : MonoBehaviour
     {
         // Get loan name, dollars, and debt.
         string loanName = loanData.getName();
-        int dollars = gameDataController.getDollarAmount();
+        int dollars = gameDataController.Dollars;
         int debt = loanData.getDebt();
 
         // Check if user has money.

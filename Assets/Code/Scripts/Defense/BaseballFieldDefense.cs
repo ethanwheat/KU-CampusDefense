@@ -25,7 +25,7 @@ public class BaseballFieldDefense : Defense, IDefense
 
     void Start()
     {
-        DefenseData defenseData = GetDefenseData();
+        DefenseData defenseData = getDefenseData();
         bool isBought = defenseData.isBought();
         int level = defenseData.getLevel();
 

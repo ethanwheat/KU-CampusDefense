@@ -106,7 +106,7 @@ public class RoundSceneUIController : MonoBehaviour
     public void updateDollarUI()
     {
         // Update dollar text.
-        dollarText.text = gameDataController.getDollarAmount().ToString();
+        dollarText.text = gameDataController.Dollars.ToString();
     }
 
     // Update coin UI.

@@ -40,7 +40,7 @@ public class PurchasableData : ScriptableObject
     // Get objects unlock round.
     public bool isLocked()
     {
-        return unlockRound > gameDataController.getRoundNumber();
+        return unlockRound > gameDataController.RoundNumber;
     }
 
     // Get if the object is bought.

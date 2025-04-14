@@ -21,7 +21,7 @@ public class Defense : MonoBehaviour
 
     void Awake()
     {
-        int defenseLevel = GetDefenseData().getLevel();
+        int defenseLevel = getDefenseData().getLevel();
 
         maxHealth += healthIncreasePerLevel * (defenseLevel - 1);
 
@@ -66,7 +66,7 @@ public class Defense : MonoBehaviour
     }
 
     // Get defense data.
-    public DefenseData GetDefenseData()
+    public DefenseData getDefenseData()
     {
         return defenseData;
     }

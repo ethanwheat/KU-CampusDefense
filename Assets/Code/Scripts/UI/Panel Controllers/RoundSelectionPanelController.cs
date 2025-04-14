@@ -6,14 +6,14 @@ public class RoundSelectionPanelController : MonoBehaviour
 {
     [Header("Round Configuration")]
     [SerializeField] private RoundData[] allRounds;
-    
+
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
     [Header("UI References")]
     [SerializeField] private Transform contentParent; // Content under the ScrollView
     [SerializeField] private GameObject roundButtonPrefab; // Prefab for each round button
-      
+
     private void Start()
     {
         PopulateScrollView();
@@ -21,12 +21,13 @@ public class RoundSelectionPanelController : MonoBehaviour
 
     private void PopulateScrollView()
     {
-        int maxUnlocked = gameDataController.getRoundNumber();
+        int maxUnlocked = gameDataController.RoundNumber;
 
         foreach (var round in allRounds)
         {
             bool isUnlocked = round.roundNumber <= maxUnlocked;
-            if (isUnlocked) {
+            if (isUnlocked)
+            {
                 GameObject btnObj = Instantiate(roundButtonPrefab, contentParent);
 
                 // set button label

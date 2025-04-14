@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8564b44c709649568eac284b7e0aeaf, type: 3}
-  m_Name: BigJayRampageAbility
+  m_Name: FreezeAllAbility
   m_EditorClassIdentifier: 
-  abilityName: Big Jay Rampage
-  icon: {fileID: 1639286842, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
-  unlockRound: 10
+  abilityName: Freeze All
+  icon: {fileID: -1746348965, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  dollarCost: 200
+  unlockRound: 5
   cooldownDuration: 60
-  effectDuration: 1
-  type: 2
+  effectDuration: 10
+  type: 1
   slowMultiplier: 0.5
   bigJaySpeed: 50
