@@ -383,14 +383,6 @@ PrefabInstance:
       propertyPath: gameDataController
       value: 
       objectReference: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
-    - target: {fileID: 3721584653362347453, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
-      propertyPath: allRounds.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3721584653362347453, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
-      propertyPath: 'allRounds.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 7445b25413fd67f419735e828df62608, type: 2}
     - target: {fileID: 4457789779151986254, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
       propertyPath: buildingSceneUIController
       value: 
