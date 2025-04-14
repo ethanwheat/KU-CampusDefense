@@ -71,6 +71,11 @@ public class DefensePanelController : MonoBehaviour
             }
         }
 
+        // Update content size.
+        RectTransform rectTransform = placementButtonsParent.GetComponent<RectTransform>();
+        Vector2 newSize = new Vector2(130 * defenseData.Length, rectTransform.sizeDelta.y);
+        rectTransform.sizeDelta = newSize;
+
         // Show panel.
         gameObject.SetActive(true);
     }

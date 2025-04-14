@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementMethod: 0
+  placementSoundEffect: {fileID: 8300000, guid: 667ce13d8d8e3754dbbe2f9548141d81, type: 3}
   onPlacementSuccess:
     m_PersistentCalls:
       m_Calls:
@@ -263,16 +264,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2335412097033395711}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b1c22ccabfb94991839ddeaf640864f, type: 3}
+  m_Script: {fileID: 11500000, guid: 50bef06588d91104191be6884f41c8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defenseData: {fileID: 11400000, guid: f66f6dce4a0824600adf6903fcb0fbfd, type: 2}
-  healthBar: {fileID: 158758177496608957, guid: d3d63af395e5cd241ac6d9aecc737ba4, type: 3}
+  healthBar: {fileID: 5917285739862761382}
+  destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
   maxHealth: 100
   healthIncreasePerLevel: 50
   damagePerSecond: 3
   slowMultiplier: 0.5
-  fogPrefab: {fileID: 2595171433322968291, guid: 8ce4c0c72d8e64521800e4190ee8bca8, type: 3}
+  fogPrefab: {fileID: 2595171433322968291, guid: ba960d6514c1f5d40b6624e75d348b77, type: 3}
   fogSpawnPoint: {fileID: 7472367880431323018}
 --- !u!1 &5115281742636681427
 GameObject:
@@ -632,6 +634,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
+--- !u!114 &5917285739862761382 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7283042652686993478, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
+  m_PrefabInstance: {fileID: 3966823221468878816}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc78f32e7609914ca6414aa9dbf6355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8309791016388509195 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4926571120867273195, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}

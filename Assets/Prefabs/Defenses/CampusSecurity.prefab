@@ -251,6 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementMethod: 1
+  placementSoundEffect: {fileID: 8300000, guid: 667ce13d8d8e3754dbbe2f9548141d81, type: 3}
   onPlacementSuccess:
     m_PersistentCalls:
       m_Calls:
@@ -290,11 +291,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2140155049482576194}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3c9108d707304d9191a562102bb6cb1, type: 3}
+  m_Script: {fileID: 11500000, guid: ee99973275a5da5448972b761259d6be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defenseData: {fileID: 11400000, guid: 543083b899a4f4629b0a14a6e4e883c2, type: 2}
-  healthBar: {fileID: 158758177496608957, guid: d3d63af395e5cd241ac6d9aecc737ba4, type: 3}
+  healthBar: {fileID: 7226702738899152605}
+  destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
   maxHealth: 100
   healthIncreasePerLevel: 50
   damagePerSecond: 10
@@ -578,3 +580,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4926571120867273195, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
   m_PrefabInstance: {fileID: 97099446558418587}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7226702738899152605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7283042652686993478, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
+  m_PrefabInstance: {fileID: 97099446558418587}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc78f32e7609914ca6414aa9dbf6355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1255,6 +1255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementMethod: 0
+  placementSoundEffect: {fileID: 8300000, guid: 667ce13d8d8e3754dbbe2f9548141d81, type: 3}
   onPlacementSuccess:
     m_PersistentCalls:
       m_Calls:
@@ -1306,16 +1307,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 8136593637354477638}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e11403576b1e4b589f3c78fae8a9a96, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d0ef8c631019ae4c9e6410a3797e99e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   defenseData: {fileID: 11400000, guid: c940a34b69da34a61aec4cb686208f4b, type: 2}
-  healthBar: {fileID: 7283042652686993478, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
+  healthBar: {fileID: 6728199699241421252}
+  destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
   maxHealth: 100
   healthIncreasePerLevel: 50
   fireRate: 0.6
-  piePrefab: {fileID: 7060852915085511669, guid: 86ad7a61155c64e1f8b03325ca67abce, type: 3}
-  firePoint: {fileID: 6342761048916866480, guid: 3615d6176185e430f999bd614703a89a, type: 3}
+  piePrefab: {fileID: 7060852915085511669, guid: 3736b943e986a7640a18d0c4a67adb1d, type: 3}
+  firePoint: {fileID: 2091518372595213696}
 --- !u!1 &8312499794247052704
 GameObject:
   m_ObjectHideFlags: 0
@@ -1858,6 +1860,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
+--- !u!114 &6728199699241421252 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7283042652686993478, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
+  m_PrefabInstance: {fileID: 4057124574461002114}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbc78f32e7609914ca6414aa9dbf6355, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8940629439700297833 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4926571120867273195, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
