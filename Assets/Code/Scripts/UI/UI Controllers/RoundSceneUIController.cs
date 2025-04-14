@@ -157,7 +157,6 @@ public class RoundSceneUIController : MonoBehaviour
     }
 
     // Close existing UI (This is buggy with the abilities panel)
-    /*void closeExistingUI()
     public void showWavePopupPanel(string waveNum)
     {
         wavePopupPanelController.showPanel(waveNum);
@@ -169,7 +168,7 @@ public class RoundSceneUIController : MonoBehaviour
         placeDefenseButton.SetActive(false);
         roundWonPanelController.showPanel(round, reward, loan, total);
     }
-    
+
     public void showRoundLostPanel()
     {
         closeExistingUI();
@@ -184,22 +183,5 @@ public class RoundSceneUIController : MonoBehaviour
         regenHealthPanelController.closePanel();
         messagePopupPanelController.closePanel();
         abilitiesPanelController.CloseAbilitiesPanel();
-    }*/
-
-    void closeExistingUI()
-    {
-        if (defensePanelController != null)
-            defensePanelController.closePanel();
-
-        if (regenHealthPanelController != null)
-            regenHealthPanelController.closePanel();
-
-        if (messagePopupPanelController != null)
-            messagePopupPanelController.closePanel();
-
-        if (abilitiesPanelController != null)
-            abilitiesPanelController.CloseAbilitiesPanel();
-        roundWonPanelController.closePanel();
-        roundLostPanelController.closePanel();
     }
 }
