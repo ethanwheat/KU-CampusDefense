@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!224 &81931297 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 961132760755650222, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
+  m_PrefabInstance: {fileID: 1372796912}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &338410009
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +363,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingSceneUI
       objectReference: {fileID: 0}
+    - target: {fileID: 3721584653362347453, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
+      propertyPath: contentParent
+      value: 
+      objectReference: {fileID: 81931297}
+    - target: {fileID: 3721584653362347453, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
+      propertyPath: roundButtonPrefab
+      value: 
+      objectReference: {fileID: 7875876714408151063, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
+    - target: {fileID: 3721584653362347453, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
+      propertyPath: gameDataController
+      value: 
+      objectReference: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
+    - target: {fileID: 3721584653362347453, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
+      propertyPath: allRounds.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721584653362347453, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
+      propertyPath: 'allRounds.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 7445b25413fd67f419735e828df62608, type: 2}
     - target: {fileID: 4457789779151986254, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
       propertyPath: buildingSceneUIController
       value: 

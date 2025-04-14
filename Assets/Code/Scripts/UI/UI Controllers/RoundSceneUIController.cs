@@ -9,10 +9,17 @@ public class RoundSceneUIController : MonoBehaviour
     [SerializeField] private RegenHealthPanelController regenHealthPanelController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
+    [SerializeField] private RoundWonPanelController roundWonPanelController;
+    [SerializeField] private RoundLostPanelController roundLostPanelController;
+    [SerializeField] private WavePopupPanelController wavePopupPanelController;
 
     [Header("UI Text")]
     [SerializeField] private TextMeshProUGUI dollarText;
     [SerializeField] private TextMeshProUGUI coinText;
+    [SerializeField] private TextMeshProUGUI waveText;
+
+    [Header("UI Elements")]
+    [SerializeField] private GameObject placeDefenseButton;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip roundMusic;
@@ -112,6 +119,11 @@ public class RoundSceneUIController : MonoBehaviour
         coinText.text = roundManager.getCoinAmount().ToString();
     }
 
+    public void updateWaveUI(int currWave, int numWaves)
+    {
+      waveText.text = "Wave " + currWave.ToString() + "/" + numWaves.ToString();
+    }
+
     // Show defense panel.
     public void showDefensePanel()
     {
@@ -125,11 +137,32 @@ public class RoundSceneUIController : MonoBehaviour
         }
     }
 
+    public void showWavePopupPanel(string waveNum)
+    {
+        wavePopupPanelController.showPanel(waveNum);
+    }
+
+    public void showRoundWonPanel(string round, string reward, string loan, string total)
+    {
+        closeExistingUI();
+        placeDefenseButton.SetActive(false);
+        roundWonPanelController.showPanel(round, reward, loan, total);
+    }
+    
+    public void showRoundLostPanel()
+    {
+        closeExistingUI();
+        placeDefenseButton.SetActive(false);
+        roundLostPanelController.showPanel();
+    }
+
     // Close existing UI.
-    void closeExistingUI()
+    public void closeExistingUI()
     {
         defensePanelController.closePanel();
         regenHealthPanelController.closePanel();
         messagePopupPanelController.closePanel();
+        roundWonPanelController.closePanel();
+        roundLostPanelController.closePanel();
     }
 }

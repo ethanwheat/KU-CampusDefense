@@ -33,7 +33,9 @@ public class RoundManager : MonoBehaviour
     [Header("Round Data")]
     [SerializeField] private int coins;
     [SerializeField] private int currentWave = 0;
+    [SerializeField] private int numWaves = 0;
     [SerializeField] private int remainingEnemies;
+    private bool gameOver = false;
 
     [Header("Allen Fieldhouse")]
     [SerializeField] private float fieldhouseHealth = 1000f;
@@ -52,8 +54,11 @@ public class RoundManager : MonoBehaviour
 
     void Start()
     {
+        currentRound = gameData.getSelectedRound();
         fieldhouseHealth = currentRound.fieldhouseHealth;
         maxFieldhouseHealth = fieldhouseHealth;
+
+        numWaves = currentRound.waves.Length;
 
         foreach (Wave wave in currentRound.waves)
         {
@@ -68,20 +73,26 @@ public class RoundManager : MonoBehaviour
     // Start round.
     IEnumerator StartRound()
     {
-        while (currentWave < currentRound.waves.Length)
+        roundSceneUIController.updateWaveUI(currentWave + 1, numWaves);
+        yield return new WaitForSeconds(1f);
+
+        while (currentWave < numWaves)
         {
+            roundSceneUIController.updateWaveUI(currentWave + 1, numWaves);
+            roundSceneUIController.showWavePopupPanel((currentWave + 1).ToString());
             yield return StartCoroutine(SpawnEnemies(currentRound.waves[currentWave]));
             currentWave++;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(10f);
         }
 
         Debug.Log("All waves complete!");
     }
 
-    private void EndRound()
+    public void EndRound()
     {
         StopAllCoroutines();
         SoundManager.instance.stopMusic(.5f);
+        roundSceneUIController.closeExistingUI();
         StartCoroutine(EndRoundCoroutine());
     }
 
@@ -90,6 +101,20 @@ public class RoundManager : MonoBehaviour
         yield return StartCoroutine(loadingBackgroundController.fadeInCoroutine(.5f));
         SceneManager.LoadScene("Building Scene");
     }
+
+    public void RetryRound()
+    {
+        StopAllCoroutines();
+        SoundManager.instance.stopMusic(.5f);
+        roundSceneUIController.closeExistingUI();
+        StartCoroutine(RetryRoundCoroutine());
+    }
+
+    private IEnumerator RetryRoundCoroutine()
+    {
+        yield return StartCoroutine(loadingBackgroundController.fadeInCoroutine(0.5f));
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    } 
 
     IEnumerator SpawnEnemies(Wave wave)
     {
@@ -182,13 +207,44 @@ public class RoundManager : MonoBehaviour
 
     public void EnemyDefeated()
     {
+        if (gameOver) return;
+
         remainingEnemies--;
 
         // Check if the round is over (no remaining enemies)
         if (remainingEnemies <= 0)
         {
-            gameData.addDollars((int)(currentRound.winPayout * dollarMultiplier));
-            EndRound();
+            int debt = gameData.getDebt();
+            int reward = (int)(currentRound.winPayout * dollarMultiplier);
+
+            if (debt > 0)
+            {
+                int owed = Mathf.Min((int)(reward * 0.3f), debt);  // 30% debt payment
+                gameData.payDebt(owed);
+                gameData.addDollars(reward - owed);
+                roundSceneUIController.showRoundWonPanel(
+                    gameData.getRoundNumber().ToString(), 
+                    reward.ToString(), 
+                    "- $" + owed.ToString(), 
+                    "$" + (reward - owed).ToString()
+                );
+            }
+            else
+            {
+                gameData.addDollars(reward);
+                roundSceneUIController.showRoundWonPanel(
+                    gameData.getRoundNumber().ToString(), 
+                    reward.ToString(), 
+                    "", 
+                    ""
+                );
+            }
+
+            if (gameData.getRoundNumber() == currentRound.roundNumber)
+            {
+              gameData.incrementRoundNumber();  // unlock next round
+            }
+
         }
     }
 
@@ -203,9 +259,10 @@ public class RoundManager : MonoBehaviour
             fieldhouseHealthBar.UpdateHealthBar(fieldhouseHealth, maxFieldhouseHealth);
         }
 
-        if (fieldhouseHealth <= 0)
+        if (fieldhouseHealth <= 0 && !gameOver)
         {
-            EndRound();
+            gameOver = true;
+            roundSceneUIController.showRoundLostPanel();
         }
     }
 
