@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: GameDataController
   m_EditorClassIdentifier: 
   startingDollarAmount: 100
-  roundNumber: 2
+  roundNumber: 1
   selectedRound: {fileID: 11400000, guid: 426e7d359223f744db54d34c735fd4a2, type: 2}
-  dollars: 200
+  dollars: 0
   defenseData:
   - {fileID: 11400000, guid: e095c808540afb14598316299453f91e, type: 2}
   - {fileID: 11400000, guid: 5175263242d8f9e418b2fbb6aa05f414, type: 2}

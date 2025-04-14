@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class BigJayRampageController : MonoBehaviour
 {
-    [SerializeField] private BoxCollider damageCollider;
     [SerializeField] private float movementSpeed;
     //[SerializeField] private ParticleSystem trailEffect;
     //[SerializeField] private AudioClip rampageSound;
-    
+
     private PathNode currentNode;
     //private AudioSource audioSource;
 
@@ -15,10 +14,10 @@ public class BigJayRampageController : MonoBehaviour
         currentNode = startNode;
         movementSpeed = speed;
         //audioSource = GetComponent<AudioSource>();
-        
+
         //if (trailEffect != null) trailEffect.Play();
         //if (rampageSound != null) audioSource.PlayOneShot(rampageSound);
-        
+
         transform.position = currentNode.transform.position;
         // Face first path node
         if (currentNode != null && currentNode.GetNextNode() != null)
@@ -27,9 +26,16 @@ public class BigJayRampageController : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (currentNode == null) return;
+
+        // Rotate toward the next waypoint
+        Vector3 direction = currentNode.transform.position - transform.position;
+        if (direction != Vector3.zero)
+        {
+            transform.forward = Vector3.Lerp(transform.forward, direction.normalized, Time.deltaTime * 5f);
+        }
 
         // Move along path
         transform.position = Vector3.MoveTowards(

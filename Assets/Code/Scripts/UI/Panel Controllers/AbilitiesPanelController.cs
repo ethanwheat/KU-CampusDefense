@@ -17,6 +17,8 @@ public class AbilitiesPanelController : MonoBehaviour
     [SerializeField] private RoundManager roundManager;
     [SerializeField] private GameDataController gameDataController;
 
+    private bool alreadyOpened = false;
+
     public void ShowAbilitiesPanel()
     {
         gameObject.SetActive(true);
@@ -32,35 +34,33 @@ public class AbilitiesPanelController : MonoBehaviour
     {
         //Debug.Log($"Initializing abilities. Parent: {abilitiesParent.name}");
 
-        // Clear existing
-        foreach (Transform child in abilitiesParent)
+        if (!alreadyOpened)
         {
-            //Debug.Log($"Destroying old button: {child.name}");
-            Destroy(child.gameObject);
-        }
+            alreadyOpened = true;
 
-        foreach (var ability in abilityData)
-        {
-            //Debug.Log($"Creating button for: {ability.AbilityName}");
-
-            var button = Instantiate(abilityButtonPrefab, abilitiesParent);
-            button.name = "Btn_" + ability.AbilityName; // Unique name
-
-            //Debug.Log($"Button created: {button.name} Active: {button.activeSelf}");
-
-            var controller = button.GetComponent<AbilityButtonController>();
-            if (controller != null)
+            foreach (var ability in abilityData)
             {
-                controller.Initialize(ability, this, roundSceneUIController, messagePopupPanelController);
-                //Debug.Log($"Controller initialized for {ability.AbilityName}");
-            }
-            else
-            {
-                //Debug.LogError($"No controller on button prefab!");
-            }
+                //Debug.Log($"Creating button for: {ability.AbilityName}");
 
-            // Force visible
-            button.SetActive(true);
+                var button = Instantiate(abilityButtonPrefab, abilitiesParent);
+                button.name = "Btn_" + ability.AbilityName; // Unique name
+
+                //Debug.Log($"Button created: {button.name} Active: {button.activeSelf}");
+
+                var controller = button.GetComponent<AbilityButtonController>();
+                if (controller != null)
+                {
+                    controller.Initialize(ability, this, roundSceneUIController, messagePopupPanelController);
+                    //Debug.Log($"Controller initialized for {ability.AbilityName}");
+                }
+                else
+                {
+                    //Debug.LogError($"No controller on button prefab!");
+                }
+
+                // Force visible
+                button.SetActive(true);
+            }
         }
     }
 }

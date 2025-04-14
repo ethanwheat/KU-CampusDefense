@@ -94,12 +94,20 @@ public class AbilityManager : MonoBehaviour
         int spawnIndex = Random.Range(0, startNodes.Length);
         PathNode startNode = startNodes[spawnIndex];
 
+        // Get parent.
+        GameObject parent = GameObject.Find("Abilities") ?? new GameObject("Abilities");
+
+        // Get collider.
+        Collider collider = startNode.GetComponent<Collider>();
+
         // Spawn Big Jay at the chosen start node
         var bigJay = Instantiate(
             bigJayRampagePrefab,
-            startNode.transform.position,
-            Quaternion.identity
+            parent.transform
         );
+
+        bigJay.transform.position = startNode.transform.position;
+        bigJay.transform.rotation = Quaternion.identity;
 
         var controller = bigJay.GetComponent<BigJayRampageController>();
         if (controller != null)
@@ -135,5 +143,55 @@ public class AbilityManager : MonoBehaviour
                 StartCoroutine(ActivateBigJayRampage(ability));
                 break;
         }
+    }
+
+    Vector3 GetRandomPointInBounds(Bounds bounds)
+    {
+        float x = Random.Range(bounds.min.x, bounds.max.x);
+        float y = bounds.center.y;
+        float z = Random.Range(bounds.min.z, bounds.max.z);
+        return new Vector3(x, y, z);
+    }
+
+    public void StartEffectRoutine(AbilityButtonController abilityButtonController, AbilityData abilityData)
+    {
+        StartCoroutine(EffectRoutine(abilityButtonController, abilityData));
+    }
+
+    private IEnumerator EffectRoutine(AbilityButtonController abilityButtonController, AbilityData abilityData)
+    {
+        float remainingEffect = abilityData.EffectDuration;
+
+        abilityButtonController.setIsEffectActive(true);
+        abilityButtonController.ShowTimer(true);
+        abilityButtonController.SetTimerEffectColor();
+
+        while (remainingEffect > 0)
+        {
+            remainingEffect -= Time.deltaTime;
+            abilityButtonController.SetTimerText(Mathf.CeilToInt(remainingEffect).ToString());
+            yield return null;
+        }
+
+        abilityButtonController.setIsEffectActive(false);
+        StartCoroutine(CooldownRoutine(abilityButtonController, abilityData));
+    }
+
+    private IEnumerator CooldownRoutine(AbilityButtonController abilityButtonController, AbilityData abilityData)
+    {
+        float remainingCooldown = abilityData.CooldownDuration;
+
+        abilityButtonController.setIsOnCooldown(true);
+        abilityButtonController.SetTimerCooldownColor();
+
+        while (remainingCooldown > 0)
+        {
+            remainingCooldown -= Time.deltaTime;
+            abilityButtonController.SetTimerText(Mathf.CeilToInt(remainingCooldown).ToString());
+            yield return null;
+        }
+
+        abilityButtonController.ShowTimer(false);
+        abilityButtonController.setIsOnCooldown(false);
     }
 }

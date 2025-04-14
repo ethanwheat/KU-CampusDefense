@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 using UnityEngine.Events;
+using System;
 
 public class AbilityButtonController : MonoBehaviour
 {
@@ -22,8 +23,8 @@ public class AbilityButtonController : MonoBehaviour
     [SerializeField] private GameDataController gameDataController;
 
     private AbilityData abilityData;
-    private bool isOnCooldown;
-    private bool isEffectActive;
+    private bool isOnCooldown = false;
+    private bool isEffectActive = false;
     private AbilitiesPanelController abilitiesPanelController;
     private RoundSceneUIController roundSceneUIController;
     private MessagePopupPanelController messagePopupPanelController;
@@ -43,89 +44,78 @@ public class AbilityButtonController : MonoBehaviour
         if (abilityIcon != null) abilityIcon.sprite = data.Icon;
         if (costText != null) costText.text = data.DollarCost.ToString();
         if (abilityNameText != null) abilityNameText.text = data.AbilityName;
-        UpdateUI();
     }
 
     private void OnAbilityClicked()
     {
-        if (isOnCooldown || isEffectActive) return;
+        if (isEffectActive)
+        {
+            showError("Already in effect", abilityData.AbilityName + " ability is already in effect!");
+            return;
+        }
+
+        if (isOnCooldown)
+        {
+            showError("Cooling down", abilityData.AbilityName + " ability is cooling down!");
+            return;
+        }
 
         int dollarCost = abilityData.DollarCost;
 
         if (gameDataController.Dollars >= dollarCost)
         {
+            // Set ability manager.
+            AbilityManager abilityManager = AbilityManager.Instance;
+
             // Subtract dollars.
             gameDataController.subtractDollars(dollarCost);
             roundSceneUIController.updateDollarUI();
 
             // Start effect duration countdown
-            StartCoroutine(EffectRoutine());
+            abilityManager.StartEffectRoutine(this, abilityData);
             // Activate ability
-            AbilityManager.Instance.ActivateAbility(abilityData);
+            abilityManager.ActivateAbility(abilityData);
         }
         else
         {
-            SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
-            messagePopupPanelController.showPanel("Insufficient Dollars", "You do not have enough dollars to buy " + abilityData.AbilityName + "!");
-            abilitiesPanelController.CloseAbilitiesPanel();
+            showError("Insufficient Dollars", "You do not have enough dollars to buy " + abilityData.AbilityName + " ability!");
         }
     }
 
-    private IEnumerator EffectRoutine()
+    void showError(string title, string text)
     {
-        isEffectActive = true;
-        float remainingEffect = abilityData.EffectDuration;
-
-        if (timerText != null)
-        {
-            timerText.gameObject.SetActive(true);
-            timerText.color = effectColor;
-
-            while (remainingEffect > 0)
-            {
-                remainingEffect -= Time.deltaTime;
-                timerText.text = Mathf.CeilToInt(remainingEffect).ToString();
-                yield return null;
-            }
-        }
-        else
-        {
-            yield return new WaitForSeconds(abilityData.EffectDuration);
-        }
-
-        isEffectActive = false;
-        StartCoroutine(CooldownRoutine());
+        SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
+        messagePopupPanelController.showPanel(title, text);
+        abilitiesPanelController.CloseAbilitiesPanel();
     }
 
-    private IEnumerator CooldownRoutine()
+    public void ShowTimer(bool isShowing)
     {
-        isOnCooldown = true;
-        float remainingCooldown = abilityData.CooldownDuration;
-
-        if (timerText != null)
-        {
-            timerText.color = cooldownColor;
-
-            while (remainingCooldown > 0)
-            {
-                remainingCooldown -= Time.deltaTime;
-                timerText.text = Mathf.CeilToInt(remainingCooldown).ToString();
-                yield return null;
-            }
-
-            timerText.gameObject.SetActive(false);
-        }
-        else
-        {
-            yield return new WaitForSeconds(abilityData.CooldownDuration);
-        }
-
-        isOnCooldown = false;
-        UpdateUI();
+        timerText.gameObject.SetActive(isShowing);
     }
 
-    private void UpdateUI()
+    public void SetTimerEffectColor()
     {
-        abilityButton.interactable = !isOnCooldown && !isEffectActive;
+        timerText.color = effectColor;
+    }
+
+    public void SetTimerCooldownColor()
+    {
+        timerText.color = cooldownColor;
+    }
+
+    public void SetTimerText(string text)
+    {
+        timerText.text = text;
+    }
+
+    public void setIsEffectActive(bool active)
+    {
+        isEffectActive = active;
+    }
+
+    public void setIsOnCooldown(bool active)
+    {
+        isOnCooldown = active;
     }
 }
