@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8564b44c709649568eac284b7e0aeaf, type: 3}
-  m_Name: SlowAllAbility
+  m_Name: BigJayRampageAbility
   m_EditorClassIdentifier: 
-  abilityName: Slow All
-  icon: {fileID: 1076768617, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
-  unlockRound: 5
-  cooldownDuration: 20
-  effectDuration: 10
-  type: 0
+  abilityName: Big Jay Rampage
+  icon: {fileID: 1639286842, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  unlockRound: 10
+  cooldownDuration: 60
+  effectDuration: 1
+  type: 2
   slowMultiplier: 0.5
   bigJaySpeed: 50

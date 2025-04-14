@@ -22,7 +22,7 @@ public class RoundManager : MonoBehaviour
 
     [Header("Round Initialization")]
     [SerializeField] private BoxCollider[] spawnAreas;  // Where enemies will spawn
-    [SerializeField] private PathNode[] startNodes;
+    [SerializeField] private PathNode[] startNodes; 
 
     [Header("Round Configuration")]
     [SerializeField] private RoundData currentRound;

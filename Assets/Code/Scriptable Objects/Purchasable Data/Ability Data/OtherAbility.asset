@@ -17,4 +17,6 @@ MonoBehaviour:
   unlockRound: 0
   cooldownDuration: 0
   effectDuration: 0
-  type: 2
+  type: 3
+  slowMultiplier: 0.5
+  bigJaySpeed: 50

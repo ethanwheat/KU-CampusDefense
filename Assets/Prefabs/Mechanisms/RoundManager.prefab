@@ -53,9 +53,11 @@ MonoBehaviour:
   fanHealth: 100
   coachHealth: 200
   cheerleaderHealth: 50
-  spawnAreas: []
+  spawnAreas:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   startNodes: []
-  regenHealthCostPerDefense: 10
   currentRound: {fileID: 11400000, guid: 7445b25413fd67f419735e828df62608, type: 2}
   gameData: {fileID: 0}
   coinMultiplier: 1
