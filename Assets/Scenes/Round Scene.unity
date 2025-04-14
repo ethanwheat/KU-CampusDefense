@@ -887,18 +887,18 @@ PrefabInstance:
       propertyPath: roundManager
       value: 
       objectReference: {fileID: 5932463853283302187}
+    - target: {fileID: 5639284224671380950, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639284224671380950, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5771053496741340049, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
       propertyPath: roundManager
       value: 
       objectReference: {fileID: 5932463853283302187}
-    - target: {fileID: 7112828411647587134, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 215
-      objectReference: {fileID: 0}
-    - target: {fileID: 7112828411647587134, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 112.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

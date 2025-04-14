@@ -73,7 +73,8 @@ public class DefensePanelController : MonoBehaviour
 
         // Update content size.
         RectTransform rectTransform = placementButtonsParent.GetComponent<RectTransform>();
-        Vector2 newSize = new Vector2(130 * defenseData.Length, rectTransform.sizeDelta.y);
+        int offset = 130 * (index - 1);
+        Vector2 newSize = new Vector2(125 + offset, rectTransform.sizeDelta.y);
         rectTransform.sizeDelta = newSize;
 
         // Show panel.
