@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: NewRound
   m_EditorClassIdentifier: 
   waves:
-  - fans: 5
+  - fans: 0
+    coaches: 0
+    cheerleaders: 1
+    spawnInterval: 1
+  - fans: 1
     coaches: 0
     cheerleaders: 0
     spawnInterval: 1
+  roundNumber: 0
   fieldhouseHealth: 1000
   winPayout: 1000
   killPayout: 100

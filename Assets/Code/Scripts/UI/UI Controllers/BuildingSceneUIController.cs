@@ -17,6 +17,9 @@ public class BuildingSceneUIController : MonoBehaviour
     [Header("UI Text")]
     [SerializeField] private TextMeshProUGUI dollarText;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip clickSoundEffect;
+
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
@@ -56,17 +59,17 @@ public class BuildingSceneUIController : MonoBehaviour
             // Get hit collider.
             Collider collider = hit.collider;
 
-            // If hit collider tag is ObjectDataBuilding then call handleObjectDataBuilding.
-            if (collider.CompareTag("ObjectDataBuilding"))
+            // If hit collider tag is DefenseBuilding or BonusBuilding then call handleDefenseBonusBuilding.
+            if (collider.CompareTag("DefenseBuilding") || collider.CompareTag("BonusBuilding"))
             {
-                handleObjectDataBuilding(hit);
+                handleDefenseBonusBuilding(hit);
                 return;
             }
 
-            // If hit collider tag is LoanDataBuilding then call handleLoanDataBuilding.
-            if (collider.CompareTag("LoanDataBuilding"))
+            // If hit collider tag is LoanBuilding then call handleLoanBuilding.
+            if (collider.CompareTag("LoanBuilding"))
             {
-                handleLoanDataBuilding(hit);
+                handleLoanBuilding(hit);
                 return;
             }
 
@@ -86,20 +89,23 @@ public class BuildingSceneUIController : MonoBehaviour
         }
     }
 
-    void handleObjectDataBuilding(RaycastHit hit)
+    void handleDefenseBonusBuilding(RaycastHit hit)
     {
-        // Get building placement controller and object data.
+        // Get building placement controller, object data, isLocked, isBought, and isDefenseBuilding.
         buildingPlacementController = hit.collider.GetComponent<BuildingPlacementController>();
-        ObjectData objectData = buildingPlacementController.getObjectData();
+        PurchasableData purchasableData = buildingPlacementController.getPurchasableData();
+        bool isLocked = purchasableData.isLocked();
+        bool isBought = purchasableData.isBought();
+        bool isDefenseBuilding = hit.collider.CompareTag("DefenseBuilding");
 
         // Make sure the object is not locked.
-        if (objectData.isLocked())
+        if (isLocked)
         {
             return;
         }
 
         // Show outline.
-        if (!objectData.isBought() || objectData.getType() == ObjectTypes.defense)
+        if (!isBought || isDefenseBuilding)
         {
             buildingPlacementController.showOutline(true);
         }
@@ -110,23 +116,26 @@ public class BuildingSceneUIController : MonoBehaviour
             // Close existing UI.
             closeExistingUI();
 
+            // Play click sound effect.
+            SoundManager.instance.playSoundEffect(clickSoundEffect, transform, 1f);
+
             // Show purchase panel with data if not bought.
-            if (!objectData.isBought())
+            if (!purchasableData.isBought())
             {
-                purchasePanelController.showPanel(buildingPlacementController, objectData);
+                purchasePanelController.showPanel(buildingPlacementController, purchasableData);
                 return;
             }
 
             // Show upgrade panel if object type is defense.
-            if (objectData.getType() == ObjectTypes.defense)
+            if (isDefenseBuilding)
             {
-                upgradePanelController.showPanel(buildingPlacementController.getBuildingName(), (DefenseData)objectData);
+                upgradePanelController.showPanel(buildingPlacementController.getBuildingName(), (DefenseData)purchasableData);
                 return;
             }
         }
     }
 
-    void handleLoanDataBuilding(RaycastHit hit)
+    void handleLoanBuilding(RaycastHit hit)
     {
         // Set loanBuildingOutline and enable outline.
         loanBuildingOutline = hit.collider.GetComponent<Outline>();
@@ -135,6 +144,9 @@ public class BuildingSceneUIController : MonoBehaviour
         // Check if mouse is clicked.
         if (Input.GetMouseButtonDown(0))
         {
+            // Play click sound effect.
+            SoundManager.instance.playSoundEffect(clickSoundEffect, transform, 1f);
+
             // Close existing UI and show loan panel.
             closeExistingUI();
             loanPanelController.showPanel();
@@ -144,6 +156,7 @@ public class BuildingSceneUIController : MonoBehaviour
     // Start round.
     public void startRound()
     {
+        SoundManager.instance.stopMusic(.5f);
         StartCoroutine(startRoundCoroutine());
     }
 

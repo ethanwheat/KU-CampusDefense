@@ -6,8 +6,13 @@ TagManager:
   tags:
   - RoadPlacement
   - SideOfRoadPlacement
-  - ObjectDataBuilding
-  - LoanDataBuilding
+  - HealthDefense
+  - NoHealthDefense
+  - LoanBuilding
+  - HealthBuilding
+  - TargetBuilding
+  - DefenseBuilding
+  - BonusBuilding
   layers:
   - Default
   - TransparentFX

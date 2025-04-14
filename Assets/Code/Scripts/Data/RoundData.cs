@@ -13,6 +13,7 @@ public class Wave
 public class RoundData : ScriptableObject
 {
     public Wave[] waves;  // Array of waves
+    public int roundNumber;
     public float fieldhouseHealth;
     public int winPayout;
     public int killPayout;

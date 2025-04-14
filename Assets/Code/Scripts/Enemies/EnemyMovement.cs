@@ -5,13 +5,16 @@ public class EnemyMovement : MonoBehaviour
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   void Start()
   {
-      roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
+    roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
   }
 
   public PathNode currentNode; // The waypoint the object is moving toward
   [SerializeField] private float speed;
   [SerializeField] private float health;
   [SerializeField] private HealthBar healthBar; // Reference to the HealthBar script
+
+  [Header("Sounds")]
+  [SerializeField] private AudioClip enemyKilledSoundEffect;
 
   private RoundManager roundManager;
   private float baseSpeed;
@@ -46,11 +49,11 @@ public class EnemyMovement : MonoBehaviour
       }
       else  // enemy has reached Allen fieldhouse
       {
-        
-        if (roundManager != null) 
+
+        if (roundManager != null)
         {
-            roundManager.EnemyDefeated();
-            roundManager.damageFieldhouse(health);
+          roundManager.EnemyDefeated();
+          roundManager.damageFieldhouse(health);
         }
 
         Destroy(gameObject);
@@ -64,7 +67,7 @@ public class EnemyMovement : MonoBehaviour
     if (!other.TryGetComponent(out DefensePlacementController placementController)) return;
     if (!placementController.isPlaced()) return;
 
-    if (other.TryGetComponent(out IDefenseEffect defenseEffect))
+    if (other.TryGetComponent(out IDefense defenseEffect))
     {
       defenseEffect.ApplyEffect(this);
     }
@@ -75,7 +78,7 @@ public class EnemyMovement : MonoBehaviour
     if (!other.TryGetComponent(out DefensePlacementController placementController)) return;
     if (!placementController.isPlaced()) return;
 
-    if (other.TryGetComponent(out IDefenseEffect defenseEffect))
+    if (other.TryGetComponent(out IDefense defenseEffect))
     {
       defenseEffect.RemoveEffect(this);
     }
@@ -115,14 +118,16 @@ public class EnemyMovement : MonoBehaviour
 
     if (roundManager != null)
     {
-        roundManager.EnemyDefeated();
-        roundManager.addCoins(killReward);
+      roundManager.EnemyDefeated();
+      roundManager.addCoins(killReward);
     }
+    SoundManager.instance.playSoundEffect(enemyKilledSoundEffect, transform, .5f);
     Destroy(gameObject); // Or trigger a death animation, effects, etc.
   }
 
   public void SetSpeedMultiplier(float multiplier)
   {
+    Debug.Log($"Enemy speed changed to: {speed * multiplier}");
     speed = baseSpeed * multiplier;
   }
 
@@ -135,4 +140,29 @@ public class EnemyMovement : MonoBehaviour
   {
     this.isBlocked = isBlocked;
   }
+
+  /*private void OnEnable()
+  {
+      if (AbilityManager.Instance != null)
+      {
+          AbilityManager.Instance.RegisterEnemy(this);
+      }
+  }
+
+  private void OnDisable()
+  {
+      if (AbilityManager.Instance != null)
+      {
+          AbilityManager.Instance.UnregisterEnemy(this);
+      }
+  }*/
+  private void OnEnable()
+{
+    AbilityManager.Instance?.RegisterEnemy(this);
+}
+
+private void OnDisable()
+{
+    AbilityManager.Instance?.UnregisterEnemy(this);
+}
 }

@@ -2,10 +2,11 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "DefenseData", menuName = "Scriptable Objects/DefenseData")]
 
-public class DefenseData : ObjectData
+public class DefenseData : PurchasableData
 {
     [Header("Defense Information")]
     [SerializeField] private int coinCost;
+    [SerializeField] private bool showInDefensePanel;
     [SerializeField] private int level1UpgradeDollarCost;
     [SerializeField] private int level2UpgradeDollarCost;
     [SerializeField] private int level3UpgradeDollarCost;
@@ -26,6 +27,12 @@ public class DefenseData : ObjectData
     public int getCoinCost()
     {
         return coinCost;
+    }
+
+    // Get if shown in defense panel.
+    public bool isShownInDefensePanel()
+    {
+        return showInDefensePanel;
     }
 
     // Get defense level.
@@ -58,10 +65,5 @@ public class DefenseData : ObjectData
     public void resetLevel()
     {
         level = 1;
-    }
-
-    public override ObjectTypes getType()
-    {
-        return ObjectTypes.defense;
     }
 }

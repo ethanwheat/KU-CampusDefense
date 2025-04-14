@@ -8,8 +8,10 @@ public class GameDataController : ScriptableObject
 
     [Header("Game Data")]
     [SerializeField] private int roundNumber;
+    [SerializeField] private RoundData selectedRound;
     [SerializeField] private int dollars;
     [SerializeField] private DefenseData[] defenseData;
+    [SerializeField] private AbilityData[] abilityData;
     [SerializeField] private BonusData[] bonusData;
     [SerializeField] private LoanData[] loanData;
 
@@ -23,6 +25,16 @@ public class GameDataController : ScriptableObject
     public void incrementRoundNumber()
     {
         roundNumber += 1;
+    }
+
+    public RoundData getSelectedRound()
+    {
+        return selectedRound;
+    }
+
+    public void setSelectedRound(RoundData currRound)
+    {
+        selectedRound = currRound;
     }
 
     // Get dollar amount.
@@ -54,6 +66,12 @@ public class GameDataController : ScriptableObject
         return defenseData;
     }
 
+    // Get ability data
+    public AbilityData[] getAbilityData()
+    {
+        return abilityData;
+    }
+
     // Get bonus data.
     public BonusData[] getBonusData()
     {
@@ -77,6 +95,23 @@ public class GameDataController : ScriptableObject
         }
 
         return debt;
+    }
+  
+    public void payDebt(int amount)
+    {
+        int remaining = amount;
+
+        foreach (var data in loanData)
+        {
+            int debt = data.getDebt();
+
+            if (remaining > 0 && debt > 0)
+            {
+                int payment = Mathf.Min(remaining, debt);    
+                data.setDebt(debt - payment);
+                remaining -= payment;
+            }
+        }
     }
 
     // Reset game data.

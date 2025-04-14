@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7928821663012954953}
   m_Layer: 7
   m_Name: Barrier
-  m_TagString: Obstacle
+  m_TagString: HealthDefense
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementMethod: 1
+  placementSoundEffect: {fileID: 8300000, guid: 667ce13d8d8e3754dbbe2f9548141d81, type: 3}
   onPlacementSuccess:
     m_PersistentCalls:
       m_Calls:
@@ -131,9 +132,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e29c3a36c845540b8587cae8bd253b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  damagePerSecond: 10
+  defenseData: {fileID: 11400000, guid: e095c808540afb14598316299453f91e, type: 2}
   healthBar: {fileID: 158758177496608957}
+  destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
+  maxHealth: 100
+  healthIncreasePerLevel: 50
+  damageToDefense: 10
+  damageToEnemy: 0
 --- !u!1 &8626985468115213023
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,7 +343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 606531805916880648, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1458842129277994118, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
       propertyPath: m_ReferencePixelsPerUnit

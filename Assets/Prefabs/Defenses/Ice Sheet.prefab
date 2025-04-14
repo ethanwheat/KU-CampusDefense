@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 8155507211172550739}
   m_Layer: 7
   m_Name: Ice Sheet
-  m_TagString: Ice
+  m_TagString: HealthDefense
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   placementMethod: 1
+  placementSoundEffect: {fileID: 8300000, guid: 667ce13d8d8e3754dbbe2f9548141d81, type: 3}
   onPlacementSuccess:
     m_PersistentCalls:
       m_Calls:
@@ -217,10 +218,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b353fafe277ba846ab128492590e745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defenseData: {fileID: 11400000, guid: 5175263242d8f9e418b2fbb6aa05f414, type: 2}
+  healthBar: {fileID: 6074170264989432044}
+  destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
+  maxHealth: 30
+  healthIncreasePerLevel: 10
   slowMultiplier: 0.2
   damagePerSecond: 5
-  duration: 30
-  healthBar: {fileID: 6074170264989432044}
 --- !u!1001 &3555971344166432938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -236,6 +240,10 @@ PrefabInstance:
     - target: {fileID: 606531805916880648, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1458842129277994118, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1458842129277994118, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
       propertyPath: m_ReferencePixelsPerUnit
@@ -343,7 +351,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7283042652686993478, guid: 111f399ebaf980648b7435f09df22c2b, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -361,7 +369,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 3555971344166432938}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4121792488654827426}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbc78f32e7609914ca6414aa9dbf6355, type: 3}
   m_Name: 

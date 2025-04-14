@@ -13,6 +13,9 @@ public class DefensePanelController : MonoBehaviour
     [Header("UI Transforms")]
     [SerializeField] private Transform placementButtonsParent;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip errorSoundEffect;
+
     [Header("Round Manager")]
     [SerializeField] private RoundManager roundManager;
 
@@ -52,7 +55,7 @@ public class DefensePanelController : MonoBehaviour
 
         foreach (var defense in defenseData)
         {
-            if (defense.isBought())
+            if (defense.isBought() && defense.isShownInDefensePanel())
             {
                 // Create defense button and add listeners.
                 GameObject placementButton = Instantiate(defensePlacementButtonPrefab, placementButtonsParent);
@@ -67,6 +70,12 @@ public class DefensePanelController : MonoBehaviour
                 index++;
             }
         }
+
+        // Update content size.
+        RectTransform rectTransform = placementButtonsParent.GetComponent<RectTransform>();
+        int offset = 130 * (index - 1);
+        Vector2 newSize = new Vector2(125 + offset, rectTransform.sizeDelta.y);
+        rectTransform.sizeDelta = newSize;
 
         // Show panel.
         gameObject.SetActive(true);
@@ -105,6 +114,7 @@ public class DefensePanelController : MonoBehaviour
     // Show error popup message and close panel.
     void placementFailed(DefenseData defenseData)
     {
+        SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
         messagePopupPanelController.showPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.getName() + "!");
         closePanel();
     }

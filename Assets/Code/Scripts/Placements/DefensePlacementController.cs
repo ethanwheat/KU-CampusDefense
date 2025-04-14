@@ -14,6 +14,10 @@ public class DefensePlacementController : MonoBehaviour
     [Header("Defense Information")]
     [SerializeField] private PlacementMethod placementMethod;
 
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip placementSoundEffect;
+
     [Header("Unity Events")]
     public UnityEvent onPlacementSuccess;
     public UnityEvent onPlacementFail;
@@ -137,6 +141,9 @@ public class DefensePlacementController : MonoBehaviour
 
                 // Disable this script.
                 this.enabled = false;
+
+                // Play placement sound effect.
+                SoundManager.instance.playSoundEffect(placementSoundEffect, transform, .5f);
 
                 // Call onPlacementSuccess.
                 onPlacementSuccess.Invoke();

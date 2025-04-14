@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 12ccb828343c3405fb94289774b51aad, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!224 &81931297 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 961132760755650222, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
+  m_PrefabInstance: {fileID: 1372796912}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &338410009
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +203,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &675297879
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 453596268046194902, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 33.043457
+      objectReference: {fileID: 0}
+    - target: {fileID: 453596268046194902, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -46.51791
+      objectReference: {fileID: 0}
+    - target: {fileID: 453596268046194902, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 102.81034
+      objectReference: {fileID: 0}
+    - target: {fileID: 453596268046194902, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 453596268046194902, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453596268046194902, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453596268046194902, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453596268046194902, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453596268046194902, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 453596268046194902, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 722898779665168410, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: music
+      value: 
+      objectReference: {fileID: 8300000, guid: 2df1053437957a24e99cf752b337de2e, type: 3}
+    - target: {fileID: 722898779665168410, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: playMusicOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897313254114535511, guid: e95a76e6961844debbec3286b1035861, type: 3}
+      propertyPath: m_Name
+      value: SoundManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e95a76e6961844debbec3286b1035861, type: 3}
 --- !u!114 &1191230245 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9155536170057261883, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
@@ -301,6 +371,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingSceneUI
       objectReference: {fileID: 0}
+    - target: {fileID: 3721584653362347453, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
+      propertyPath: contentParent
+      value: 
+      objectReference: {fileID: 81931297}
+    - target: {fileID: 3721584653362347453, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
+      propertyPath: roundButtonPrefab
+      value: 
+      objectReference: {fileID: 7875876714408151063, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
+    - target: {fileID: 3721584653362347453, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
+      propertyPath: gameDataController
+      value: 
+      objectReference: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
     - target: {fileID: 4457789779151986254, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
       propertyPath: buildingSceneUIController
       value: 
@@ -327,7 +409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6651519775747354749, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
       propertyPath: m_ReferenceResolution.x
-      value: 1400
+      value: 1600
       objectReference: {fileID: 0}
     - target: {fileID: 6651519775747354749, guid: 8b172573529093f41bafe2844df16bb6, type: 3}
       propertyPath: m_ReferenceResolution.y
@@ -732,7 +814,8 @@ PrefabInstance:
       value: Map
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4235072778050006150, guid: 8f546d684acd07145a4ede200a27c7f1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f546d684acd07145a4ede200a27c7f1, type: 3}
@@ -789,7 +872,9 @@ PrefabInstance:
       value: BuildingPlacementAreas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 66651253001335807, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+    - {fileID: 8269966628847537701, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
@@ -814,3 +899,4 @@ SceneRoots:
   - {fileID: 2444567202873125258}
   - {fileID: 1372796912}
   - {fileID: 2529070627533754251}
+  - {fileID: 675297879}

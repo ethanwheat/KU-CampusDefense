@@ -17,8 +17,11 @@ public class UpgradePanelController : MonoBehaviour
     [Header("UI Controllers")]
     [SerializeField] private BuildingSceneUIController buildingSceneUIController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
-
     [SerializeField] private StarImagesController starImagesController;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip upgradeSoundEffect;
+    [SerializeField] private AudioClip errorSoundEffect;
 
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
@@ -78,15 +81,17 @@ public class UpgradePanelController : MonoBehaviour
 
         if (dollars >= upgradeCost)
         {
-            // Upgrade object, subtract cost, update dollar amounts on dollar UI, and update upgrade panel.
+            // Upgrade object, subtract cost, update dollar amounts on dollar UI, play upgrade sound, and update upgrade panel.
             defenseData.upgradeLevel();
             gameDataController.subtractDollars(upgradeCost);
             buildingSceneUIController.updateDollarUI();
+            SoundManager.instance.playSoundEffect(upgradeSoundEffect, transform, 1f);
             updateUI();
         }
         else
         {
             // Show error popup panel and close upgrade panel.
+            SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
             messagePopupPanelController.showPanel("Insufficient Dollars", "You do not have enough dollars to upgrade " + buildingName + "!");
             closePanel();
         }

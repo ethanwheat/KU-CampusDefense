@@ -6,19 +6,30 @@ public class MainMenuUIController : MonoBehaviour
 {
     [Header("UI Controllers")]
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
+    [SerializeField] private PanelFadeController menuPanelFadeController;
 
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
     void Start()
     {
-        // Fade background out.
-        StartCoroutine(loadingBackgroundController.fadeOutCoroutine(.5f));
+        // Call show menu coroutine.
+        StartCoroutine(showMenu());
+    }
+
+    // Show menu.
+    IEnumerator showMenu()
+    {
+        yield return StartCoroutine(loadingBackgroundController.fadeOutCoroutine(.5f));
+        menuPanelFadeController.Show();
     }
 
     // Start game.
     public void startGame()
     {
+        // Stop music.
+        SoundManager.instance.stopMusic(.5f);
+
         // Start game coroutine.
         StartCoroutine(startGameCoroutine());
     }
