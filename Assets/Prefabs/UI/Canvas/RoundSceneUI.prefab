@@ -842,6 +842,58 @@ GameObject:
   - component: {fileID: 2906500451640516737}
   - component: {fileID: 4714770156054562542}
   - component: {fileID: 1935070567126787103}
+  - component: {fileID: 3368801264393113600}
+  - component: {fileID: 954099759858925084}
+  m_Layer: 0
+  m_Name: AbilityManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3368801264393113600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5642739500754547890}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 59.726246, y: -151.50168, z: 270.7488}
+  m_LocalScale: {x: 1.7052375, y: 1.7052375, z: 1.7052375}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1355419699485016467}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &954099759858925084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5642739500754547890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18086d715815a4bd9b77181d108c99d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roundManager: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
+  bigJayRampagePrefab: {fileID: 5880123995378728792, guid: 39a7df16644b64d6f832c16210ae7ccd, type: 3}
+  startNodes:
+  - {fileID: 0}
+--- !u!1 &8498374371359012354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3159835124871653581}
+  - component: {fileID: 113346016563763855}
+  - component: {fileID: 1813442020428718208}
+  - component: {fileID: 5481217692485382172}
   m_Layer: 5
   m_Name: RainOverlay
   m_TagString: Untagged
@@ -1902,6 +1954,22 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6285534362954685447, guid: 1cddec5b384444a52b7c54f9683f54b7, type: 3}
+      propertyPath: abilityData.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6285534362954685447, guid: 1cddec5b384444a52b7c54f9683f54b7, type: 3}
+      propertyPath: 'abilityData.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 836444dac1cee4d83b1260b988267bb2, type: 2}
+    - target: {fileID: 6285534362954685447, guid: 1cddec5b384444a52b7c54f9683f54b7, type: 3}
+      propertyPath: 'abilityData.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 82ff28d26eeaa4d3989e5fe9403bb8ea, type: 2}
+    - target: {fileID: 6285534362954685447, guid: 1cddec5b384444a52b7c54f9683f54b7, type: 3}
+      propertyPath: 'abilityData.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 82ff28d26eeaa4d3989e5fe9403bb8ea, type: 2}
     - target: {fileID: 8373910009943009479, guid: 1cddec5b384444a52b7c54f9683f54b7, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
