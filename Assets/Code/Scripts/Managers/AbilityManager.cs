@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class AbilityManager : MonoBehaviour
 {
@@ -9,8 +7,6 @@ public class AbilityManager : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] private RoundManager roundManager;
-
-    private List<EnemyMovement> activeEnemies = new List<EnemyMovement>();
 
     private void Awake()
     {
@@ -24,56 +20,28 @@ public class AbilityManager : MonoBehaviour
         }
     }
 
-    public void RegisterEnemy(EnemyMovement enemy)
-    {
-        if (!activeEnemies.Contains(enemy))
-        {
-            activeEnemies.Add(enemy);
-        }
-    }
-
-    public void UnregisterEnemy(EnemyMovement enemy)
-    {
-        if (activeEnemies.Contains(enemy))
-        {
-            activeEnemies.Remove(enemy);
-        }
-    }
-
     // *********** SLOW ALL ENEMIES ***********
     private IEnumerator ApplySlowEffect(AbilityData ability)
     {
         float multiplier = ability.SlowMultiplier; // This will be 1f for non-SlowAll Ability types
 
-        foreach (var enemy in activeEnemies)
-        {
-            enemy?.SetSpeedMultiplier(multiplier);
-        }
+        roundManager.SlowAllEnemies(multiplier);
 
         yield return new WaitForSeconds(ability.EffectDuration);
 
-        foreach (var enemy in activeEnemies)
-        {
-            enemy?.ResetSpeedMultiplier();
-        }
+        roundManager.ResetSlowAllEnemies();
     }
 
     // *********** FREEZE ALL ENEMIES ***********
     private IEnumerator ApplyFreezeEffect(float duration)
     {
         // Freeze enemies
-        foreach (var enemy in activeEnemies)
-        {
-            enemy?.BlockMovement(true);
-        }
+        roundManager.FreezeAllEnemies();
 
         yield return new WaitForSeconds(duration);
 
         // Unfreeze enemies
-        foreach (var enemy in activeEnemies)
-        {
-            enemy?.BlockMovement(false);
-        }
+        roundManager.ResetFreezeAllEnemies();
     }
 
     // *********** BIG JAY ABILITY ***********
@@ -86,7 +54,6 @@ public class AbilityManager : MonoBehaviour
         // If no start nodes are available, return
         if (startNodes == null || startNodes.Length == 0)
         {
-            Debug.Log("No start nodes available for Big Jay");
             yield break;
         }
 
@@ -127,8 +94,6 @@ public class AbilityManager : MonoBehaviour
 
     public void ActivateAbility(AbilityData ability)
     {
-        Debug.Log($"Activating ability: {ability.AbilityName}");
-
         switch (ability.Type)
         {
             case AbilityData.AbilityType.SlowAll:
@@ -143,14 +108,6 @@ public class AbilityManager : MonoBehaviour
                 StartCoroutine(ActivateBigJayRampage(ability));
                 break;
         }
-    }
-
-    Vector3 GetRandomPointInBounds(Bounds bounds)
-    {
-        float x = Random.Range(bounds.min.x, bounds.max.x);
-        float y = bounds.center.y;
-        float z = Random.Range(bounds.min.z, bounds.max.z);
-        return new Vector3(x, y, z);
     }
 
     public void StartEffectRoutine(AbilityButtonController abilityButtonController, AbilityData abilityData)

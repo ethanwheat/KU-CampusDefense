@@ -365,6 +365,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8244160896475581144, guid: 88cd02b7d9ebb45faaaa21b9d0c0a8d0, type: 3}
+      propertyPath: roundManager
+      value: 
+      objectReference: {fileID: 5932463853283302187}
+    - target: {fileID: 8244160896475581144, guid: 88cd02b7d9ebb45faaaa21b9d0c0a8d0, type: 3}
       propertyPath: startNodes.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -394,13 +398,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 34462870293887778, guid: d098c15a9c06145769250890c7ac1dc7, type: 3}
+      propertyPath: duration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 34462870293887778, guid: d098c15a9c06145769250890c7ac1dc7, type: 3}
       propertyPath: rainOverlay
       value: 
       objectReference: {fileID: 1917716098}
     - target: {fileID: 34462870293887778, guid: d098c15a9c06145769250890c7ac1dc7, type: 3}
+      propertyPath: roundManager
+      value: 
+      objectReference: {fileID: 5932463853283302187}
+    - target: {fileID: 34462870293887778, guid: d098c15a9c06145769250890c7ac1dc7, type: 3}
       propertyPath: darkenOverlay
       value: 
-      objectReference: {fileID: 1086091587}
+      objectReference: {fileID: 0}
     - target: {fileID: 34462870293887778, guid: d098c15a9c06145769250890c7ac1dc7, type: 3}
       propertyPath: weatherChance
       value: 0.1
@@ -412,7 +424,11 @@ PrefabInstance:
     - target: {fileID: 34462870293887778, guid: d098c15a9c06145769250890c7ac1dc7, type: 3}
       propertyPath: weatherPopupText
       value: 
-      objectReference: {fileID: 1688876252}
+      objectReference: {fileID: 0}
+    - target: {fileID: 34462870293887778, guid: d098c15a9c06145769250890c7ac1dc7, type: 3}
+      propertyPath: smallMessagePopupPanelController
+      value: 
+      objectReference: {fileID: 525901077}
     - target: {fileID: 558038416690709956, guid: d098c15a9c06145769250890c7ac1dc7, type: 3}
       propertyPath: m_Name
       value: WeatherManager
@@ -589,11 +605,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1086091587 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3166063965269580043, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-  m_PrefabInstance: {fileID: 1696650594}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1119820238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -887,17 +898,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5259aefe30938564d905146a691aeb44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1688876252 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 203204183251572049, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-  m_PrefabInstance: {fileID: 1696650594}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1696650594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1115,7 +1115,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3166063965269580043, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}

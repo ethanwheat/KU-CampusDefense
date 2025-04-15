@@ -52,6 +52,11 @@ public class RoundManager : MonoBehaviour
     [Header("Transforms")]
     [SerializeField] private Transform defensesParent;
 
+    private List<EnemyMovement> enemies = new List<EnemyMovement>();
+    private bool isAllEnemiesSlowed = false;
+    private bool isAllEnemiesFrozen = false;
+    private float slowMultiplier = 1;
+
     void Start()
     {
         currentRound = gameData.SelectedRound;
@@ -78,16 +83,14 @@ public class RoundManager : MonoBehaviour
 
         while (currentWave < numWaves)
         {
-            WeatherController.Instance.ResetWeatherForNewRound();
-            WeatherController.Instance.TryActivateWeather();
+            WeatherManager.Instance.ResetWeatherForNewRound();
+            WeatherManager.Instance.TryActivateWeather();
             roundSceneUIController.updateWaveUI(currentWave + 1, numWaves);
             roundSceneUIController.showWavePopupPanel((currentWave + 1).ToString());
             yield return StartCoroutine(SpawnEnemies(currentRound.waves[currentWave]));
             currentWave++;
             yield return new WaitForSeconds(10f);
         }
-
-        Debug.Log("All waves complete!");
     }
 
     public void EndRound()
@@ -129,6 +132,10 @@ public class RoundManager : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
+            while (isAllEnemiesFrozen)
+            {
+                yield return null;
+            }
 
             int spawnIndex = Random.Range(0, spawnAreas.Length);
             Vector3 spawnPosition = GetRandomPointInBounds(spawnAreas[spawnIndex].bounds);
@@ -141,9 +148,16 @@ public class RoundManager : MonoBehaviour
 
             if (enemy.TryGetComponent(out EnemyMovement enemyScript))
             {
+                enemies.Add(enemyScript);
                 enemyScript.SetSpeed(speed);
                 enemyScript.SetHealth(health);
                 enemyScript.SetReward(currentRound.killPayout);
+
+                if (isAllEnemiesSlowed)
+                {
+                    enemyScript.SetSpeedMultiplier(slowMultiplier);
+                }
+
                 enemyScript.currentNode = startNodes[spawnIndex];
             }
 
@@ -207,11 +221,12 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-    public void EnemyDefeated()
+    public void EnemyDefeated(EnemyMovement enemyDefeated)
     {
         if (gameOver) return;
 
         remainingEnemies--;
+        enemies.Remove(enemyDefeated);
 
         // Check if the round is over (no remaining enemies)
         if (remainingEnemies <= 0)
@@ -310,6 +325,49 @@ public class RoundManager : MonoBehaviour
         }
 
         return regenCost;
+    }
+
+    public void SlowAllEnemies(float multiplier)
+    {
+        isAllEnemiesSlowed = true;
+        slowMultiplier = multiplier;
+
+        foreach (var enemy in enemies)
+        {
+            enemy.SetSpeedMultiplier(multiplier);
+        }
+    }
+
+
+    public void ResetSlowAllEnemies()
+    {
+        isAllEnemiesSlowed = false;
+        slowMultiplier = 1;
+
+        foreach (var enemy in enemies)
+        {
+            enemy.ResetSpeedMultiplier();
+        }
+    }
+
+    public void FreezeAllEnemies()
+    {
+        isAllEnemiesFrozen = true;
+
+        foreach (var enemy in enemies)
+        {
+            enemy.BlockMovement(true);
+        }
+    }
+
+    public void ResetFreezeAllEnemies()
+    {
+        isAllEnemiesFrozen = false;
+
+        foreach (var enemy in enemies)
+        {
+            enemy.BlockMovement(false);
+        }
     }
 }
 

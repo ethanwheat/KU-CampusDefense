@@ -52,7 +52,7 @@ public class EnemyMovement : MonoBehaviour
 
         if (roundManager != null)
         {
-          roundManager.EnemyDefeated();
+          roundManager.EnemyDefeated(this);
           roundManager.damageFieldhouse(health);
         }
 
@@ -104,7 +104,6 @@ public class EnemyMovement : MonoBehaviour
   public void TakeDamage(float amount)
   {
     health -= amount;
-    //Debug.Log("Enemy took damage. Current Health: " + health);
     healthBar.UpdateHealthBar(health, maxHealth);
     if (health <= 0)
     {
@@ -114,11 +113,9 @@ public class EnemyMovement : MonoBehaviour
 
   private void Die()
   {
-    Debug.Log("Enemy died.");
-
     if (roundManager != null)
     {
-      roundManager.EnemyDefeated();
+      roundManager.EnemyDefeated(this);
       roundManager.addCoins(killReward);
     }
     SoundManager.instance.playSoundEffect(enemyKilledSoundEffect, transform, .5f);
@@ -127,7 +124,6 @@ public class EnemyMovement : MonoBehaviour
 
   public void SetSpeedMultiplier(float multiplier)
   {
-    Debug.Log($"Enemy speed changed to: {speed * multiplier}");
     speed = baseSpeed * multiplier;
   }
 
@@ -140,29 +136,4 @@ public class EnemyMovement : MonoBehaviour
   {
     this.isBlocked = isBlocked;
   }
-
-  /*private void OnEnable()
-  {
-      if (AbilityManager.Instance != null)
-      {
-          AbilityManager.Instance.RegisterEnemy(this);
-      }
-  }
-
-  private void OnDisable()
-  {
-      if (AbilityManager.Instance != null)
-      {
-          AbilityManager.Instance.UnregisterEnemy(this);
-      }
-  }*/
-  private void OnEnable()
-{
-    AbilityManager.Instance?.RegisterEnemy(this);
-}
-
-private void OnDisable()
-{
-    AbilityManager.Instance?.UnregisterEnemy(this);
-}
 }

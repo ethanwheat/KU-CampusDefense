@@ -38,7 +38,6 @@ public class RoundSelectionPanelController : MonoBehaviour
                 btnObj.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     gameDataController.setSelectedRound(capturedRound);
-                    Debug.Log("Selected Round " + capturedRound.roundNumber);
                     closePanel();
                 });
             }

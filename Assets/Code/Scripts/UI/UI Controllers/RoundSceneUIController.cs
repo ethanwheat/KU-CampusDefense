@@ -12,7 +12,7 @@ public class RoundSceneUIController : MonoBehaviour
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
     [SerializeField] private RoundWonPanelController roundWonPanelController;
     [SerializeField] private RoundLostPanelController roundLostPanelController;
-    [SerializeField] private WavePopupPanelController wavePopupPanelController;
+    [SerializeField] private SmallMessagePopupPanel smallMessagePopupPanelController;
 
     [Header("UI Text")]
     [SerializeField] private TextMeshProUGUI dollarText;
@@ -126,7 +126,6 @@ public class RoundSceneUIController : MonoBehaviour
     {
         if (defensePanelController == null)
         {
-            //Debug.LogError("DefensePanelController reference is null!");
             return;
         }
         bool showPanel = !defensePanelController.gameObject.activeSelf;
@@ -143,7 +142,6 @@ public class RoundSceneUIController : MonoBehaviour
     {
         if (abilitiesPanelController == null)
         {
-            //Debug.LogError("AbilitiesPanelController reference is missing!");
             return;
         }
 
@@ -159,7 +157,7 @@ public class RoundSceneUIController : MonoBehaviour
     // Close existing UI (This is buggy with the abilities panel)
     public void showWavePopupPanel(string waveNum)
     {
-        wavePopupPanelController.showPanel(waveNum);
+        smallMessagePopupPanelController.showPanel("Wave " + waveNum);
     }
 
     public void showRoundWonPanel(string round, string reward, string loan, string total)

@@ -32,30 +32,19 @@ public class AbilitiesPanelController : MonoBehaviour
 
     private void InitializeAbilities()
     {
-        //Debug.Log($"Initializing abilities. Parent: {abilitiesParent.name}");
-
         if (!alreadyOpened)
         {
             alreadyOpened = true;
 
             foreach (var ability in abilityData)
             {
-                //Debug.Log($"Creating button for: {ability.AbilityName}");
-
                 var button = Instantiate(abilityButtonPrefab, abilitiesParent);
                 button.name = "Btn_" + ability.AbilityName; // Unique name
-
-                //Debug.Log($"Button created: {button.name} Active: {button.activeSelf}");
 
                 var controller = button.GetComponent<AbilityButtonController>();
                 if (controller != null)
                 {
                     controller.Initialize(ability, this, roundSceneUIController, messagePopupPanelController);
-                    //Debug.Log($"Controller initialized for {ability.AbilityName}");
-                }
-                else
-                {
-                    //Debug.LogError($"No controller on button prefab!");
                 }
 
                 // Force visible

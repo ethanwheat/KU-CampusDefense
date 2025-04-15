@@ -13,7 +13,6 @@ public class TrackedBullet : Bullet
     {
         if (target == null)
         {
-            //Debug.Log("Target is null. Destroying bullet.");
             Destroy(gameObject);
             return;
         }
@@ -23,6 +22,5 @@ public class TrackedBullet : Bullet
         float distanceThisFrame = GetSpeed() * Time.deltaTime;
 
         transform.Translate(direction.normalized * distanceThisFrame, Space.World);
-        //Debug.Log("Bullet moving towards target: " + target.name);
     }
 }

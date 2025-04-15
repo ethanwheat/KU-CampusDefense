@@ -17,6 +17,7 @@ public class AbilityButtonController : MonoBehaviour
     [SerializeField] private Color cooldownColor = Color.red;
 
     [Header("Sounds")]
+    [SerializeField] private AudioClip abilityActivatedSoundEffect;
     [SerializeField] private AudioClip errorSoundEffect;
 
     [Header("Game Data Controller")]
@@ -50,13 +51,13 @@ public class AbilityButtonController : MonoBehaviour
     {
         if (isEffectActive)
         {
-            showError("Already in effect", abilityData.AbilityName + " ability is already in effect!");
+            showError("Already in effect", "The " + abilityData.AbilityName + " ability is already in effect!");
             return;
         }
 
         if (isOnCooldown)
         {
-            showError("Cooling down", abilityData.AbilityName + " ability is cooling down!");
+            showError("Cooling down", "The " + abilityData.AbilityName + " ability is cooling down!");
             return;
         }
 
@@ -75,10 +76,15 @@ public class AbilityButtonController : MonoBehaviour
             abilityManager.StartEffectRoutine(this, abilityData);
             // Activate ability
             abilityManager.ActivateAbility(abilityData);
+
+            // Show message.
+            SoundManager.instance.playSoundEffect(abilityActivatedSoundEffect, transform, 1f);
+            messagePopupPanelController.showPanel("Ability activated", "The " + abilityData.AbilityName + " ability has been activated!");
+            abilitiesPanelController.CloseAbilitiesPanel();
         }
         else
         {
-            showError("Insufficient Dollars", "You do not have enough dollars to buy " + abilityData.AbilityName + " ability!");
+            showError("Insufficient Dollars", "You do not have enough dollars to buy the " + abilityData.AbilityName + " ability!");
         }
     }
 

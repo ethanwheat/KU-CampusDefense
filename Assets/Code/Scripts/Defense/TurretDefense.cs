@@ -78,7 +78,6 @@ public class TurretDefense : Defense, IDefense
                 if (!enemiesInRange.Contains(enemy))
                 {
                     enemiesInRange.Add(enemy);
-                    //Debug.Log("Enemy entered range: " + enemy.name);
                 }
             }
         }
@@ -94,7 +93,6 @@ public class TurretDefense : Defense, IDefense
                 if (enemy != null && enemiesInRange.Contains(enemy))
                 {
                     enemiesInRange.Remove(enemy);
-                    //Debug.Log("Enemy left range: " + enemy.name);
                 }
             }
         }
@@ -104,11 +102,9 @@ public class TurretDefense : Defense, IDefense
     {
         if (target == null)
         {
-            //Debug.Log("No target to shoot at.");
             return;
         }
 
-        //Debug.Log("Shooting at target: " + target.name);
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.transform.parent = GetProjectilesParent();
         if (bullet.TryGetComponent(out TrackedBullet bulletScript))

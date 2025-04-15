@@ -13,16 +13,10 @@ public class Pie : MonoBehaviour
         target = newTarget;
     }
 
-    void Start()
-    {
-        //Debug.Log("Pie spawned at: " + transform.position);
-    }
-
     void Update()
     {
         if (target == null)
         {
-            //Debug.Log("Target is null. Destroying pie.");
             Destroy(gameObject);
             return;
         }
@@ -33,19 +27,16 @@ public class Pie : MonoBehaviour
 
         if (direction.magnitude <= distanceThisFrame)
         {
-            //Debug.Log("Pie hit target: " + target.name);
             HitTarget();
             return;
         }
 
         transform.Translate(direction.normalized * distanceThisFrame, Space.World);
-        //Debug.Log("Pie moving towards target: " + target.name);
     }
 
     private void HitTarget()
     {
         // Deal damage to the enemy
-        //Debug.Log("Pie hit target: " + target.name);
         target.TakeDamage(damage);
         Destroy(gameObject);
     }
