@@ -1031,19 +1031,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1459393652437986005, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459393652437986005, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1459393652437986005, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459393652437986005, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 5932463853283302187}
     - target: {fileID: 1459393652437986005, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 5932463853283302187}
+    - target: {fileID: 1459393652437986005, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459393652437986005, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459393652437986005, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: RetryRound
       objectReference: {fileID: 0}
     - target: {fileID: 1459393652437986005, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: RetryRound
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459393652437986005, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: RoundManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459393652437986005, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: RoundManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459393652437986005, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459393652437986005, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1497946044152908741, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
       propertyPath: m_Name
@@ -1059,19 +1095,31 @@ PrefabInstance:
       objectReference: {fileID: 5932463853283302187}
     - target: {fileID: 3014515017586440757, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014515017586440757, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3014515017586440757, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 5932463853283302187}
     - target: {fileID: 3014515017586440757, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014515017586440757, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: EndRound
       objectReference: {fileID: 0}
     - target: {fileID: 3014515017586440757, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: RoundManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3014515017586440757, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4762837724571225817, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1117,18 +1165,6 @@ PrefabInstance:
       propertyPath: wavePopupPanelController
       value: 
       objectReference: {fileID: 525901077}
-    - target: {fileID: 6353253439303244492, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5932463853283302187}
-    - target: {fileID: 6353253439303244492, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: EndRound
-      objectReference: {fileID: 0}
-    - target: {fileID: 6353253439303244492, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: RoundManager, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 6656834757768644013, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
       propertyPath: m_IsActive
       value: 0
