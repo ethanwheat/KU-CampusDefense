@@ -32,6 +32,7 @@ public class BaseballFieldDefense : Defense, IDefense
         if (isBought)
         {
             onDefenseStart.Invoke();
+            RoundManager.instance.addDefense(this);
             ballsPerWave += ballsIncreasePerLevel * (level - 1);
             StartCoroutine(FireBaseballWaves());
         }
@@ -45,6 +46,11 @@ public class BaseballFieldDefense : Defense, IDefense
 
         for (int i = 0; i < ballsPerWave; i++)
         {
+            if (!enabled)
+            {
+                yield break;
+            }
+
             ballsLeft--;
             healthBar.UpdateHealthBar(ballsLeft, ballsPerWave);
             FireRandomBaseball();

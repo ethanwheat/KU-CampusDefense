@@ -66,7 +66,7 @@ public class AbilityButtonController : MonoBehaviour
         if (gameDataController.Dollars >= dollarCost)
         {
             // Set ability manager.
-            AbilityManager abilityManager = AbilityManager.Instance;
+            AbilityManager abilityManager = AbilityManager.instance;
 
             // Subtract dollars.
             gameDataController.subtractDollars(dollarCost);

@@ -25,5 +25,5 @@ MonoBehaviour:
   level1UpgradeDollarCost: 0
   level2UpgradeDollarCost: 0
   level3UpgradeDollarCost: 0
-  level: 3
+  level: 1
   prefab: {fileID: 6672386744193232199, guid: 3615d6176185e430f999bd614703a89a, type: 3}

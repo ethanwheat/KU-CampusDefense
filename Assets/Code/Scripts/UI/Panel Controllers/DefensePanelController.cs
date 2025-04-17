@@ -16,9 +16,6 @@ public class DefensePanelController : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Round Manager")]
-    [SerializeField] private RoundManager roundManager;
-
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
@@ -84,12 +81,11 @@ public class DefensePanelController : MonoBehaviour
         selectedPlacementButton.GetComponent<DefensePlacementButtonController>().onSelect();
 
         // Create and set new placement.
-        Transform parentTransform = getRootGameObject("Placement").transform;
-        currentDefensePlacement = Instantiate(defense.getPrefab(), parentTransform);
+        currentDefensePlacement = Instantiate(defense.getPrefab(), RoundManager.instance.PlacementParent);
 
         // Set defense data on placement controller and add listeners to reset the panel and destroy current placement when a placement is made.
         DefensePlacementController placementController = currentDefensePlacement.GetComponent<DefensePlacementController>();
-        placementController.loadData(defense, roundManager);
+        placementController.loadData(defense);
         placementController.onPlacementSuccess.AddListener(placementSuccess);
         placementController.onPlacementFail.AddListener(() => placementFailed(defense));
     }
@@ -132,28 +128,6 @@ public class DefensePanelController : MonoBehaviour
     {
         resetCurrentPlacementButton();
         destroyCurrentPlacement();
-    }
-
-    // Get root game object
-    GameObject getRootGameObject(string name)
-    {
-        GameObject gameObject = null;
-
-        foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
-        {
-            if (currentGameObject.name == name)
-            {
-                gameObject = currentGameObject;
-                break;
-            }
-        }
-
-        if (!gameObject)
-        {
-            gameObject = new GameObject(name);
-        }
-
-        return gameObject;
     }
 
     // Close defense panel.

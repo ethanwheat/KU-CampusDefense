@@ -2,12 +2,6 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-  // Start is called once before the first execution of Update after the MonoBehaviour is created
-  void Start()
-  {
-    roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
-  }
-
   public PathNode currentNode; // The waypoint the object is moving toward
   [SerializeField] private float speed;
   [SerializeField] private float health;
@@ -24,7 +18,11 @@ public class EnemyMovement : MonoBehaviour
 
   public float Health => health; // read only access
 
-  // Update is called once per frame
+  void Start()
+  {
+    roundManager = RoundManager.instance;
+  }
+
   void FixedUpdate()
   {
     if (currentNode == null || isBlocked) return;

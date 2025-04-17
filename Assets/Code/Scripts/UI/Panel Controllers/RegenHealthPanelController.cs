@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RegenHealthPanelController : MonoBehaviour
@@ -15,12 +16,11 @@ public class RegenHealthPanelController : MonoBehaviour
     [SerializeField] private AudioClip regenSoundEffect;
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Round Manager")]
-    [SerializeField] private RoundManager roundManager;
-
     // Show health regen panel.
     public void showPanel()
     {
+        RoundManager roundManager = RoundManager.instance;
+
         int regenCost = roundManager.getRegenCost();
 
         if (regenCost > 0)
@@ -42,6 +42,8 @@ public class RegenHealthPanelController : MonoBehaviour
     // Regen health.
     public void regenHealth()
     {
+        RoundManager roundManager = RoundManager.instance;
+
         int coins = roundManager.getCoinAmount();
         int regenCost = roundManager.getRegenCost();
 

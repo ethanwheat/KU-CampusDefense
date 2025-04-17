@@ -17,15 +17,20 @@ public class Defense : MonoBehaviour
     [SerializeField] private float healthIncreasePerLevel = 50f;
 
     private float health;
-    private Transform projectilesParent;
+    private RoundManager roundManager;
+    private SoundManager soundManager;
 
-    void Awake()
+    void Start()
     {
+        roundManager = RoundManager.instance;
+        soundManager = SoundManager.instance;
+
         int defenseLevel = getDefenseData().getLevel();
-
         maxHealth += healthIncreasePerLevel * (defenseLevel - 1);
-
         ResetHealth();
+
+        transform.parent = roundManager.DefenseParent;
+        roundManager.addDefense(this);
     }
 
     // Get health.
@@ -61,7 +66,8 @@ public class Defense : MonoBehaviour
     // Called when defense is out of health.
     public virtual void OnDefenseDestroy()
     {
-        SoundManager.instance.playSoundEffect(destroySoundEffect, transform, .5f);
+        roundManager.removeDefense(this);
+        soundManager.playSoundEffect(destroySoundEffect, transform, .5f);
         Destroy(gameObject);
     }
 
@@ -80,25 +86,6 @@ public class Defense : MonoBehaviour
     // Get projectiles parent.
     public Transform GetProjectilesParent()
     {
-        if (projectilesParent)
-        {
-            return projectilesParent;
-        }
-
-        foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
-        {
-            if (currentGameObject.name == "Projectiles")
-            {
-                projectilesParent = currentGameObject.transform;
-                break;
-            }
-        }
-
-        if (!projectilesParent)
-        {
-            projectilesParent = new GameObject("Projectiles").transform;
-        }
-
-        return projectilesParent;
+        return GameObject.Find("Projectiles").transform;
     }
 }

@@ -4,7 +4,7 @@ using TMPro;
 
 public class WeatherManager : MonoBehaviour
 {
-    public static WeatherManager Instance;
+    public static WeatherManager instance;
 
     [Header("Weather UI")]
     [SerializeField] private GameObject rainOverlay;
@@ -21,27 +21,29 @@ public class WeatherManager : MonoBehaviour
     [SerializeField] private Light directionalLight;
     [SerializeField] private float darkenedLightIntensity = 0.3f;
 
-    [Header("Round Manager")]
-    [SerializeField] private RoundManager roundManager;
-
+    private RoundManager roundManager;
     private bool weatherTriggeredThisRound = false;
     private float originalLightIntensity;
 
     void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
-
-            if (directionalLight != null)
-            {
-                originalLightIntensity = directionalLight.intensity;
-            }
+            instance = this;
         }
         else
         {
             Destroy(gameObject);
         }
+
+        if (directionalLight != null)
+        {
+            originalLightIntensity = directionalLight.intensity;
+        }
+    }
+    void Start()
+    {
+        roundManager = RoundManager.instance;
     }
 
     public void ResetWeatherForNewRound()

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -25,7 +26,6 @@ public class DefensePlacementController : MonoBehaviour
     private Camera mainCamera;
     private Outline outline;
     private DefenseData defenseData;
-    private RoundManager roundManager;
     private bool dataLoaded = false;
     private bool placed;
     private bool validPlacement;
@@ -108,11 +108,10 @@ public class DefensePlacementController : MonoBehaviour
     }
 
     // Load data to be used in the placement.
-    public void loadData(DefenseData data, RoundManager manager)
+    public void loadData(DefenseData data)
     {
         // Set data.
         defenseData = data;
-        roundManager = manager;
         dataLoaded = true;
     }
 
@@ -122,6 +121,9 @@ public class DefensePlacementController : MonoBehaviour
         // Check if valid placement is true.
         if (validPlacement)
         {
+            // Get round manager.
+            RoundManager roundManager = RoundManager.instance;
+
             // Check if defense can be purchased
             if (roundManager.getCoinAmount() >= defenseData.getCoinCost())
             {
@@ -132,15 +134,8 @@ public class DefensePlacementController : MonoBehaviour
                 // Subtract coin amount from round manager.
                 roundManager.subtractCoins(defenseData.getCoinCost());
 
-                // Set the parent of the new defense.
-                transform.parent = getRootGameObject("Defenses").transform;
-
-                // Delete placement gameObject.
-                GameObject placementParent = getRootGameObject("Placement");
-                Destroy(placementParent);
-
                 // Disable this script.
-                this.enabled = false;
+                enabled = false;
 
                 // Play placement sound effect.
                 SoundManager.instance.playSoundEffect(placementSoundEffect, transform, .5f);
@@ -200,27 +195,5 @@ public class DefensePlacementController : MonoBehaviour
         // Set the placement as invalid and set outline color to red.
         validPlacement = false;
         outline.OutlineColor = Color.red;
-    }
-
-    // Get root game object
-    GameObject getRootGameObject(string name)
-    {
-        GameObject gameObject = null;
-
-        foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
-        {
-            if (currentGameObject.name == name)
-            {
-                gameObject = currentGameObject;
-                break;
-            }
-        }
-
-        if (!gameObject)
-        {
-            gameObject = new GameObject(name);
-        }
-
-        return gameObject;
     }
 }

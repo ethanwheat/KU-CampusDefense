@@ -14,6 +14,10 @@ public class SoundManager : MonoBehaviour
     [Header("Music")]
     [SerializeField] private AudioClip music;
 
+    [Header("Parents")]
+    [SerializeField] private Transform musicParent;
+    [SerializeField] private Transform soundEffectsParent;
+
     [Header("Settings Data Controller")]
     [SerializeField] private SettingsDataController settingsDataController;
 
@@ -25,6 +29,10 @@ public class SoundManager : MonoBehaviour
         if (!instance)
         {
             instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -68,11 +76,15 @@ public class SoundManager : MonoBehaviour
 
         // Create audio game object.
         musicObject = createSoundObject(audioClip, transform);
+        musicObject.transform.parent = musicParent;
+
+        // Create audio source.
         AudioSource audioSource = musicObject.GetComponent<AudioSource>();
         audioSource.volume = 0;
         audioSource.loop = true;
         audioSource.Play();
 
+        // Fade in music.
         float timeElapsed = 0;
 
         while (timeElapsed < duration)
@@ -90,7 +102,10 @@ public class SoundManager : MonoBehaviour
     {
         if (musicObject)
         {
+            // Get audio source.
             AudioSource audioSource = musicObject.GetComponent<AudioSource>();
+
+            // Fade out music.
             float volume = audioSource.volume;
             float timeElapsed = 0;
 
@@ -103,6 +118,7 @@ public class SoundManager : MonoBehaviour
                 yield return null;
             }
 
+            // Destroy music object.
             Destroy(musicObject);
         }
     }
@@ -114,56 +130,31 @@ public class SoundManager : MonoBehaviour
         float soundEffectsVolume = settingsDataController.getSoundEffectsVolume();
 
         // Create audio game object.
-        GameObject audioObject = createSoundObject(audioClip, transform);
-        AudioSource audioSource = audioObject.GetComponent<AudioSource>();
+        GameObject soundEffectObject = createSoundObject(audioClip, transform);
+        soundEffectObject.transform.parent = soundEffectsParent;
+
+        // Create audio source.
+        AudioSource audioSource = soundEffectObject.GetComponent<AudioSource>();
         audioSource.volume = volume * soundEffectsVolume;
         audioSource.Play();
 
         // Destroy after audio plays.
         float clipLength = audioSource.clip.length + .1f;
-        Destroy(audioObject, clipLength);
+        Destroy(soundEffectObject, clipLength);
     }
 
     // Create music object.
     GameObject createSoundObject(AudioClip audioClip, Transform transform)
     {
         // Create audio game object.
-        GameObject audioObject = new GameObject();
-        audioObject.transform.parent = getSoundsParent();
+        GameObject audioObject = new GameObject(audioClip.name);
         audioObject.transform.position = transform.position;
         audioObject.transform.rotation = Quaternion.identity;
-        audioObject.name = audioClip.name;
 
         // Create audio source.
         AudioSource audioSource = audioObject.AddComponent<AudioSource>();
-        audioSource.transform.parent = getSoundsParent();
         audioSource.clip = audioClip;
 
         return audioObject;
-    }
-
-    // Get sounds parent.
-    Transform getSoundsParent()
-    {
-        if (soundsParent)
-        {
-            return soundsParent;
-        }
-
-        foreach (GameObject currentGameObject in SceneManager.GetActiveScene().GetRootGameObjects())
-        {
-            if (currentGameObject.name == "Sounds")
-            {
-                soundsParent = currentGameObject.transform;
-                break;
-            }
-        }
-
-        if (!soundsParent)
-        {
-            soundsParent = new GameObject("Sounds").transform;
-        }
-
-        return soundsParent;
     }
 }

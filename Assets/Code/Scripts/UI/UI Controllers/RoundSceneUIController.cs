@@ -25,19 +25,20 @@ public class RoundSceneUIController : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioClip clickSoundEffect;
 
-    [Header("Round Manager")]
-    [SerializeField] private RoundManager roundManager;
-
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
     private Camera mainCamera;
     private Outline healthBuildingOutline;
+    private RoundManager roundManager;
 
     void Start()
     {
         // Set main camera.
         mainCamera = Camera.main;
+
+        // Set round manager.
+        roundManager = RoundManager.instance;
 
         // Update dollar UI and coin UI.
         updateDollarUI();

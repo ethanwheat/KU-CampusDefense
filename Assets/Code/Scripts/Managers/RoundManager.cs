@@ -5,6 +5,8 @@ using System.Collections.Generic;
 
 public class RoundManager : MonoBehaviour
 {
+    public static RoundManager instance;
+
     [Header("Prefabs")]
     [SerializeField] private GameObject fanPrefab;
     [SerializeField] private GameObject coachPrefab;
@@ -49,13 +51,32 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private RoundSceneUIController roundSceneUIController;
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
 
-    [Header("Transforms")]
+    [Header("Parents")]
+    [SerializeField] private Transform enemiesParent;
     [SerializeField] private Transform defensesParent;
+    [SerializeField] private Transform placementParent;
 
     private List<EnemyMovement> enemies = new List<EnemyMovement>();
+    private List<Defense> defenses = new List<Defense>();
+    private List<Defense> healthDefenses = new List<Defense>();
     private bool isAllEnemiesSlowed = false;
     private bool isAllEnemiesFrozen = false;
     private float slowMultiplier = 1;
+
+    public Transform PlacementParent => placementParent;
+    public Transform DefenseParent => defensesParent;
+
+    void Awake()
+    {
+        if (!instance)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -83,8 +104,8 @@ public class RoundManager : MonoBehaviour
 
         while (currentWave < numWaves)
         {
-            WeatherManager.Instance.ResetWeatherForNewRound();
-            WeatherManager.Instance.TryActivateWeather();
+            WeatherManager.instance.ResetWeatherForNewRound();
+            WeatherManager.instance.TryActivateWeather();
             roundSceneUIController.updateWaveUI(currentWave + 1, numWaves);
             roundSceneUIController.showWavePopupPanel((currentWave + 1).ToString());
             yield return StartCoroutine(SpawnEnemies(currentRound.waves[currentWave]));
@@ -141,8 +162,7 @@ public class RoundManager : MonoBehaviour
             Vector3 spawnPosition = GetRandomPointInBounds(spawnAreas[spawnIndex].bounds);
 
             // Set the parent of the new enemy.
-            GameObject parent = GameObject.Find("Enemies") ?? new GameObject("Enemies");
-            GameObject enemy = Instantiate(prefab, parent.transform);
+            GameObject enemy = Instantiate(prefab, enemiesParent.transform);
             enemy.transform.position = spawnPosition;
             enemy.transform.rotation = Quaternion.identity;
 
@@ -231,6 +251,8 @@ public class RoundManager : MonoBehaviour
         // Check if the round is over (no remaining enemies)
         if (remainingEnemies <= 0)
         {
+            GameOver();
+
             int debt = gameData.getDebt();
             int reward = (int)(currentRound.winPayout * dollarMultiplier);
 
@@ -278,32 +300,48 @@ public class RoundManager : MonoBehaviour
 
         if (fieldhouseHealth <= 0 && !gameOver)
         {
-            gameOver = true;
+            GameOver();
             roundSceneUIController.showRoundLostPanel();
         }
     }
 
-    private List<Defense> getHealthDefenses()
+    private void GameOver()
     {
-        List<Defense> healthDefenses = new List<Defense>();
+        gameOver = true;
 
-        foreach (Transform transform in defensesParent)
+        foreach (var enemy in enemies)
         {
-            GameObject defense = transform.gameObject;
-
-            if (defense.CompareTag("HealthDefense"))
-            {
-                healthDefenses.Add(defense.GetComponent<Defense>());
-            }
+            enemy.enabled = false;
         }
 
-        return healthDefenses;
+        foreach (var defense in defenses)
+        {
+            defense.enabled = false;
+        }
+    }
+
+    public void addDefense(Defense defense)
+    {
+        defenses.Add(defense);
+
+        if (defense.gameObject.CompareTag("HealthDefense"))
+        {
+            healthDefenses.Add(defense);
+        }
+    }
+
+    public void removeDefense(Defense defense)
+    {
+        defenses.Remove(defense);
+
+        if (healthDefenses.Contains(defense))
+        {
+            healthDefenses.Remove(defense);
+        }
     }
 
     public void regenHealthOnDefenses()
     {
-        List<Defense> healthDefenses = getHealthDefenses();
-
         foreach (var healthDefense in healthDefenses)
         {
             healthDefense.ResetHealth();
@@ -317,7 +355,6 @@ public class RoundManager : MonoBehaviour
     public int getRegenCost()
     {
         int regenCost = 0;
-        List<Defense> healthDefenses = getHealthDefenses();
 
         foreach (var healthDefense in healthDefenses)
         {

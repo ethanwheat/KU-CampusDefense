@@ -14,7 +14,6 @@ public class AbilitiesPanelController : MonoBehaviour
 
     [Header("Game Data")]
     [SerializeField] private AbilityData[] abilityData;
-    [SerializeField] private RoundManager roundManager;
     [SerializeField] private GameDataController gameDataController;
 
     private bool alreadyOpened = false;

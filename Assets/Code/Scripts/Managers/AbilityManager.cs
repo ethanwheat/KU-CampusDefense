@@ -3,21 +3,28 @@ using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
 {
-    public static AbilityManager Instance { get; private set; }
+    public static AbilityManager instance;
 
-    [Header("Dependencies")]
-    [SerializeField] private RoundManager roundManager;
+    [Header("Parent")]
+    [SerializeField] private Transform abilitiesParent;
+
+    private RoundManager roundManager;
 
     private void Awake()
     {
-        if (Instance == null)
+        if (instance == null)
         {
-            Instance = this;
+            instance = this;
         }
         else
         {
             Destroy(gameObject);
         }
+    }
+
+    void Start()
+    {
+        roundManager = RoundManager.instance;
     }
 
     // *********** SLOW ALL ENEMIES ***********
@@ -61,16 +68,13 @@ public class AbilityManager : MonoBehaviour
         int spawnIndex = Random.Range(0, startNodes.Length);
         PathNode startNode = startNodes[spawnIndex];
 
-        // Get parent.
-        GameObject parent = GameObject.Find("Abilities") ?? new GameObject("Abilities");
-
         // Get collider.
         Collider collider = startNode.GetComponent<Collider>();
 
         // Spawn Big Jay at the chosen start node
         var bigJay = Instantiate(
             bigJayRampagePrefab,
-            parent.transform
+            abilitiesParent
         );
 
         bigJay.transform.position = startNode.transform.position;
