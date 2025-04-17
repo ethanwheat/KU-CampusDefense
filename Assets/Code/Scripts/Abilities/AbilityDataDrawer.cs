@@ -1,7 +1,6 @@
 // Purpose of this file is to have the Slow Duration option in the Inspector to appear only for Abilities of AbilityType = SlowAll
 #if UNITY_EDITOR
 using UnityEditor;
-using UnityEngine;
 
 [CustomEditor(typeof(AbilityData))]
 public class AbilityDataDrawer : Editor

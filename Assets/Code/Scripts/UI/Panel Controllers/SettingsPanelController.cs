@@ -19,15 +19,15 @@ public class SettingsPanelController : MonoBehaviour
 
     void Start()
     {
-        musicVolumeSlider.onValueChanged.AddListener(soundManager.onMusicVolumeChange);
-        soundEffectsVolumeSlider.onValueChanged.AddListener(settingsDataController.setSoundEffectsVolume);
+        musicVolumeSlider.onValueChanged.AddListener(soundManager.OnMusicVolumeChange);
+        soundEffectsVolumeSlider.onValueChanged.AddListener(settingsDataController.SetSoundEffectsVolume);
     }
 
     // Update panel with correct music volume and sound effect volume.
     public void updatePanel()
     {
-        float musicVolume = settingsDataController.getMusicVolume();
-        float soundEffectsVolume = settingsDataController.getSoundEffectsVolume();
+        float musicVolume = settingsDataController.MusicVolume;
+        float soundEffectsVolume = settingsDataController.SoundEffectsVolume;
 
         musicVolumeSlider.value = musicVolume;
         soundEffectsVolumeSlider.value = soundEffectsVolume;

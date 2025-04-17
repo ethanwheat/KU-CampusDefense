@@ -5,8 +5,8 @@ using UnityEngine;
 public class DefenseData : PurchasableData
 {
     [Header("Defense Information")]
+    [SerializeField] private bool isShownInDefensePanel;
     [SerializeField] private int coinCost;
-    [SerializeField] private bool showInDefensePanel;
     [SerializeField] private int level1UpgradeDollarCost;
     [SerializeField] private int level2UpgradeDollarCost;
     [SerializeField] private int level3UpgradeDollarCost;
@@ -17,31 +17,12 @@ public class DefenseData : PurchasableData
     [Header("Prefabs")]
     [SerializeField] private GameObject prefab;
 
-    // Get defense prefab.
-    public GameObject getPrefab()
-    {
-        return prefab;
-    }
+    public bool IsShownInDefensePanel => isShownInDefensePanel;
+    public int CoinCost => coinCost;
+    public int Level => level;
+    public GameObject Prefab => prefab;
 
-    // Get defense coin cost.
-    public int getCoinCost()
-    {
-        return coinCost;
-    }
-
-    // Get if shown in defense panel.
-    public bool isShownInDefensePanel()
-    {
-        return showInDefensePanel;
-    }
-
-    // Get defense level.
-    public int getLevel()
-    {
-        return level;
-    }
-
-    public int getUpgradeCost()
+    public int GetUpgradeCost()
     {
         if (level == 1)
         {
@@ -57,12 +38,12 @@ public class DefenseData : PurchasableData
         }
     }
 
-    public void upgradeLevel()
+    public void UpgradeLevel()
     {
         level++;
     }
 
-    public void resetLevel()
+    public void ResetLevel()
     {
         level = 1;
     }

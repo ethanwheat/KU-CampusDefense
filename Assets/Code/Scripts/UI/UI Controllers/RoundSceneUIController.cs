@@ -45,7 +45,7 @@ public class RoundSceneUIController : MonoBehaviour
         updateCoinUI();
 
         // Fade background out.
-        StartCoroutine(loadingBackgroundController.fadeOutCoroutine(.5f));
+        StartCoroutine(loadingBackgroundController.FadeOutCoroutine(.5f));
     }
 
     void Update()
@@ -95,11 +95,11 @@ public class RoundSceneUIController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // Play click sound effect.
-            SoundManager.instance.playSoundEffect(clickSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, 1f);
 
             // Close existing UI and show loan panel.
             closeExistingUI();
-            regenHealthPanelController.showPanel();
+            regenHealthPanelController.ShowPanel();
         }
     }
 
@@ -114,7 +114,7 @@ public class RoundSceneUIController : MonoBehaviour
     public void updateCoinUI()
     {
         // Update coin text.
-        coinText.text = roundManager.getCoinAmount().ToString();
+        coinText.text = roundManager.Coins.ToString();
     }
 
     public void updateWaveUI(int currWave, int numWaves)
@@ -135,7 +135,7 @@ public class RoundSceneUIController : MonoBehaviour
 
         if (showPanel)
         {
-            defensePanelController.showPanel();
+            defensePanelController.ShowPanel();
         }
     }
 
@@ -151,7 +151,7 @@ public class RoundSceneUIController : MonoBehaviour
 
         if (showPanel)
         {
-            abilitiesPanelController.ShowAbilitiesPanel();
+            abilitiesPanelController.ShowPanel();
         }
     }
 
@@ -165,22 +165,22 @@ public class RoundSceneUIController : MonoBehaviour
     {
         closeExistingUI();
         placeDefenseButton.SetActive(false);
-        roundWonPanelController.showPanel(round, reward, loan, total);
+        roundWonPanelController.ShowPanel(round, reward, loan, total);
     }
 
     public void showRoundLostPanel()
     {
         closeExistingUI();
         placeDefenseButton.SetActive(false);
-        roundLostPanelController.showPanel();
+        roundLostPanelController.ShowPanel();
     }
 
     // Close existing UI.
     public void closeExistingUI()
     {
-        defensePanelController.closePanel();
-        regenHealthPanelController.closePanel();
-        messagePopupPanelController.closePanel();
-        abilitiesPanelController.CloseAbilitiesPanel();
+        defensePanelController.ClosePanel();
+        regenHealthPanelController.ClosePanel();
+        messagePopupPanelController.ClosePanel();
+        abilitiesPanelController.ClosePanel();
     }
 }

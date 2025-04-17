@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DefensePanelController : MonoBehaviour
@@ -28,15 +27,15 @@ public class DefensePanelController : MonoBehaviour
         // Cancel selection is escape pressed.
         if (Input.GetKeyDown("escape"))
         {
-            cancelPlacement();
+            CancelPlacement();
         }
     }
 
     // Load defenses in UI.
-    public void showPanel()
+    public void ShowPanel()
     {
         // Destroy current placement.
-        destroyCurrentPlacement();
+        DestroyCurrentPlacement();
 
         // Delete all placement buttons.
         foreach (Transform button in placementButtonsParent)
@@ -52,12 +51,12 @@ public class DefensePanelController : MonoBehaviour
 
         foreach (var defense in defenseData)
         {
-            if (defense.isBought() && defense.isShownInDefensePanel())
+            if (defense.Bought && defense.IsShownInDefensePanel)
             {
                 // Create defense button and add listeners.
                 GameObject placementButton = Instantiate(defensePlacementButtonPrefab, placementButtonsParent);
-                placementButton.GetComponent<DefensePlacementButtonController>().setData(defense);
-                placementButton.GetComponent<Button>().onClick.AddListener(() => startPlacement(placementButton, defense));
+                placementButton.GetComponent<DefensePlacementButtonController>().SetData(defense);
+                placementButton.GetComponent<Button>().onClick.AddListener(() => StartPlacement(placementButton, defense));
 
                 // Update index
                 index++;
@@ -69,53 +68,53 @@ public class DefensePanelController : MonoBehaviour
     }
 
     // Select a defense in the UI and create placement.
-    void startPlacement(GameObject placementButton, DefenseData defense)
+    void StartPlacement(GameObject placementButton, DefenseData defense)
     {
         // Cancel previous placement.
-        cancelPlacement();
+        CancelPlacement();
 
         // Set the new placement button.
         selectedPlacementButton = placementButton;
 
         // Set button to selected.
-        selectedPlacementButton.GetComponent<DefensePlacementButtonController>().onSelect();
+        selectedPlacementButton.GetComponent<DefensePlacementButtonController>().OnSelect();
 
         // Create and set new placement.
-        currentDefensePlacement = Instantiate(defense.getPrefab(), RoundManager.instance.PlacementParent);
+        currentDefensePlacement = Instantiate(defense.Prefab, RoundManager.instance.PlacementParent);
 
         // Set defense data on placement controller and add listeners to reset the panel and destroy current placement when a placement is made.
         DefensePlacementController placementController = currentDefensePlacement.GetComponent<DefensePlacementController>();
-        placementController.loadData(defense);
-        placementController.onPlacementSuccess.AddListener(placementSuccess);
-        placementController.onPlacementFail.AddListener(() => placementFailed(defense));
+        placementController.LoadData(defense);
+        placementController.onPlacementSuccess.AddListener(PlacementSuccess);
+        placementController.onPlacementFail.AddListener(() => PlacementFailed(defense));
     }
 
     // Set current defense placement to null and reset current placement button.
-    void placementSuccess()
+    void PlacementSuccess()
     {
         currentDefensePlacement = null;
-        resetCurrentPlacementButton();
+        ResetCurrentPlacementButton();
     }
 
     // Show error popup message and close panel.
-    void placementFailed(DefenseData defenseData)
+    void PlacementFailed(DefenseData defenseData)
     {
-        SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
-        messagePopupPanelController.showPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.getName() + "!");
-        closePanel();
+        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+        messagePopupPanelController.ShowPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.ObjectName + "!");
+        ClosePanel();
     }
 
     // Reset current placement button.
-    void resetCurrentPlacementButton()
+    void ResetCurrentPlacementButton()
     {
         if (selectedPlacementButton)
         {
-            selectedPlacementButton.GetComponent<DefensePlacementButtonController>().onDeselect();
+            selectedPlacementButton.GetComponent<DefensePlacementButtonController>().OnDeselect();
         }
     }
 
     // Destroys current placement.
-    void destroyCurrentPlacement()
+    void DestroyCurrentPlacement()
     {
         if (currentDefensePlacement)
         {
@@ -124,17 +123,17 @@ public class DefensePanelController : MonoBehaviour
     }
 
     // Reset placement button and destroy current placement.
-    void cancelPlacement()
+    void CancelPlacement()
     {
-        resetCurrentPlacementButton();
-        destroyCurrentPlacement();
+        ResetCurrentPlacementButton();
+        DestroyCurrentPlacement();
     }
 
     // Close defense panel.
-    public void closePanel()
+    public void ClosePanel()
     {
         // Destroy current placement and hide panel.
-        destroyCurrentPlacement();
+        DestroyCurrentPlacement();
         gameObject.SetActive(false);
     }
 }

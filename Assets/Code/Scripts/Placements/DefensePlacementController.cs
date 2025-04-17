@@ -1,8 +1,6 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class DefensePlacementController : MonoBehaviour
 {
@@ -23,6 +21,8 @@ public class DefensePlacementController : MonoBehaviour
     public UnityEvent onPlacementSuccess;
     public UnityEvent onPlacementFail;
 
+    public bool Placed => placed;
+
     private Camera mainCamera;
     private Outline outline;
     private DefenseData defenseData;
@@ -41,11 +41,11 @@ public class DefensePlacementController : MonoBehaviour
 
     void Update()
     {
-        startPlacement();
+        StartPlacement();
     }
 
     // Start the placement on the map following the mouse.
-    void startPlacement()
+    void StartPlacement()
     {
         if (dataLoaded)
         {
@@ -66,13 +66,13 @@ public class DefensePlacementController : MonoBehaviour
                 {
                     if (tag == "RoadPlacement")
                     {
-                        snapToRoad(hit);
-                        setValidPlacement();
+                        SnapToRoad(hit);
+                        SetValidPlacement();
                     }
                     else
                     {
-                        freePlace(hit);
-                        setInvalidPlacement();
+                        FreePlace(hit);
+                        SetInvalidPlacement();
                     }
                 }
 
@@ -81,34 +81,28 @@ public class DefensePlacementController : MonoBehaviour
                 {
                     if (tag == "SideOfRoadPlacement")
                     {
-                        setValidPlacement();
+                        SetValidPlacement();
                     }
                     else
                     {
-                        setInvalidPlacement();
+                        SetInvalidPlacement();
                     }
 
-                    freePlace(hit);
+                    FreePlace(hit);
                 }
 
                 // Check if mouse clicked and mouse is not over UI.
                 if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
                     // Place defense.
-                    placeDefense();
+                    PlaceDefense();
                 }
             }
         }
     }
 
-    // Return true if object is placed else false.
-    public bool isPlaced()
-    {
-        return placed;
-    }
-
     // Load data to be used in the placement.
-    public void loadData(DefenseData data)
+    public void LoadData(DefenseData data)
     {
         // Set data.
         defenseData = data;
@@ -116,7 +110,7 @@ public class DefensePlacementController : MonoBehaviour
     }
 
     // Place the defense, disable this script, and disable outline script.
-    void placeDefense()
+    void PlaceDefense()
     {
         // Check if valid placement is true.
         if (validPlacement)
@@ -125,20 +119,20 @@ public class DefensePlacementController : MonoBehaviour
             RoundManager roundManager = RoundManager.instance;
 
             // Check if defense can be purchased
-            if (roundManager.getCoinAmount() >= defenseData.getCoinCost())
+            if (roundManager.Coins >= defenseData.CoinCost)
             {
                 // Set isPlaced to true, and disable outline script, send event to reset the defense panel.
                 placed = true;
                 outline.enabled = false;
 
                 // Subtract coin amount from round manager.
-                roundManager.subtractCoins(defenseData.getCoinCost());
+                roundManager.SubtractCoins(defenseData.CoinCost);
 
                 // Disable this script.
                 enabled = false;
 
                 // Play placement sound effect.
-                SoundManager.instance.playSoundEffect(placementSoundEffect, transform, .5f);
+                SoundManager.instance.PlaySoundEffect(placementSoundEffect, transform, .5f);
 
                 // Call onPlacementSuccess.
                 onPlacementSuccess.Invoke();
@@ -152,7 +146,7 @@ public class DefensePlacementController : MonoBehaviour
     }
 
     // Allow defense to be dragged over any part of the map.
-    void freePlace(RaycastHit hit)
+    void FreePlace(RaycastHit hit)
     {
         Vector3 targetPosition = hit.point;
         float hitBottom = hit.collider.bounds.min.y;
@@ -163,7 +157,7 @@ public class DefensePlacementController : MonoBehaviour
     }
 
     // Snap defense to roads.
-    void snapToRoad(RaycastHit hit)
+    void SnapToRoad(RaycastHit hit)
     {
         Vector3 objectPosition = hit.transform.position;
         Quaternion objectRotation = hit.transform.rotation;
@@ -182,7 +176,7 @@ public class DefensePlacementController : MonoBehaviour
     }
 
     // Set placement to valid and change outline to green.
-    void setValidPlacement()
+    void SetValidPlacement()
     {
         // Set the placement as valid and set outline color to green.
         validPlacement = true;
@@ -190,7 +184,7 @@ public class DefensePlacementController : MonoBehaviour
     }
 
     // Set placement to invalid and change outline to red.
-    void setInvalidPlacement()
+    void SetInvalidPlacement()
     {
         // Set the placement as invalid and set outline color to red.
         validPlacement = false;

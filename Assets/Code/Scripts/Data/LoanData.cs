@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "LoanData", menuName = "Scriptable Objects/LoanData")]
 public class LoanData : ScriptableObject
@@ -18,57 +17,34 @@ public class LoanData : ScriptableObject
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
-    public string getName()
-    {
-        return loanName;
-    }
+    public string LoanName => loanName;
+    public int Amount => amount;
+    public int UnlockRound => unlockRound;
+    public bool Locked => unlockRound > gameDataController.RoundNumber;
+    public Sprite Sprite => sprite;
+    public int Debt => debt;
 
-    public int getAmount()
+    public void TakeLoan()
     {
-        return amount;
-    }
-
-    public int getUnlockRound()
-    {
-        return unlockRound;
-    }
-
-    public bool isLocked()
-    {
-        return unlockRound > gameDataController.RoundNumber;
-    }
-
-    public Sprite getSprite()
-    {
-        return sprite;
-    }
-
-    public void takeLoan()
-    {
-        gameDataController.addDollars(amount);
+        gameDataController.AddDollars(amount);
         debt += amount;
     }
 
-    public int getDebt()
-    {
-        return debt;
-    }
-
-    public void payDebt(int amount)
+    public void PayDebt(int amount)
     {
         if (debt - amount >= 0)
         {
-            gameDataController.subtractDollars(amount);
+            gameDataController.SubtractDollars(amount);
             debt -= amount;
         }
     }
 
-    public void setDebt(int amount)
+    public void SetDebt(int amount)
     {
         debt = amount;
     }
 
-    public void resetLoan()
+    public void ResetLoan()
     {
         debt = 0;
     }

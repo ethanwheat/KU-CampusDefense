@@ -24,24 +24,25 @@ public class GameDataController : ScriptableObject
     public AbilityData[] AbilityData => abilityData;
 
     // Increment round number.
-    public void incrementRoundNumber()
+    public void IncrementRoundNumber()
     {
         roundNumber += 1;
     }
 
-    public void setSelectedRound(RoundData currRound)
+    // Set selected round.
+    public void SetSelectedRound(RoundData currRound)
     {
         selectedRound = currRound;
     }
 
     // Add dollars.
-    public void addDollars(int amount)
+    public void AddDollars(int amount)
     {
         dollars += amount;
     }
 
     // Subtract dollars.
-    public void subtractDollars(int amount)
+    public void SubtractDollars(int amount)
     {
         int futureAmount = dollars - amount;
 
@@ -52,37 +53,38 @@ public class GameDataController : ScriptableObject
     }
 
     // Get debt.
-    public int getDebt()
+    public int GetDebt()
     {
         int debt = 0;
 
         foreach (var data in loanData)
         {
-            debt += data.getDebt();
+            debt += data.Debt;
         }
 
         return debt;
     }
 
-    public void payDebt(int amount)
+    // Pay debt.
+    public void PayDebt(int amount)
     {
         int remaining = amount;
 
         foreach (var data in loanData)
         {
-            int debt = data.getDebt();
+            int debt = data.Debt;
 
             if (remaining > 0 && debt > 0)
             {
                 int payment = Mathf.Min(remaining, debt);
-                data.setDebt(debt - payment);
+                data.SetDebt(debt - payment);
                 remaining -= payment;
             }
         }
     }
 
     // Reset game data.
-    public void resetGameData()
+    public void ResetGameData()
     {
         // Reset dollars to starting dollar amount and round number to 1.
         dollars = startingDollarAmount;
@@ -91,22 +93,22 @@ public class GameDataController : ScriptableObject
         // Reset defense data.
         foreach (var data in defenseData)
         {
-            bool isBoughtAtStart = data.isBoughtAtStart();
-            data.setBought(isBoughtAtStart);
-            data.resetLevel();
+            bool isBoughtAtStart = data.BoughtAtStart;
+            data.SetBought(isBoughtAtStart);
+            data.ResetLevel();
         }
 
         // Reset bonus data.
         foreach (var data in bonusData)
         {
-            bool isBoughtAtStart = data.isBoughtAtStart();
-            data.setBought(isBoughtAtStart);
+            bool isBoughtAtStart = data.BoughtAtStart;
+            data.SetBought(isBoughtAtStart);
         }
 
         // Reset loan data.
         foreach (var data in loanData)
         {
-            data.resetLoan();
+            data.ResetLoan();
         }
     }
 }

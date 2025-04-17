@@ -7,32 +7,23 @@ public class SettingsDataController : ScriptableObject
     [SerializeField] private float musicVolume = 1;
     [SerializeField] private float soundEffectsVolume = 1;
 
-    // Get music volume.
-    public float getMusicVolume()
-    {
-        return musicVolume;
-    }
+    public float MusicVolume => musicVolume;
+    public float SoundEffectsVolume => soundEffectsVolume;
 
     // Set music volume.
-    public void setMusicVolume(float volume)
+    public void SetMusicVolume(float volume)
     {
         musicVolume = volume;
     }
 
-    // Get sound effects volume.
-    public float getSoundEffectsVolume()
-    {
-        return soundEffectsVolume;
-    }
-
     // Set sound effects volume.
-    public void setSoundEffectsVolume(float volume)
+    public void SetSoundEffectsVolume(float volume)
     {
         soundEffectsVolume = volume;
     }
 
     // Reset settings.
-    public void resetSettings()
+    public void ResetSettings()
     {
         musicVolume = 1;
         soundEffectsVolume = 1;

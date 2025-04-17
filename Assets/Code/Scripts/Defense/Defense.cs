@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Defense : MonoBehaviour
 {
@@ -25,12 +24,12 @@ public class Defense : MonoBehaviour
         roundManager = RoundManager.instance;
         soundManager = SoundManager.instance;
 
-        int defenseLevel = getDefenseData().getLevel();
+        int defenseLevel = getDefenseData().Level;
         maxHealth += healthIncreasePerLevel * (defenseLevel - 1);
         ResetHealth();
 
         transform.parent = roundManager.DefenseParent;
-        roundManager.addDefense(this);
+        roundManager.AddDefense(this);
     }
 
     // Get health.
@@ -66,8 +65,8 @@ public class Defense : MonoBehaviour
     // Called when defense is out of health.
     public virtual void OnDefenseDestroy()
     {
-        roundManager.removeDefense(this);
-        soundManager.playSoundEffect(destroySoundEffect, transform, .5f);
+        roundManager.RemoveDefense(this);
+        soundManager.PlaySoundEffect(destroySoundEffect, transform, .5f);
         Destroy(gameObject);
     }
 

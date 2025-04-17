@@ -8,10 +8,10 @@ public class UnlockedBuildingOverlayController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI buildingText;
     [SerializeField] private TextMeshProUGUI costText;
 
-    public void setData(string buildingName, PurchasableData purchasableData)
+    public void SetData(string buildingName, PurchasableData purchasableData)
     {
-        itemImage.sprite = purchasableData.getSprite();
+        itemImage.sprite = purchasableData.Sprite;
         buildingText.text = buildingName;
-        costText.text = purchasableData.getDollarCost().ToString();
+        costText.text = purchasableData.DollarCost.ToString();
     }
 }

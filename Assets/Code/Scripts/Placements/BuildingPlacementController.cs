@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class BuildingPlacementController : MonoBehaviour
@@ -25,23 +24,28 @@ public class BuildingPlacementController : MonoBehaviour
     [Header("Game Data Controller")]
     [SerializeField] private GameDataController gameDataController;
 
+    public string BuildingName => buildingName;
+    public PurchasableData PurchasableData => purchasableData;
+    public bool RoundScene => roundScene;
+
+
     private Transform overlays;
 
     void Start()
     {
         // Show placement area.
-        updatePlacementArea();
+        UpdatePlacementArea();
     }
 
     // Update the placement area.
-    public void updatePlacementArea()
+    public void UpdatePlacementArea()
     {
         // Reset placement area.
-        resetPlacementArea();
+        ResetPlacementArea();
 
         // Store if object is bought and locked.
-        bool isBought = purchasableData.isBought();
-        bool isLocked = purchasableData.isLocked();
+        bool isBought = purchasableData.Bought;
+        bool isLocked = purchasableData.Locked;
 
         // Check if defense is bought.
         if (isBought)
@@ -55,11 +59,11 @@ public class BuildingPlacementController : MonoBehaviour
         // Create overlay if not round scene.
         if (!roundScene)
         {
-            createOverlay();
+            CreateOverlay();
         }
 
         // Set placement material
-        setPlacementMaterial(isLocked);
+        SetPlacementMaterial(isLocked);
 
         // Set placement as active.
         placementGameObject.SetActive(true);
@@ -67,7 +71,7 @@ public class BuildingPlacementController : MonoBehaviour
     }
 
     // Reset placement area.
-    void resetPlacementArea()
+    void ResetPlacementArea()
     {
         // Set placement and building to not be active.
         placementGameObject.SetActive(false);
@@ -81,7 +85,7 @@ public class BuildingPlacementController : MonoBehaviour
     }
 
     // If defense is unlocked and is not round scene then change color to available material else set to unavailable color.
-    void setPlacementMaterial(bool isLocked)
+    void SetPlacementMaterial(bool isLocked)
     {
         // Get mesh renderer.
         MeshRenderer meshRenderer = placementGameObject.GetComponent<MeshRenderer>();
@@ -97,7 +101,7 @@ public class BuildingPlacementController : MonoBehaviour
     }
 
     // Create overlay.
-    void createOverlay()
+    void CreateOverlay()
     {
         if (!overlays)
         {
@@ -106,35 +110,23 @@ public class BuildingPlacementController : MonoBehaviour
             overlays.localPosition = new Vector3(0, 1, 0);
         }
 
-        if (purchasableData.isLocked())
+        if (purchasableData.Locked)
         {
             GameObject overlay = Instantiate(lockedBuildingOverlayPrefab, overlays);
-            overlay.GetComponent<LockedBuildingOverlayController>().setData(buildingName);
+            overlay.GetComponent<LockedBuildingOverlayController>().SetData(buildingName);
         }
         else
         {
             GameObject overlay = Instantiate(unlockedBuildingOverlayPrefab, overlays);
-            overlay.GetComponent<UnlockedBuildingOverlayController>().setData(buildingName, purchasableData);
+            overlay.GetComponent<UnlockedBuildingOverlayController>().SetData(buildingName, purchasableData);
         }
     }
 
-    // Get building name.
-    public string getBuildingName()
-    {
-        return buildingName;
-    }
-
-    // Get object data.
-    public PurchasableData getPurchasableData()
-    {
-        return purchasableData;
-    }
-
     // Show outline on placement.
-    public void showOutline(bool visible)
+    public void ShowOutline(bool visible)
     {
         // Show outlines.
-        if (purchasableData.isBought())
+        if (purchasableData.Bought)
         {
             buildingGameObject.GetComponent<Outline>().enabled = visible;
         }
@@ -142,10 +134,5 @@ public class BuildingPlacementController : MonoBehaviour
         {
             placementGameObject.GetComponent<Outline>().enabled = visible;
         }
-    }
-
-    public bool isRoundScene()
-    {
-        return roundScene;
     }
 }

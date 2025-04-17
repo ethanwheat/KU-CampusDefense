@@ -38,9 +38,9 @@ public class UpgradePanelController : MonoBehaviour
 
         // Set UI text.
         headerText.text = buildingName;
-        itemImage.sprite = defenseData.getSprite();
-        itemText.text = defenseData.getName();
-        itemDescription.text = defenseData.getDescription();
+        itemImage.sprite = defenseData.Sprite;
+        itemText.text = defenseData.ObjectName;
+        itemDescription.text = defenseData.Description;
 
         // Set stars, level, and cost.
         updateUI();
@@ -52,15 +52,15 @@ public class UpgradePanelController : MonoBehaviour
     // Set stars, level, and cost.
     void updateUI()
     {
-        int defenseLevel = defenseData.getLevel();
+        int defenseLevel = defenseData.Level;
 
-        starImagesController.updateStars(defenseLevel);
+        starImagesController.UpdateStars(defenseLevel);
 
         itemLevelText.text = "Level " + defenseLevel.ToString();
 
         if (defenseLevel < 3)
         {
-            costText.text = defenseData.getUpgradeCost().ToString();
+            costText.text = defenseData.GetUpgradeCost().ToString();
             upgradeContent.SetActive(true);
             fullyUpgradedText.SetActive(false);
         }
@@ -77,22 +77,22 @@ public class UpgradePanelController : MonoBehaviour
     {
         // Get dollar amount and building name.
         int dollars = gameDataController.Dollars;
-        int upgradeCost = defenseData.getUpgradeCost();
+        int upgradeCost = defenseData.GetUpgradeCost();
 
         if (dollars >= upgradeCost)
         {
             // Upgrade object, subtract cost, update dollar amounts on dollar UI, play upgrade sound, and update upgrade panel.
-            defenseData.upgradeLevel();
-            gameDataController.subtractDollars(upgradeCost);
+            defenseData.UpgradeLevel();
+            gameDataController.SubtractDollars(upgradeCost);
             buildingSceneUIController.updateDollarUI();
-            SoundManager.instance.playSoundEffect(upgradeSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(upgradeSoundEffect, transform, 1f);
             updateUI();
         }
         else
         {
             // Show error popup panel and close upgrade panel.
-            SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
-            messagePopupPanelController.showPanel("Insufficient Dollars", "You do not have enough dollars to upgrade " + buildingName + "!");
+            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+            messagePopupPanelController.ShowPanel("Insufficient Dollars", "You do not have enough dollars to upgrade " + buildingName + "!");
             closePanel();
         }
     }

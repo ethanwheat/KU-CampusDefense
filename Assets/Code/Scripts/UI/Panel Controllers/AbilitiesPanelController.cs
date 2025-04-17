@@ -18,13 +18,13 @@ public class AbilitiesPanelController : MonoBehaviour
 
     private bool alreadyOpened = false;
 
-    public void ShowAbilitiesPanel()
+    public void ShowPanel()
     {
         gameObject.SetActive(true);
         InitializeAbilities();
     }
 
-    public void CloseAbilitiesPanel()
+    public void ClosePanel()
     {
         gameObject.SetActive(false);
     }

@@ -6,8 +6,8 @@ public class ButtonController : MonoBehaviour
     [SerializeField] private AudioClip clickSoundEffect;
 
     // Play sound effect when button clicked.
-    public void onClick()
+    public void OnClick()
     {
-        SoundManager.instance.playSoundEffect(clickSoundEffect, transform, 1f);
+        SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, 1f);
     }
 }

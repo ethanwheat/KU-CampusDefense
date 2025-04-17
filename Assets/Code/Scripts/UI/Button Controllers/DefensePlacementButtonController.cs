@@ -17,20 +17,20 @@ public class DefensePlacementButtonController : MonoBehaviour
     [SerializeField] private Sprite selectedPressedSprite;
     [SerializeField] private Sprite selectedUnpressedSprite;
 
-    public void setData(DefenseData defenseData)
+    public void SetData(DefenseData defenseData)
     {
-        Sprite sprite = defenseData.getSprite();
+        Sprite sprite = defenseData.Sprite;
 
         if (sprite)
         {
             defenseImage.sprite = sprite;
         }
 
-        defenseText.text = defenseData.getName();
-        defenseCostText.text = defenseData.getCoinCost().ToString();
+        defenseText.text = defenseData.ObjectName;
+        defenseCostText.text = defenseData.CoinCost.ToString();
     }
 
-    public void onSelect()
+    public void OnSelect()
     {
         // Change current button to be selected.
         Image buttonImage = gameObject.GetComponent<Image>();
@@ -43,7 +43,7 @@ public class DefensePlacementButtonController : MonoBehaviour
         selectedButton.spriteState = spriteState;
     }
 
-    public void onDeselect()
+    public void OnDeselect()
     {
         // Reset pressed button sprite.
         Image selectedButtonImage = gameObject.GetComponent<Image>();

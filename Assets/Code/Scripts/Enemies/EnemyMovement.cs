@@ -51,7 +51,7 @@ public class EnemyMovement : MonoBehaviour
         if (roundManager != null)
         {
           roundManager.EnemyDefeated(this);
-          roundManager.damageFieldhouse(health);
+          roundManager.DamageFieldhouse(health);
         }
 
         Destroy(gameObject);
@@ -63,7 +63,7 @@ public class EnemyMovement : MonoBehaviour
   private void OnTriggerEnter(Collider other)
   {
     if (!other.TryGetComponent(out DefensePlacementController placementController)) return;
-    if (!placementController.isPlaced()) return;
+    if (!placementController.Placed) return;
 
     if (other.TryGetComponent(out IDefense defenseEffect))
     {
@@ -74,7 +74,7 @@ public class EnemyMovement : MonoBehaviour
   private void OnTriggerExit(Collider other)
   {
     if (!other.TryGetComponent(out DefensePlacementController placementController)) return;
-    if (!placementController.isPlaced()) return;
+    if (!placementController.Placed) return;
 
     if (other.TryGetComponent(out IDefense defenseEffect))
     {
@@ -114,9 +114,9 @@ public class EnemyMovement : MonoBehaviour
     if (roundManager != null)
     {
       roundManager.EnemyDefeated(this);
-      roundManager.addCoins(killReward);
+      roundManager.AddCoins(killReward);
     }
-    SoundManager.instance.playSoundEffect(enemyKilledSoundEffect, transform, .5f);
+    SoundManager.instance.PlaySoundEffect(enemyKilledSoundEffect, transform, .5f);
     Destroy(gameObject); // Or trigger a death animation, effects, etc.
   }
 

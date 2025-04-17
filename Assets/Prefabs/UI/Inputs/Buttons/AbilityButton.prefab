@@ -723,7 +723,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4987683273719394659}
         m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
-        m_MethodName: onClick
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

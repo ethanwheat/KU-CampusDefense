@@ -56,15 +56,16 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private Transform defensesParent;
     [SerializeField] private Transform placementParent;
 
+    public Transform PlacementParent => placementParent;
+    public Transform DefenseParent => defensesParent;
+    public int Coins => coins;
+
     private List<EnemyMovement> enemies = new List<EnemyMovement>();
     private List<Defense> defenses = new List<Defense>();
     private List<Defense> healthDefenses = new List<Defense>();
     private bool isAllEnemiesSlowed = false;
     private bool isAllEnemiesFrozen = false;
     private float slowMultiplier = 1;
-
-    public Transform PlacementParent => placementParent;
-    public Transform DefenseParent => defensesParent;
 
     void Awake()
     {
@@ -91,7 +92,7 @@ public class RoundManager : MonoBehaviour
             remainingEnemies += wave.fans + wave.cheerleaders + wave.coaches;
         }
 
-        getBonuses();
+        GetBonuses();
 
         StartCoroutine(StartRound());
     }
@@ -117,28 +118,28 @@ public class RoundManager : MonoBehaviour
     public void EndRound()
     {
         StopAllCoroutines();
-        SoundManager.instance.stopMusic(.5f);
+        SoundManager.instance.StopMusic(.5f);
         roundSceneUIController.closeExistingUI();
         StartCoroutine(EndRoundCoroutine());
     }
 
     private IEnumerator EndRoundCoroutine()
     {
-        yield return StartCoroutine(loadingBackgroundController.fadeInCoroutine(.5f));
+        yield return StartCoroutine(loadingBackgroundController.FadeInCoroutine(.5f));
         SceneManager.LoadScene("Building Scene");
     }
 
     public void RetryRound()
     {
         StopAllCoroutines();
-        SoundManager.instance.stopMusic(.5f);
+        SoundManager.instance.StopMusic(.5f);
         roundSceneUIController.closeExistingUI();
         StartCoroutine(RetryRoundCoroutine());
     }
 
     private IEnumerator RetryRoundCoroutine()
     {
-        yield return StartCoroutine(loadingBackgroundController.fadeInCoroutine(0.5f));
+        yield return StartCoroutine(loadingBackgroundController.FadeInCoroutine(0.5f));
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -194,43 +195,37 @@ public class RoundManager : MonoBehaviour
         return new Vector3(x, y, z);
     }
 
-    void getBonuses()
+    void GetBonuses()
     {
         BonusData[] bonuses = gameData.BonusData;
 
         // Find the highest unlocked coin bonus
         foreach (BonusData bonus in bonuses)
         {
-            if (bonus != null && bonus.isBought()) // Check if the bonus is unlocked
+            if (bonus != null && bonus.Bought) // Check if the bonus is unlocked
             {
-                if (bonus.getCoinBonus() > coinMultiplier)
+                if (bonus.CoinBonus > coinMultiplier)
                 {
-                    coinMultiplier = bonus.getCoinBonus();
+                    coinMultiplier = bonus.CoinBonus;
                 }
 
-                if (bonus.getDollarBonus() > dollarMultiplier)
+                if (bonus.DollarBonus > dollarMultiplier)
                 {
-                    dollarMultiplier = bonus.getDollarBonus();
+                    dollarMultiplier = bonus.DollarBonus;
                 }
             }
         }
     }
 
-    // Get coin amount.
-    public int getCoinAmount()
-    {
-        return coins;
-    }
-
     // Add coins.
-    public void addCoins(int amount)
+    public void AddCoins(int amount)
     {
         coins += (int)(amount * coinMultiplier);
         roundSceneUIController.updateCoinUI();
     }
 
     // Subtract coins.
-    public void subtractCoins(int amount)
+    public void SubtractCoins(int amount)
     {
         int futureAmount = coins - amount;
 
@@ -253,14 +248,14 @@ public class RoundManager : MonoBehaviour
         {
             GameOver();
 
-            int debt = gameData.getDebt();
+            int debt = gameData.GetDebt();
             int reward = (int)(currentRound.winPayout * dollarMultiplier);
 
             if (debt > 0)
             {
                 int owed = Mathf.Min((int)(reward * 0.3f), debt);  // 30% debt payment
-                gameData.payDebt(owed);
-                gameData.addDollars(reward - owed);
+                gameData.PayDebt(owed);
+                gameData.AddDollars(reward - owed);
                 roundSceneUIController.showRoundWonPanel(
                     gameData.RoundNumber.ToString(),
                     reward.ToString(),
@@ -270,7 +265,7 @@ public class RoundManager : MonoBehaviour
             }
             else
             {
-                gameData.addDollars(reward);
+                gameData.AddDollars(reward);
                 roundSceneUIController.showRoundWonPanel(
                     gameData.RoundNumber.ToString(),
                     reward.ToString(),
@@ -281,15 +276,15 @@ public class RoundManager : MonoBehaviour
 
             if (gameData.RoundNumber == currentRound.roundNumber)
             {
-                gameData.incrementRoundNumber();  // unlock next round
+                gameData.IncrementRoundNumber();  // unlock next round
             }
 
         }
     }
 
-    public void damageFieldhouse(float damage)
+    public void DamageFieldhouse(float damage)
     {
-        SoundManager.instance.playSoundEffect(allenFieldHouseDamageSoundEffect, transform, .5f);
+        SoundManager.instance.PlaySoundEffect(allenFieldHouseDamageSoundEffect, transform, .5f);
 
         fieldhouseHealth -= damage;
 
@@ -320,7 +315,7 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-    public void addDefense(Defense defense)
+    public void AddDefense(Defense defense)
     {
         defenses.Add(defense);
 
@@ -330,7 +325,7 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-    public void removeDefense(Defense defense)
+    public void RemoveDefense(Defense defense)
     {
         defenses.Remove(defense);
 
@@ -340,25 +335,25 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-    public void regenHealthOnDefenses()
+    public void RegenHealthOnDefenses()
     {
         foreach (var healthDefense in healthDefenses)
         {
             healthDefense.ResetHealth();
         }
 
-        int regenCost = getRegenCost();
+        int regenCost = GetRegenCost();
 
-        subtractCoins(regenCost);
+        SubtractCoins(regenCost);
     }
 
-    public int getRegenCost()
+    public int GetRegenCost()
     {
         int regenCost = 0;
 
         foreach (var healthDefense in healthDefenses)
         {
-            regenCost += healthDefense.getDefenseData().getCoinCost() / 2;
+            regenCost += healthDefense.getDefenseData().CoinCost / 2;
         }
 
         return regenCost;

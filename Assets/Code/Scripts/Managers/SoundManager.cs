@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
@@ -21,7 +18,6 @@ public class SoundManager : MonoBehaviour
     [Header("Settings Data Controller")]
     [SerializeField] private SettingsDataController settingsDataController;
 
-    private Transform soundsParent;
     private GameObject musicObject;
 
     void Awake()
@@ -41,41 +37,41 @@ public class SoundManager : MonoBehaviour
         // Play music if playMusicOnStart is true.
         if (playMusicOnStart)
         {
-            playMusic(music, transform, .5f, .5f);
+            PlayMusic(music, transform, .5f, .5f);
         }
     }
 
     // Play music.
-    public void playMusic(AudioClip audioClip, Transform transform, float volume, float duration)
+    public void PlayMusic(AudioClip audioClip, Transform transform, float volume, float duration)
     {
-        StartCoroutine(playMusicCoroutine(audioClip, transform, volume, duration));
+        StartCoroutine(PlayMusicCoroutine(audioClip, transform, volume, duration));
     }
 
     // Stop music.
-    public void stopMusic(float duration)
+    public void StopMusic(float duration)
     {
-        StartCoroutine(stopMusicCoroutine(duration));
+        StartCoroutine(StopMusicCoroutine(duration));
     }
 
     // Set music volume.
-    public void onMusicVolumeChange(float volume)
+    public void OnMusicVolumeChange(float volume)
     {
-        settingsDataController.setMusicVolume(volume);
+        settingsDataController.SetMusicVolume(volume);
 
         AudioSource audioSource = musicObject.GetComponent<AudioSource>();
         audioSource.volume = volume / 2;
     }
 
     // Play music coroutine.
-    IEnumerator playMusicCoroutine(AudioClip audioClip, Transform transform, float volume, float duration)
+    IEnumerator PlayMusicCoroutine(AudioClip audioClip, Transform transform, float volume, float duration)
     {
-        yield return stopMusicCoroutine(duration);
+        yield return StopMusicCoroutine(duration);
 
         // Get music volume.
-        float musicVolume = settingsDataController.getMusicVolume();
+        float musicVolume = settingsDataController.MusicVolume;
 
         // Create audio game object.
-        musicObject = createSoundObject(audioClip, transform);
+        musicObject = CreateSoundObject(audioClip, transform);
         musicObject.transform.parent = musicParent;
 
         // Create audio source.
@@ -98,7 +94,7 @@ public class SoundManager : MonoBehaviour
     }
 
     // Stop music coroutine.
-    IEnumerator stopMusicCoroutine(float duration)
+    IEnumerator StopMusicCoroutine(float duration)
     {
         if (musicObject)
         {
@@ -124,13 +120,13 @@ public class SoundManager : MonoBehaviour
     }
 
     // Play sound effect.
-    public void playSoundEffect(AudioClip audioClip, Transform transform, float volume)
+    public void PlaySoundEffect(AudioClip audioClip, Transform transform, float volume)
     {
         // Get sound effect volume.
-        float soundEffectsVolume = settingsDataController.getSoundEffectsVolume();
+        float soundEffectsVolume = settingsDataController.SoundEffectsVolume;
 
         // Create audio game object.
-        GameObject soundEffectObject = createSoundObject(audioClip, transform);
+        GameObject soundEffectObject = CreateSoundObject(audioClip, transform);
         soundEffectObject.transform.parent = soundEffectsParent;
 
         // Create audio source.
@@ -144,7 +140,7 @@ public class SoundManager : MonoBehaviour
     }
 
     // Create music object.
-    GameObject createSoundObject(AudioClip audioClip, Transform transform)
+    GameObject CreateSoundObject(AudioClip audioClip, Transform transform)
     {
         // Create audio game object.
         GameObject audioObject = new GameObject(audioClip.name);

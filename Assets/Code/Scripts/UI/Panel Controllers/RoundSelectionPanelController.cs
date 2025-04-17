@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -37,21 +36,21 @@ public class RoundSelectionPanelController : MonoBehaviour
 
                 btnObj.GetComponent<Button>().onClick.AddListener(() =>
                 {
-                    gameDataController.setSelectedRound(capturedRound);
-                    closePanel();
+                    gameDataController.SetSelectedRound(capturedRound);
+                    ClosePanel();
                 });
             }
         }
     }
 
     // Show message popup panel and set message popup panel data.
-    public void showPanel()
+    public void ShowPanel()
     {
         gameObject.SetActive(true);
     }
 
     // Close message popup panel.
-    public void closePanel()
+    public void ClosePanel()
     {
         gameObject.SetActive(false);
     }

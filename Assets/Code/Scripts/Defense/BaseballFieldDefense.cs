@@ -26,13 +26,13 @@ public class BaseballFieldDefense : Defense, IDefense
     void Start()
     {
         DefenseData defenseData = getDefenseData();
-        bool isBought = defenseData.isBought();
-        int level = defenseData.getLevel();
+        bool isBought = defenseData.Bought;
+        int level = defenseData.Level;
 
         if (isBought)
         {
             onDefenseStart.Invoke();
-            RoundManager.instance.addDefense(this);
+            RoundManager.instance.AddDefense(this);
             ballsPerWave += ballsIncreasePerLevel * (level - 1);
             StartCoroutine(FireBaseballWaves());
         }
@@ -57,7 +57,7 @@ public class BaseballFieldDefense : Defense, IDefense
             yield return new WaitForSeconds(timeBetweenBaseballs);
         }
 
-        SoundManager.instance.playSoundEffect(rechargeSoundEffect, transform, .5f);
+        SoundManager.instance.PlaySoundEffect(rechargeSoundEffect, transform, .5f);
         healthBar.UpdateHealthBar(ballsPerWave, ballsPerWave);
 
         yield return new WaitForSeconds(timeBetweenWaves);
@@ -72,7 +72,7 @@ public class BaseballFieldDefense : Defense, IDefense
 
         GameObject ball = Instantiate(baseballPrefab, transform.position + Vector3.up * 1.5f, Quaternion.LookRotation(direction));
         ball.transform.parent = GetProjectilesParent();
-        SoundManager.instance.playSoundEffect(shootSoundEffect, transform, .5f);
+        SoundManager.instance.PlaySoundEffect(shootSoundEffect, transform, .5f);
         // No need to manually apply speed — handled in Baseball.cs
     }
 

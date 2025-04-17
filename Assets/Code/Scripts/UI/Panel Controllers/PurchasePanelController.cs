@@ -26,20 +26,20 @@ public class PurchasePanelController : MonoBehaviour
     private BuildingPlacementController buildingPlacementController;
 
     // Load purchase panel data.
-    public void showPanel(BuildingPlacementController controller, PurchasableData data)
+    public void ShowPanel(BuildingPlacementController controller, PurchasableData data)
     {
         // Set building name and set object data.
         buildingPlacementController = controller;
         purchasableData = data;
 
         // Set UI sprite.
-        itemImage.sprite = purchasableData.getSprite();
+        itemImage.sprite = purchasableData.Sprite;
 
         // Set UI text.
-        headerText.text = buildingPlacementController.getBuildingName();
-        itemText.text = purchasableData.getName();
-        itemDescription.text = purchasableData.getDescription();
-        costText.text = purchasableData.getDollarCost().ToString();
+        headerText.text = buildingPlacementController.BuildingName;
+        itemText.text = purchasableData.ObjectName;
+        itemDescription.text = purchasableData.Description;
+        costText.text = purchasableData.DollarCost.ToString();
 
         // Show panel
         gameObject.SetActive(true);
@@ -47,36 +47,36 @@ public class PurchasePanelController : MonoBehaviour
 
     // Set object to bought, subtract dollars, create message popup panel, and update dollar UI
     // if player has enough dollars, else show error popup panel and close purchase panel.
-    public void onPurchase()
+    public void OnPurchase()
     {
         // Get dollar amount and building name.
         int dollars = gameDataController.Dollars;
-        int objectCost = purchasableData.getDollarCost();
-        string buildingName = buildingPlacementController.getBuildingName();
+        int objectCost = purchasableData.DollarCost;
+        string buildingName = buildingPlacementController.BuildingName;
 
         if (dollars >= objectCost)
         {
             // Set object as bought, subtract cost, play building placement sound,
             // create popup panel showing success, update dollar amounts on dollar UI, and close purchase panel.
-            purchasableData.setBought(true);
-            gameDataController.subtractDollars(objectCost);
-            SoundManager.instance.playSoundEffect(placementSoundEffect, transform, 1f);
-            messagePopupPanelController.showPanel("Item Purchased", "You have bought " + buildingName + " for " + objectCost.ToString() + " dollars!");
+            purchasableData.SetBought(true);
+            gameDataController.SubtractDollars(objectCost);
+            SoundManager.instance.PlaySoundEffect(placementSoundEffect, transform, 1f);
+            messagePopupPanelController.ShowPanel("Item Purchased", "You have bought " + buildingName + " for " + objectCost.ToString() + " dollars!");
             buildingSceneUIController.updateDollarUI();
-            buildingPlacementController.updatePlacementArea();
-            closePanel();
+            buildingPlacementController.UpdatePlacementArea();
+            ClosePanel();
         }
         else
         {
             // Show error popup panel and close purchase panel.
-            SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
-            messagePopupPanelController.showPanel("Insufficient Dollars", "You do not have enough dollars to buy " + buildingName + "!");
-            closePanel();
+            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+            messagePopupPanelController.ShowPanel("Insufficient Dollars", "You do not have enough dollars to buy " + buildingName + "!");
+            ClosePanel();
         }
     }
 
     // Close purchase panel.
-    public void closePanel()
+    public void ClosePanel()
     {
         gameObject.SetActive(false);
     }

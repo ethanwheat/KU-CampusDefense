@@ -20,7 +20,7 @@ public class MainMenuUIController : MonoBehaviour
     // Show menu.
     IEnumerator showMenu()
     {
-        yield return StartCoroutine(loadingBackgroundController.fadeOutCoroutine(.5f));
+        yield return StartCoroutine(loadingBackgroundController.FadeOutCoroutine(.5f));
         menuPanelFadeController.Show();
     }
 
@@ -28,7 +28,7 @@ public class MainMenuUIController : MonoBehaviour
     public void startGame()
     {
         // Stop music.
-        SoundManager.instance.stopMusic(.5f);
+        SoundManager.instance.StopMusic(.5f);
 
         // Start game coroutine.
         StartCoroutine(startGameCoroutine());
@@ -38,10 +38,10 @@ public class MainMenuUIController : MonoBehaviour
     IEnumerator startGameCoroutine()
     {
         // Wait until background fades in completly.
-        yield return StartCoroutine(loadingBackgroundController.fadeInCoroutine(.5f));
+        yield return StartCoroutine(loadingBackgroundController.FadeInCoroutine(.5f));
 
         // Reset game data.
-        gameDataController.resetGameData();
+        gameDataController.ResetGameData();
 
         // Load building scene.
         SceneManager.LoadScene("Building Scene");

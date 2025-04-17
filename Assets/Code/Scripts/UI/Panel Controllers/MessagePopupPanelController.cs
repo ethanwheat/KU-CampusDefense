@@ -7,7 +7,7 @@ public class MessagePopupPanelController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI messageText;
 
     // Show message popup panel and set message popup panel data.
-    public void showPanel(string title, string message)
+    public void ShowPanel(string title, string message)
     {
         headerText.text = title;
         messageText.text = message;
@@ -16,7 +16,7 @@ public class MessagePopupPanelController : MonoBehaviour
     }
 
     // Close message popup panel.
-    public void closePanel()
+    public void ClosePanel()
     {
         gameObject.SetActive(false);
     }

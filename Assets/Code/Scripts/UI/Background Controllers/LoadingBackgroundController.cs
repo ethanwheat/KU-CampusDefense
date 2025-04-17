@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class LoadingBackgroundController : MonoBehaviour
 {
     // Fade background in slowly.
-    public IEnumerator fadeInCoroutine(float duration)
+    public IEnumerator FadeInCoroutine(float duration)
     {
         gameObject.SetActive(true);
 
@@ -30,7 +30,7 @@ public class LoadingBackgroundController : MonoBehaviour
     }
 
     // Fade background out slowly.
-    public IEnumerator fadeOutCoroutine(float duration)
+    public IEnumerator FadeOutCoroutine(float duration)
     {
         gameObject.SetActive(true);
 

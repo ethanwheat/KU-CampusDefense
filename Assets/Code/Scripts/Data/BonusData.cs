@@ -7,15 +7,6 @@ public class BonusData : PurchasableData
     [SerializeField] private float dollarBonus;
     [SerializeField] private float coinBonus;
 
-    // Get dollar bonus.
-    public float getDollarBonus()
-    {
-        return dollarBonus;
-    }
-
-    // Get coin bonus.
-    public float getCoinBonus()
-    {
-        return coinBonus;
-    }
+    public float DollarBonus => dollarBonus;
+    public float CoinBonus => coinBonus;
 }

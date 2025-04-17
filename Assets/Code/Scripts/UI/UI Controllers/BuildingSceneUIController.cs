@@ -1,6 +1,5 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -36,7 +35,7 @@ public class BuildingSceneUIController : MonoBehaviour
         updateDollarUI();
 
         // Fade out background.
-        StartCoroutine(loadingBackgroundController.fadeOutCoroutine(.5f));
+        StartCoroutine(loadingBackgroundController.FadeOutCoroutine(.5f));
     }
 
     void Update()
@@ -79,7 +78,7 @@ public class BuildingSceneUIController : MonoBehaviour
         // If no raycat hit and there is a buildingPlacementController then hide outline.
         if (buildingPlacementController)
         {
-            buildingPlacementController.showOutline(false);
+            buildingPlacementController.ShowOutline(false);
         }
 
         // If no raycat hit and there is a loanBuildingOutline then hide outline.
@@ -93,9 +92,9 @@ public class BuildingSceneUIController : MonoBehaviour
     {
         // Get building placement controller, object data, isLocked, isBought, and isDefenseBuilding.
         buildingPlacementController = hit.collider.GetComponent<BuildingPlacementController>();
-        PurchasableData purchasableData = buildingPlacementController.getPurchasableData();
-        bool isLocked = purchasableData.isLocked();
-        bool isBought = purchasableData.isBought();
+        PurchasableData purchasableData = buildingPlacementController.PurchasableData;
+        bool isLocked = purchasableData.Locked;
+        bool isBought = purchasableData.Bought;
         bool isDefenseBuilding = hit.collider.CompareTag("DefenseBuilding");
 
         // Make sure the object is not locked.
@@ -107,7 +106,7 @@ public class BuildingSceneUIController : MonoBehaviour
         // Show outline.
         if (!isBought || isDefenseBuilding)
         {
-            buildingPlacementController.showOutline(true);
+            buildingPlacementController.ShowOutline(true);
         }
 
         // Check if mouse is clicked.
@@ -117,19 +116,19 @@ public class BuildingSceneUIController : MonoBehaviour
             closeExistingUI();
 
             // Play click sound effect.
-            SoundManager.instance.playSoundEffect(clickSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, 1f);
 
             // Show purchase panel with data if not bought.
-            if (!purchasableData.isBought())
+            if (!purchasableData.Bought)
             {
-                purchasePanelController.showPanel(buildingPlacementController, purchasableData);
+                purchasePanelController.ShowPanel(buildingPlacementController, purchasableData);
                 return;
             }
 
             // Show upgrade panel if object type is defense.
             if (isDefenseBuilding)
             {
-                upgradePanelController.showPanel(buildingPlacementController.getBuildingName(), (DefenseData)purchasableData);
+                upgradePanelController.showPanel(buildingPlacementController.BuildingName, (DefenseData)purchasableData);
                 return;
             }
         }
@@ -145,25 +144,25 @@ public class BuildingSceneUIController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // Play click sound effect.
-            SoundManager.instance.playSoundEffect(clickSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, 1f);
 
             // Close existing UI and show loan panel.
             closeExistingUI();
-            loanPanelController.showPanel();
+            loanPanelController.ShowPanel();
         }
     }
 
     // Start round.
     public void startRound()
     {
-        SoundManager.instance.stopMusic(.5f);
+        SoundManager.instance.StopMusic(.5f);
         StartCoroutine(startRoundCoroutine());
     }
 
     // Fade background in and load round scene.
     IEnumerator startRoundCoroutine()
     {
-        yield return StartCoroutine(loadingBackgroundController.fadeInCoroutine(.5f));
+        yield return StartCoroutine(loadingBackgroundController.FadeInCoroutine(.5f));
 
         SceneManager.LoadScene("Round Scene");
     }
@@ -178,9 +177,9 @@ public class BuildingSceneUIController : MonoBehaviour
     // Close existing UI.
     void closeExistingUI()
     {
-        purchasePanelController.closePanel();
+        purchasePanelController.ClosePanel();
         upgradePanelController.closePanel();
-        loanPanelController.closePanel();
-        messagePopupPanelController.closePanel();
+        loanPanelController.ClosePanel();
+        messagePopupPanelController.ClosePanel();
     }
 }

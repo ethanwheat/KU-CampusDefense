@@ -27,23 +27,23 @@ public class LoanInformationPanelController : MonoBehaviour
 
     private LoanData loanData;
 
-    public void setData(LoanData data)
+    public void SetData(LoanData data)
     {
         // Set loan data.
         loanData = data;
 
         // Set isLocked and debt.
-        bool isLocked = loanData.isLocked();
-        int debt = loanData.getDebt();
+        bool isLocked = loanData.Locked;
+        int debt = loanData.Debt;
 
         // Set title text and cost text.
-        titleText.text = loanData.getName();
-        costText.text = loanData.getAmount().ToString();
+        titleText.text = loanData.LoanName;
+        costText.text = loanData.Amount.ToString();
 
         // Show locked content.
         if (isLocked)
         {
-            lockedText.text = "Unlocks at round " + loanData.getUnlockRound() + ".";
+            lockedText.text = "Unlocks at round " + loanData.UnlockRound + ".";
             lockedContent.SetActive(true);
             return;
         }
@@ -52,28 +52,28 @@ public class LoanInformationPanelController : MonoBehaviour
         if (debt > 0)
         {
             takenDebtCost.text = debt.ToString();
-            takenLoanImage.sprite = loanData.getSprite();
+            takenLoanImage.sprite = loanData.Sprite;
             takenContent.SetActive(true);
             return;
         }
 
         // Show unlocked content.
-        unlockedLoanImage.sprite = loanData.getSprite();
+        unlockedLoanImage.sprite = loanData.Sprite;
         unlockedContent.SetActive(true);
     }
 
     // Play take loan sound effect, take loan and invoke onTakeLoan.
-    public void onTake()
+    public void OnTake()
     {
-        SoundManager.instance.playSoundEffect(takeLoanSoundEffect, transform, 1f);
-        loanData.takeLoan();
+        SoundManager.instance.PlaySoundEffect(takeLoanSoundEffect, transform, 1f);
+        loanData.TakeLoan();
         onTakeLoan.Invoke();
     }
 
     // Play make payment sound effect, invoke onLoanPayment.
-    public void onPayment()
+    public void OnPayment()
     {
-        SoundManager.instance.playSoundEffect(makePaymentSoundEffect, transform, 1f);
+        SoundManager.instance.PlaySoundEffect(makePaymentSoundEffect, transform, 1f);
         onLoanPayment.Invoke();
     }
 }

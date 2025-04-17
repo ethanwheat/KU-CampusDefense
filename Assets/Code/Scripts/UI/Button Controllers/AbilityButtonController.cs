@@ -1,9 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections;
-using UnityEngine.Events;
-using System;
 
 public class AbilityButtonController : MonoBehaviour
 {
@@ -69,7 +66,7 @@ public class AbilityButtonController : MonoBehaviour
             AbilityManager abilityManager = AbilityManager.instance;
 
             // Subtract dollars.
-            gameDataController.subtractDollars(dollarCost);
+            gameDataController.SubtractDollars(dollarCost);
             roundSceneUIController.updateDollarUI();
 
             // Start effect duration countdown
@@ -78,9 +75,9 @@ public class AbilityButtonController : MonoBehaviour
             abilityManager.ActivateAbility(abilityData);
 
             // Show message.
-            SoundManager.instance.playSoundEffect(abilityActivatedSoundEffect, transform, 1f);
-            messagePopupPanelController.showPanel("Ability activated", "The " + abilityData.AbilityName + " ability has been activated!");
-            abilitiesPanelController.CloseAbilitiesPanel();
+            SoundManager.instance.PlaySoundEffect(abilityActivatedSoundEffect, transform, 1f);
+            messagePopupPanelController.ShowPanel("Ability activated", "The " + abilityData.AbilityName + " ability has been activated!");
+            abilitiesPanelController.ClosePanel();
         }
         else
         {
@@ -90,9 +87,9 @@ public class AbilityButtonController : MonoBehaviour
 
     void showError(string title, string text)
     {
-        SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
-        messagePopupPanelController.showPanel(title, text);
-        abilitiesPanelController.CloseAbilitiesPanel();
+        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+        messagePopupPanelController.ShowPanel(title, text);
+        abilitiesPanelController.ClosePanel();
     }
 
     public void ShowTimer(bool isShowing)

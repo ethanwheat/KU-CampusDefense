@@ -19,51 +19,17 @@ public class PurchasableData : ScriptableObject
     [Header("Sprites")]
     [SerializeField] private Sprite sprite;
 
-    // Get the objects name.
-    public string getName()
-    {
-        return objectName;
-    }
-
-    // Get the objects description.
-    public string getDescription()
-    {
-        return description;
-    }
-
-    // Get objects dollar cost.
-    public int getDollarCost()
-    {
-        return dollarCost;
-    }
-
-    // Get objects unlock round.
-    public bool isLocked()
-    {
-        return unlockRound > gameDataController.RoundNumber;
-    }
-
-    // Get if the object is bought.
-    public bool isBought()
-    {
-        return bought;
-    }
-
-    // Get if the object is bought at start.
-    public bool isBoughtAtStart()
-    {
-        return boughtAtStart;
-    }
+    public string ObjectName => objectName;
+    public string Description => description;
+    public int DollarCost => dollarCost;
+    public bool Locked => unlockRound > gameDataController.RoundNumber;
+    public bool Bought => bought;
+    public bool BoughtAtStart => boughtAtStart;
+    public Sprite Sprite => sprite;
 
     // Set object to be bought or not.
-    public void setBought(bool boughtValue)
+    public void SetBought(bool boughtValue)
     {
         bought = boughtValue;
-    }
-
-    // Get sprite.
-    public Sprite getSprite()
-    {
-        return sprite;
     }
 }
