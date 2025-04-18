@@ -67,7 +67,7 @@ public class AbilityButtonController : MonoBehaviour
 
             // Subtract dollars.
             gameDataController.SubtractDollars(dollarCost);
-            roundSceneUIController.updateDollarUI();
+            roundSceneUIController.UpdateDollarUI();
 
             // Start effect duration countdown
             abilityManager.StartEffectRoutine(this, abilityData);

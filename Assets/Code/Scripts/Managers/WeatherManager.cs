@@ -76,7 +76,7 @@ public class WeatherManager : MonoBehaviour
         panelFadeController.Show();
 
         // Show message.
-        smallMessagePopupPanelController.showPanel("Rain Incoming! Enemies Slowed!");
+        smallMessagePopupPanelController.ShowPanel("Rain Incoming! Enemies Slowed!");
 
         // Set directionalLightDuration and elapsedTime.
         float directionalLightFadeDuration = .3f;

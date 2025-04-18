@@ -6,7 +6,7 @@ public class SmallMessagePopupPanel : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI headerText;
 
-    public void showPanel(string text)
+    public void ShowPanel(string text)
     {
         headerText.text = text;
         gameObject.SetActive(true);

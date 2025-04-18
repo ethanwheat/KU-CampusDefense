@@ -24,7 +24,7 @@ public class SettingsPanelController : MonoBehaviour
     }
 
     // Update panel with correct music volume and sound effect volume.
-    public void updatePanel()
+    public void UpdatePanel()
     {
         float musicVolume = settingsDataController.MusicVolume;
         float soundEffectsVolume = settingsDataController.SoundEffectsVolume;

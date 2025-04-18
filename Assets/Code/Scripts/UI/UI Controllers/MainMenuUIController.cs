@@ -14,28 +14,28 @@ public class MainMenuUIController : MonoBehaviour
     void Start()
     {
         // Call show menu coroutine.
-        StartCoroutine(showMenu());
+        StartCoroutine(ShowMenu());
     }
 
     // Show menu.
-    IEnumerator showMenu()
+    IEnumerator ShowMenu()
     {
         yield return StartCoroutine(loadingBackgroundController.FadeOutCoroutine(.5f));
         menuPanelFadeController.Show();
     }
 
     // Start game.
-    public void startGame()
+    public void StartGame()
     {
         // Stop music.
         SoundManager.instance.StopMusic(.5f);
 
         // Start game coroutine.
-        StartCoroutine(startGameCoroutine());
+        StartCoroutine(StartGameCoroutine());
     }
 
     // Fade background in, reset game data, and load building scene.
-    IEnumerator startGameCoroutine()
+    IEnumerator StartGameCoroutine()
     {
         // Wait until background fades in completly.
         yield return StartCoroutine(loadingBackgroundController.FadeInCoroutine(.5f));

@@ -32,7 +32,7 @@ public class BuildingSceneUIController : MonoBehaviour
         mainCamera = Camera.main;
 
         // Update dollar UI.
-        updateDollarUI();
+        UpdateDollarUI();
 
         // Fade out background.
         StartCoroutine(loadingBackgroundController.FadeOutCoroutine(.5f));
@@ -61,14 +61,14 @@ public class BuildingSceneUIController : MonoBehaviour
             // If hit collider tag is DefenseBuilding or BonusBuilding then call handleDefenseBonusBuilding.
             if (collider.CompareTag("DefenseBuilding") || collider.CompareTag("BonusBuilding"))
             {
-                handleDefenseBonusBuilding(hit);
+                HandleDefenseBonusBuilding(hit);
                 return;
             }
 
             // If hit collider tag is LoanBuilding then call handleLoanBuilding.
             if (collider.CompareTag("LoanBuilding"))
             {
-                handleLoanBuilding(hit);
+                HandleLoanBuilding(hit);
                 return;
             }
 
@@ -88,7 +88,7 @@ public class BuildingSceneUIController : MonoBehaviour
         }
     }
 
-    void handleDefenseBonusBuilding(RaycastHit hit)
+    void HandleDefenseBonusBuilding(RaycastHit hit)
     {
         // Get building placement controller, object data, isLocked, isBought, and isDefenseBuilding.
         buildingPlacementController = hit.collider.GetComponent<BuildingPlacementController>();
@@ -113,7 +113,7 @@ public class BuildingSceneUIController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // Close existing UI.
-            closeExistingUI();
+            CloseExistingUI();
 
             // Play click sound effect.
             SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, 1f);
@@ -128,13 +128,13 @@ public class BuildingSceneUIController : MonoBehaviour
             // Show upgrade panel if object type is defense.
             if (isDefenseBuilding)
             {
-                upgradePanelController.showPanel(buildingPlacementController.BuildingName, (DefenseData)purchasableData);
+                upgradePanelController.ShowPanel(buildingPlacementController.BuildingName, (DefenseData)purchasableData);
                 return;
             }
         }
     }
 
-    void handleLoanBuilding(RaycastHit hit)
+    void HandleLoanBuilding(RaycastHit hit)
     {
         // Set loanBuildingOutline and enable outline.
         loanBuildingOutline = hit.collider.GetComponent<Outline>();
@@ -147,20 +147,20 @@ public class BuildingSceneUIController : MonoBehaviour
             SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, 1f);
 
             // Close existing UI and show loan panel.
-            closeExistingUI();
+            CloseExistingUI();
             loanPanelController.ShowPanel();
         }
     }
 
     // Start round.
-    public void startRound()
+    public void StartRound()
     {
         SoundManager.instance.StopMusic(.5f);
-        StartCoroutine(startRoundCoroutine());
+        StartCoroutine(StartRoundCoroutine());
     }
 
     // Fade background in and load round scene.
-    IEnumerator startRoundCoroutine()
+    IEnumerator StartRoundCoroutine()
     {
         yield return StartCoroutine(loadingBackgroundController.FadeInCoroutine(.5f));
 
@@ -168,17 +168,17 @@ public class BuildingSceneUIController : MonoBehaviour
     }
 
     // Update the dollar UI.
-    public void updateDollarUI()
+    public void UpdateDollarUI()
     {
         // Update dollar text.
         dollarText.text = gameDataController.Dollars.ToString();
     }
 
     // Close existing UI.
-    void closeExistingUI()
+    void CloseExistingUI()
     {
         purchasePanelController.ClosePanel();
-        upgradePanelController.closePanel();
+        upgradePanelController.ClosePanel();
         loanPanelController.ClosePanel();
         messagePopupPanelController.ClosePanel();
     }

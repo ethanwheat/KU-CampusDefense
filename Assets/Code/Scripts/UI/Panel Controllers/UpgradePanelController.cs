@@ -30,7 +30,7 @@ public class UpgradePanelController : MonoBehaviour
     private DefenseData defenseData;
 
     // Load purchase panel data.
-    public void showPanel(string name, DefenseData data)
+    public void ShowPanel(string name, DefenseData data)
     {
         // Set building name and object data.
         buildingName = name;
@@ -43,14 +43,14 @@ public class UpgradePanelController : MonoBehaviour
         itemDescription.text = defenseData.Description;
 
         // Set stars, level, and cost.
-        updateUI();
+        UpdateUI();
 
         // Show panel
         gameObject.SetActive(true);
     }
 
     // Set stars, level, and cost.
-    void updateUI()
+    void UpdateUI()
     {
         int defenseLevel = defenseData.Level;
 
@@ -73,7 +73,7 @@ public class UpgradePanelController : MonoBehaviour
 
     // Set object to bought, subtract dollars, create message popup panel, and update dollar UI
     // if player has enough dollars, else show error popup panel and close purchase panel.
-    public void onUpgrade()
+    public void OnUpgrade()
     {
         // Get dollar amount and building name.
         int dollars = gameDataController.Dollars;
@@ -84,21 +84,21 @@ public class UpgradePanelController : MonoBehaviour
             // Upgrade object, subtract cost, update dollar amounts on dollar UI, play upgrade sound, and update upgrade panel.
             defenseData.UpgradeLevel();
             gameDataController.SubtractDollars(upgradeCost);
-            buildingSceneUIController.updateDollarUI();
+            buildingSceneUIController.UpdateDollarUI();
             SoundManager.instance.PlaySoundEffect(upgradeSoundEffect, transform, 1f);
-            updateUI();
+            UpdateUI();
         }
         else
         {
             // Show error popup panel and close upgrade panel.
             SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
             messagePopupPanelController.ShowPanel("Insufficient Dollars", "You do not have enough dollars to upgrade " + buildingName + "!");
-            closePanel();
+            ClosePanel();
         }
     }
 
     // Close purchase panel.
-    public void closePanel()
+    public void ClosePanel()
     {
         gameObject.SetActive(false);
     }

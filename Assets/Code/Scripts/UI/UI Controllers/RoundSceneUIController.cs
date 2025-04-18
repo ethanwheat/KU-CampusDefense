@@ -1,3 +1,4 @@
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,9 +20,6 @@ public class RoundSceneUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private TextMeshProUGUI waveText;
 
-    [Header("UI Elements")]
-    [SerializeField] private GameObject placeDefenseButton;
-
     [Header("Sounds")]
     [SerializeField] private AudioClip clickSoundEffect;
 
@@ -41,8 +39,8 @@ public class RoundSceneUIController : MonoBehaviour
         roundManager = RoundManager.instance;
 
         // Update dollar UI and coin UI.
-        updateDollarUI();
-        updateCoinUI();
+        UpdateDollarUI();
+        UpdateCoinUI();
 
         // Fade background out.
         StartCoroutine(loadingBackgroundController.FadeOutCoroutine(.5f));
@@ -71,7 +69,7 @@ public class RoundSceneUIController : MonoBehaviour
             // If hit collider tag is ObjectBuilding then call handleObjectBuilding.
             if (collider.CompareTag("HealthBuilding"))
             {
-                handleHealthBuilding(hit);
+                HandleHealthBuilding(hit);
                 return;
             }
 
@@ -85,7 +83,7 @@ public class RoundSceneUIController : MonoBehaviour
         }
     }
 
-    void handleHealthBuilding(RaycastHit hit)
+    void HandleHealthBuilding(RaycastHit hit)
     {
         // Set loanBuildingOutline and enable outline.
         healthBuildingOutline = hit.collider.GetComponent<Outline>();
@@ -98,32 +96,32 @@ public class RoundSceneUIController : MonoBehaviour
             SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, 1f);
 
             // Close existing UI and show loan panel.
-            closeExistingUI();
+            CloseExistingUI();
             regenHealthPanelController.ShowPanel();
         }
     }
 
     // Update dollar UI.
-    public void updateDollarUI()
+    public void UpdateDollarUI()
     {
         // Update dollar text.
         dollarText.text = gameDataController.Dollars.ToString();
     }
 
     // Update coin UI.
-    public void updateCoinUI()
+    public void UpdateCoinUI()
     {
         // Update coin text.
         coinText.text = roundManager.Coins.ToString();
     }
 
-    public void updateWaveUI(int currWave, int numWaves)
+    public void UpdateWaveUI(int currWave, int numWaves)
     {
         waveText.text = "Wave " + currWave.ToString() + "/" + numWaves.ToString();
     }
 
     // Show defense panel.
-    public void showDefensePanel()
+    public void ShowDefensePanel()
     {
         if (defensePanelController == null)
         {
@@ -131,7 +129,7 @@ public class RoundSceneUIController : MonoBehaviour
         }
         bool showPanel = !defensePanelController.gameObject.activeSelf;
 
-        closeExistingUI();
+        CloseExistingUI();
 
         if (showPanel)
         {
@@ -147,7 +145,7 @@ public class RoundSceneUIController : MonoBehaviour
         }
 
         bool showPanel = !abilitiesPanelController.gameObject.activeSelf;
-        closeExistingUI();
+        CloseExistingUI();
 
         if (showPanel)
         {
@@ -156,31 +154,46 @@ public class RoundSceneUIController : MonoBehaviour
     }
 
     // Close existing UI (This is buggy with the abilities panel)
-    public void showWavePopupPanel(string waveNum)
+    public void ShowWavePopupPanel(string waveNum)
     {
-        smallMessagePopupPanelController.showPanel("Wave " + waveNum);
+        smallMessagePopupPanelController.ShowPanel("Wave " + waveNum);
     }
 
-    public void showRoundWonPanel(string round, string reward, string loan, string total)
+    public void ShowRoundWonPanel(string round, string reward, string loan, string total)
     {
-        closeExistingUI();
-        placeDefenseButton.SetActive(false);
+        string[] avoid = { "RoundWonPanel", "DollarUI", "CoinUI", "WaveCount" };
+        HideAllUI(avoid);
         roundWonPanelController.ShowPanel(round, reward, loan, total);
     }
 
-    public void showRoundLostPanel()
+    public void ShowRoundLostPanel()
     {
-        closeExistingUI();
-        placeDefenseButton.SetActive(false);
+        string[] avoid = { "RoundLostPanel", "DollarUI", "CoinUI", "WaveCount" };
+        HideAllUI(avoid);
         roundLostPanelController.ShowPanel();
     }
 
     // Close existing UI.
-    public void closeExistingUI()
+    public void CloseExistingUI()
     {
         defensePanelController.ClosePanel();
         regenHealthPanelController.ClosePanel();
         messagePopupPanelController.ClosePanel();
         abilitiesPanelController.ClosePanel();
+    }
+
+    void HideAllUI(string[] avoid)
+    {
+        CloseExistingUI();
+
+        foreach (Transform transform in transform)
+        {
+            GameObject uiElement = transform.gameObject;
+
+            if (!avoid.Contains(uiElement.name) && uiElement.activeSelf)
+            {
+                uiElement.SetActive(false);
+            }
+        }
     }
 }

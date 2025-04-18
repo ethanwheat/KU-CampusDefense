@@ -62,7 +62,7 @@ public class PurchasePanelController : MonoBehaviour
             gameDataController.SubtractDollars(objectCost);
             SoundManager.instance.PlaySoundEffect(placementSoundEffect, transform, 1f);
             messagePopupPanelController.ShowPanel("Item Purchased", "You have bought " + buildingName + " for " + objectCost.ToString() + " dollars!");
-            buildingSceneUIController.updateDollarUI();
+            buildingSceneUIController.UpdateDollarUI();
             buildingPlacementController.UpdatePlacementArea();
             ClosePanel();
         }

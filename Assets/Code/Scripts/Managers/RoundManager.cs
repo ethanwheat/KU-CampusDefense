@@ -100,15 +100,15 @@ public class RoundManager : MonoBehaviour
     // Start round.
     IEnumerator StartRound()
     {
-        roundSceneUIController.updateWaveUI(currentWave + 1, numWaves);
+        roundSceneUIController.UpdateWaveUI(currentWave + 1, numWaves);
         yield return new WaitForSeconds(1f);
 
         while (currentWave < numWaves)
         {
             WeatherManager.instance.ResetWeatherForNewRound();
             WeatherManager.instance.TryActivateWeather();
-            roundSceneUIController.updateWaveUI(currentWave + 1, numWaves);
-            roundSceneUIController.showWavePopupPanel((currentWave + 1).ToString());
+            roundSceneUIController.UpdateWaveUI(currentWave + 1, numWaves);
+            roundSceneUIController.ShowWavePopupPanel((currentWave + 1).ToString());
             yield return StartCoroutine(SpawnEnemies(currentRound.waves[currentWave]));
             currentWave++;
             yield return new WaitForSeconds(10f);
@@ -119,7 +119,7 @@ public class RoundManager : MonoBehaviour
     {
         StopAllCoroutines();
         SoundManager.instance.StopMusic(.5f);
-        roundSceneUIController.closeExistingUI();
+        roundSceneUIController.CloseExistingUI();
         StartCoroutine(EndRoundCoroutine());
     }
 
@@ -133,7 +133,7 @@ public class RoundManager : MonoBehaviour
     {
         StopAllCoroutines();
         SoundManager.instance.StopMusic(.5f);
-        roundSceneUIController.closeExistingUI();
+        roundSceneUIController.CloseExistingUI();
         StartCoroutine(RetryRoundCoroutine());
     }
 
@@ -221,7 +221,7 @@ public class RoundManager : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += (int)(amount * coinMultiplier);
-        roundSceneUIController.updateCoinUI();
+        roundSceneUIController.UpdateCoinUI();
     }
 
     // Subtract coins.
@@ -232,7 +232,7 @@ public class RoundManager : MonoBehaviour
         if (futureAmount >= 0)
         {
             coins = futureAmount;
-            roundSceneUIController.updateCoinUI();
+            roundSceneUIController.UpdateCoinUI();
         }
     }
 
@@ -256,7 +256,7 @@ public class RoundManager : MonoBehaviour
                 int owed = Mathf.Min((int)(reward * 0.3f), debt);  // 30% debt payment
                 gameData.PayDebt(owed);
                 gameData.AddDollars(reward - owed);
-                roundSceneUIController.showRoundWonPanel(
+                roundSceneUIController.ShowRoundWonPanel(
                     gameData.RoundNumber.ToString(),
                     reward.ToString(),
                     "- $" + owed.ToString(),
@@ -266,7 +266,7 @@ public class RoundManager : MonoBehaviour
             else
             {
                 gameData.AddDollars(reward);
-                roundSceneUIController.showRoundWonPanel(
+                roundSceneUIController.ShowRoundWonPanel(
                     gameData.RoundNumber.ToString(),
                     reward.ToString(),
                     "",
@@ -296,7 +296,7 @@ public class RoundManager : MonoBehaviour
         if (fieldhouseHealth <= 0 && !gameOver)
         {
             GameOver();
-            roundSceneUIController.showRoundLostPanel();
+            roundSceneUIController.ShowRoundLostPanel();
         }
     }
 

@@ -61,7 +61,7 @@ public class LoanPanelController : MonoBehaviour
     // Update dollar UI and update panel.
     void RefreshUI()
     {
-        buildingSceneUIController.updateDollarUI();
+        buildingSceneUIController.UpdateDollarUI();
         UpdatePanel();
     }
 
