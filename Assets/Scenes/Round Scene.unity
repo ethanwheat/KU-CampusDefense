@@ -645,11 +645,6 @@ Transform:
   - {fileID: 1739801883}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1241488931 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8965466870352711862, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
-  m_PrefabInstance: {fileID: 1696650594}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1282737822 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8647825447028577094, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
@@ -1156,7 +1151,7 @@ PrefabInstance:
     - target: {fileID: 5771053496741340049, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
       propertyPath: placeDefenseButton
       value: 
-      objectReference: {fileID: 1241488931}
+      objectReference: {fileID: 0}
     - target: {fileID: 5771053496741340049, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
       propertyPath: roundLostPanelController
       value: 
@@ -1165,6 +1160,34 @@ PrefabInstance:
       propertyPath: wavePopupPanelController
       value: 
       objectReference: {fileID: 525901077}
+    - target: {fileID: 6353253439303244492, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353253439303244492, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353253439303244492, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 5932463853283302187}
+    - target: {fileID: 6353253439303244492, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353253439303244492, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: EndRound
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353253439303244492, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: RoundManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353253439303244492, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6656834757768644013, guid: 824037c3dca8dac43986d6864cc88ff9, type: 3}
       propertyPath: m_IsActive
       value: 0

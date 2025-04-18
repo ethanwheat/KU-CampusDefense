@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aba16d96d34af943b5669c9aab6d0ac, type: 3}
   m_Name: SetttingsDataController
   m_EditorClassIdentifier: 
-  musicVolume: 0
+  musicVolume: 1
   soundEffectsVolume: 1
