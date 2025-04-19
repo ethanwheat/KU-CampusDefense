@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using Mono.Cecil;
 
 public class RoundManager : MonoBehaviour
 {
@@ -52,12 +53,14 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
 
     [Header("Parents")]
+    [SerializeField] private Transform placementParent;
     [SerializeField] private Transform enemiesParent;
     [SerializeField] private Transform defensesParent;
-    [SerializeField] private Transform placementParent;
+    [SerializeField] private Transform projectilesParent;
 
     public Transform PlacementParent => placementParent;
-    public Transform DefenseParent => defensesParent;
+    public Transform DefensesParent => defensesParent;
+    public Transform ProjectilesParent => projectilesParent;
     public int Coins => coins;
 
     private List<EnemyMovement> enemies = new List<EnemyMovement>();

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TrackedBullet : Bullet
+public class TrackedProjectile : Projectile
 {
     private EnemyMovement target;
 
@@ -19,7 +19,7 @@ public class TrackedBullet : Bullet
 
         // Move towards the target
         Vector3 direction = target.transform.position - transform.position;
-        float distanceThisFrame = GetSpeed() * Time.deltaTime;
+        float distanceThisFrame = Speed * Time.deltaTime;
 
         transform.Translate(direction.normalized * distanceThisFrame, Space.World);
     }

@@ -10,11 +10,12 @@ public class TurretDefense : Defense, IDefense
     [SerializeField] private AudioClip shootSoundEffect;
 
     [Header("Turret Settings")]
+    [SerializeField] private bool faceEnemy = true;
     [SerializeField] private float fireRate = 1f; // Shots per second
     [SerializeField] private Transform firePoint; // Point where bullets are spawned
 
-    private float fireCountdown = 0f;
     private List<EnemyMovement> enemiesInRange = new List<EnemyMovement>();
+    private float fireCountdown = 0f;
     private float timeElapsed = 0f;
 
     void Update()
@@ -33,9 +34,12 @@ public class TurretDefense : Defense, IDefense
         if (nearestEnemy != null)
         {
             // Rotate turret head to face the enemy
-            Vector3 direction = nearestEnemy.transform.position - transform.position;
-            Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10);
+            if (faceEnemy)
+            {
+                Vector3 direction = nearestEnemy.transform.position - transform.position;
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10);
+            }
 
             // Shoot at the enemy
             if (fireCountdown <= 0f)
@@ -106,8 +110,8 @@ public class TurretDefense : Defense, IDefense
         }
 
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        bullet.transform.parent = GetProjectilesParent();
-        if (bullet.TryGetComponent(out TrackedBullet bulletScript))
+        bullet.transform.parent = RoundManager.instance.ProjectilesParent;
+        if (bullet.TryGetComponent(out TrackedProjectile bulletScript))
         {
             bulletScript.SetTarget(target);
         }

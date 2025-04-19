@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4650319978575768567
 CanvasRenderer:
@@ -165,7 +165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6377916619401901514
 RectTransform:
   m_ObjectHideFlags: 0
@@ -175,7 +175,7 @@ RectTransform:
   m_GameObject: {fileID: 6511807902069587531}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3962614519056502345}
@@ -184,7 +184,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0.5}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &307536207833014888
 Canvas:
@@ -3168,7 +3168,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 125
+  m_Radius: 50
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8453790566547876889
 MonoBehaviour:
@@ -3259,10 +3259,11 @@ MonoBehaviour:
   defenseData: {fileID: 11400000, guid: 2b2d76fc4badc4cda8c0a6bd4e330677, type: 2}
   healthBar: {fileID: 58168574569903344}
   destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
-  maxHealth: 100
-  healthIncreasePerLevel: 50
+  maxHealth: 30
+  healthIncreasePerLevel: 10
   bulletPrefab: {fileID: 3333216577341784471, guid: 0ed2b4574dbdf4592b8a9d5a34b3b707, type: 3}
   shootSoundEffect: {fileID: 8300000, guid: d2329c56333ef254e920c0f3b272e64b, type: 3}
+  faceEnemy: 1
   fireRate: 1
   firePoint: {fileID: 6342761048916866480}
 --- !u!1 &6672386744193232201

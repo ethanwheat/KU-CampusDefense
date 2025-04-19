@@ -23,7 +23,7 @@ public class BaseballFieldDefense : Defense, IDefense
     [Header("Unity Events")]
     [SerializeField] private UnityEvent onDefenseStart;
 
-    void Start()
+    public override void Start()
     {
         DefenseData defenseData = getDefenseData();
         bool isBought = defenseData.Bought;
@@ -32,10 +32,11 @@ public class BaseballFieldDefense : Defense, IDefense
         if (isBought)
         {
             onDefenseStart.Invoke();
-            RoundManager.instance.AddDefense(this);
             ballsPerWave += ballsIncreasePerLevel * (level - 1);
             StartCoroutine(FireBaseballWaves());
         }
+
+        base.Start();
     }
 
     private IEnumerator FireBaseballWaves()
@@ -71,7 +72,7 @@ public class BaseballFieldDefense : Defense, IDefense
         Vector3 direction = Quaternion.Euler(0, angle, 0) * Vector3.forward;
 
         GameObject ball = Instantiate(baseballPrefab, transform.position + Vector3.up * 1.5f, Quaternion.LookRotation(direction));
-        ball.transform.parent = GetProjectilesParent();
+        ball.transform.parent = RoundManager.instance.ProjectilesParent;
         SoundManager.instance.PlaySoundEffect(shootSoundEffect, transform, .5f);
         // No need to manually apply speed — handled in Baseball.cs
     }

@@ -174,4 +174,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 100
   damage: 25
+  destroyOnEnemyHit: 1
   lifeTime: 5
+  growthRate: 0

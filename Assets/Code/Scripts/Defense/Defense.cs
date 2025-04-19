@@ -19,7 +19,7 @@ public class Defense : MonoBehaviour
     private RoundManager roundManager;
     private SoundManager soundManager;
 
-    void Start()
+    public virtual void Start()
     {
         roundManager = RoundManager.instance;
         soundManager = SoundManager.instance;
@@ -28,7 +28,7 @@ public class Defense : MonoBehaviour
         maxHealth += healthIncreasePerLevel * (defenseLevel - 1);
         ResetHealth();
 
-        transform.parent = roundManager.DefenseParent;
+        transform.parent = roundManager.DefensesParent;
         roundManager.AddDefense(this);
     }
 
@@ -80,11 +80,5 @@ public class Defense : MonoBehaviour
     public HealthBar GetHealthBar()
     {
         return healthBar;
-    }
-
-    // Get projectiles parent.
-    public Transform GetProjectilesParent()
-    {
-        return GameObject.Find("Projectiles").transform;
     }
 }

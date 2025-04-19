@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8447674838566847370
 CanvasRenderer:
@@ -5373,7 +5373,7 @@ RectTransform:
   m_GameObject: {fileID: 6124332443968422323}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1580648638588340199}
@@ -5382,7 +5382,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0.5}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &9144074781605474087
 Canvas:
@@ -5599,6 +5599,7 @@ MonoBehaviour:
   healthIncreasePerLevel: 10
   bulletPrefab: {fileID: 4376966964805629839, guid: 9961c4610855d449b88a3b3afac28201, type: 3}
   shootSoundEffect: {fileID: 8300000, guid: 702dd70943b09814789e1e5017b3ca8a, type: 3}
+  faceEnemy: 1
   fireRate: 1
   firePoint: {fileID: 6699522880739028948}
 --- !u!1001 &7987413265313410988

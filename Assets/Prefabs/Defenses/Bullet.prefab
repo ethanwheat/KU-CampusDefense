@@ -203,6 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 50
   damage: 30
+  destroyOnEnemyHit: 1
 --- !u!65 &4124577006885858301
 BoxCollider:
   m_ObjectHideFlags: 0

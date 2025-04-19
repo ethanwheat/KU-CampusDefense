@@ -235,9 +235,10 @@ MonoBehaviour:
   allenFieldHouseDamageSoundEffect: {fileID: 8300000, guid: 5ccdcde176da9744d8838ca0fdd47932, type: 3}
   roundSceneUIController: {fileID: 0}
   loadingBackgroundController: {fileID: 0}
+  placementParent: {fileID: 7045058554721417536}
   enemiesParent: {fileID: 6421931705708880764}
   defensesParent: {fileID: 3189944864858491484}
-  placementParent: {fileID: 7045058554721417536}
+  projectilesParent: {fileID: 4837568856536189479}
 --- !u!1 &7700811736497174906
 GameObject:
   m_ObjectHideFlags: 0
