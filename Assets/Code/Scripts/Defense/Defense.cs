@@ -3,7 +3,7 @@ using UnityEngine;
 public class Defense : MonoBehaviour
 {
     [Header("Defense Data")]
-    [SerializeField] private DefenseData defenseData;
+    [SerializeField] private DefenseDataObject defenseData;
 
     [Header("Health Bar Script")]
     [SerializeField] private HealthBar healthBar;
@@ -24,7 +24,7 @@ public class Defense : MonoBehaviour
         roundManager = RoundManager.instance;
         soundManager = SoundManager.instance;
 
-        int defenseLevel = getDefenseData().Level;
+        int defenseLevel = getDefenseDataObject().Level;
         maxHealth += healthIncreasePerLevel * (defenseLevel - 1);
         ResetHealth();
 
@@ -71,7 +71,7 @@ public class Defense : MonoBehaviour
     }
 
     // Get defense data.
-    public DefenseData getDefenseData()
+    public DefenseDataObject getDefenseDataObject()
     {
         return defenseData;
     }

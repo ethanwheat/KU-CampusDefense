@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "AbilityData", menuName = "Scriptable Objects/AbilityData")]
-public class AbilityData : ScriptableObject
+[CreateAssetMenu(fileName = "AbilityDataObject", menuName = "Scriptable Objects/AbilityDataObject")]
+public class AbilityDataObject : ScriptableObject
 {
     [Header("Ability Information")]
     [SerializeField] private string abilityName;

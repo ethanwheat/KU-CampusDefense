@@ -9,7 +9,7 @@ public class MainMenuUIController : MonoBehaviour
     [SerializeField] private PanelFadeController menuPanelFadeController;
 
     [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
+    [SerializeField] private GameDataObject gameDataController;
 
     void Start()
     {

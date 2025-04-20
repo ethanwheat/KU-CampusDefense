@@ -13,8 +13,8 @@ public class AbilitiesPanelController : MonoBehaviour
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
     [Header("Game Data")]
-    [SerializeField] private AbilityData[] abilityData;
-    [SerializeField] private GameDataController gameDataController;
+    [SerializeField] private AbilityDataObject[] abilityData;
+    [SerializeField] private GameDataObject gameDataController;
 
     private bool alreadyOpened = false;
 

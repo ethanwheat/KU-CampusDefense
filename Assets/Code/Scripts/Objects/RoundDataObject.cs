@@ -10,7 +10,7 @@ public class Wave
 }
 
 [CreateAssetMenu(fileName = "NewRound", menuName = "Round Configuration")]
-public class RoundData : ScriptableObject
+public class RoundDataObject : ScriptableObject
 {
     public Wave[] waves;  // Array of waves
     public int roundNumber;

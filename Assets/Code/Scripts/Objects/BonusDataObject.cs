@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BonusData", menuName = "Scriptable Objects/BonusData")]
-public class BonusData : PurchasableData
+[CreateAssetMenu(fileName = "BonusDataObject", menuName = "Scriptable Objects/BonusDataObject")]
+public class BonusDataObject : PurchasableDataObject
 {
     [Header("Currency Bonus")]
     [SerializeField] private float dollarBonus;

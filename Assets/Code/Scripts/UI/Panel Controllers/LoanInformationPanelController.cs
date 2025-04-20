@@ -25,9 +25,9 @@ public class LoanInformationPanelController : MonoBehaviour
     public UnityEvent onTakeLoan;
     public UnityEvent onLoanPayment;
 
-    private LoanData loanData;
+    private LoanDataObject loanData;
 
-    public void SetData(LoanData data)
+    public void SetData(LoanDataObject data)
     {
         // Set loan data.
         loanData = data;

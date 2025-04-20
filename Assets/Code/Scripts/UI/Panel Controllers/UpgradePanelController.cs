@@ -24,13 +24,13 @@ public class UpgradePanelController : MonoBehaviour
     [SerializeField] private AudioClip errorSoundEffect;
 
     [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
+    [SerializeField] private GameDataObject gameDataController;
 
     private string buildingName;
-    private DefenseData defenseData;
+    private DefenseDataObject defenseData;
 
     // Load purchase panel data.
-    public void ShowPanel(string name, DefenseData data)
+    public void ShowPanel(string name, DefenseDataObject data)
     {
         // Set building name and object data.
         buildingName = name;

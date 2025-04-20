@@ -4,10 +4,10 @@ using UnityEngine.UI;
 public class RoundSelectionPanelController : MonoBehaviour
 {
     [Header("Round Configuration")]
-    [SerializeField] private RoundData[] allRounds;
+    [SerializeField] private RoundDataObject[] allRounds;
 
     [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
+    [SerializeField] private GameDataObject gameDataController;
 
     [Header("UI References")]
     [SerializeField] private Transform contentParent; // Content under the ScrollView
@@ -32,7 +32,7 @@ public class RoundSelectionPanelController : MonoBehaviour
                 // set button label
                 btnObj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Round " + round.roundNumber;
 
-                RoundData capturedRound = round; // closure-safe
+                RoundDataObject capturedRound = round; // closure-safe
 
                 btnObj.GetComponent<Button>().onClick.AddListener(() =>
                 {

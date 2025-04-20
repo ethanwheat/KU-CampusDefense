@@ -4,7 +4,7 @@ public class BuildingPlacementController : MonoBehaviour
 {
     [Header("Building Information")]
     [SerializeField] private string buildingName;
-    [SerializeField] private PurchasableData purchasableData;
+    [SerializeField] private PurchasableDataObject purchasableData;
 
     [Header("Scene Information")]
     [SerializeField] private bool roundScene;
@@ -22,10 +22,10 @@ public class BuildingPlacementController : MonoBehaviour
     [SerializeField] private Material unavailableMaterial;
 
     [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
+    [SerializeField] private GameDataObject gameDataController;
 
     public string BuildingName => buildingName;
-    public PurchasableData PurchasableData => purchasableData;
+    public PurchasableDataObject PurchasableDataObject => purchasableData;
     public bool RoundScene => roundScene;
 
 

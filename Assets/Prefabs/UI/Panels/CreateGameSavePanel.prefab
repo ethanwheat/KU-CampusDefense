@@ -990,7 +990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87532d03c06f5ab4988d11a4aae39dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveNameInput: {fileID: 3821519795891968837}
+  gameSaveNameInput: {fileID: 3821519795891968837}
 --- !u!1001 &2373459189587253777
 PrefabInstance:
   m_ObjectHideFlags: 0

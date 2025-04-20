@@ -20,13 +20,13 @@ public class PurchasePanelController : MonoBehaviour
     [SerializeField] private AudioClip errorSoundEffect;
 
     [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
+    [SerializeField] private GameDataObject gameDataController;
 
-    private PurchasableData purchasableData;
+    private PurchasableDataObject purchasableData;
     private BuildingPlacementController buildingPlacementController;
 
     // Load purchase panel data.
-    public void ShowPanel(BuildingPlacementController controller, PurchasableData data)
+    public void ShowPanel(BuildingPlacementController controller, PurchasableDataObject data)
     {
         // Set building name and set object data.
         buildingPlacementController = controller;

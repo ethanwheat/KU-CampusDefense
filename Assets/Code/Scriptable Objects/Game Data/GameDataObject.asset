@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b9be8f6e82a8734b8ab39eaf09efea4, type: 3}
-  m_Name: GameDataController
+  m_Name: GameDataObject
   m_EditorClassIdentifier: 
   startingDollarAmount: 100
   roundNumber: 1

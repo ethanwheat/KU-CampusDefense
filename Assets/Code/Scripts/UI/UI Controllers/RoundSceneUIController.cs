@@ -24,7 +24,7 @@ public class RoundSceneUIController : MonoBehaviour
     [SerializeField] private AudioClip clickSoundEffect;
 
     [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
+    [SerializeField] private GameDataObject gameDataController;
 
     private Camera mainCamera;
     private Outline healthBuildingOutline;

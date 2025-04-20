@@ -28,8 +28,8 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private PathNode[] startNodes;
 
     [Header("Round Configuration")]
-    [SerializeField] private RoundData currentRound;
-    [SerializeField] private GameDataController gameData;
+    [SerializeField] private RoundDataObject currentRound;
+    [SerializeField] private GameDataObject gameData;
     [SerializeField] private float coinMultiplier = 1;
     [SerializeField] private float dollarMultiplier = 1;
 
@@ -200,10 +200,10 @@ public class RoundManager : MonoBehaviour
 
     void GetBonuses()
     {
-        BonusData[] bonuses = gameData.BonusData;
+        BonusDataObject[] bonuses = gameData.BonusDataObject;
 
         // Find the highest unlocked coin bonus
-        foreach (BonusData bonus in bonuses)
+        foreach (BonusDataObject bonus in bonuses)
         {
             if (bonus != null && bonus.Bought) // Check if the bonus is unlocked
             {
@@ -356,7 +356,7 @@ public class RoundManager : MonoBehaviour
 
         foreach (var healthDefense in healthDefenses)
         {
-            regenCost += healthDefense.getDefenseData().CoinCost / 2;
+            regenCost += healthDefense.getDefenseDataObject().CoinCost / 2;
         }
 
         return regenCost;

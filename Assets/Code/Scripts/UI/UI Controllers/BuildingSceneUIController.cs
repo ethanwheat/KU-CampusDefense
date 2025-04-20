@@ -20,7 +20,7 @@ public class BuildingSceneUIController : MonoBehaviour
     [SerializeField] private AudioClip clickSoundEffect;
 
     [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
+    [SerializeField] private GameDataObject gameDataController;
 
     private Camera mainCamera;
     private BuildingPlacementController buildingPlacementController;
@@ -92,7 +92,7 @@ public class BuildingSceneUIController : MonoBehaviour
     {
         // Get building placement controller, object data, isLocked, isBought, and isDefenseBuilding.
         buildingPlacementController = hit.collider.GetComponent<BuildingPlacementController>();
-        PurchasableData purchasableData = buildingPlacementController.PurchasableData;
+        PurchasableDataObject purchasableData = buildingPlacementController.PurchasableDataObject;
         bool isLocked = purchasableData.Locked;
         bool isBought = purchasableData.Bought;
         bool isDefenseBuilding = hit.collider.CompareTag("DefenseBuilding");
@@ -128,7 +128,7 @@ public class BuildingSceneUIController : MonoBehaviour
             // Show upgrade panel if object type is defense.
             if (isDefenseBuilding)
             {
-                upgradePanelController.ShowPanel(buildingPlacementController.BuildingName, (DefenseData)purchasableData);
+                upgradePanelController.ShowPanel(buildingPlacementController.BuildingName, (DefenseDataObject)purchasableData);
                 return;
             }
         }

@@ -16,7 +16,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private Transform soundEffectsParent;
 
     [Header("Settings Data Controller")]
-    [SerializeField] private SettingsDataController settingsDataController;
+    [SerializeField] private SettingsDataObject settingsDataController;
 
     private GameObject musicObject;
 

@@ -18,7 +18,7 @@ public class LoanPanelController : MonoBehaviour
     [SerializeField] private AudioClip errorSoundEffect;
 
     [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
+    [SerializeField] private GameDataObject gameDataController;
 
     // Load purchase panel data.
     public void ShowPanel()
@@ -42,13 +42,13 @@ public class LoanPanelController : MonoBehaviour
         }
 
         // Get loan data.
-        LoanData[] loanData = gameDataController.LoanData;
+        LoanDataObject[] loanData = gameDataController.LoanDataObject;
 
         // Create loan information panels.
         for (int i = 0; i < loanData.Length; i++)
         {
             // Create loan information panel, set position, set data, add onTakeLoan listener, onLoanPayment listener.
-            LoanData data = loanData[i];
+            LoanDataObject data = loanData[i];
             GameObject loanInformationPanel = Instantiate(loanInformationPanelPrefab, loanInformation);
             LoanInformationPanelController loanInformationPanelController = loanInformationPanel.GetComponent<LoanInformationPanelController>();
             loanInformationPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -80 * i - 37.5f, 0);
@@ -66,7 +66,7 @@ public class LoanPanelController : MonoBehaviour
     }
 
     // Make payment
-    void OnPayment(LoanData loanData)
+    void OnPayment(LoanDataObject loanData)
     {
         // Get loan name, dollars, and debt.
         string loanName = loanData.LoanName;

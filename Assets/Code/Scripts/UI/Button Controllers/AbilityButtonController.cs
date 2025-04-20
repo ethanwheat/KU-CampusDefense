@@ -18,9 +18,9 @@ public class AbilityButtonController : MonoBehaviour
     [SerializeField] private AudioClip errorSoundEffect;
 
     [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
+    [SerializeField] private GameDataObject gameDataController;
 
-    private AbilityData abilityData;
+    private AbilityDataObject abilityData;
     private bool isOnCooldown = false;
     private bool isEffectActive = false;
     private AbilitiesPanelController abilitiesPanelController;
@@ -33,7 +33,7 @@ public class AbilityButtonController : MonoBehaviour
         if (timerText != null) timerText.gameObject.SetActive(false);
     }
 
-    public void Initialize(AbilityData data, AbilitiesPanelController abilities, RoundSceneUIController roundSceneUI, MessagePopupPanelController messagePopup)
+    public void Initialize(AbilityDataObject data, AbilitiesPanelController abilities, RoundSceneUIController roundSceneUI, MessagePopupPanelController messagePopup)
     {
         abilityData = data;
         abilitiesPanelController = abilities;

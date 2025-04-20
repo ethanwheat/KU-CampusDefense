@@ -8,7 +8,7 @@ public class SettingsPanelController : MonoBehaviour
     [SerializeField] private Slider soundEffectsVolumeSlider;
 
     [Header("Settings Data Controller")]
-    [SerializeField] private SettingsDataController settingsDataController;
+    [SerializeField] private SettingsDataObject settingsDataController;
 
     private SoundManager soundManager;
 

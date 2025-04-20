@@ -17,7 +17,7 @@ public class DefensePlacementButtonController : MonoBehaviour
     [SerializeField] private Sprite selectedPressedSprite;
     [SerializeField] private Sprite selectedUnpressedSprite;
 
-    public void SetData(DefenseData defenseData)
+    public void SetData(DefenseDataObject defenseData)
     {
         Sprite sprite = defenseData.Sprite;
 

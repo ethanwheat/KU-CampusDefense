@@ -1,8 +1,8 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DefenseData", menuName = "Scriptable Objects/DefenseData")]
+[CreateAssetMenu(fileName = "DefenseDataObject", menuName = "Scriptable Objects/DefenseDataObject")]
 
-public class DefenseData : PurchasableData
+public class DefenseDataObject : PurchasableDataObject
 {
     [Header("Defense Information")]
     [SerializeField] private bool isShownInDefensePanel;

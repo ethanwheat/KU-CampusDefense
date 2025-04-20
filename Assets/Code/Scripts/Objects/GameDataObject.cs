@@ -1,27 +1,27 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GameDataController", menuName = "Scriptable Objects/GameDataController")]
-public class GameDataController : ScriptableObject
+[CreateAssetMenu(fileName = "GameObject", menuName = "Scriptable Objects/GameObject")]
+public class GameDataObject : ScriptableObject
 {
     [Header("Game Initialization")]
     [SerializeField] private int startingDollarAmount;
 
     [Header("Game Data")]
     [SerializeField] private int roundNumber;
-    [SerializeField] private RoundData selectedRound;
+    [SerializeField] private RoundDataObject selectedRound;
     [SerializeField] private int dollars;
-    [SerializeField] private DefenseData[] defenseData;
-    [SerializeField] private AbilityData[] abilityData;
-    [SerializeField] private BonusData[] bonusData;
-    [SerializeField] private LoanData[] loanData;
+    [SerializeField] private DefenseDataObject[] defenseData;
+    [SerializeField] private AbilityDataObject[] abilityData;
+    [SerializeField] private BonusDataObject[] bonusData;
+    [SerializeField] private LoanDataObject[] loanData;
 
     public int RoundNumber => roundNumber;
-    public RoundData SelectedRound => selectedRound;
+    public RoundDataObject SelectedRound => selectedRound;
     public int Dollars => dollars;
-    public DefenseData[] DefenseData => defenseData;
-    public BonusData[] BonusData => bonusData;
-    public LoanData[] LoanData => loanData;
-    public AbilityData[] AbilityData => abilityData;
+    public DefenseDataObject[] DefenseDataObject => defenseData;
+    public BonusDataObject[] BonusDataObject => bonusData;
+    public LoanDataObject[] LoanDataObject => loanData;
+    public AbilityDataObject[] AbilityDataObject => abilityData;
 
     // Increment round number.
     public void IncrementRoundNumber()
@@ -30,7 +30,7 @@ public class GameDataController : ScriptableObject
     }
 
     // Set selected round.
-    public void SetSelectedRound(RoundData currRound)
+    public void SetSelectedRound(RoundDataObject currRound)
     {
         selectedRound = currRound;
     }
