@@ -991,6 +991,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSaveNameInput: {fileID: 3821519795891968837}
+  onCreateGameSave:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &2373459189587253777
 PrefabInstance:
   m_ObjectHideFlags: 0

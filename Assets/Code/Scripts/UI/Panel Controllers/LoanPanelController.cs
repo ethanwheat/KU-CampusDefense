@@ -42,7 +42,7 @@ public class LoanPanelController : MonoBehaviour
         }
 
         // Get loan data.
-        LoanDataObject[] loanData = gameDataController.LoanDataObject;
+        LoanDataObject[] loanData = gameDataController.LoanDataObjects;
 
         // Create loan information panels.
         for (int i = 0; i < loanData.Length; i++)

@@ -1,6 +1,15 @@
+using System;
+using UnityEditor;
+
 [System.Serializable]
 public class PurchasableData
 {
     public string objectName;
-    public bool bought;
+
+    public string ObjectName => objectName;
+
+    public PurchasableData(string name)
+    {
+        objectName = name;
+    }
 }

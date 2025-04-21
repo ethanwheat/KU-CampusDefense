@@ -1,27 +1,26 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "GameObject", menuName = "Scriptable Objects/GameObject")]
 public class GameDataObject : ScriptableObject
 {
-    [Header("Game Initialization")]
-    [SerializeField] private int startingDollarAmount;
-
     [Header("Game Data")]
     [SerializeField] private int roundNumber;
     [SerializeField] private RoundDataObject selectedRound;
     [SerializeField] private int dollars;
-    [SerializeField] private DefenseDataObject[] defenseData;
-    [SerializeField] private AbilityDataObject[] abilityData;
-    [SerializeField] private BonusDataObject[] bonusData;
-    [SerializeField] private LoanDataObject[] loanData;
+    [SerializeField] private DefenseDataObject[] defenseDataObjects;
+    [SerializeField] private AbilityDataObject[] abilityDataObjects;
+    [SerializeField] private BonusDataObject[] bonusDataObjects;
+    [SerializeField] private LoanDataObject[] loanDataObjects;
 
     public int RoundNumber => roundNumber;
     public RoundDataObject SelectedRound => selectedRound;
     public int Dollars => dollars;
-    public DefenseDataObject[] DefenseDataObject => defenseData;
-    public BonusDataObject[] BonusDataObject => bonusData;
-    public LoanDataObject[] LoanDataObject => loanData;
-    public AbilityDataObject[] AbilityDataObject => abilityData;
+    public DefenseDataObject[] DefenseDataObjects => defenseDataObjects;
+    public BonusDataObject[] BonusDataObjects => bonusDataObjects;
+    public LoanDataObject[] LoanDataObjects => loanDataObjects;
+    public AbilityDataObject[] AbilityDataObjects => abilityDataObjects;
 
     // Increment round number.
     public void IncrementRoundNumber()
@@ -57,7 +56,7 @@ public class GameDataObject : ScriptableObject
     {
         int debt = 0;
 
-        foreach (var data in loanData)
+        foreach (var data in loanDataObjects)
         {
             debt += data.Debt;
         }
@@ -70,7 +69,7 @@ public class GameDataObject : ScriptableObject
     {
         int remaining = amount;
 
-        foreach (var data in loanData)
+        foreach (var data in loanDataObjects)
         {
             int debt = data.Debt;
 
@@ -83,32 +82,60 @@ public class GameDataObject : ScriptableObject
         }
     }
 
-    // Reset game data.
-    public void ResetGameData()
+    // Set game data.
+    public void SetGameData(GameData gameData)
     {
-        // Reset dollars to starting dollar amount and round number to 1.
-        dollars = startingDollarAmount;
-        roundNumber = 1;
+        dollars = gameData.Dollars;
+        roundNumber = gameData.RoundNumber;
 
-        // Reset defense data.
-        foreach (var data in defenseData)
+        Dictionary<string, DefenseData> defenseDataDictionary = gameData.defenseData.ToDictionary(d => d.ObjectName);
+
+        foreach (var defenseObject in defenseDataObjects)
         {
-            bool isBoughtAtStart = data.BoughtAtStart;
-            data.SetBought(isBoughtAtStart);
-            data.ResetLevel();
+            string objectName = defenseObject.ObjectName;
+
+            if (defenseDataDictionary.TryGetValue(objectName, out DefenseData matchingData))
+            {
+                defenseObject.SetBought(true);
+                defenseObject.SetLevel(matchingData.Level);
+            }
+            else
+            {
+                defenseObject.SetBought(false);
+                defenseObject.ResetLevel();
+            }
         }
 
-        // Reset bonus data.
-        foreach (var data in bonusData)
+        Dictionary<string, BonusData> bonusDataDictionary = gameData.bonusData.ToDictionary(b => b.ObjectName);
+
+        foreach (var bonusObject in bonusDataObjects)
         {
-            bool isBoughtAtStart = data.BoughtAtStart;
-            data.SetBought(isBoughtAtStart);
+            string objectName = bonusObject.ObjectName;
+
+            if (bonusDataDictionary.TryGetValue(objectName, out BonusData matchingData))
+            {
+                bonusObject.SetBought(true);
+            }
+            else
+            {
+                bonusObject.SetBought(false);
+            }
         }
 
-        // Reset loan data.
-        foreach (var data in loanData)
+        Dictionary<string, LoanData> loanDataDictionary = gameData.loanData.ToDictionary(l => l.LoanName);
+
+        foreach (var loanObject in loanDataObjects)
         {
-            data.ResetLoan();
+            string objectName = loanObject.LoanName;
+
+            if (loanDataDictionary.TryGetValue(objectName, out LoanData matchingData))
+            {
+                loanObject.SetDebt(matchingData.Debt);
+            }
+            else
+            {
+                loanObject.SetDebt(0);
+            }
         }
     }
 }

@@ -8,7 +8,6 @@ public class PurchasableDataObject : ScriptableObject
     [SerializeField] private string description;
     [SerializeField] private int dollarCost;
     [SerializeField] private int unlockRound;
-    [SerializeField] private bool boughtAtStart;
 
     [Header("Object Data")]
     [SerializeField] private bool bought;
@@ -24,7 +23,6 @@ public class PurchasableDataObject : ScriptableObject
     public int DollarCost => dollarCost;
     public bool Locked => unlockRound > gameDataController.RoundNumber;
     public bool Bought => bought;
-    public bool BoughtAtStart => boughtAtStart;
     public Sprite Sprite => sprite;
 
     // Set object to be bought or not.

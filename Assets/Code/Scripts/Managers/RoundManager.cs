@@ -200,7 +200,7 @@ public class RoundManager : MonoBehaviour
 
     void GetBonuses()
     {
-        BonusDataObject[] bonuses = gameData.BonusDataObject;
+        BonusDataObject[] bonuses = gameData.BonusDataObjects;
 
         // Find the highest unlocked coin bonus
         foreach (BonusDataObject bonus in bonuses)

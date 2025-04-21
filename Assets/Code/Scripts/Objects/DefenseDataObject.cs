@@ -43,6 +43,11 @@ public class DefenseDataObject : PurchasableDataObject
         level++;
     }
 
+    public void SetLevel(int newLevel)
+    {
+        level = newLevel;
+    }
+
     public void ResetLevel()
     {
         level = 1;

@@ -16,8 +16,7 @@ MonoBehaviour:
   description: 'Blocks all types of defenders, breaks eventually '
   dollarCost: 0
   unlockRound: 0
-  boughtAtStart: 0
-  bought: 1
+  bought: 0
   gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
   sprite: {fileID: -779828453, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   isShownInDefensePanel: 1

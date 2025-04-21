@@ -44,7 +44,7 @@ public class DefensePanelController : MonoBehaviour
         }
 
         // Get updated defenses.
-        defenseData = gameDataController.DefenseDataObject;
+        defenseData = gameDataController.DefenseDataObjects;
 
         // Set intial index to 0.
         int index = 0;
