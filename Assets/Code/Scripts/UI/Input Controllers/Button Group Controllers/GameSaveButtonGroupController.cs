@@ -10,14 +10,14 @@ public class GameSaveButtonGroupController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI creationDateText;
 
     [Header("Unity Events")]
-    [SerializeField] public UnityEvent onLoadGame;
-    [SerializeField] public UnityEvent onDeleteSave;
+    [SerializeField] public UnityEvent OnLoadGame;
+    [SerializeField] public UnityEvent OnDeleteSave;
 
-    public void SetData(GameSave gameSave)
+    public void SetData(GameDataMeta meta)
     {
-        saveText.text = gameSave.name;
+        saveText.text = meta.Name;
 
-        DateTime parsedTimed = DateTime.Parse(gameSave.creationTime);
+        DateTime parsedTimed = DateTime.Parse(meta.CreationTime);
         DateTime localTime = parsedTimed.ToLocalTime();
         string formattedTime = localTime.ToString("M/d/yyyy h:mm tt");
 
@@ -26,11 +26,11 @@ public class GameSaveButtonGroupController : MonoBehaviour
 
     public void LoadGame()
     {
-        onLoadGame.Invoke();
+        OnLoadGame.Invoke();
     }
 
     public void DeleteSave()
     {
-        onDeleteSave.Invoke();
+        OnDeleteSave.Invoke();
     }
 }

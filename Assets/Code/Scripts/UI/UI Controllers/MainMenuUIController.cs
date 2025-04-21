@@ -27,29 +27,20 @@ public class MainMenuUIController : MonoBehaviour
     }
 
     // Start game.
-    public void StartGame(GameData gameData)
+    public void StartGame()
     {
-        // Check to see if game data was found.
-        if (gameData == null)
-        {
-            messagePopupPanelController.ShowPanel("Something went wrong!", "The game data could not be found.");
-        }
-
         // Stop music.
         SoundManager.instance.StopMusic(.5f);
 
         // Start game coroutine.
-        StartCoroutine(StartGameCoroutine(gameData));
+        StartCoroutine(StartGameCoroutine());
     }
 
     // Fade background in, reset game data, and load building scene.
-    IEnumerator StartGameCoroutine(GameData gameData)
+    IEnumerator StartGameCoroutine()
     {
         // Wait until background fades in completly.
         yield return StartCoroutine(loadingBackgroundController.FadeInCoroutine(.5f));
-
-        // Reset game data.
-        gameDataController.SetGameData(gameData);
 
         // Load building scene.
         SceneManager.LoadScene("Building Scene");

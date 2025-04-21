@@ -25,7 +25,7 @@ public class DefensePlacementController : MonoBehaviour
 
     private Camera mainCamera;
     private Outline outline;
-    private DefenseDataObject defenseData;
+    private DefenseObject defenseData;
     private bool dataLoaded = false;
     private bool placed;
     private bool validPlacement;
@@ -102,7 +102,7 @@ public class DefensePlacementController : MonoBehaviour
     }
 
     // Load data to be used in the placement.
-    public void LoadData(DefenseDataObject data)
+    public void LoadData(DefenseObject data)
     {
         // Set data.
         defenseData = data;

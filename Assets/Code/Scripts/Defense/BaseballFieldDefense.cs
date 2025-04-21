@@ -25,9 +25,8 @@ public class BaseballFieldDefense : Defense, IDefense
 
     public override void Start()
     {
-        DefenseDataObject defenseData = getDefenseDataObject();
-        bool isBought = defenseData.Bought;
-        int level = defenseData.Level;
+        bool isBought = DefenseData.Bought;
+        int level = DefenseData.Level;
 
         if (isBought)
         {

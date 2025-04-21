@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using Mono.Cecil;
 
 public class RoundManager : MonoBehaviour
 {
@@ -28,8 +27,8 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private PathNode[] startNodes;
 
     [Header("Round Configuration")]
-    [SerializeField] private RoundDataObject currentRound;
-    [SerializeField] private GameDataObject gameData;
+    [SerializeField] private RoundObject currentRound;
+    [SerializeField] private GameDataObject gameDataObject;
     [SerializeField] private float coinMultiplier = 1;
     [SerializeField] private float dollarMultiplier = 1;
 
@@ -70,6 +69,8 @@ public class RoundManager : MonoBehaviour
     private bool isAllEnemiesFrozen = false;
     private float slowMultiplier = 1;
 
+    private GameData gameData;
+
     void Awake()
     {
         if (!instance)
@@ -84,7 +85,8 @@ public class RoundManager : MonoBehaviour
 
     void Start()
     {
-        currentRound = gameData.SelectedRound;
+        gameData = GameDataManager.instance.GameData;
+        currentRound = gameDataObject.SelectedRound;
         fieldhouseHealth = currentRound.fieldhouseHealth;
         maxFieldhouseHealth = fieldhouseHealth;
 
@@ -200,10 +202,10 @@ public class RoundManager : MonoBehaviour
 
     void GetBonuses()
     {
-        BonusDataObject[] bonuses = gameData.BonusDataObjects;
+        List<BonusData> bonuses = gameData.BonusData;
 
         // Find the highest unlocked coin bonus
-        foreach (BonusDataObject bonus in bonuses)
+        foreach (BonusData bonus in bonuses)
         {
             if (bonus != null && bonus.Bought) // Check if the bonus is unlocked
             {
@@ -356,7 +358,7 @@ public class RoundManager : MonoBehaviour
 
         foreach (var healthDefense in healthDefenses)
         {
-            regenCost += healthDefense.getDefenseDataObject().CoinCost / 2;
+            regenCost += healthDefense.DefenseObject.CoinCost / 2;
         }
 
         return regenCost;

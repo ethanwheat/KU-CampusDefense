@@ -18,7 +18,7 @@ public class DefensePanelController : MonoBehaviour
     [Header("Game Data Controller")]
     [SerializeField] private GameDataObject gameDataController;
 
-    private DefenseDataObject[] defenseData;
+    private DefenseObject[] defenseData;
     private GameObject selectedPlacementButton;
     private GameObject currentDefensePlacement;
 
@@ -44,7 +44,7 @@ public class DefensePanelController : MonoBehaviour
         }
 
         // Get updated defenses.
-        defenseData = gameDataController.DefenseDataObjects;
+        defenseData = gameDataController.DefenseObjects;
 
         // Set intial index to 0.
         int index = 0;
@@ -68,7 +68,7 @@ public class DefensePanelController : MonoBehaviour
     }
 
     // Select a defense in the UI and create placement.
-    void StartPlacement(GameObject placementButton, DefenseDataObject defense)
+    void StartPlacement(GameObject placementButton, DefenseObject defense)
     {
         // Cancel previous placement.
         CancelPlacement();
@@ -97,7 +97,7 @@ public class DefensePanelController : MonoBehaviour
     }
 
     // Show error popup message and close panel.
-    void PlacementFailed(DefenseDataObject defenseData)
+    void PlacementFailed(DefenseObject defenseData)
     {
         SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
         messagePopupPanelController.ShowPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.ObjectName + "!");

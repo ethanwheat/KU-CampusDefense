@@ -22,11 +22,11 @@ public class PurchasePanelController : MonoBehaviour
     [Header("Game Data Controller")]
     [SerializeField] private GameDataObject gameDataController;
 
-    private PurchasableDataObject purchasableData;
+    private PurchasableObject purchasableData;
     private BuildingPlacementController buildingPlacementController;
 
     // Load purchase panel data.
-    public void ShowPanel(BuildingPlacementController controller, PurchasableDataObject data)
+    public void ShowPanel(BuildingPlacementController controller, PurchasableObject data)
     {
         // Set building name and set object data.
         buildingPlacementController = controller;

@@ -1,12 +1,10 @@
 [System.Serializable]
 public class DefenseData : PurchasableData
 {
-    public int level;
+    public int Level;
 
-    public int Level => level;
-
-    public DefenseData(string name, int startingLevel = 1) : base(name)
+    public DefenseData(string name, bool bought, int startingLevel = 1) : base(name, bought)
     {
-        level = startingLevel;
+        Level = startingLevel;
     }
 }

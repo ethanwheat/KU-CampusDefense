@@ -4,7 +4,7 @@ public class BuildingPlacementController : MonoBehaviour
 {
     [Header("Building Information")]
     [SerializeField] private string buildingName;
-    [SerializeField] private PurchasableDataObject purchasableData;
+    [SerializeField] private PurchasableObject purchasableObject;
 
     [Header("Scene Information")]
     [SerializeField] private bool roundScene;
@@ -25,14 +25,17 @@ public class BuildingPlacementController : MonoBehaviour
     [SerializeField] private GameDataObject gameDataController;
 
     public string BuildingName => buildingName;
-    public PurchasableDataObject PurchasableDataObject => purchasableData;
+    public PurchasableObject PurchasableObject => purchasableObject;
     public bool RoundScene => roundScene;
 
-
+    private DefenseData defenseData;
     private Transform overlays;
 
     void Start()
     {
+        // Set defense data.
+        defenseData = GameDataManager.instance.GameData.GetDefenseData(purchasableObject.ObjectName);
+
         // Show placement area.
         UpdatePlacementArea();
     }
@@ -43,12 +46,8 @@ public class BuildingPlacementController : MonoBehaviour
         // Reset placement area.
         ResetPlacementArea();
 
-        // Store if object is bought and locked.
-        bool isBought = purchasableData.Bought;
-        bool isLocked = purchasableData.Locked;
-
         // Check if defense is bought.
-        if (isBought)
+        if (defenseData.Bought)
         {
             // Show building if defense is bought.
             buildingGameObject.SetActive(true);
@@ -61,9 +60,6 @@ public class BuildingPlacementController : MonoBehaviour
         {
             CreateOverlay();
         }
-
-        // Set placement material
-        SetPlacementMaterial(isLocked);
 
         // Set placement as active.
         placementGameObject.SetActive(true);
@@ -85,12 +81,12 @@ public class BuildingPlacementController : MonoBehaviour
     }
 
     // If defense is unlocked and is not round scene then change color to available material else set to unavailable color.
-    void SetPlacementMaterial(bool isLocked)
+    void SetPlacementMaterial()
     {
         // Get mesh renderer.
         MeshRenderer meshRenderer = placementGameObject.GetComponent<MeshRenderer>();
 
-        if (!isLocked && !roundScene)
+        if (defenseData != null && !roundScene)
         {
             meshRenderer.material = availableMaterial;
         }
@@ -110,7 +106,7 @@ public class BuildingPlacementController : MonoBehaviour
             overlays.localPosition = new Vector3(0, 1, 0);
         }
 
-        if (purchasableData.Locked)
+        if (defenseData != null)
         {
             GameObject overlay = Instantiate(lockedBuildingOverlayPrefab, overlays);
             overlay.GetComponent<LockedBuildingOverlayController>().SetData(buildingName);
@@ -118,7 +114,7 @@ public class BuildingPlacementController : MonoBehaviour
         else
         {
             GameObject overlay = Instantiate(unlockedBuildingOverlayPrefab, overlays);
-            overlay.GetComponent<UnlockedBuildingOverlayController>().SetData(buildingName, purchasableData);
+            overlay.GetComponent<UnlockedBuildingOverlayController>().SetData(buildingName, purchasableObject);
         }
     }
 
@@ -126,7 +122,7 @@ public class BuildingPlacementController : MonoBehaviour
     public void ShowOutline(bool visible)
     {
         // Show outlines.
-        if (purchasableData.Bought)
+        if (defenseData.Bought)
         {
             buildingGameObject.GetComponent<Outline>().enabled = visible;
         }

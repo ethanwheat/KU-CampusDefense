@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SettingsDataObject", menuName = "Scriptable Objects/SettingsDataObject")]
-public class SettingsDataObject : ScriptableObject
+public class SettingsObject : ScriptableObject
 {
     [Header("Volume")]
     [SerializeField] private float musicVolume = 1;

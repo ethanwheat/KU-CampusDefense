@@ -15,17 +15,16 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
 
     void OnEnable()
     {
-        List<GameSave> gameSaves = GameSaveController.GetGameSaveList().GameSaves;
+        GameDataManager gameDataManager = GameDataManager.instance;
+        List<GameDataMeta> gameDataMeta = gameDataManager.GetAllGameMetaData();
 
-        foreach (var gameSave in gameSaves)
+        foreach (var meta in gameDataMeta)
         {
             GameObject buttonGroup = Instantiate(gameSaveButtonGroupPrefab, content);
             GameSaveButtonGroupController gameSaveButtonGroupController = buttonGroup.GetComponent<GameSaveButtonGroupController>();
-            gameSaveButtonGroupController.SetData(gameSave);
-
-            GameData gameData = GameDataController.GetGameData(gameSave.Id);
-            gameSaveButtonGroupController.onLoadGame.AddListener(() => mainMenuUIController.StartGame(gameData));
-            gameSaveButtonGroupController.onDeleteSave.AddListener(() => DeleteSave(buttonGroup, gameSave));
+            gameSaveButtonGroupController.SetData(meta);
+            gameSaveButtonGroupController.OnLoadGame.AddListener(() => StartGame(meta));
+            gameSaveButtonGroupController.OnDeleteSave.AddListener(() => DeleteSave(buttonGroup, meta));
         }
     }
 
@@ -37,9 +36,21 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
         }
     }
 
-    private void DeleteSave(GameObject buttonGroup, GameSave gameSave)
+    private void StartGame(GameDataMeta gameDataMeta)
     {
-        GameSaveController.DeleteGameSave(gameSave.Id);
+        if (GameDataManager.instance.LoadGameData(gameDataMeta.Id))
+        {
+            mainMenuUIController.StartGame();
+        }
+        else
+        {
+            Debug.Log("Could not load.");
+        }
+    }
+
+    private void DeleteSave(GameObject buttonGroup, GameDataMeta gameDataMeta)
+    {
+        GameDataManager.instance.DeleteGameData(gameDataMeta.Id);
         Destroy(buttonGroup);
     }
 }

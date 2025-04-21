@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Defense : MonoBehaviour
 {
-    [Header("Defense Data")]
-    [SerializeField] private DefenseDataObject defenseData;
+    [Header("Defense Data Object")]
+    [SerializeField] private DefenseObject defenseObject;
 
     [Header("Health Bar Script")]
     [SerializeField] private HealthBar healthBar;
@@ -16,15 +16,23 @@ public class Defense : MonoBehaviour
     [SerializeField] private float healthIncreasePerLevel = 50f;
 
     private float health;
+    private GameDataManager gameDataManager;
     private RoundManager roundManager;
     private SoundManager soundManager;
+    private DefenseData defenseData;
+
+    public DefenseObject DefenseObject => defenseObject;
+    public DefenseData DefenseData => defenseData;
 
     public virtual void Start()
     {
+        gameDataManager = GameDataManager.instance;
         roundManager = RoundManager.instance;
         soundManager = SoundManager.instance;
 
-        int defenseLevel = getDefenseDataObject().Level;
+        gameDataManager.GameData.GetDefenseData(defenseObject.ObjectName);
+
+        int defenseLevel = defenseObject.Level;
         maxHealth += healthIncreasePerLevel * (defenseLevel - 1);
         ResetHealth();
 
@@ -68,12 +76,6 @@ public class Defense : MonoBehaviour
         roundManager.RemoveDefense(this);
         soundManager.PlaySoundEffect(destroySoundEffect, transform, .5f);
         Destroy(gameObject);
-    }
-
-    // Get defense data.
-    public DefenseDataObject getDefenseDataObject()
-    {
-        return defenseData;
     }
 
     // Get health bar.

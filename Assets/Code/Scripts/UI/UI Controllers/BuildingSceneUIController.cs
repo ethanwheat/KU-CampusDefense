@@ -92,7 +92,7 @@ public class BuildingSceneUIController : MonoBehaviour
     {
         // Get building placement controller, object data, isLocked, isBought, and isDefenseBuilding.
         buildingPlacementController = hit.collider.GetComponent<BuildingPlacementController>();
-        PurchasableDataObject purchasableData = buildingPlacementController.PurchasableDataObject;
+        PurchasableObject purchasableData = buildingPlacementController.PurchasableObject;
         bool isLocked = purchasableData.Locked;
         bool isBought = purchasableData.Bought;
         bool isDefenseBuilding = hit.collider.CompareTag("DefenseBuilding");
@@ -128,7 +128,7 @@ public class BuildingSceneUIController : MonoBehaviour
             // Show upgrade panel if object type is defense.
             if (isDefenseBuilding)
             {
-                upgradePanelController.ShowPanel(buildingPlacementController.BuildingName, (DefenseDataObject)purchasableData);
+                upgradePanelController.ShowPanel(buildingPlacementController.BuildingName, (DefenseObject)purchasableData);
                 return;
             }
         }

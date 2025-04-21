@@ -2,8 +2,8 @@
 #if UNITY_EDITOR
 using UnityEditor;
 
-[CustomEditor(typeof(AbilityDataObject))]
-public class AbilityDataObjectDrawer : Editor
+[CustomEditor(typeof(AbilityObject))]
+public class AbilityObjectDrawer : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -20,7 +20,7 @@ public class AbilityDataObjectDrawer : Editor
 
         // Only show slow multiplier if type is SlowAll
         var typeProperty = serializedObject.FindProperty("type");
-        if ((AbilityDataObject.AbilityType)typeProperty.enumValueIndex == AbilityDataObject.AbilityType.SlowAll)
+        if ((AbilityObject.AbilityType)typeProperty.enumValueIndex == AbilityObject.AbilityType.SlowAll)
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("slowMultiplier"));
         }

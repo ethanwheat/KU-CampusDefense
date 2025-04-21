@@ -27,10 +27,10 @@ public class UpgradePanelController : MonoBehaviour
     [SerializeField] private GameDataObject gameDataController;
 
     private string buildingName;
-    private DefenseDataObject defenseData;
+    private DefenseObject defenseData;
 
     // Load purchase panel data.
-    public void ShowPanel(string name, DefenseDataObject data)
+    public void ShowPanel(string name, DefenseObject data)
     {
         // Set building name and object data.
         buildingName = name;
@@ -75,15 +75,18 @@ public class UpgradePanelController : MonoBehaviour
     // if player has enough dollars, else show error popup panel and close purchase panel.
     public void OnUpgrade()
     {
+        // Get game data.
+        GameData gameData = GameDataManager.instance.GameData;
+
         // Get dollar amount and building name.
-        int dollars = gameDataController.Dollars;
+        int dollars = gameData.Dollars;
         int upgradeCost = defenseData.GetUpgradeCost();
 
         if (dollars >= upgradeCost)
         {
             // Upgrade object, subtract cost, update dollar amounts on dollar UI, play upgrade sound, and update upgrade panel.
             defenseData.UpgradeLevel();
-            gameDataController.SubtractDollars(upgradeCost);
+            gameData.SubtractDollars(upgradeCost);
             buildingSceneUIController.UpdateDollarUI();
             SoundManager.instance.PlaySoundEffect(upgradeSoundEffect, transform, 1f);
             UpdateUI();
