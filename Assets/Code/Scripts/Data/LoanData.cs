@@ -2,21 +2,17 @@
 public class LoanData
 {
     public string LoanName;
-    public int Amount;
     public int Debt;
 
+    [System.NonSerialized]
     private GameData gameData;
 
-    public LoanData(GameData gameData, int amount)
+    public LoanData(GameData gameData, string loanName, int debt)
     {
         this.gameData = gameData;
-        Amount = amount;
-    }
 
-    public void TakeLoan()
-    {
-        gameData.AddDollars(Amount);
-        Debt += Amount;
+        LoanName = loanName;
+        Debt = debt;
     }
 
     public void PayDebt(int amount)

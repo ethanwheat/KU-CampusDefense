@@ -19,27 +19,24 @@ public class PurchasePanelController : MonoBehaviour
     [SerializeField] private AudioClip placementSoundEffect;
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataObject gameDataController;
-
-    private PurchasableObject purchasableData;
+    private PurchasableObject purchasableObject;
     private BuildingPlacementController buildingPlacementController;
 
     // Load purchase panel data.
     public void ShowPanel(BuildingPlacementController controller, PurchasableObject data)
     {
-        // Set building name and set object data.
+        // Set building name and set object.
         buildingPlacementController = controller;
-        purchasableData = data;
+        purchasableObject = data;
 
         // Set UI sprite.
-        itemImage.sprite = purchasableData.Sprite;
+        itemImage.sprite = purchasableObject.Sprite;
 
         // Set UI text.
         headerText.text = buildingPlacementController.BuildingName;
-        itemText.text = purchasableData.ObjectName;
-        itemDescription.text = purchasableData.Description;
-        costText.text = purchasableData.DollarCost.ToString();
+        itemText.text = purchasableObject.ObjectName;
+        itemDescription.text = purchasableObject.Description;
+        costText.text = purchasableObject.DollarCost.ToString();
 
         // Show panel
         gameObject.SetActive(true);
@@ -49,17 +46,28 @@ public class PurchasePanelController : MonoBehaviour
     // if player has enough dollars, else show error popup panel and close purchase panel.
     public void OnPurchase()
     {
+        // Get game data.
+        GameData gameData = GameDataManager.instance.GameData;
+
         // Get dollar amount and building name.
-        int dollars = gameDataController.Dollars;
-        int objectCost = purchasableData.DollarCost;
+        int dollars = gameData.Dollars;
+        int objectCost = purchasableObject.DollarCost;
         string buildingName = buildingPlacementController.BuildingName;
 
         if (dollars >= objectCost)
         {
             // Set object as bought, subtract cost, play building placement sound,
             // create popup panel showing success, update dollar amounts on dollar UI, and close purchase panel.
-            purchasableData.SetBought(true);
-            gameDataController.SubtractDollars(objectCost);
+            if (purchasableObject is DefenseObject defenseObject)
+            {
+                gameData.CreateDefenseData(defenseObject);
+            }
+            else if (purchasableObject is BonusObject bonusObject)
+            {
+                gameData.CreateBonusData(bonusObject);
+            }
+
+            gameData.SubtractDollars(objectCost);
             SoundManager.instance.PlaySoundEffect(placementSoundEffect, transform, 1f);
             messagePopupPanelController.ShowPanel("Building Purchased", "You have bought " + buildingName + " for " + objectCost.ToString() + " dollars!");
             buildingSceneUIController.UpdateDollarUI();

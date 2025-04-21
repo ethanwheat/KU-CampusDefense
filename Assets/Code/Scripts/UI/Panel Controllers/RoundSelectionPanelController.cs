@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class RoundSelectionPanelController : MonoBehaviour
 {
     [Header("Round Configuration")]
-    [SerializeField] private RoundDataObject[] allRounds;
+    [SerializeField] private RoundObject[] allRounds;
 
     [Header("Game Data Controller")]
     [SerializeField] private GameDataObject gameDataController;
@@ -20,7 +20,9 @@ public class RoundSelectionPanelController : MonoBehaviour
 
     private void PopulateScrollView()
     {
-        int maxUnlocked = gameDataController.RoundNumber;
+        GameData gameData = GameDataManager.instance.GameData;
+
+        int maxUnlocked = gameData.RoundNumber;
 
         foreach (var round in allRounds)
         {
@@ -32,11 +34,11 @@ public class RoundSelectionPanelController : MonoBehaviour
                 // set button label
                 btnObj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Round " + round.roundNumber;
 
-                RoundDataObject capturedRound = round; // closure-safe
+                RoundObject capturedRound = round; // closure-safe
 
                 btnObj.GetComponent<Button>().onClick.AddListener(() =>
                 {
-                    gameDataController.SetSelectedRound(capturedRound);
+                    // gameDataController.SetSelectedRound(capturedRound);
                     ClosePanel();
                 });
             }

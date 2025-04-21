@@ -6,24 +6,9 @@ public class GameData
 {
     public int RoundNumber;
     public int Dollars;
-    public List<DefenseData> DefenseData;
-    public List<BonusData> BonusData;
-    public List<LoanData> LoanData;
-
-    public GameData(
-        int roundNumber = 1,
-        int dollars = 100,
-        List<DefenseData> defenseData = null,
-        List<BonusData> bonusData = null,
-        List<LoanData> loanData = null
-    )
-    {
-        RoundNumber = roundNumber;
-        Dollars = dollars;
-        DefenseData = defenseData ?? new List<DefenseData> { new DefenseData("Barrier", true) };
-        BonusData = bonusData ?? new List<BonusData>();
-        LoanData = loanData ?? new List<LoanData>();
-    }
+    public List<DefenseData> DefenseData = new List<DefenseData>();
+    public List<BonusData> BonusData = new List<BonusData>();
+    public List<LoanData> LoanData = new List<LoanData>();
 
     // Increment round number.
     public void IncrementRoundNumber()
@@ -48,17 +33,46 @@ public class GameData
         }
     }
 
+    public void CreateDefenseData(DefenseObject defenseObject)
+    {
+        DefenseData defenseData = new DefenseData(defenseObject.ObjectName);
+        DefenseData.Add(defenseData);
+    }
+
+    public void CreateBonusData(BonusObject bonusObject)
+    {
+        BonusData bonusData = new BonusData(bonusObject.ObjectName);
+        BonusData.Add(bonusData);
+    }
+
+    public PurchasableData GetPurchasableData(string name)
+    {
+        List<PurchasableData> purchasableData = new List<PurchasableData>();
+        purchasableData.AddRange(DefenseData);
+        purchasableData.AddRange(BonusData);
+
+        return DefenseData.Find(data => data.ObjectName == name);
+    }
+
     public DefenseData GetDefenseData(string name)
     {
-        foreach (DefenseData data in DefenseData)
-        {
-            if (data.ObjectName == name)
-            {
-                return data;
-            }
-        }
+        return DefenseData.Find(data => data.ObjectName == name);
+    }
 
-        return null;
+    public LoanData GetLoanData(string name)
+    {
+        return LoanData.Find(data => data.LoanName == name);
+    }
+
+    public void TakeLoan(LoanObject loanObject)
+    {
+        string name = loanObject.LoanName;
+        int amount = loanObject.Amount;
+
+        LoanData loanData = new LoanData(this, name, amount);
+
+        AddDollars(amount);
+        LoanData.Add(loanData);
     }
 
     // Get debt.

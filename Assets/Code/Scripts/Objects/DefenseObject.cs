@@ -11,18 +11,14 @@ public class DefenseObject : PurchasableObject
     [SerializeField] private int level2UpgradeDollarCost;
     [SerializeField] private int level3UpgradeDollarCost;
 
-    [Header("Defense Data")]
-    [SerializeField] private int level = 1;
-
     [Header("Prefabs")]
     [SerializeField] private GameObject prefab;
 
     public bool IsShownInDefensePanel => isShownInDefensePanel;
     public int CoinCost => coinCost;
-    public int Level => level;
     public GameObject Prefab => prefab;
 
-    public int GetUpgradeCost()
+    public int GetUpgradeCost(int level)
     {
         if (level == 1)
         {
@@ -36,20 +32,5 @@ public class DefenseObject : PurchasableObject
         {
             return level3UpgradeDollarCost;
         }
-    }
-
-    public void UpgradeLevel()
-    {
-        level++;
-    }
-
-    public void SetLevel(int newLevel)
-    {
-        level = newLevel;
-    }
-
-    public void ResetLevel()
-    {
-        level = 1;
     }
 }

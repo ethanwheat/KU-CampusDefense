@@ -13,7 +13,7 @@ public class AbilitiesPanelController : MonoBehaviour
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
     [Header("Game Data")]
-    [SerializeField] private AbilityDataObject[] abilityData;
+    [SerializeField] private AbilityObject[] abilityObject;
     [SerializeField] private GameDataObject gameDataController;
 
     private bool alreadyOpened = false;
@@ -35,7 +35,7 @@ public class AbilitiesPanelController : MonoBehaviour
         {
             alreadyOpened = true;
 
-            foreach (var ability in abilityData)
+            foreach (var ability in abilityObject)
             {
                 var button = Instantiate(abilityButtonPrefab, abilitiesParent);
                 button.name = "Btn_" + ability.AbilityName; // Unique name

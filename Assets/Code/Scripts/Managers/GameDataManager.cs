@@ -7,6 +7,16 @@ public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager instance;
 
+    [Header("Game Data Initialization")]
+    [SerializeField]
+    private GameData startingGameData = new GameData()
+    {
+        RoundNumber = 1,
+        Dollars = 100,
+        DefenseData = { new DefenseData("Barrier") }
+    };
+
+    [Header("Game Data")]
     [SerializeField] private GameData gameData;
 
     public GameData GameData => gameData;
@@ -29,17 +39,23 @@ public class GameDataManager : MonoBehaviour
         // Create unique id.
         string id = Guid.NewGuid().ToString();
 
-        // Create game data and game data meta.
-        GameData gameData = new GameData();
-        GameDataMeta gameDataMeta = new GameDataMeta(id, name);
+        // Create game data meta.
+        GameDataMeta gameDataMeta = new GameDataMeta()
+        {
+            Id = id,
+            Name = string.IsNullOrWhiteSpace(name) ? "Untitled Game Save" : name
+        };
 
         // Set names of files.
         string gameDataFilePath = Path.Combine(Application.persistentDataPath, $"{id}.json");
         string gameDataMetaFilePath = Path.Combine(Application.persistentDataPath, $"{id}.meta.json");
 
         // Write data to game saves file.
-        File.WriteAllText(gameDataFilePath, JsonUtility.ToJson(gameData, true));
+        File.WriteAllText(gameDataFilePath, JsonUtility.ToJson(startingGameData, true));
         File.WriteAllText(gameDataMetaFilePath, JsonUtility.ToJson(gameDataMeta, true));
+
+        // Set game data to be new game data.
+        gameData = startingGameData;
 
         return true;
     }

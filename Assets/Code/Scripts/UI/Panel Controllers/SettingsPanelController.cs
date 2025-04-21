@@ -8,7 +8,7 @@ public class SettingsPanelController : MonoBehaviour
     [SerializeField] private Slider soundEffectsVolumeSlider;
 
     [Header("Settings Data Controller")]
-    [SerializeField] private SettingsDataObject settingsDataController;
+    [SerializeField] private SettingsObject settingsObject;
 
     private SoundManager soundManager;
 
@@ -20,14 +20,14 @@ public class SettingsPanelController : MonoBehaviour
     void Start()
     {
         musicVolumeSlider.onValueChanged.AddListener(soundManager.OnMusicVolumeChange);
-        soundEffectsVolumeSlider.onValueChanged.AddListener(settingsDataController.SetSoundEffectsVolume);
+        soundEffectsVolumeSlider.onValueChanged.AddListener(settingsObject.SetSoundEffectsVolume);
     }
 
     // Update panel with correct music volume and sound effect volume.
     public void UpdatePanel()
     {
-        float musicVolume = settingsDataController.MusicVolume;
-        float soundEffectsVolume = settingsDataController.SoundEffectsVolume;
+        float musicVolume = settingsObject.MusicVolume;
+        float soundEffectsVolume = settingsObject.SoundEffectsVolume;
 
         musicVolumeSlider.value = musicVolume;
         soundEffectsVolumeSlider.value = soundEffectsVolume;

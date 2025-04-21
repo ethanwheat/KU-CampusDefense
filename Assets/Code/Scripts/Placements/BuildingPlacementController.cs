@@ -21,21 +21,18 @@ public class BuildingPlacementController : MonoBehaviour
     [SerializeField] private Material availableMaterial;
     [SerializeField] private Material unavailableMaterial;
 
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataObject gameDataController;
-
     public string BuildingName => buildingName;
     public PurchasableObject PurchasableObject => purchasableObject;
     public bool RoundScene => roundScene;
 
-    private DefenseData defenseData;
+    private GameData gameData;
+    private PurchasableData purchasableData;
+    private bool isLocked;
+    private bool isBought;
     private Transform overlays;
 
     void Start()
     {
-        // Set defense data.
-        defenseData = GameDataManager.instance.GameData.GetDefenseData(purchasableObject.ObjectName);
-
         // Show placement area.
         UpdatePlacementArea();
     }
@@ -46,8 +43,16 @@ public class BuildingPlacementController : MonoBehaviour
         // Reset placement area.
         ResetPlacementArea();
 
+        // Set game data and defense data.
+        gameData = GameDataManager.instance.GameData;
+        purchasableData = gameData.GetPurchasableData(purchasableObject.ObjectName);
+
+        // Set isLocked and isBought.
+        isLocked = gameData.RoundNumber < purchasableObject.UnlockRound;
+        isBought = purchasableData != null;
+
         // Check if defense is bought.
-        if (defenseData.Bought)
+        if (isBought)
         {
             // Show building if defense is bought.
             buildingGameObject.SetActive(true);
@@ -60,6 +65,9 @@ public class BuildingPlacementController : MonoBehaviour
         {
             CreateOverlay();
         }
+
+        // Set placement material.
+        SetPlacementMaterial();
 
         // Set placement as active.
         placementGameObject.SetActive(true);
@@ -86,7 +94,7 @@ public class BuildingPlacementController : MonoBehaviour
         // Get mesh renderer.
         MeshRenderer meshRenderer = placementGameObject.GetComponent<MeshRenderer>();
 
-        if (defenseData != null && !roundScene)
+        if (!isLocked && !roundScene)
         {
             meshRenderer.material = availableMaterial;
         }
@@ -106,7 +114,7 @@ public class BuildingPlacementController : MonoBehaviour
             overlays.localPosition = new Vector3(0, 1, 0);
         }
 
-        if (defenseData != null)
+        if (isLocked)
         {
             GameObject overlay = Instantiate(lockedBuildingOverlayPrefab, overlays);
             overlay.GetComponent<LockedBuildingOverlayController>().SetData(buildingName);
@@ -122,7 +130,7 @@ public class BuildingPlacementController : MonoBehaviour
     public void ShowOutline(bool visible)
     {
         // Show outlines.
-        if (defenseData.Bought)
+        if (isBought)
         {
             buildingGameObject.GetComponent<Outline>().enabled = visible;
         }

@@ -44,6 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53fd9dcb7cd364594a2daf98ade8fecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startingGameData:
+    RoundNumber: 1
+    Dollars: 100
+    DefenseData:
+    - ObjectName: Barrier
+      Level: 1
+    BonusData: []
+    LoanData: []
   gameData:
     RoundNumber: 0
     Dollars: 0

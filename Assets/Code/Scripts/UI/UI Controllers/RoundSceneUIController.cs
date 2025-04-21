@@ -23,9 +23,6 @@ public class RoundSceneUIController : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioClip clickSoundEffect;
 
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataObject gameDataController;
-
     private Camera mainCamera;
     private Outline healthBuildingOutline;
     private RoundManager roundManager;
@@ -105,7 +102,7 @@ public class RoundSceneUIController : MonoBehaviour
     public void UpdateDollarUI()
     {
         // Update dollar text.
-        dollarText.text = gameDataController.Dollars.ToString();
+        dollarText.text = GameDataManager.instance.GameData.Dollars.ToString();
     }
 
     // Update coin UI.

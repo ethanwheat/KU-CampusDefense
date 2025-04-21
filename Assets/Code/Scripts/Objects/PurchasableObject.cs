@@ -15,5 +15,6 @@ public class PurchasableObject : ScriptableObject
     public string ObjectName => objectName;
     public string Description => description;
     public int DollarCost => dollarCost;
+    public int UnlockRound => unlockRound;
     public Sprite Sprite => sprite;
 }

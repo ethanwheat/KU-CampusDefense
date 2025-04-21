@@ -90,24 +90,20 @@ public class BuildingSceneUIController : MonoBehaviour
 
     void HandleDefenseBonusBuilding(RaycastHit hit)
     {
-        // Get building placement controller, object data, isLocked, isBought, and isDefenseBuilding.
+        // Get building placement controller, game data, purchasable object, purchasable data, and isDefenseBuilding.
         buildingPlacementController = hit.collider.GetComponent<BuildingPlacementController>();
-        PurchasableObject purchasableData = buildingPlacementController.PurchasableObject;
-        bool isLocked = purchasableData.Locked;
-        bool isBought = purchasableData.Bought;
-        bool isDefenseBuilding = hit.collider.CompareTag("DefenseBuilding");
+        GameData gameData = GameDataManager.instance.GameData;
+        PurchasableObject purchasableObject = buildingPlacementController.PurchasableObject;
+        PurchasableData purchasableData = gameData.GetPurchasableData(purchasableObject.ObjectName);
 
         // Make sure the object is not locked.
-        if (isLocked)
+        if (gameData.RoundNumber < purchasableObject.UnlockRound)
         {
             return;
         }
 
         // Show outline.
-        if (!isBought || isDefenseBuilding)
-        {
-            buildingPlacementController.ShowOutline(true);
-        }
+        buildingPlacementController.ShowOutline(true);
 
         // Check if mouse is clicked.
         if (Input.GetMouseButtonDown(0))
@@ -119,16 +115,16 @@ public class BuildingSceneUIController : MonoBehaviour
             SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, 1f);
 
             // Show purchase panel with data if not bought.
-            if (!purchasableData.Bought)
+            if (purchasableData == null)
             {
-                purchasePanelController.ShowPanel(buildingPlacementController, purchasableData);
+                purchasePanelController.ShowPanel(buildingPlacementController, purchasableObject);
                 return;
             }
 
             // Show upgrade panel if object type is defense.
-            if (isDefenseBuilding)
+            if (hit.collider.CompareTag("DefenseBuilding"))
             {
-                upgradePanelController.ShowPanel(buildingPlacementController.BuildingName, (DefenseObject)purchasableData);
+                upgradePanelController.ShowPanel(buildingPlacementController.BuildingName, (DefenseObject)purchasableObject, (DefenseData)purchasableData);
                 return;
             }
         }
@@ -171,7 +167,7 @@ public class BuildingSceneUIController : MonoBehaviour
     public void UpdateDollarUI()
     {
         // Update dollar text.
-        dollarText.text = gameDataController.Dollars.ToString();
+        dollarText.text = GameDataManager.instance.GameData.Dollars.ToString();
     }
 
     // Close existing UI.

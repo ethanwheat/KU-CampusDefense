@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,10 +16,10 @@ public class DefensePanelController : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataObject gameDataController;
+    [Header("Game Data Object")]
+    [SerializeField] private GameDataObject gameDataObject;
 
-    private DefenseObject[] defenseData;
+    private List<DefenseObject> defenseObjects;
     private GameObject selectedPlacementButton;
     private GameObject currentDefensePlacement;
 
@@ -44,14 +45,17 @@ public class DefensePanelController : MonoBehaviour
         }
 
         // Get updated defenses.
-        defenseData = gameDataController.DefenseObjects;
+        defenseObjects = gameDataObject.DefenseObjects;
 
         // Set intial index to 0.
         int index = 0;
 
-        foreach (var defense in defenseData)
+        foreach (var defense in defenseObjects)
         {
-            if (defense.Bought && defense.IsShownInDefensePanel)
+            // Get defense data.
+            DefenseData defenseData = GameDataManager.instance.GameData.GetDefenseData(defense.ObjectName);
+
+            if (defenseData != null && defense.IsShownInDefensePanel)
             {
                 // Create defense button and add listeners.
                 GameObject placementButton = Instantiate(defensePlacementButtonPrefab, placementButtonsParent);

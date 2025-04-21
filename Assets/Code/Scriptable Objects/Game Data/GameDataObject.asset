@@ -12,32 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9be8f6e82a8734b8ab39eaf09efea4, type: 3}
   m_Name: GameDataObject
   m_EditorClassIdentifier: 
-  roundNumber: 1
   selectedRound: {fileID: 11400000, guid: 426e7d359223f744db54d34c735fd4a2, type: 2}
-  dollars: 100
-  defenseDataObjects:
+  defenseObjects:
   - {fileID: 11400000, guid: e095c808540afb14598316299453f91e, type: 2}
-  - {fileID: 11400000, guid: 628e1d1d39bb54e4c964c113b6cc5650, type: 2}
-  - {fileID: 11400000, guid: 5175263242d8f9e418b2fbb6aa05f414, type: 2}
-  - {fileID: 11400000, guid: 2b2d76fc4badc4cda8c0a6bd4e330677, type: 2}
-  - {fileID: 11400000, guid: df3b93bc15d664bf8aa13a7b0d453fa9, type: 2}
-  - {fileID: 11400000, guid: f66f6dce4a0824600adf6903fcb0fbfd, type: 2}
-  - {fileID: 11400000, guid: c940a34b69da34a61aec4cb686208f4b, type: 2}
-  - {fileID: 11400000, guid: 543083b899a4f4629b0a14a6e4e883c2, type: 2}
-  - {fileID: 11400000, guid: 4dd9f11bfb22340619a3c88e5b4a4d7b, type: 2}
-  - {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
-  abilityDataObjects:
-  - {fileID: 11400000, guid: 8e5a42ef2123846c59f0739259e3419b, type: 2}
-  - {fileID: 11400000, guid: 31a0f7e72890c43a0b899bde7d891111, type: 2}
-  - {fileID: 11400000, guid: 836444dac1cee4d83b1260b988267bb2, type: 2}
-  - {fileID: 11400000, guid: 82ff28d26eeaa4d3989e5fe9403bb8ea, type: 2}
-  bonusDataObjects:
-  - {fileID: 11400000, guid: c9dda16791d6c1e45b79fdc07b2d22be, type: 2}
-  - {fileID: 11400000, guid: 3f0a23819b0d0674c8df0cf1bcd7d2b6, type: 2}
-  - {fileID: 11400000, guid: 72bbba30305c9e540a48e1ccd2c542c2, type: 2}
-  - {fileID: 11400000, guid: 8a96bcd9567a0094d8f1a0cb80ac2021, type: 2}
-  - {fileID: 11400000, guid: 03ccf100e81c1ba45aea928dbda026f0, type: 2}
-  loanDataObjects:
-  - {fileID: 11400000, guid: b72a0b0ee95c5470896a96ba9e87e2f0, type: 2}
-  - {fileID: 11400000, guid: 9564b5bbdf8acdf478a1741db1c53a69, type: 2}
-  - {fileID: 11400000, guid: 487bdd464198fb84f9f21553a74d2dd7, type: 2}
+  bonusObjects: []
+  loanObjects: []
+  abilityObjects: []

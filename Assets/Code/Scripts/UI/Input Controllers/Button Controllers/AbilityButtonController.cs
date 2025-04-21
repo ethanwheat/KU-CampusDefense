@@ -20,7 +20,7 @@ public class AbilityButtonController : MonoBehaviour
     [Header("Game Data Controller")]
     [SerializeField] private GameDataObject gameDataController;
 
-    private AbilityDataObject abilityData;
+    private AbilityObject abilityObject;
     private bool isOnCooldown = false;
     private bool isEffectActive = false;
     private AbilitiesPanelController abilitiesPanelController;
@@ -33,55 +33,57 @@ public class AbilityButtonController : MonoBehaviour
         if (timerText != null) timerText.gameObject.SetActive(false);
     }
 
-    public void Initialize(AbilityDataObject data, AbilitiesPanelController abilities, RoundSceneUIController roundSceneUI, MessagePopupPanelController messagePopup)
+    public void Initialize(AbilityObject abilityObject, AbilitiesPanelController abilities, RoundSceneUIController roundSceneUI, MessagePopupPanelController messagePopup)
     {
-        abilityData = data;
+        this.abilityObject = abilityObject;
         abilitiesPanelController = abilities;
         roundSceneUIController = roundSceneUI;
         messagePopupPanelController = messagePopup;
-        if (abilityIcon != null) abilityIcon.sprite = data.Icon;
-        if (costText != null) costText.text = data.DollarCost.ToString();
-        if (abilityNameText != null) abilityNameText.text = data.AbilityName;
+        if (abilityIcon != null) abilityIcon.sprite = abilityObject.Icon;
+        if (costText != null) costText.text = abilityObject.DollarCost.ToString();
+        if (abilityNameText != null) abilityNameText.text = abilityObject.AbilityName;
     }
 
     private void OnAbilityClicked()
     {
+        GameData gameData = GameDataManager.instance.GameData;
+
         if (isEffectActive)
         {
-            showError("Already in effect", "The " + abilityData.AbilityName + " ability is already in effect!");
+            showError("Already in effect", "The " + abilityObject.AbilityName + " ability is already in effect!");
             return;
         }
 
         if (isOnCooldown)
         {
-            showError("Cooling down", "The " + abilityData.AbilityName + " ability is cooling down!");
+            showError("Cooling down", "The " + abilityObject.AbilityName + " ability is cooling down!");
             return;
         }
 
-        int dollarCost = abilityData.DollarCost;
+        int dollarCost = abilityObject.DollarCost;
 
-        if (gameDataController.Dollars >= dollarCost)
+        if (gameData.Dollars >= dollarCost)
         {
             // Set ability manager.
             AbilityManager abilityManager = AbilityManager.instance;
 
             // Subtract dollars.
-            gameDataController.SubtractDollars(dollarCost);
+            gameData.SubtractDollars(dollarCost);
             roundSceneUIController.UpdateDollarUI();
 
             // Start effect duration countdown
-            abilityManager.StartEffectRoutine(this, abilityData);
+            abilityManager.StartEffectRoutine(this, abilityObject);
             // Activate ability
-            abilityManager.ActivateAbility(abilityData);
+            abilityManager.ActivateAbility(abilityObject);
 
             // Show message.
             SoundManager.instance.PlaySoundEffect(abilityActivatedSoundEffect, transform, 1f);
-            messagePopupPanelController.ShowPanel("Ability activated", "The " + abilityData.AbilityName + " ability has been activated!");
+            messagePopupPanelController.ShowPanel("Ability activated", "The " + abilityObject.AbilityName + " ability has been activated!");
             abilitiesPanelController.ClosePanel();
         }
         else
         {
-            showError("Insufficient Dollars", "You do not have enough dollars to buy the " + abilityData.AbilityName + " ability!");
+            showError("Insufficient Dollars", "You do not have enough dollars to buy the " + abilityObject.AbilityName + " ability!");
         }
     }
 

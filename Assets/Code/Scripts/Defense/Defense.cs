@@ -26,13 +26,12 @@ public class Defense : MonoBehaviour
 
     public virtual void Start()
     {
-        gameDataManager = GameDataManager.instance;
         roundManager = RoundManager.instance;
         soundManager = SoundManager.instance;
 
-        gameDataManager.GameData.GetDefenseData(defenseObject.ObjectName);
+        defenseData = GameDataManager.instance.GameData.GetDefenseData(defenseObject.ObjectName);
 
-        int defenseLevel = defenseObject.Level;
+        int defenseLevel = defenseData.Level;
         maxHealth += healthIncreasePerLevel * (defenseLevel - 1);
         ResetHealth();
 

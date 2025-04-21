@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -17,8 +18,15 @@ public class LoanPanelController : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataObject gameDataController;
+    [Header("Game Data Object")]
+    [SerializeField] private GameDataObject gameDataObject;
+
+    private GameData gameData;
+
+    void Start()
+    {
+        gameData = GameDataManager.instance.GameData;
+    }
 
     // Load purchase panel data.
     public void ShowPanel()
@@ -33,7 +41,7 @@ public class LoanPanelController : MonoBehaviour
     void UpdatePanel()
     {
         // Set debt text.
-        debtCostText.text = gameDataController.GetDebt().ToString();
+        debtCostText.text = gameData.GetDebt().ToString();
 
         // Destroy previous loan information panels.
         foreach (Transform loanInformationPanel in loanInformation)
@@ -41,20 +49,17 @@ public class LoanPanelController : MonoBehaviour
             Destroy(loanInformationPanel.gameObject);
         }
 
-        // Get loan data.
-        LoanDataObject[] loanData = gameDataController.LoanDataObjects;
-
         // Create loan information panels.
-        for (int i = 0; i < loanData.Length; i++)
+        foreach (var loanObject in gameDataObject.LoanObjects)
         {
             // Create loan information panel, set position, set data, add onTakeLoan listener, onLoanPayment listener.
-            LoanDataObject data = loanData[i];
+            LoanData loanData = gameData.GetLoanData(loanObject.LoanName);
             GameObject loanInformationPanel = Instantiate(loanInformationPanelPrefab, loanInformation);
             LoanInformationPanelController loanInformationPanelController = loanInformationPanel.GetComponent<LoanInformationPanelController>();
-            loanInformationPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -80 * i - 37.5f, 0);
-            loanInformationPanelController.SetData(data);
-            loanInformationPanelController.onTakeLoan.AddListener(RefreshUI);
-            loanInformationPanelController.onLoanPayment.AddListener(() => OnPayment(data));
+
+            loanInformationPanelController.SetData(loanObject, loanData);
+            loanInformationPanelController.OnTakeLoan.AddListener(RefreshUI);
+            loanInformationPanelController.OnLoanPayment.AddListener(() => OnPayment(loanObject, loanData));
         }
     }
 
@@ -66,11 +71,11 @@ public class LoanPanelController : MonoBehaviour
     }
 
     // Make payment
-    void OnPayment(LoanDataObject loanData)
+    void OnPayment(LoanObject loanObject, LoanData loanData)
     {
         // Get loan name, dollars, and debt.
-        string loanName = loanData.LoanName;
-        int dollars = gameDataController.Dollars;
+        string loanName = loanObject.LoanName;
+        int dollars = gameData.Dollars;
         int debt = loanData.Debt;
 
         // Check if user has money.

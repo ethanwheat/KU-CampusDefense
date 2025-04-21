@@ -7,10 +7,8 @@ public class GameDataMeta
     public string Name;
     public string CreationTime;
 
-    public GameDataMeta(string id, string name)
+    public GameDataMeta()
     {
-        Id = id;
-        Name = string.IsNullOrWhiteSpace(name) ? "Untitled Game Save" : name;
         CreationTime = DateTime.UtcNow.ToString("o");
     }
 }

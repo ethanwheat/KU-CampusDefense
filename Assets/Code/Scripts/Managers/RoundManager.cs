@@ -207,7 +207,7 @@ public class RoundManager : MonoBehaviour
         // Find the highest unlocked coin bonus
         foreach (BonusData bonus in bonuses)
         {
-            if (bonus != null && bonus.Bought) // Check if the bonus is unlocked
+            if (bonus != null) // Check if the bonus is unlocked
             {
                 if (bonus.CoinBonus > coinMultiplier)
                 {

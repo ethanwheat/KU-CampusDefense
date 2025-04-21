@@ -27,20 +27,24 @@ public class UpgradePanelController : MonoBehaviour
     [SerializeField] private GameDataObject gameDataController;
 
     private string buildingName;
-    private DefenseObject defenseData;
+    private DefenseObject defenseObject;
+    private DefenseData defenseData;
 
     // Load purchase panel data.
-    public void ShowPanel(string name, DefenseObject data)
+    public void ShowPanel(string name, DefenseObject defenseObject, DefenseData defenseData)
     {
-        // Set building name and object data.
+        // Set building name.
         buildingName = name;
-        defenseData = data;
+
+        // Set defense object and defense data.
+        this.defenseObject = defenseObject;
+        this.defenseData = defenseData;
 
         // Set UI text.
         headerText.text = buildingName;
-        itemImage.sprite = defenseData.Sprite;
-        itemText.text = defenseData.ObjectName;
-        itemDescription.text = defenseData.Description;
+        itemImage.sprite = defenseObject.Sprite;
+        itemText.text = defenseObject.ObjectName;
+        itemDescription.text = defenseObject.Description;
 
         // Set stars, level, and cost.
         UpdateUI();
@@ -60,7 +64,7 @@ public class UpgradePanelController : MonoBehaviour
 
         if (defenseLevel < 3)
         {
-            costText.text = defenseData.GetUpgradeCost().ToString();
+            costText.text = defenseObject.GetUpgradeCost(defenseLevel).ToString();
             upgradeContent.SetActive(true);
             fullyUpgradedText.SetActive(false);
         }
@@ -78,9 +82,9 @@ public class UpgradePanelController : MonoBehaviour
         // Get game data.
         GameData gameData = GameDataManager.instance.GameData;
 
-        // Get dollar amount and building name.
+        // Get dollar amount, and building name.
         int dollars = gameData.Dollars;
-        int upgradeCost = defenseData.GetUpgradeCost();
+        int upgradeCost = defenseObject.GetUpgradeCost(defenseData.Level);
 
         if (dollars >= upgradeCost)
         {
