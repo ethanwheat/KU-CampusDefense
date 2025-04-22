@@ -642,7 +642,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1950516495022027919}
   m_HandleRect: {fileID: 8665436253335869671}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -840,10 +840,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a79a2d418d039142b533f6c4bdda6d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allRounds:
-  - {fileID: 11400000, guid: 7445b25413fd67f419735e828df62608, type: 2}
-  - {fileID: 11400000, guid: 68ec9e293b2eaa34c9316c714a727544, type: 2}
-  - {fileID: 11400000, guid: 426e7d359223f744db54d34c735fd4a2, type: 2}
-  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
   contentParent: {fileID: 9055883763353630756}
   roundButtonPrefab: {fileID: 7875876714408151063, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
+  gameDataObject: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}

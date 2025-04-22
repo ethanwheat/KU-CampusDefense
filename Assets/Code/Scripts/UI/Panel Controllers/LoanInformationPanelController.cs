@@ -36,16 +36,19 @@ public class LoanInformationPanelController : MonoBehaviour
         titleText.text = loanObject.LoanName;
         costText.text = loanObject.Amount.ToString();
 
+        // Set unlock round.
+        int unlockRound = loanObject.UnlockRound;
+
         // Show locked content.
-        if (loanData == null)
+        if (GameDataManager.instance.GameData.RoundNumber < unlockRound)
         {
-            lockedText.text = "Unlocks at round " + loanObject.UnlockRound + ".";
+            lockedText.text = "Unlocks at round " + unlockRound + ".";
             lockedContent.SetActive(true);
             return;
         }
 
         // Set debt.
-        int debt = loanData.Debt;
+        int debt = loanData != null ? loanData.Debt : 0;
 
         // Show taken content.
         if (debt > 0)

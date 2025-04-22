@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 12.5}
-  m_SizeDelta: {x: 150, y: 25}
+  m_AnchoredPosition: {x: 130.64539, y: 12.5}
+  m_SizeDelta: {x: 110, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &690518706700566160
 CanvasRenderer:
@@ -675,10 +675,10 @@ MonoBehaviour:
   takenDebtCost: {fileID: 4417833772488617008}
   takeLoanSoundEffect: {fileID: 8300000, guid: d044fc8acc86af847bbb04597a1334d3, type: 3}
   makePaymentSoundEffect: {fileID: 8300000, guid: 94f1b0ed291d2344989879d033992c44, type: 3}
-  onTakeLoan:
+  OnTakeLoan:
     m_PersistentCalls:
       m_Calls: []
-  onLoanPayment:
+  OnLoanPayment:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &4986714434156898115

@@ -1,14 +1,13 @@
-using System;
-
 [System.Serializable]
 public class GameDataMeta
 {
-    public string Id;
+    public string Guid;
     public string Name;
     public string CreationTime;
+    public string LastModified;
 
-    public GameDataMeta()
+    public void SetLastModified(string lastModified)
     {
-        CreationTime = DateTime.UtcNow.ToString("o");
+        LastModified = lastModified;
     }
 }

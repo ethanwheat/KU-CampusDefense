@@ -13,8 +13,8 @@ public class BewareOfThePhogDefense : Defense, IDefense
 
     public override void Start()
     {
-        StartCoroutine(SpawnPhog());
         base.Start();
+        StartCoroutine(SpawnPhog());
     }
 
     void Update()

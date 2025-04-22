@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -12,21 +11,13 @@ public class LoanPanelController : MonoBehaviour
     [SerializeField] private GameObject loanInformationPanelPrefab;
 
     [Header("UI Controllers")]
-    [SerializeField] private BuildingSceneUIController buildingSceneUIController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Game Data Object")]
+    [Header("Game Object")]
     [SerializeField] private GameDataObject gameDataObject;
-
-    private GameData gameData;
-
-    void Start()
-    {
-        gameData = GameDataManager.instance.GameData;
-    }
 
     // Load purchase panel data.
     public void ShowPanel()
@@ -40,6 +31,9 @@ public class LoanPanelController : MonoBehaviour
 
     void UpdatePanel()
     {
+        // Get game data.
+        GameData gameData = GameDataManager.instance.GameData;
+
         // Set debt text.
         debtCostText.text = gameData.GetDebt().ToString();
 
@@ -66,13 +60,16 @@ public class LoanPanelController : MonoBehaviour
     // Update dollar UI and update panel.
     void RefreshUI()
     {
-        buildingSceneUIController.UpdateDollarUI();
+        BuildingSceneUIController.instance.UpdateDollarUI();
         UpdatePanel();
     }
 
     // Make payment
     void OnPayment(LoanObject loanObject, LoanData loanData)
     {
+        // Get game data.
+        GameData gameData = GameDataManager.instance.GameData;
+
         // Get loan name, dollars, and debt.
         string loanName = loanObject.LoanName;
         int dollars = gameData.Dollars;
@@ -82,7 +79,7 @@ public class LoanPanelController : MonoBehaviour
         if (dollars > 0)
         {
             // Pay what user can.
-            loanData.PayDebt(Mathf.Clamp(dollars, 0, debt));
+            gameData.PayDebtOnLoan(loanData, Mathf.Clamp(dollars, 0, debt));
 
             // Refresh UI.
             RefreshUI();

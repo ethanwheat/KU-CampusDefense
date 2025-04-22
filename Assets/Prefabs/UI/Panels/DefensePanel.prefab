@@ -450,7 +450,7 @@ MonoBehaviour:
   messagePopupPanelController: {fileID: 0}
   placementButtonsParent: {fileID: 8986043190085409068}
   errorSoundEffect: {fileID: 8300000, guid: d334ab6419cf84f47a7ca4e98f8d1b1c, type: 3}
-  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
+  gameDataObject: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!1 &7275780897789267342
 GameObject:
   m_ObjectHideFlags: 0

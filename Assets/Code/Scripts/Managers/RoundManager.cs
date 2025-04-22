@@ -28,7 +28,6 @@ public class RoundManager : MonoBehaviour
 
     [Header("Round Configuration")]
     [SerializeField] private RoundObject currentRound;
-    [SerializeField] private GameDataObject gameDataObject;
     [SerializeField] private float coinMultiplier = 1;
     [SerializeField] private float dollarMultiplier = 1;
 
@@ -56,6 +55,9 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private Transform enemiesParent;
     [SerializeField] private Transform defensesParent;
     [SerializeField] private Transform projectilesParent;
+
+    [Header("Game Object")]
+    [SerializeField] private GameDataObject gameDataObject;
 
     public Transform PlacementParent => placementParent;
     public Transform DefensesParent => defensesParent;
@@ -85,16 +87,18 @@ public class RoundManager : MonoBehaviour
 
     void Start()
     {
-        gameData = GameDataManager.instance.GameData;
-        currentRound = gameDataObject.SelectedRound;
-        fieldhouseHealth = currentRound.fieldhouseHealth;
+        GameDataManager gameDataManager = GameDataManager.instance;
+
+        gameData = gameDataManager.GameData;
+        currentRound = gameDataObject.RoundObjects[gameDataManager.SelectedRound - 1];
+        fieldhouseHealth = currentRound.FieldHouseHealth;
         maxFieldhouseHealth = fieldhouseHealth;
 
-        numWaves = currentRound.waves.Length;
+        numWaves = currentRound.Waves.Length;
 
-        foreach (Wave wave in currentRound.waves)
+        foreach (Wave wave in currentRound.Waves)
         {
-            remainingEnemies += wave.fans + wave.cheerleaders + wave.coaches;
+            remainingEnemies += wave.Fans + wave.Cheerleaders + wave.Coaches;
         }
 
         GetBonuses();
@@ -114,7 +118,7 @@ public class RoundManager : MonoBehaviour
             WeatherManager.instance.TryActivateWeather();
             roundSceneUIController.UpdateWaveUI(currentWave + 1, numWaves);
             roundSceneUIController.ShowWavePopupPanel((currentWave + 1).ToString());
-            yield return StartCoroutine(SpawnEnemies(currentRound.waves[currentWave]));
+            yield return StartCoroutine(SpawnEnemies(currentRound.Waves[currentWave]));
             currentWave++;
             yield return new WaitForSeconds(10f);
         }
@@ -150,9 +154,9 @@ public class RoundManager : MonoBehaviour
 
     IEnumerator SpawnEnemies(Wave wave)
     {
-        yield return SpawnEnemyType(fanPrefab, wave.fans, wave.spawnInterval, fanSpeed, fanHealth);
-        yield return SpawnEnemyType(coachPrefab, wave.coaches, wave.spawnInterval, coachSpeed, coachHealth);
-        yield return SpawnEnemyType(cheerleaderPrefab, wave.cheerleaders, wave.spawnInterval, cheerleaderSpeed, cheerleaderHealth);
+        yield return SpawnEnemyType(fanPrefab, wave.Fans, wave.SpawnInterval, fanSpeed, fanHealth);
+        yield return SpawnEnemyType(coachPrefab, wave.Coaches, wave.SpawnInterval, coachSpeed, coachHealth);
+        yield return SpawnEnemyType(cheerleaderPrefab, wave.Cheerleaders, wave.SpawnInterval, cheerleaderSpeed, cheerleaderHealth);
     }
 
     IEnumerator SpawnEnemyType(GameObject prefab, int count, float interval, float speed, float health)
@@ -177,7 +181,7 @@ public class RoundManager : MonoBehaviour
                 enemies.Add(enemyScript);
                 enemyScript.SetSpeed(speed);
                 enemyScript.SetHealth(health);
-                enemyScript.SetReward(currentRound.killPayout);
+                enemyScript.SetReward(currentRound.KillPayout);
 
                 if (isAllEnemiesSlowed)
                 {
@@ -202,21 +206,24 @@ public class RoundManager : MonoBehaviour
 
     void GetBonuses()
     {
-        List<BonusData> bonuses = gameData.BonusData;
+        List<BonusObject> bonusObjects = gameDataObject.BonusObjects;
+        // BonusObject bonusObject = gameData.Get
 
         // Find the highest unlocked coin bonus
-        foreach (BonusData bonus in bonuses)
+        foreach (BonusObject bonusObject in bonusObjects)
         {
-            if (bonus != null) // Check if the bonus is unlocked
+            BonusData bonusData = gameData.GetBonusData(bonusObject.ObjectName);
+
+            if (bonusData != null) // Check if the bonus is unlocked
             {
-                if (bonus.CoinBonus > coinMultiplier)
+                if (bonusObject.CoinBonus > coinMultiplier)
                 {
-                    coinMultiplier = bonus.CoinBonus;
+                    coinMultiplier = bonusObject.CoinBonus;
                 }
 
-                if (bonus.DollarBonus > dollarMultiplier)
+                if (bonusObject.DollarBonus > dollarMultiplier)
                 {
-                    dollarMultiplier = bonus.DollarBonus;
+                    dollarMultiplier = bonusObject.DollarBonus;
                 }
             }
         }
@@ -254,12 +261,12 @@ public class RoundManager : MonoBehaviour
             GameOver();
 
             int debt = gameData.GetDebt();
-            int reward = (int)(currentRound.winPayout * dollarMultiplier);
+            int reward = (int)(currentRound.WinPayout * dollarMultiplier);
 
             if (debt > 0)
             {
                 int owed = Mathf.Min((int)(reward * 0.3f), debt);  // 30% debt payment
-                gameData.PayDebt(owed);
+                gameData.PayDebtOnAllLoans(owed);
                 gameData.AddDollars(reward - owed);
                 roundSceneUIController.ShowRoundWonPanel(
                     gameData.RoundNumber.ToString(),
@@ -279,7 +286,7 @@ public class RoundManager : MonoBehaviour
                 );
             }
 
-            if (gameData.RoundNumber == currentRound.roundNumber)
+            if (gameData.RoundNumber == currentRound.RoundNumber)
             {
                 gameData.IncrementRoundNumber();  // unlock next round
             }

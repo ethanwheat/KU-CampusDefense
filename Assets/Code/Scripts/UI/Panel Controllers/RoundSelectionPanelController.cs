@@ -1,17 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class RoundSelectionPanelController : MonoBehaviour
 {
-    [Header("Round Configuration")]
-    [SerializeField] private RoundObject[] allRounds;
-
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataObject gameDataController;
-
     [Header("UI References")]
     [SerializeField] private Transform contentParent; // Content under the ScrollView
     [SerializeField] private GameObject roundButtonPrefab; // Prefab for each round button
+
+    [Header("Game Object")]
+    [SerializeField] private GameDataObject gameDataObject;
 
     private void Start()
     {
@@ -20,25 +18,25 @@ public class RoundSelectionPanelController : MonoBehaviour
 
     private void PopulateScrollView()
     {
-        GameData gameData = GameDataManager.instance.GameData;
+        GameDataManager gameDataMangaer = GameDataManager.instance;
+        GameData gameData = gameDataMangaer.GameData;
+        List<RoundObject> roundObjects = gameDataObject.RoundObjects;
 
         int maxUnlocked = gameData.RoundNumber;
 
-        foreach (var round in allRounds)
+        foreach (var round in roundObjects)
         {
-            bool isUnlocked = round.roundNumber <= maxUnlocked;
+            bool isUnlocked = round.RoundNumber <= maxUnlocked;
             if (isUnlocked)
             {
                 GameObject btnObj = Instantiate(roundButtonPrefab, contentParent);
 
                 // set button label
-                btnObj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Round " + round.roundNumber;
-
-                RoundObject capturedRound = round; // closure-safe
+                btnObj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Round " + round.RoundNumber;
 
                 btnObj.GetComponent<Button>().onClick.AddListener(() =>
                 {
-                    // gameDataController.SetSelectedRound(capturedRound);
+                    gameDataMangaer.SetSelectedRound(round.RoundNumber);
                     ClosePanel();
                 });
             }

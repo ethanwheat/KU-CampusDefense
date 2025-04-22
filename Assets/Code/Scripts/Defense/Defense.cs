@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Defense : MonoBehaviour
@@ -16,9 +17,7 @@ public class Defense : MonoBehaviour
     [SerializeField] private float healthIncreasePerLevel = 50f;
 
     private float health;
-    private GameDataManager gameDataManager;
     private RoundManager roundManager;
-    private SoundManager soundManager;
     private DefenseData defenseData;
 
     public DefenseObject DefenseObject => defenseObject;
@@ -27,9 +26,13 @@ public class Defense : MonoBehaviour
     public virtual void Start()
     {
         roundManager = RoundManager.instance;
-        soundManager = SoundManager.instance;
-
         defenseData = GameDataManager.instance.GameData.GetDefenseData(defenseObject.ObjectName);
+
+        if (defenseData == null)
+        {
+            enabled = false;
+            return;
+        }
 
         int defenseLevel = defenseData.Level;
         maxHealth += healthIncreasePerLevel * (defenseLevel - 1);
@@ -73,7 +76,7 @@ public class Defense : MonoBehaviour
     public virtual void OnDefenseDestroy()
     {
         roundManager.RemoveDefense(this);
-        soundManager.PlaySoundEffect(destroySoundEffect, transform, .5f);
+        SoundManager.instance.PlaySoundEffect(destroySoundEffect, transform, .5f);
         Destroy(gameObject);
     }
 

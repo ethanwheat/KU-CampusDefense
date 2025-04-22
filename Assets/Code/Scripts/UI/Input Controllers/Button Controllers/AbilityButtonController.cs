@@ -17,9 +17,6 @@ public class AbilityButtonController : MonoBehaviour
     [SerializeField] private AudioClip abilityActivatedSoundEffect;
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataObject gameDataController;
-
     private AbilityObject abilityObject;
     private bool isOnCooldown = false;
     private bool isEffectActive = false;
@@ -50,13 +47,13 @@ public class AbilityButtonController : MonoBehaviour
 
         if (isEffectActive)
         {
-            showError("Already in effect", "The " + abilityObject.AbilityName + " ability is already in effect!");
+            ShowError("Already in effect", "The " + abilityObject.AbilityName + " ability is already in effect!");
             return;
         }
 
         if (isOnCooldown)
         {
-            showError("Cooling down", "The " + abilityObject.AbilityName + " ability is cooling down!");
+            ShowError("Cooling down", "The " + abilityObject.AbilityName + " ability is cooling down!");
             return;
         }
 
@@ -83,11 +80,11 @@ public class AbilityButtonController : MonoBehaviour
         }
         else
         {
-            showError("Insufficient Dollars", "You do not have enough dollars to buy the " + abilityObject.AbilityName + " ability!");
+            ShowError("Insufficient Dollars", "You do not have enough dollars to buy the " + abilityObject.AbilityName + " ability!");
         }
     }
 
-    void showError(string title, string text)
+    void ShowError(string title, string text)
     {
         SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
         messagePopupPanelController.ShowPanel(title, text);

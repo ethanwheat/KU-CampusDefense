@@ -47,9 +47,9 @@ public class BuildingPlacementController : MonoBehaviour
         gameData = GameDataManager.instance.GameData;
         purchasableData = gameData.GetPurchasableData(purchasableObject.ObjectName);
 
-        // Set isLocked and isBought.
-        isLocked = gameData.RoundNumber < purchasableObject.UnlockRound;
+        // Set isBought and isLocked.
         isBought = purchasableData != null;
+        isLocked = gameData.RoundNumber < purchasableObject.UnlockRound;
 
         // Check if defense is bought.
         if (isBought)
@@ -71,7 +71,6 @@ public class BuildingPlacementController : MonoBehaviour
 
         // Set placement as active.
         placementGameObject.SetActive(true);
-
     }
 
     // Reset placement area.

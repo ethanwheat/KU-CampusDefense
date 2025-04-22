@@ -12,7 +12,6 @@ public class PurchasePanelController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI costText;
 
     [Header("UI Controllers")]
-    [SerializeField] private BuildingSceneUIController buildingSceneUIController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
     [Header("Sounds")]
@@ -23,11 +22,11 @@ public class PurchasePanelController : MonoBehaviour
     private BuildingPlacementController buildingPlacementController;
 
     // Load purchase panel data.
-    public void ShowPanel(BuildingPlacementController controller, PurchasableObject data)
+    public void ShowPanel(BuildingPlacementController controller, PurchasableObject purchasableObject)
     {
         // Set building name and set object.
         buildingPlacementController = controller;
-        purchasableObject = data;
+        this.purchasableObject = purchasableObject;
 
         // Set UI sprite.
         itemImage.sprite = purchasableObject.Sprite;
@@ -70,7 +69,7 @@ public class PurchasePanelController : MonoBehaviour
             gameData.SubtractDollars(objectCost);
             SoundManager.instance.PlaySoundEffect(placementSoundEffect, transform, 1f);
             messagePopupPanelController.ShowPanel("Building Purchased", "You have bought " + buildingName + " for " + objectCost.ToString() + " dollars!");
-            buildingSceneUIController.UpdateDollarUI();
+            BuildingSceneUIController.instance.UpdateDollarUI();
             buildingPlacementController.UpdatePlacementArea();
             ClosePanel();
         }

@@ -38,19 +38,25 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
 
     private void StartGame(GameDataMeta gameDataMeta)
     {
-        if (GameDataManager.instance.LoadGameData(gameDataMeta.Id))
+        if (GameDataManager.instance.LoadGameData(gameDataMeta.Guid))
         {
             mainMenuUIController.StartGame();
         }
         else
         {
-            Debug.Log("Could not load.");
+            // Show message popup.
         }
     }
 
     private void DeleteSave(GameObject buttonGroup, GameDataMeta gameDataMeta)
     {
-        GameDataManager.instance.DeleteGameData(gameDataMeta.Id);
-        Destroy(buttonGroup);
+        if (GameDataManager.instance.DeleteGameData(gameDataMeta.Guid))
+        {
+            Destroy(buttonGroup);
+        }
+        else
+        {
+            // Show message popup.
+        }
     }
 }

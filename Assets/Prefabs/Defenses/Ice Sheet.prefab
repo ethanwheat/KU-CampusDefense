@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b353fafe277ba846ab128492590e745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defenseData: {fileID: 11400000, guid: 5175263242d8f9e418b2fbb6aa05f414, type: 2}
+  defenseObject: {fileID: 11400000, guid: 5175263242d8f9e418b2fbb6aa05f414, type: 2}
   healthBar: {fileID: 6074170264989432044}
   destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
   maxHealth: 30

@@ -16,7 +16,7 @@ public class DefensePanelController : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Game Data Object")]
+    [Header("Game Object")]
     [SerializeField] private GameDataObject gameDataObject;
 
     private List<DefenseObject> defenseObjects;

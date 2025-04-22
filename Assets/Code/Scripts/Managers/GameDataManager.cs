@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -7,19 +8,18 @@ public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager instance;
 
-    [Header("Game Data Initialization")]
-    [SerializeField]
-    private GameData startingGameData = new GameData()
-    {
-        RoundNumber = 1,
-        Dollars = 100,
-        DefenseData = { new DefenseData("Barrier") }
-    };
-
-    [Header("Game Data")]
+    [Header("Game Object Data")]
     [SerializeField] private GameData gameData;
+    [SerializeField] private GameDataMeta gameDataMeta;
+
+    [Header("Selected Round")]
+    [SerializeField] private int selectedRound = 1;
+
+    private Coroutine autosaveCoroutine;
 
     public GameData GameData => gameData;
+    public GameDataMeta GameDataMeta => gameDataMeta;
+    public int SelectedRound => selectedRound;
 
     void Awake()
     {
@@ -36,61 +36,141 @@ public class GameDataManager : MonoBehaviour
 
     public bool CreateGameData(string name)
     {
-        // Create unique id.
-        string id = Guid.NewGuid().ToString();
-
-        // Create game data meta.
-        GameDataMeta gameDataMeta = new GameDataMeta()
+        try
         {
-            Id = id,
-            Name = string.IsNullOrWhiteSpace(name) ? "Untitled Game Save" : name
-        };
-
-        // Set names of files.
-        string gameDataFilePath = Path.Combine(Application.persistentDataPath, $"{id}.json");
-        string gameDataMetaFilePath = Path.Combine(Application.persistentDataPath, $"{id}.meta.json");
-
-        // Write data to game saves file.
-        File.WriteAllText(gameDataFilePath, JsonUtility.ToJson(startingGameData, true));
-        File.WriteAllText(gameDataMetaFilePath, JsonUtility.ToJson(gameDataMeta, true));
-
-        // Set game data to be new game data.
-        gameData = startingGameData;
-
-        return true;
-    }
-
-    public bool LoadGameData(string id)
-    {
-        string targetFileName = id + ".json";
-
-        foreach (string filePath in Directory.GetFiles(Application.persistentDataPath, "*.json"))
-        {
-            if (Path.GetFileName(filePath) == targetFileName)
+            // Create game data.
+            gameData = new GameData()
             {
-                string json = File.ReadAllText(filePath);
-                gameData = JsonUtility.FromJson<GameData>(json);
-                return true;
-            }
-        }
+                RoundNumber = 1,
+                Dollars = 100,
+                DefenseData = { new DefenseData("Barrier") }
+            };
 
-        return false;
+            // Set selected round.
+            selectedRound = gameData.RoundNumber;
+
+            // Create unique id.
+            string guid = Guid.NewGuid().ToString();
+
+            // Get current time.
+            string currentTime = DateTime.UtcNow.ToString("o");
+
+            // Create game data meta.
+            gameDataMeta = new GameDataMeta()
+            {
+                Guid = guid,
+                Name = string.IsNullOrWhiteSpace(name) ? "Untitled Game Save" : name,
+                CreationTime = currentTime,
+                LastModified = currentTime
+            };
+
+            SaveGameData();
+
+            return true;
+        }
+        catch (Exception exception)
+        {
+            Debug.LogError("Could not create game data: " + exception);
+            return false;
+        }
     }
 
-    public void DeleteGameData(string id)
+    public bool LoadGameData(string guid)
     {
-        // Get files.
-        string gameDataFilePath = Path.Combine(Application.persistentDataPath, $"{id}.json");
-        string gameDataMetaFilePath = Path.Combine(Application.persistentDataPath, $"{id}.meta.json");
-
-        if (File.Exists(gameDataFilePath))
+        try
         {
-            File.Delete(gameDataFilePath);
+            // Get game data file and game data meta file.
+            string gameDataFilePath = Path.Combine(Application.persistentDataPath, $"{guid}.json");
+            string gameDataMetaFilePath = Path.Combine(Application.persistentDataPath, $"{guid}.meta.json");
+
+            // Get game data json and game data meta json.
+            string gameDataJson = File.ReadAllText(gameDataFilePath);
+            string gameDataMetaJson = File.ReadAllText(gameDataMetaFilePath);
+
+            // Set game data and game data meta.
+            gameData = JsonUtility.FromJson<GameData>(gameDataJson);
+            gameDataMeta = JsonUtility.FromJson<GameDataMeta>(gameDataMetaJson);
+
+            // Reset selected round.
+            selectedRound = gameData.RoundNumber;
+
+            return true;
+        }
+        catch (Exception exception)
+        {
+            Debug.LogError("Could not load game data: " + exception);
+            return false;
+        }
+    }
+
+    public void TriggerAutosave()
+    {
+        if (autosaveCoroutine != null)
+        {
+            StopCoroutine(autosaveCoroutine);
         }
 
-        if (File.Exists(gameDataMetaFilePath))
+        autosaveCoroutine = StartCoroutine(TriggerAutosaveCoroutine());
+    }
+
+    private IEnumerator TriggerAutosaveCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+
+        SaveGameData();
+        autosaveCoroutine = null;
+    }
+
+    public bool SaveGameData()
+    {
+        try
         {
-            File.Delete(gameDataMetaFilePath);
+            // Update last modified to current time.
+            gameDataMeta.SetLastModified(DateTime.UtcNow.ToString("o"));
+
+            // Get game data file and game data meta file.
+            string gameDataFilePath = Path.Combine(Application.persistentDataPath, $"{gameDataMeta.Guid}.json");
+            string gameDataMetaFilePath = Path.Combine(Application.persistentDataPath, $"{gameDataMeta.Guid}.meta.json");
+
+            // Write data to game data file and game data meta file.
+            File.WriteAllText(gameDataFilePath, JsonUtility.ToJson(gameData, true));
+            File.WriteAllText(gameDataMetaFilePath, JsonUtility.ToJson(gameDataMeta, true));
+
+            return true;
+        }
+        catch (Exception exception)
+        {
+            Debug.LogError("Could not save game data: " + exception);
+            return false;
+        }
+    }
+
+    public bool DeleteGameData(string guid)
+    {
+        try
+        {
+            // Get files.
+            string gameDataFilePath = Path.Combine(Application.persistentDataPath, $"{guid}.json");
+            string gameDataMetaFilePath = Path.Combine(Application.persistentDataPath, $"{guid}.meta.json");
+
+            // Delete game data file.
+            if (File.Exists(gameDataFilePath))
+            {
+                File.Delete(gameDataFilePath);
+            }
+
+            // Delete game data meta file.
+            if (File.Exists(gameDataMetaFilePath))
+            {
+                File.Delete(gameDataMetaFilePath);
+            }
+
+            return true;
+        }
+        catch (Exception exception)
+        {
+            Debug.LogError("Could not delete game data: " + exception);
+            return false;
         }
     }
 
@@ -105,5 +185,10 @@ public class GameDataManager : MonoBehaviour
         }
 
         return gameDataMeta;
+    }
+
+    public void SetSelectedRound(int roundNumber)
+    {
+        selectedRound = roundNumber;
     }
 }

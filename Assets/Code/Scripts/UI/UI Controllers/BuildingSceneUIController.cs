@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class BuildingSceneUIController : MonoBehaviour
 {
+    public static BuildingSceneUIController instance;
+
     [Header("UI Controllers")]
     [SerializeField] private PurchasePanelController purchasePanelController;
     [SerializeField] private UpgradePanelController upgradePanelController;
@@ -19,12 +21,21 @@ public class BuildingSceneUIController : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioClip clickSoundEffect;
 
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataObject gameDataController;
-
     private Camera mainCamera;
     private BuildingPlacementController buildingPlacementController;
     private Outline loanBuildingOutline;
+
+    void Awake()
+    {
+        if (!instance)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -95,6 +106,7 @@ public class BuildingSceneUIController : MonoBehaviour
         GameData gameData = GameDataManager.instance.GameData;
         PurchasableObject purchasableObject = buildingPlacementController.PurchasableObject;
         PurchasableData purchasableData = gameData.GetPurchasableData(purchasableObject.ObjectName);
+        bool isDefenseBuilding = hit.collider.CompareTag("DefenseBuilding");
 
         // Make sure the object is not locked.
         if (gameData.RoundNumber < purchasableObject.UnlockRound)
@@ -103,7 +115,10 @@ public class BuildingSceneUIController : MonoBehaviour
         }
 
         // Show outline.
-        buildingPlacementController.ShowOutline(true);
+        if (purchasableData == null || isDefenseBuilding)
+        {
+            buildingPlacementController.ShowOutline(true);
+        }
 
         // Check if mouse is clicked.
         if (Input.GetMouseButtonDown(0))
@@ -122,7 +137,7 @@ public class BuildingSceneUIController : MonoBehaviour
             }
 
             // Show upgrade panel if object type is defense.
-            if (hit.collider.CompareTag("DefenseBuilding"))
+            if (isDefenseBuilding)
             {
                 upgradePanelController.ShowPanel(buildingPlacementController.BuildingName, (DefenseObject)purchasableObject, (DefenseData)purchasableData);
                 return;

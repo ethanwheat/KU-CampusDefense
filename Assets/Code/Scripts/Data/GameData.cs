@@ -14,12 +14,14 @@ public class GameData
     public void IncrementRoundNumber()
     {
         RoundNumber += 1;
+        TriggerAutosave();
     }
 
     // Add dollars.
     public void AddDollars(int amount)
     {
         Dollars += amount;
+        TriggerAutosave();
     }
 
     // Subtract dollars.
@@ -30,6 +32,7 @@ public class GameData
         if (futureAmount >= 0)
         {
             Dollars = futureAmount;
+            TriggerAutosave();
         }
     }
 
@@ -37,12 +40,14 @@ public class GameData
     {
         DefenseData defenseData = new DefenseData(defenseObject.ObjectName);
         DefenseData.Add(defenseData);
+        TriggerAutosave();
     }
 
     public void CreateBonusData(BonusObject bonusObject)
     {
         BonusData bonusData = new BonusData(bonusObject.ObjectName);
         BonusData.Add(bonusData);
+        TriggerAutosave();
     }
 
     public PurchasableData GetPurchasableData(string name)
@@ -51,12 +56,17 @@ public class GameData
         purchasableData.AddRange(DefenseData);
         purchasableData.AddRange(BonusData);
 
-        return DefenseData.Find(data => data.ObjectName == name);
+        return purchasableData.Find(data => data.ObjectName == name);
     }
 
     public DefenseData GetDefenseData(string name)
     {
         return DefenseData.Find(data => data.ObjectName == name);
+    }
+
+    public BonusData GetBonusData(string name)
+    {
+        return BonusData.Find(data => data.ObjectName == name);
     }
 
     public LoanData GetLoanData(string name)
@@ -69,10 +79,11 @@ public class GameData
         string name = loanObject.LoanName;
         int amount = loanObject.Amount;
 
-        LoanData loanData = new LoanData(this, name, amount);
+        LoanData loanData = new LoanData(name, amount);
 
         AddDollars(amount);
         LoanData.Add(loanData);
+        TriggerAutosave();
     }
 
     // Get debt.
@@ -88,8 +99,18 @@ public class GameData
         return debt;
     }
 
-    // Pay debt.
-    public void PayDebt(int amount)
+    // Pay debt on loan.
+    public void PayDebtOnLoan(LoanData loanData, int amount)
+    {
+        loanData.SubtractDebt(amount);
+        SubtractDollars(amount);
+        LoanData.Remove(loanData);
+        TriggerAutosave();
+
+    }
+
+    // Pay debt on all loans.
+    public void PayDebtOnAllLoans(int amount)
     {
         int remaining = amount;
 
@@ -104,5 +125,10 @@ public class GameData
                 remaining -= payment;
             }
         }
+    }
+
+    public void TriggerAutosave()
+    {
+        GameDataManager.instance.TriggerAutosave();
     }
 }

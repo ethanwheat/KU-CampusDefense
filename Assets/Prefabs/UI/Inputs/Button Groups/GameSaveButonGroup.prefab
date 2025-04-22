@@ -51,11 +51,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   saveText: {fileID: 7721929108478869868}
-  creationDateText: {fileID: 4850881986916192446}
-  onLoadGame:
+  lastModifiedText: {fileID: 4850881986916192446}
+  OnLoadGame:
     m_PersistentCalls:
       m_Calls: []
-  onDeleteSave:
+  OnDeleteSave:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &5518249778897941027
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 1654916262043197061}
   - component: {fileID: 4850881986916192446}
   m_Layer: 5
-  m_Name: CreationDateText
+  m_Name: LastModifiedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

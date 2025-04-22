@@ -223,7 +223,6 @@ MonoBehaviour:
   - {fileID: 0}
   startNodes: []
   currentRound: {fileID: 11400000, guid: 7445b25413fd67f419735e828df62608, type: 2}
-  gameData: {fileID: 0}
   coinMultiplier: 1
   dollarMultiplier: 1
   coins: 0
@@ -239,6 +238,7 @@ MonoBehaviour:
   enemiesParent: {fileID: 6421931705708880764}
   defensesParent: {fileID: 3189944864858491484}
   projectilesParent: {fileID: 4837568856536189479}
+  gameDataObject: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!1 &7700811736497174906
 GameObject:
   m_ObjectHideFlags: 0

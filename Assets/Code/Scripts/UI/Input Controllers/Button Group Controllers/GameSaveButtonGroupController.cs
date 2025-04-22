@@ -7,7 +7,7 @@ public class GameSaveButtonGroupController : MonoBehaviour
 {
     [Header("Text")]
     [SerializeField] private TextMeshProUGUI saveText;
-    [SerializeField] private TextMeshProUGUI creationDateText;
+    [SerializeField] private TextMeshProUGUI lastModifiedText;
 
     [Header("Unity Events")]
     [SerializeField] public UnityEvent OnLoadGame;
@@ -17,11 +17,10 @@ public class GameSaveButtonGroupController : MonoBehaviour
     {
         saveText.text = meta.Name;
 
-        DateTime parsedTimed = DateTime.Parse(meta.CreationTime);
-        DateTime localTime = parsedTimed.ToLocalTime();
-        string formattedTime = localTime.ToString("M/d/yyyy h:mm tt");
-
-        creationDateText.text = formattedTime;
+        if (DateTime.TryParse(meta.LastModified, out DateTime parsedTime))
+        {
+            lastModifiedText.text = parsedTime.ToLocalTime().ToString("M/d/yyyy h:mm tt");
+        }
     }
 
     public void LoadGame()

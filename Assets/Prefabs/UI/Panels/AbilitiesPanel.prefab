@@ -96,11 +96,7 @@ MonoBehaviour:
   abilitiesParent: {fileID: 1207857963590967949}
   roundSceneUIController: {fileID: 0}
   messagePopupPanelController: {fileID: 0}
-  abilityData:
-  - {fileID: 11400000, guid: 8e5a42ef2123846c59f0739259e3419b, type: 2}
-  - {fileID: 11400000, guid: 31a0f7e72890c43a0b899bde7d891111, type: 2}
-  - {fileID: 11400000, guid: 82ff28d26eeaa4d3989e5fe9403bb8ea, type: 2}
-  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
+  gameDataObject: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!225 &5858375315924650550
 CanvasGroup:
   m_ObjectHideFlags: 0

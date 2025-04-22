@@ -10,9 +10,6 @@ public class MainMenuUIController : MonoBehaviour
     [SerializeField] private PanelFadeController menuPanelFadeController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataObject gameDataController;
-
     void Start()
     {
         // Call show menu coroutine.

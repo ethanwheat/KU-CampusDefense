@@ -15,16 +15,12 @@ public class UpgradePanelController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI costText;
 
     [Header("UI Controllers")]
-    [SerializeField] private BuildingSceneUIController buildingSceneUIController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
     [SerializeField] private StarImagesController starImagesController;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip upgradeSoundEffect;
     [SerializeField] private AudioClip errorSoundEffect;
-
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataObject gameDataController;
 
     private string buildingName;
     private DefenseObject defenseObject;
@@ -91,7 +87,7 @@ public class UpgradePanelController : MonoBehaviour
             // Upgrade object, subtract cost, update dollar amounts on dollar UI, play upgrade sound, and update upgrade panel.
             defenseData.UpgradeLevel();
             gameData.SubtractDollars(upgradeCost);
-            buildingSceneUIController.UpdateDollarUI();
+            BuildingSceneUIController.instance.UpdateDollarUI();
             SoundManager.instance.PlaySoundEffect(upgradeSoundEffect, transform, 1f);
             UpdateUI();
         }

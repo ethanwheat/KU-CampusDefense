@@ -25,16 +25,14 @@ public class BaseballFieldDefense : Defense, IDefense
 
     public override void Start()
     {
-        bool isBought = DefenseData != null;
+        base.Start();
 
-        if (isBought)
+        if (DefenseData != null)
         {
             onDefenseStart.Invoke();
             ballsPerWave += ballsIncreasePerLevel * (DefenseData.Level - 1);
             StartCoroutine(FireBaseballWaves());
         }
-
-        base.Start();
     }
 
     private IEnumerator FireBaseballWaves()

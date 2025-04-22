@@ -11,7 +11,13 @@ public class CreateGameSavePanelController : MonoBehaviour
 
     public void CreateGameSave()
     {
-        GameDataManager.instance.CreateGameData(gameSaveNameInput.text);
-        mainMenuUIController.StartGame();
+        if (GameDataManager.instance.CreateGameData(gameSaveNameInput.text))
+        {
+            mainMenuUIController.StartGame();
+        }
+        else
+        {
+            // Show message popup.
+        }
     }
 }
