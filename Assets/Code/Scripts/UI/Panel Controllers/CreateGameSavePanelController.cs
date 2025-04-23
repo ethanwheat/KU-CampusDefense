@@ -1,23 +1,28 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CreateGameSavePanelController : MonoBehaviour
 {
     [Header("Panel Objects")]
-    [SerializeField] private TextMeshProUGUI gameSaveNameInput;
+    [SerializeField] private TMP_InputField gameSaveNameInputField;
 
     [Header("UI Controllers")]
-    [SerializeField] private MainMenuUIController mainMenuUIController;
+    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip errorSoundEffect;
 
     public void CreateGameSave()
     {
-        if (GameDataManager.instance.CreateGameData(gameSaveNameInput.text))
+        if (GameDataManager.instance.CreateGameData(gameSaveNameInputField.text))
         {
-            mainMenuUIController.StartGame();
+            MainMenuSceneUIController.instance.StartGame();
         }
         else
         {
-            // Show message popup.
+            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+            messagePopupPanelController.ShowPanel("Something went wrong!", "Game save could not be created.");
         }
     }
 }

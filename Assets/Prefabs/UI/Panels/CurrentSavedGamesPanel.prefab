@@ -844,6 +844,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameSaveButtonGroupPrefab: {fileID: 3497806285697905709, guid: 6dd1859bc59338e4e9843d183b373945, type: 3}
   content: {fileID: 5507000522699600255}
+  panelFadeController: {fileID: 72608369363762700}
+  messagePopupPanelController: {fileID: 0}
+  errorSoundEffect: {fileID: 8300000, guid: d334ab6419cf84f47a7ca4e98f8d1b1c, type: 3}
 --- !u!1001 &2373459189587253777
 PrefabInstance:
   m_ObjectHideFlags: 0

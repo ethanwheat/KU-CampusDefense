@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class SmallMessagePopupPanel : MonoBehaviour
+public class SmallMessagePopupPanelController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI headerText;
 

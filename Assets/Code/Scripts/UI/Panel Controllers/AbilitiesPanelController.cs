@@ -9,8 +9,11 @@ public class AbilitiesPanelController : MonoBehaviour
     [SerializeField] private Transform abilitiesParent;
 
     [Header("UI Controllers")]
-    [SerializeField] private RoundSceneUIController roundSceneUIController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip errorSoundEffect;
+    [SerializeField] private AudioClip abilityActivatedSoundEffect;
 
     [Header("Game Object Data")]
     [SerializeField] private GameDataObject gameDataObject;
@@ -28,6 +31,20 @@ public class AbilitiesPanelController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void ShowError(string title, string text)
+    {
+        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+        messagePopupPanelController.ShowPanel(title, text);
+        ClosePanel();
+    }
+
+    public void ShowActivated(string title, string text)
+    {
+        SoundManager.instance.PlaySoundEffect(abilityActivatedSoundEffect, transform, 1f);
+        messagePopupPanelController.ShowPanel(title, text);
+        ClosePanel();
+    }
+
     private void InitializeAbilities()
     {
         if (!alreadyOpened)
@@ -42,7 +59,7 @@ public class AbilitiesPanelController : MonoBehaviour
                 var controller = button.GetComponent<AbilityButtonController>();
                 if (controller != null)
                 {
-                    controller.Initialize(ability, this, roundSceneUIController, messagePopupPanelController);
+                    controller.Initialize(ability, this);
                 }
 
                 // Force visible

@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class RoundSceneUIController : MonoBehaviour
 {
+    public static RoundSceneUIController instance;
+
     [Header("UI Controllers")]
     [SerializeField] private DefensePanelController defensePanelController;
     [SerializeField] private AbilitiesPanelController abilitiesPanelController;
@@ -13,7 +15,7 @@ public class RoundSceneUIController : MonoBehaviour
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
     [SerializeField] private RoundWonPanelController roundWonPanelController;
     [SerializeField] private RoundLostPanelController roundLostPanelController;
-    [SerializeField] private SmallMessagePopupPanel smallMessagePopupPanelController;
+    [SerializeField] private SmallMessagePopupPanelController smallMessagePopupPanelController;
 
     [Header("UI Text")]
     [SerializeField] private TextMeshProUGUI dollarText;
@@ -26,6 +28,18 @@ public class RoundSceneUIController : MonoBehaviour
     private Camera mainCamera;
     private Outline healthBuildingOutline;
     private RoundManager roundManager;
+
+    void Awake()
+    {
+        if (!instance)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {

@@ -15,8 +15,8 @@ public class UpgradePanelController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI costText;
 
     [Header("UI Controllers")]
-    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
     [SerializeField] private StarImagesController starImagesController;
+    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip upgradeSoundEffect;

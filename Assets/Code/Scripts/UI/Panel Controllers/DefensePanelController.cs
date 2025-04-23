@@ -7,11 +7,11 @@ public class DefensePanelController : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject defensePlacementButtonPrefab;
 
-    [Header("UI Controllers")]
-    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
-
     [Header("UI Transforms")]
     [SerializeField] private Transform placementButtonsParent;
+
+    [Header("UI Controllers")]
+    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip errorSoundEffect;

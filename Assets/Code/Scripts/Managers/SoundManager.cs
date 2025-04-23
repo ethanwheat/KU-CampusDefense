@@ -18,7 +18,12 @@ public class SoundManager : MonoBehaviour
     [Header("Settings Data Controller")]
     [SerializeField] private SettingsObject settingsDataController;
 
+    private float musicVolume;
+    private float soundEffectsVolume;
     private GameObject musicObject;
+
+    public float MusicVolume => musicVolume;
+    public float SoundEffectsVolume => soundEffectsVolume;
 
     void Awake()
     {
@@ -30,6 +35,19 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (!PlayerPrefs.HasKey("MusicVolume"))
+        {
+            PlayerPrefs.SetFloat("MusicVolume", 1f);
+        }
+
+        if (!PlayerPrefs.HasKey("SoundEffectsVolume"))
+        {
+            PlayerPrefs.SetFloat("SoundEffectsVolume", 1f);
+        }
+
+        musicVolume = PlayerPrefs.GetFloat("MusicVolume");
+        soundEffectsVolume = PlayerPrefs.GetFloat("SoundEffectsVolume");
     }
 
     void Start()
@@ -56,8 +74,8 @@ public class SoundManager : MonoBehaviour
     // Set music volume.
     public void OnMusicVolumeChange(float volume)
     {
-        settingsDataController.SetMusicVolume(volume);
-
+        musicVolume = volume;
+        PlayerPrefs.SetFloat("MusicVolume", volume);
         AudioSource audioSource = musicObject.GetComponent<AudioSource>();
         audioSource.volume = volume / 2;
     }
@@ -66,9 +84,6 @@ public class SoundManager : MonoBehaviour
     IEnumerator PlayMusicCoroutine(AudioClip audioClip, Transform transform, float volume, float duration)
     {
         yield return StopMusicCoroutine(duration);
-
-        // Get music volume.
-        float musicVolume = settingsDataController.MusicVolume;
 
         // Create audio game object.
         musicObject = CreateSoundObject(audioClip, transform);
@@ -122,9 +137,6 @@ public class SoundManager : MonoBehaviour
     // Play sound effect.
     public void PlaySoundEffect(AudioClip audioClip, Transform transform, float volume)
     {
-        // Get sound effect volume.
-        float soundEffectsVolume = settingsDataController.SoundEffectsVolume;
-
         // Create audio game object.
         GameObject soundEffectObject = CreateSoundObject(audioClip, transform);
         soundEffectObject.transform.parent = soundEffectsParent;
@@ -137,6 +149,13 @@ public class SoundManager : MonoBehaviour
         // Destroy after audio plays.
         float clipLength = audioSource.clip.length + .1f;
         Destroy(soundEffectObject, clipLength);
+    }
+
+    // Set music volume.
+    public void OnSoundEffectVolumeChange(float volume)
+    {
+        soundEffectsVolume = volume;
+        PlayerPrefs.SetFloat("SoundEffectsVolume", volume);
     }
 
     // Create music object.

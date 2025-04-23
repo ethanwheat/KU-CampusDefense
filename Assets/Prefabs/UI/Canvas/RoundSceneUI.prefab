@@ -138,9 +138,8 @@ MonoBehaviour:
   smallMessagePopupPanelController: {fileID: 6185293258701389728}
   dollarText: {fileID: 7043421358521999637}
   coinText: {fileID: 1740722999357597077}
-  waveText: {fileID: 0}
+  waveText: {fileID: 4449457124588025399}
   clickSoundEffect: {fileID: 8300000, guid: 3cdb04cb39150f8429e89b26e5a10b9e, type: 3}
-  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!1 &7905146676800674007
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,6 +359,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0aba24ef9482f544ab0276f0b3d963f, type: 3}
+--- !u!114 &4449457124588025399 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4390810108901760594, guid: e0aba24ef9482f544ab0276f0b3d963f, type: 3}
+  m_PrefabInstance: {fileID: 94838555493197925}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &8384008352278246054 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8433293788471696067, guid: e0aba24ef9482f544ab0276f0b3d963f, type: 3}

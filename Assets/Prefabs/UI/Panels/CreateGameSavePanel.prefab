@@ -990,10 +990,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87532d03c06f5ab4988d11a4aae39dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSaveNameInput: {fileID: 3821519795891968837}
-  onCreateGameSave:
-    m_PersistentCalls:
-      m_Calls: []
+  gameSaveNameInputField: {fileID: 1300942541409538911}
+  messagePopupPanelController: {fileID: 0}
+  errorSoundEffect: {fileID: 8300000, guid: d334ab6419cf84f47a7ca4e98f8d1b1c, type: 3}
 --- !u!1001 &2373459189587253777
 PrefabInstance:
   m_ObjectHideFlags: 0

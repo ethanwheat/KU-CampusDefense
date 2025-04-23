@@ -56,3 +56,4 @@ MonoBehaviour:
     CreationTime: 
     LastModified: 
   selectedRound: {fileID: 11400000, guid: 68ec9e293b2eaa34c9316c714a727544, type: 2}
+  gameDataObject: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}

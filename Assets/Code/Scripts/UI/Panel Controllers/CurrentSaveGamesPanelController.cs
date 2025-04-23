@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class CurrentSaveGamesPanelController : MonoBehaviour
 {
@@ -11,10 +10,17 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
     [SerializeField] private Transform content;
 
     [Header("UI Controllers")]
-    [SerializeField] private MainMenuUIController mainMenuUIController;
+    [SerializeField] private PanelFadeController panelFadeController;
+    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
-    void OnEnable()
+    [Header("Sounds")]
+    [SerializeField] private AudioClip errorSoundEffect;
+
+    // Populate panel with game saves.
+    public void ShowPanel()
     {
+        ResetPanel();
+
         GameDataManager gameDataManager = GameDataManager.instance;
         List<GameDataMeta> gameDataMeta = gameDataManager.GetAllGameMetaData();
 
@@ -26,9 +32,12 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
             gameSaveButtonGroupController.OnLoadGame.AddListener(() => StartGame(meta));
             gameSaveButtonGroupController.OnDeleteSave.AddListener(() => DeleteSave(buttonGroup, meta));
         }
+
+        panelFadeController.Show();
     }
 
-    void OnDisable()
+    // Remove previous game saves.
+    void ResetPanel()
     {
         foreach (Transform buttonGroup in content)
         {
@@ -36,18 +45,21 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
         }
     }
 
+    // Load game data and start game.
     private void StartGame(GameDataMeta gameDataMeta)
     {
         if (GameDataManager.instance.LoadGameData(gameDataMeta.Guid))
         {
-            mainMenuUIController.StartGame();
+            MainMenuSceneUIController.instance.StartGame();
         }
         else
         {
-            // Show message popup.
+            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+            messagePopupPanelController.ShowPanel("Something went wrong!", "The game could not be started.");
         }
     }
 
+    // Delete game save and remove button.
     private void DeleteSave(GameObject buttonGroup, GameDataMeta gameDataMeta)
     {
         if (GameDataManager.instance.DeleteGameData(gameDataMeta.Guid))
@@ -56,7 +68,8 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
         }
         else
         {
-            // Show message popup.
+            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+            messagePopupPanelController.ShowPanel("Something went wrong!", "The game save could not be deleted.");
         }
     }
 }

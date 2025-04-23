@@ -36,7 +36,7 @@ public class RoundSelectionPanelController : MonoBehaviour
 
                 btnObj.GetComponent<Button>().onClick.AddListener(() =>
                 {
-                    gameDataMangaer.SetSelectedRound(round.RoundNumber);
+                    gameDataMangaer.SetSelectedRound(round);
                     ClosePanel();
                 });
             }

@@ -13,13 +13,16 @@ public class GameDataManager : MonoBehaviour
     [SerializeField] private GameDataMeta gameDataMeta;
 
     [Header("Selected Round")]
-    [SerializeField] private int selectedRound = 1;
+    [SerializeField] private RoundObject selectedRound;
+
+    [Header("Game Data Object")]
+    [SerializeField] private GameDataObject gameDataObject;
 
     private Coroutine autosaveCoroutine;
 
     public GameData GameData => gameData;
     public GameDataMeta GameDataMeta => gameDataMeta;
-    public int SelectedRound => selectedRound;
+    public RoundObject SelectedRound => selectedRound;
 
     void Awake()
     {
@@ -47,7 +50,7 @@ public class GameDataManager : MonoBehaviour
             };
 
             // Set selected round.
-            selectedRound = gameData.RoundNumber;
+            selectedRound = gameDataObject.GetRoundObject(gameData.RoundNumber);
 
             // Create unique id.
             string guid = Guid.NewGuid().ToString();
@@ -92,7 +95,7 @@ public class GameDataManager : MonoBehaviour
             gameDataMeta = JsonUtility.FromJson<GameDataMeta>(gameDataMetaJson);
 
             // Reset selected round.
-            selectedRound = gameData.RoundNumber;
+            selectedRound = gameDataObject.GetRoundObject(gameData.RoundNumber);
 
             return true;
         }
@@ -187,8 +190,8 @@ public class GameDataManager : MonoBehaviour
         return gameDataMeta;
     }
 
-    public void SetSelectedRound(int roundNumber)
+    public void SetSelectedRound(RoundObject roundObject)
     {
-        selectedRound = roundNumber;
+        selectedRound = roundObject;
     }
 }

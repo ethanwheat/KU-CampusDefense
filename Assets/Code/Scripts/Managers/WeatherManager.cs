@@ -10,7 +10,7 @@ public class WeatherManager : MonoBehaviour
     [SerializeField] private GameObject rainOverlay;
 
     [Header("UI Controllers")]
-    [SerializeField] private SmallMessagePopupPanel smallMessagePopupPanelController;
+    [SerializeField] private SmallMessagePopupPanelController smallMessagePopupPanelController;
 
     [Header("Weather Settings")]
     [SerializeField] private float weatherChance = 0.3f; // 30% chance

@@ -3,12 +3,26 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuUIController : MonoBehaviour
+public class MainMenuSceneUIController : MonoBehaviour
 {
+
+    public static MainMenuSceneUIController instance;
+
     [Header("UI Controllers")]
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
     [SerializeField] private PanelFadeController menuPanelFadeController;
-    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
+
+    void Awake()
+    {
+        if (!instance)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {

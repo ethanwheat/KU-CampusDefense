@@ -94,8 +94,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityButtonPrefab: {fileID: 8138072150330930651, guid: a80ccb95e10ff4840bf6d304a5a3f103, type: 3}
   abilitiesParent: {fileID: 1207857963590967949}
-  roundSceneUIController: {fileID: 0}
   messagePopupPanelController: {fileID: 0}
+  errorSoundEffect: {fileID: 8300000, guid: d334ab6419cf84f47a7ca4e98f8d1b1c, type: 3}
+  abilityActivatedSoundEffect: {fileID: 8300000, guid: 9a8cdf5a0fabba843bcdf476d342dbe0, type: 3}
   gameDataObject: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!225 &5858375315924650550
 CanvasGroup:

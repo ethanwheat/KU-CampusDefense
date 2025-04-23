@@ -47,7 +47,6 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private AudioClip allenFieldHouseDamageSoundEffect;
 
     [Header("UI Controllers")]
-    [SerializeField] private RoundSceneUIController roundSceneUIController;
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
 
     [Header("Parents")]
@@ -64,14 +63,14 @@ public class RoundManager : MonoBehaviour
     public Transform ProjectilesParent => projectilesParent;
     public int Coins => coins;
 
+    private GameData gameData;
+    private RoundSceneUIController roundSceneUIController;
     private List<EnemyMovement> enemies = new List<EnemyMovement>();
     private List<Defense> defenses = new List<Defense>();
     private List<Defense> healthDefenses = new List<Defense>();
     private bool isAllEnemiesSlowed = false;
     private bool isAllEnemiesFrozen = false;
     private float slowMultiplier = 1;
-
-    private GameData gameData;
 
     void Awake()
     {
@@ -90,7 +89,8 @@ public class RoundManager : MonoBehaviour
         GameDataManager gameDataManager = GameDataManager.instance;
 
         gameData = gameDataManager.GameData;
-        currentRound = gameDataObject.RoundObjects[gameDataManager.SelectedRound - 1];
+        roundSceneUIController = RoundSceneUIController.instance;
+        currentRound = gameDataManager.SelectedRound;
         fieldhouseHealth = currentRound.FieldHouseHealth;
         maxFieldhouseHealth = fieldhouseHealth;
 

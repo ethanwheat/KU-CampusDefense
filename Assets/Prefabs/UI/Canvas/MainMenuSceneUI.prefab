@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7313200089782540089}
   - component: {fileID: 5204553759205242153}
   m_Layer: 5
-  m_Name: MainMenuUI
+  m_Name: MainMenuSceneUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,8 +125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingBackgroundController: {fileID: 5716891728201563717}
   menuPanelFadeController: {fileID: 6987268511834118930}
-  messagePopupPanelController: {fileID: 7888288625402450208}
-  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!114 &5204553759205242153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,6 +615,10 @@ PrefabInstance:
       propertyPath: mainMenuUIController
       value: 
       objectReference: {fileID: 7313200089782540089}
+    - target: {fileID: 2819915814581774966, guid: 6b03e5aa399234ef7bab2ea3e048e895, type: 3}
+      propertyPath: messagePopupPanelController
+      value: 
+      objectReference: {fileID: 7888288625402450208}
     - target: {fileID: 3090986212653816645, guid: 6b03e5aa399234ef7bab2ea3e048e895, type: 3}
       propertyPath: m_Value
       value: 0
@@ -848,6 +850,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 089f267b8b4d3457d9a505f8fcfeed8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7953161855489005834 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2819915814581774966, guid: 6b03e5aa399234ef7bab2ea3e048e895, type: 3}
+  m_PrefabInstance: {fileID: 5295411757030634364}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6704364c6f6369e41ab2f1dd4c38416d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &6695177475224716423
@@ -1523,7 +1536,7 @@ PrefabInstance:
     - target: {fileID: 3333065409897286076, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 5223295969497009520}
+      objectReference: {fileID: 7953161855489005834}
     - target: {fileID: 3333065409897286076, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -1538,7 +1551,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3333065409897286076, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: Show
+      value: ShowPanel
       objectReference: {fileID: 0}
     - target: {fileID: 3333065409897286076, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -1546,7 +1559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3333065409897286076, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: PanelFadeController, Assembly-CSharp
+      value: CurrentSaveGamesPanelController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3333065409897286076, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1646,7 +1659,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 3cdb04cb39150f8429e89b26e5a10b9e, type: 3}
     - target: {fileID: 5622116793543682829, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5622116793543682829, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -1667,7 +1680,7 @@ PrefabInstance:
     - target: {fileID: 5622116793543682829, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 8530246232186025335}
+      objectReference: {fileID: 6435336254133885886}
     - target: {fileID: 5622116793543682829, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
       value: 
@@ -1690,7 +1703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5622116793543682829, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: Show
+      value: ShowPanel
       objectReference: {fileID: 0}
     - target: {fileID: 5622116793543682829, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
@@ -1702,7 +1715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5622116793543682829, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: PanelFadeController, Assembly-CSharp
+      value: SettingsPanelController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5622116793543682829, guid: 35a98cbfdeef1674681dcc06ae58f867, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_TargetAssemblyTypeName

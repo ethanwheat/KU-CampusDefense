@@ -130,7 +130,6 @@ MonoBehaviour:
   loadingBackgroundController: {fileID: 8084291624175720268}
   dollarText: {fileID: 1476515413953950980}
   clickSoundEffect: {fileID: 8300000, guid: 3cdb04cb39150f8429e89b26e5a10b9e, type: 3}
-  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!1001 &1235957425190312097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -281,6 +280,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2536853213404295063, guid: a8ce1e96afd604a2aa3d469b29785b69, type: 3}
+      propertyPath: messagePopupPanelController
+      value: 
+      objectReference: {fileID: 9155536170057261883}
     - target: {fileID: 4182517720276961612, guid: a8ce1e96afd604a2aa3d469b29785b69, type: 3}
       propertyPath: itemImage
       value: 
