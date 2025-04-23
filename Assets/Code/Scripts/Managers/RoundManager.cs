@@ -12,16 +12,22 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private GameObject fanPrefab;
     [SerializeField] private GameObject coachPrefab;
     [SerializeField] private GameObject cheerleaderPrefab;
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private GameObject mascotPrefab;
 
     [Header("Prefab Speeds")]
     [SerializeField] private float fanSpeed = 15f;
     [SerializeField] private float coachSpeed = 10f;
     [SerializeField] private float cheerleaderSpeed = 25f;
+    [SerializeField] private float playerSpeed = 20f;
+    [SerializeField] private float mascotSpeed = 12f;
 
     [Header("Prefab Healths")]
     [SerializeField] private float fanHealth = 100;
     [SerializeField] private float coachHealth = 200;
-    [SerializeField] private float cheerleaderHealth = 50;
+    [SerializeField] private float cheerleaderHealth = 50; 
+    [SerializeField] private float playerHealth = 150;
+    [SerializeField] private float mascotHealth = 300;
 
     [Header("Round Initialization")]
     [SerializeField] private BoxCollider[] spawnAreas;  // Where enemies will spawn
@@ -151,6 +157,8 @@ public class RoundManager : MonoBehaviour
         yield return SpawnEnemyType(fanPrefab, wave.fans, wave.spawnInterval, fanSpeed, fanHealth);
         yield return SpawnEnemyType(coachPrefab, wave.coaches, wave.spawnInterval, coachSpeed, coachHealth);
         yield return SpawnEnemyType(cheerleaderPrefab, wave.cheerleaders, wave.spawnInterval, cheerleaderSpeed, cheerleaderHealth);
+        yield return SpawnEnemyType(playerPrefab, wave.players, wave.spawnInterval, playerSpeed, playerHealth);
+        yield return SpawnEnemyType(mascotPrefab, wave.mascots, wave.spawnInterval, mascotSpeed, mascotHealth);
     }
 
     IEnumerator SpawnEnemyType(GameObject prefab, int count, float interval, float speed, float health)

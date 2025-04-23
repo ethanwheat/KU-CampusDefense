@@ -1645,6 +1645,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
     - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
+      propertyPath: mascotPrefab
+      value: 
+      objectReference: {fileID: 7447163605589988728, guid: 72134d669dd0c419580bf53844de2f9a, type: 3}
+    - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 7447163605589988728, guid: 4b426258082a6409da98dd54183337a2, type: 3}
+    - target: {fileID: 5451056833004249319, guid: 1cf58fe927d919947b38c716d14f82e0, type: 3}
       propertyPath: startRoundButton
       value: 
       objectReference: {fileID: 0}

@@ -6,6 +6,8 @@ public class Wave
     public int fans;
     public int coaches;
     public int cheerleaders;
+    public int players;
+    public int mascots;
     public float spawnInterval = 1f; // Time between spawns
 }
 
