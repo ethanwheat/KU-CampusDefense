@@ -56,28 +56,47 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
         }
         else
         {
-            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
-            messagePopupPanelController.ShowPanel("Something went wrong!", "The game could not be started.");
+            ShowError("Something went wrong!", "The game could not be started.");
         }
     }
 
     // Delete game save and remove button.
     private void DeleteSave(GameObject buttonGroup, GameDataMeta gameDataMeta)
     {
-        confirmPanelController.OnConfirm.AddListener(() => OnDelete(buttonGroup, gameDataMeta));
+        SetInteractable(false);
+
         confirmPanelController.ShowPanel("Delete Game Save", "Are you sure you want to delete " + gameDataMeta.Name + " game save?", false);
+        confirmPanelController.OnConfirm.AddListener(() => OnDelete(buttonGroup, gameDataMeta));
+        confirmPanelController.OnClose.AddListener(() => SetInteractable(true));
     }
 
+    // Called when delete confirmed.
     public void OnDelete(GameObject buttonGroup, GameDataMeta gameDataMeta)
     {
+        SetInteractable(true);
+
         if (GameDataManager.instance.DeleteGameData(gameDataMeta.Guid))
         {
             Destroy(buttonGroup);
         }
         else
         {
-            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
-            messagePopupPanelController.ShowPanel("Something went wrong!", "The game save could not be deleted.");
+            ShowError("Something went wrong!", "The game save could not be deleted.");
         }
+    }
+
+    // Show error.
+    void ShowError(string title, string text)
+    {
+        SetInteractable(false);
+        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+        messagePopupPanelController.ShowPanel(title, text);
+        messagePopupPanelController.OnClose.AddListener(() => SetInteractable(true));
+    }
+
+    // Set if UI is interactable
+    void SetInteractable(bool interactable)
+    {
+        GetComponent<CanvasGroup>().interactable = interactable;
     }
 }

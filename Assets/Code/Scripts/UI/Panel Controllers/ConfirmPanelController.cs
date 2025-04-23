@@ -13,7 +13,7 @@ public class ConfirmPanelController : MonoBehaviour
 
     [Header("Untiy Events")]
     public UnityEvent OnConfirm;
-    public UnityEvent OnQuit;
+    public UnityEvent OnClose;
 
     private bool isFading;
 
@@ -21,6 +21,9 @@ public class ConfirmPanelController : MonoBehaviour
     public void ShowPanel(string title, string description, bool fade)
     {
         isFading = fade;
+
+        OnConfirm.RemoveAllListeners();
+        OnClose.RemoveAllListeners();
 
         titleText.text = title;
         descriptionText.text = description;
@@ -34,31 +37,32 @@ public class ConfirmPanelController : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    // Hide panel.
-    void HidePanel()
+    // Close panel.
+    public void ClosePanel()
     {
-        if (isFading)
+        if (gameObject.activeSelf)
         {
-            panelFadeController.Hide();
-            return;
-        }
+            if (isFading)
+            {
+                panelFadeController.Hide();
+                return;
+            }
 
-        gameObject.SetActive(false);
+            gameObject.SetActive(false);
+        }
     }
 
     // Called when confirm is clicked.
     public void OnConfirmClick()
     {
-        HidePanel();
         OnConfirm.Invoke();
-        OnConfirm.RemoveAllListeners();
+        ClosePanel();
     }
 
     // Called when panel is closed.
-    public void OnQuitClick()
+    public void OnCloseClick()
     {
-        HidePanel();
-        OnQuit.Invoke();
-        OnQuit.RemoveAllListeners();
+        OnClose.Invoke();
+        ClosePanel();
     }
 }

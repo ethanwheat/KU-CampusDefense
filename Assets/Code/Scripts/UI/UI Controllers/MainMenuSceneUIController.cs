@@ -10,7 +10,7 @@ public class MainMenuSceneUIController : MonoBehaviour
 
     [Header("UI Controllers")]
     [SerializeField] private PanelFadeController menuPanelFadeController;
-    [SerializeField] private ConfirmPanelController quitConfirmPanelController;
+    [SerializeField] private ConfirmPanelController confirmPanelController;
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
 
     void Awake()
@@ -61,9 +61,9 @@ public class MainMenuSceneUIController : MonoBehaviour
     // Show quit game panel.
     public void ShowQuitConfirmPanel()
     {
-        quitConfirmPanelController.OnConfirm.AddListener(QuitGame);
-        quitConfirmPanelController.OnQuit.AddListener(menuPanelFadeController.Show);
-        quitConfirmPanelController.ShowPanel("Quit Game", "Are you sure you want to quit the game?", true);
+        confirmPanelController.ShowPanel("Quit Game", "Are you sure you want to quit the game?", true);
+        confirmPanelController.OnConfirm.AddListener(QuitGame);
+        confirmPanelController.OnClose.AddListener(menuPanelFadeController.Show);
     }
 
     // Called by "Yes" on Quit Confirm
