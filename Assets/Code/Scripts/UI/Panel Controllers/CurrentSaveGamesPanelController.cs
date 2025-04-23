@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CurrentSaveGamesPanelController : MonoBehaviour
@@ -10,6 +11,7 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
     [SerializeField] private Transform content;
 
     [Header("UI Controllers")]
+    [SerializeField] private ConfirmPanelController confirmPanelController;
     [SerializeField] private PanelFadeController panelFadeController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
@@ -61,6 +63,12 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
 
     // Delete game save and remove button.
     private void DeleteSave(GameObject buttonGroup, GameDataMeta gameDataMeta)
+    {
+        confirmPanelController.OnConfirm.AddListener(() => OnDelete(buttonGroup, gameDataMeta));
+        confirmPanelController.ShowPanel("Delete Game Save", "Are you sure you want to delete " + gameDataMeta.Name + " game save?", false);
+    }
+
+    public void OnDelete(GameObject buttonGroup, GameDataMeta gameDataMeta)
     {
         if (GameDataManager.instance.DeleteGameData(gameDataMeta.Guid))
         {

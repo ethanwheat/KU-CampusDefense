@@ -56,5 +56,9 @@ public class PanelFadeController : MonoBehaviour
 
         canvasGroup.alpha = 0f;
         gameObject.SetActive(false);
+
+        canvasGroup.alpha = 1f;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
     }
 }

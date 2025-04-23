@@ -9,8 +9,9 @@ public class MainMenuSceneUIController : MonoBehaviour
     public static MainMenuSceneUIController instance;
 
     [Header("UI Controllers")]
-    [SerializeField] private LoadingBackgroundController loadingBackgroundController;
     [SerializeField] private PanelFadeController menuPanelFadeController;
+    [SerializeField] private ConfirmPanelController quitConfirmPanelController;
+    [SerializeField] private LoadingBackgroundController loadingBackgroundController;
 
     void Awake()
     {
@@ -55,6 +56,14 @@ public class MainMenuSceneUIController : MonoBehaviour
 
         // Load building scene.
         SceneManager.LoadScene("Building Scene");
+    }
+
+    // Show quit game panel.
+    public void ShowQuitConfirmPanel()
+    {
+        quitConfirmPanelController.OnConfirm.AddListener(QuitGame);
+        quitConfirmPanelController.OnQuit.AddListener(menuPanelFadeController.Show);
+        quitConfirmPanelController.ShowPanel("Quit Game", "Are you sure you want to quit the game?", true);
     }
 
     // Called by "Yes" on Quit Confirm
