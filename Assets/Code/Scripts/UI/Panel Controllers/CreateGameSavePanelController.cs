@@ -17,7 +17,7 @@ public class CreateGameSavePanelController : MonoBehaviour
     {
         if (GameDataManager.instance.CreateGameData(gameSaveNameInputField.text))
         {
-            MainMenuSceneUIController.instance.StartGame();
+            MainMenuSceneCanvasController.instance.StartGame();
         }
         else
         {

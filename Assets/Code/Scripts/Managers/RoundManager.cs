@@ -64,7 +64,7 @@ public class RoundManager : MonoBehaviour
     public int Coins => coins;
 
     private GameData gameData;
-    private RoundSceneUIController roundSceneUIController;
+    private RoundSceneCanvasController roundSceneUIController;
     private List<EnemyMovement> enemies = new List<EnemyMovement>();
     private List<Defense> defenses = new List<Defense>();
     private List<Defense> healthDefenses = new List<Defense>();
@@ -89,7 +89,7 @@ public class RoundManager : MonoBehaviour
         GameDataManager gameDataManager = GameDataManager.instance;
 
         gameData = gameDataManager.GameData;
-        roundSceneUIController = RoundSceneUIController.instance;
+        roundSceneUIController = RoundSceneCanvasController.instance;
         currentRound = gameDataManager.SelectedRound;
         fieldhouseHealth = currentRound.FieldHouseHealth;
         maxFieldhouseHealth = fieldhouseHealth;

@@ -52,7 +52,7 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
     {
         if (GameDataManager.instance.LoadGameData(gameDataMeta.Guid))
         {
-            MainMenuSceneUIController.instance.StartGame();
+            MainMenuSceneCanvasController.instance.StartGame();
         }
         else
         {

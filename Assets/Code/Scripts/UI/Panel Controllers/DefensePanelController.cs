@@ -23,15 +23,6 @@ public class DefensePanelController : MonoBehaviour
     private GameObject selectedPlacementButton;
     private GameObject currentDefensePlacement;
 
-    void Update()
-    {
-        // Cancel selection is escape pressed.
-        if (Input.GetKeyDown("escape"))
-        {
-            CancelPlacement();
-        }
-    }
-
     // Load defenses in UI.
     public void ShowPanel()
     {

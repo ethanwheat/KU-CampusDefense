@@ -4,6 +4,7 @@ using UnityEngine;
 public class PanelFadeController : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
+    private Coroutine currentCoroutine;
 
     void Awake()
     {
@@ -13,12 +14,22 @@ public class PanelFadeController : MonoBehaviour
     public void Show()
     {
         gameObject.SetActive(true);
-        StartCoroutine(FadeIn(0.3f));
+
+        if (currentCoroutine != null)
+            StopCoroutine(currentCoroutine);
+
+        currentCoroutine = StartCoroutine(FadeIn(0.3f));
     }
 
     public void Hide()
     {
-        StartCoroutine(FadeOut(0.3f));
+        if (gameObject.activeSelf)
+        {
+            if (currentCoroutine != null)
+                StopCoroutine(currentCoroutine);
+
+            currentCoroutine = StartCoroutine(FadeOut(0.3f));
+        }
     }
 
     private IEnumerator FadeIn(float duration)

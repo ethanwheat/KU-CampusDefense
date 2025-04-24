@@ -17,7 +17,7 @@ public class AbilityButtonController : MonoBehaviour
     private bool isOnCooldown = false;
     private bool isEffectActive = false;
     private AbilitiesPanelController abilitiesPanelController;
-    private RoundSceneUIController roundSceneUIController;
+    private RoundSceneCanvasController roundSceneUIController;
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class AbilityButtonController : MonoBehaviour
     {
         this.abilityObject = abilityObject;
         abilitiesPanelController = abilities;
-        roundSceneUIController = RoundSceneUIController.instance;
+        roundSceneUIController = RoundSceneCanvasController.instance;
         if (abilityIcon != null) abilityIcon.sprite = abilityObject.Icon;
         if (costText != null) costText.text = abilityObject.DollarCost.ToString();
         if (abilityNameText != null) abilityNameText.text = abilityObject.AbilityName;
