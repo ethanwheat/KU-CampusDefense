@@ -12,8 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3dd13367839f1c48a0fc16f476dc3d6, type: 3}
   m_Name: Round3
   m_EditorClassIdentifier: 
-  waves: []
-  roundNumber: 3
-  fieldHouseHealth: 0
-  winPayout: 0
-  killPayout: 0
+  waves:
+  - fans: 0
+    coaches: 0
+    cheerleaders: 1
+    players: 0
+    mascots: 0
+    spawnInterval: 1
+  - fans: 1
+    coaches: 0
+    cheerleaders: 0
+    players: 0
+    mascots: 0
+    spawnInterval: 1
+  roundNumber: 0
+  fieldhouseHealth: 1000
+  winPayout: 1000
+  killPayout: 100

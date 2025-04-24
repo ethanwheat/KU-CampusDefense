@@ -16,10 +16,14 @@ MonoBehaviour:
   - fans: 0
     coaches: 0
     cheerleaders: 5
+    players: 0
+    mascots: 0
     spawnInterval: 1
   - fans: 3
     coaches: 3
     cheerleaders: 2
+    players: 0
+    mascots: 0
     spawnInterval: 1
   roundNumber: 2
   fieldhouseHealth: 1000
