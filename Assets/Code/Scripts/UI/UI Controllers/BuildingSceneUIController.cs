@@ -17,6 +17,7 @@ public class BuildingSceneUIController : MonoBehaviour
 
     [Header("UI Text")]
     [SerializeField] private TextMeshProUGUI dollarText;
+    [SerializeField] private TextMeshProUGUI selectedText;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip clickSoundEffect;
@@ -44,6 +45,8 @@ public class BuildingSceneUIController : MonoBehaviour
 
         // Update dollar UI.
         UpdateDollarUI();
+        // Update selected round
+        UpdateSelectedRound();
 
         // Fade out background.
         StartCoroutine(loadingBackgroundController.FadeOutCoroutine(.5f));
@@ -183,6 +186,12 @@ public class BuildingSceneUIController : MonoBehaviour
     {
         // Update dollar text.
         dollarText.text = GameDataManager.instance.GameData.Dollars.ToString();
+    }
+
+    public void UpdateSelectedRound()
+    {
+        int roundNumber = GameDataManager.instance.SelectedRound.RoundNumber;    
+        selectedText.text = "Round " + roundNumber.ToString();
     }
 
     // Close existing UI.

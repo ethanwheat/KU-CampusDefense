@@ -7,6 +7,8 @@ public class RoundSelectionPanelController : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private Transform contentParent; // Content under the ScrollView
     [SerializeField] private GameObject roundButtonPrefab; // Prefab for each round button
+    [SerializeField] private GameObject lockedRoundPrefab; // Prefab for locked round buttons
+    [SerializeField] private BuildingSceneUIController uiController;
 
     [Header("Game Object")]
     [SerializeField] private GameDataObject gameDataObject;
@@ -18,8 +20,8 @@ public class RoundSelectionPanelController : MonoBehaviour
 
     private void PopulateScrollView()
     {
-        GameDataManager gameDataMangaer = GameDataManager.instance;
-        GameData gameData = gameDataMangaer.GameData;
+        GameDataManager gameDataManager = GameDataManager.instance;
+        GameData gameData = gameDataManager.GameData;
         List<RoundObject> roundObjects = gameDataObject.RoundObjects;
 
         int maxUnlocked = gameData.RoundNumber;
@@ -27,18 +29,27 @@ public class RoundSelectionPanelController : MonoBehaviour
         foreach (var round in roundObjects)
         {
             bool isUnlocked = round.RoundNumber <= maxUnlocked;
+
+            GameObject btnObj;
+
             if (isUnlocked)
             {
-                GameObject btnObj = Instantiate(roundButtonPrefab, contentParent);
+                btnObj = Instantiate(roundButtonPrefab, contentParent);
 
                 // set button label
                 btnObj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Round " + round.RoundNumber;
 
                 btnObj.GetComponent<Button>().onClick.AddListener(() =>
                 {
-                    gameDataMangaer.SetSelectedRound(round);
+                    gameDataManager.SetSelectedRound(round);
                     ClosePanel();
                 });
+            } 
+            else
+            {
+                btnObj = Instantiate(lockedRoundPrefab, contentParent);
+                // set button label
+                btnObj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Round " + round.RoundNumber;
             }
         }
     }
@@ -46,12 +57,13 @@ public class RoundSelectionPanelController : MonoBehaviour
     // Show message popup panel and set message popup panel data.
     public void ShowPanel()
     {
-        gameObject.SetActive(true);
+        gameObject.SetActive(!gameObject.activeSelf);
     }
 
     // Close message popup panel.
     public void ClosePanel()
     {
         gameObject.SetActive(false);
+        uiController.UpdateSelectedRound();
     }
 }
