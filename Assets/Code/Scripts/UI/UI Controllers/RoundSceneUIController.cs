@@ -1,6 +1,7 @@
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class RoundSceneUIController : MonoBehaviour
@@ -21,6 +22,9 @@ public class RoundSceneUIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dollarText;
     [SerializeField] private TextMeshProUGUI coinText;
     [SerializeField] private TextMeshProUGUI waveText;
+
+    [Header("UI Image")]
+    [SerializeField] private Image opponentImage;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip clickSoundEffect;
@@ -182,6 +186,11 @@ public class RoundSceneUIController : MonoBehaviour
         string[] avoid = { "RoundLostPanel", "DollarUI", "CoinUI", "WaveCount" };
         HideAllUI(avoid);
         roundLostPanelController.ShowPanel();
+    }
+
+    public void SetOpponentImage(Sprite sprite)
+    {
+        opponentImage.sprite = sprite;
     }
 
     // Close existing UI.

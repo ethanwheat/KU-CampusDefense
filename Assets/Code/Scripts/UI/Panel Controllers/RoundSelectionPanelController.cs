@@ -39,6 +39,13 @@ public class RoundSelectionPanelController : MonoBehaviour
                 // set button label
                 btnObj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Round " + round.RoundNumber;
 
+                // set button image
+                if (round.OpponentImage != null)
+                {
+                    Image btnImg = btnObj.transform.Find("TeamImage")?.GetComponent<Image>();
+                    btnImg.sprite = round.OpponentImage;
+                }
+
                 btnObj.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     gameDataManager.SetSelectedRound(round);

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3dd13367839f1c48a0fc16f476dc3d6, type: 3}
+  m_Name: Round12
+  m_EditorClassIdentifier: 
+  waves:
+  - fans: 18
+    coaches: 3
+    cheerleaders: 0
+    players: 0
+    mascots: 0
+    spawnInterval: 1
+  - fans: 17
+    coaches: 0
+    cheerleaders: 2
+    players: 0
+    mascots: 0
+    spawnInterval: 1
+  - fans: 14
+    coaches: 0
+    cheerleaders: 0
+    players: 2
+    mascots: 1
+    spawnInterval: 1
+  roundNumber: 12
+  fieldHouseHealth: 2100
+  winPayout: 1600
+  killPayout: 90
+  opponentImage: {fileID: -833300337, guid: 5f7c439436691d947be0ec858655682b, type: 3}

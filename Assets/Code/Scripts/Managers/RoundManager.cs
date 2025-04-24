@@ -116,6 +116,12 @@ public class RoundManager : MonoBehaviour
     IEnumerator StartRound()
     {
         roundSceneUIController.UpdateWaveUI(currentWave + 1, numWaves);
+
+        if (currentRound.OpponentImage != null)
+        {
+            roundSceneUIController.SetOpponentImage(currentRound.OpponentImage);
+        }
+
         yield return new WaitForSeconds(1f);
 
         while (currentWave < numWaves)
@@ -160,11 +166,11 @@ public class RoundManager : MonoBehaviour
 
     IEnumerator SpawnEnemies(Wave wave)
     {
-        yield return SpawnEnemyType(fanPrefab, wave.fans, wave.spawnInterval, fanSpeed, fanHealth);
-        yield return SpawnEnemyType(coachPrefab, wave.coaches, wave.spawnInterval, coachSpeed, coachHealth);
-        yield return SpawnEnemyType(cheerleaderPrefab, wave.cheerleaders, wave.spawnInterval, cheerleaderSpeed, cheerleaderHealth);
-        yield return SpawnEnemyType(playerPrefab, wave.players, wave.spawnInterval, playerSpeed, playerHealth);
-        yield return SpawnEnemyType(mascotPrefab, wave.mascots, wave.spawnInterval, mascotSpeed, mascotHealth);
+        yield return SpawnEnemyType(fanPrefab, wave.Fans, wave.SpawnInterval, fanSpeed, fanHealth);
+        yield return SpawnEnemyType(coachPrefab, wave.Coaches, wave.SpawnInterval, coachSpeed, coachHealth);
+        yield return SpawnEnemyType(cheerleaderPrefab, wave.Cheerleaders, wave.SpawnInterval, cheerleaderSpeed, cheerleaderHealth);
+        yield return SpawnEnemyType(playerPrefab, wave.Players, wave.SpawnInterval, playerSpeed, playerHealth);
+        yield return SpawnEnemyType(mascotPrefab, wave.Mascots, wave.SpawnInterval, mascotSpeed, mascotHealth);
     }
 
     IEnumerator SpawnEnemyType(GameObject prefab, int count, float interval, float speed, float health)

@@ -13,19 +13,14 @@ MonoBehaviour:
   m_Name: Round2
   m_EditorClassIdentifier: 
   waves:
-  - fans: 0
+  - fans: 6
     coaches: 0
-    cheerleaders: 5
+    cheerleaders: 1
     players: 0
     mascots: 0
-    spawnInterval: 1
-  - fans: 3
-    coaches: 3
-    cheerleaders: 2
-    players: 0
-    mascots: 0
-    spawnInterval: 1
+    spawnInterval: 1.4
   roundNumber: 2
-  fieldhouseHealth: 1000
-  winPayout: 1000
-  killPayout: 100
+  fieldHouseHealth: 1100
+  winPayout: 600
+  killPayout: 50
+  opponentImage: {fileID: -169321579, guid: 9586ce0dd2d107c4081d8b9f43af6515, type: 3}

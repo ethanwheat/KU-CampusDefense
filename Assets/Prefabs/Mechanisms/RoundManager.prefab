@@ -211,12 +211,18 @@ MonoBehaviour:
   fanPrefab: {fileID: 7447163605589988728, guid: 907fd825e3988774caab4234b943bf44, type: 3}
   coachPrefab: {fileID: 7478225697116208144, guid: 6fb37f825ee63264b9c2600bf1a52006, type: 3}
   cheerleaderPrefab: {fileID: 6252356961377389083, guid: 2db03e7c8a8135146b280e5da7e0289c, type: 3}
+  playerPrefab: {fileID: 7447163605589988728, guid: 4b426258082a6409da98dd54183337a2, type: 3}
+  mascotPrefab: {fileID: 7447163605589988728, guid: 72134d669dd0c419580bf53844de2f9a, type: 3}
   fanSpeed: 15
   coachSpeed: 10
   cheerleaderSpeed: 25
+  playerSpeed: 20
+  mascotSpeed: 12
   fanHealth: 100
   coachHealth: 200
   cheerleaderHealth: 50
+  playerHealth: 150
+  mascotHealth: 300
   spawnAreas:
   - {fileID: 0}
   - {fileID: 0}
@@ -232,7 +238,6 @@ MonoBehaviour:
   fieldhouseHealth: 1000
   fieldhouseHealthBar: {fileID: 0}
   allenFieldHouseDamageSoundEffect: {fileID: 8300000, guid: 5ccdcde176da9744d8838ca0fdd47932, type: 3}
-  roundSceneUIController: {fileID: 0}
   loadingBackgroundController: {fileID: 0}
   placementParent: {fileID: 7045058554721417536}
   enemiesParent: {fileID: 6421931705708880764}

@@ -1293,6 +1293,10 @@ PrefabInstance:
       propertyPath: uiController
       value: 
       objectReference: {fileID: 7217311723383874994}
+    - target: {fileID: 4854861622487431991, guid: 2b7d97d015e31874b962742565c4877e, type: 3}
+      propertyPath: roundButtonPrefab
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7466249662769680219, guid: 2b7d97d015e31874b962742565c4877e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1

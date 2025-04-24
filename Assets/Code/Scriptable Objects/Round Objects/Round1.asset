@@ -18,14 +18,9 @@ MonoBehaviour:
     cheerleaders: 0
     players: 0
     mascots: 0
-    spawnInterval: 1
-  - fans: 3
-    coaches: 3
-    cheerleaders: 2
-    players: 5
-    mascots: 5
-    spawnInterval: 1
+    spawnInterval: 1.5
   roundNumber: 1
-  fieldhouseHealth: 1000
-  winPayout: 1000
-  killPayout: 100
+  fieldHouseHealth: 1000
+  winPayout: 500
+  killPayout: 50
+  opponentImage: {fileID: 1161059628, guid: 952d6936c3705ae4684dee157bdcebd0, type: 3}

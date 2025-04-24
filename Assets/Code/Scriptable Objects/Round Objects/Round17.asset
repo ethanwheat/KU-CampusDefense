@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3dd13367839f1c48a0fc16f476dc3d6, type: 3}
+  m_Name: Round17
+  m_EditorClassIdentifier: 
+  waves:
+  - fans: 26
+    coaches: 4
+    cheerleaders: 0
+    players: 0
+    mascots: 0
+    spawnInterval: 0.9
+  - fans: 24
+    coaches: 0
+    cheerleaders: 1
+    players: 0
+    mascots: 1
+    spawnInterval: 0.9
+  - fans: 20
+    coaches: 2
+    cheerleaders: 0
+    players: 1
+    mascots: 0
+    spawnInterval: 0.9
+  roundNumber: 17
+  fieldHouseHealth: 2600
+  winPayout: 2100
+  killPayout: 110
+  opponentImage: {fileID: -169321579, guid: 9586ce0dd2d107c4081d8b9f43af6515, type: 3}
