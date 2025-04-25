@@ -80,3 +80,4 @@ MonoBehaviour:
   bigJayRampagePrefab: {fileID: 5880123995378728792, guid: 39a7df16644b64d6f832c16210ae7ccd, type: 3}
   startNodes:
   - {fileID: 0}
+  busRidePrefab: {fileID: 5880123995378728792, guid: 4c5158382cf904936864d46a778c2e5c, type: 3}

@@ -18,7 +18,7 @@ public class AbilityData : ScriptableObject
     [Range(0.1f, 0.9f)]
     [SerializeField] private float slowMultiplier = 0.5f;
 
-    public enum AbilityType { SlowAll, FreezeAll, BigJayRampage, Other }
+    public enum AbilityType { SlowAll, FreezeAll, BigJayRampage, BusRide, Other }
 
     // Public properties
     public string AbilityName => abilityName;
@@ -33,4 +33,7 @@ public class AbilityData : ScriptableObject
     [Header("Big Jay Parameters")]
     [SerializeField] private float bigJaySpeed = 50f;
     public float BigJaySpeed => bigJaySpeed;
+
+    [Header("Bus Ride Settings")]
+    public float BusSpeed = 50f;
 }

@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e8564b44c709649568eac284b7e0aeaf, type: 3}
-  m_Name: OtherAbility
+  m_Name: BusRideAbility
   m_EditorClassIdentifier: 
-  abilityName: Other
-  icon: {fileID: 2062225460, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
-  dollarCost: 0
-  unlockRound: 0
-  cooldownDuration: 0
-  effectDuration: 0
-  type: 4
+  abilityName: Bus Ride
+  icon: {fileID: 21300000, guid: 662cb95df3fa1493b978beb15a439239, type: 3}
+  dollarCost: 300
+  unlockRound: 10
+  cooldownDuration: 60
+  effectDuration: 1
+  type: 3
   slowMultiplier: 0.5
   bigJaySpeed: 50
   BusSpeed: 50
