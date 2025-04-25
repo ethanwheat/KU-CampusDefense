@@ -25,18 +25,14 @@ public class BaseballFieldDefense : Defense, IDefense
 
     public override void Start()
     {
-        DefenseData defenseData = getDefenseData();
-        bool isBought = defenseData.Bought;
-        int level = defenseData.Level;
+        base.Start();
 
-        if (isBought)
+        if (DefenseData != null)
         {
             onDefenseStart.Invoke();
-            ballsPerWave += ballsIncreasePerLevel * (level - 1);
+            ballsPerWave += ballsIncreasePerLevel * (DefenseData.Level - 1);
             StartCoroutine(FireBaseballWaves());
         }
-
-        base.Start();
     }
 
     private IEnumerator FireBaseballWaves()
@@ -47,10 +43,7 @@ public class BaseballFieldDefense : Defense, IDefense
 
         for (int i = 0; i < ballsPerWave; i++)
         {
-            if (!enabled)
-            {
-                yield break;
-            }
+            if (!enabled) { yield return new WaitUntil(() => enabled); }
 
             ballsLeft--;
             healthBar.UpdateHealthBar(ballsLeft, ballsPerWave);
@@ -58,7 +51,7 @@ public class BaseballFieldDefense : Defense, IDefense
             yield return new WaitForSeconds(timeBetweenBaseballs);
         }
 
-        SoundManager.instance.PlaySoundEffect(rechargeSoundEffect, transform, .5f);
+        SoundManager.instance.PlaySoundEffect(rechargeSoundEffect, transform);
         healthBar.UpdateHealthBar(ballsPerWave, ballsPerWave);
 
         yield return new WaitForSeconds(timeBetweenWaves);
@@ -73,7 +66,7 @@ public class BaseballFieldDefense : Defense, IDefense
 
         GameObject ball = Instantiate(baseballPrefab, transform.position + Vector3.up * 1.5f, Quaternion.LookRotation(direction));
         ball.transform.parent = RoundManager.instance.ProjectilesParent;
-        SoundManager.instance.PlaySoundEffect(shootSoundEffect, transform, .5f);
+        SoundManager.instance.PlaySoundEffect(shootSoundEffect, transform);
         // No need to manually apply speed — handled in Baseball.cs
     }
 

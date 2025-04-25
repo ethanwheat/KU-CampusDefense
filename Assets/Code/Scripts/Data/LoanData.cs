@@ -1,51 +1,25 @@
-using UnityEngine;
-
-[CreateAssetMenu(fileName = "LoanData", menuName = "Scriptable Objects/LoanData")]
-public class LoanData : ScriptableObject
+[System.Serializable]
+public class LoanData
 {
-    [Header("Loan Information")]
-    [SerializeField] private string loanName;
-    [SerializeField] private int amount;
-    [SerializeField] private int unlockRound;
+    public string LoanName;
+    public int Debt;
 
-    [Header("Sprites")]
-    [SerializeField] private Sprite sprite;
-
-    [Header("Loan Data")]
-    [SerializeField] private int debt;
-
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
-
-    public string LoanName => loanName;
-    public int Amount => amount;
-    public int UnlockRound => unlockRound;
-    public bool Locked => unlockRound > gameDataController.RoundNumber;
-    public Sprite Sprite => sprite;
-    public int Debt => debt;
-
-    public void TakeLoan()
+    public LoanData(string loanName, int debt)
     {
-        gameDataController.AddDollars(amount);
-        debt += amount;
-    }
-
-    public void PayDebt(int amount)
-    {
-        if (debt - amount >= 0)
-        {
-            gameDataController.SubtractDollars(amount);
-            debt -= amount;
-        }
+        LoanName = loanName;
+        Debt = debt;
     }
 
     public void SetDebt(int amount)
     {
-        debt = amount;
+        Debt = amount;
     }
 
-    public void ResetLoan()
+    public void SubtractDebt(int amount)
     {
-        debt = 0;
+        if (Debt - amount >= 0)
+        {
+            Debt -= amount;
+        }
     }
 }

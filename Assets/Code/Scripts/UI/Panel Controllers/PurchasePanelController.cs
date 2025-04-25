@@ -12,34 +12,30 @@ public class PurchasePanelController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI costText;
 
     [Header("UI Controllers")]
-    [SerializeField] private BuildingSceneUIController buildingSceneUIController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip placementSoundEffect;
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
-
-    private PurchasableData purchasableData;
+    private PurchasableObject purchasableObject;
     private BuildingPlacementController buildingPlacementController;
 
     // Load purchase panel data.
-    public void ShowPanel(BuildingPlacementController controller, PurchasableData data)
+    public void ShowPanel(BuildingPlacementController controller, PurchasableObject purchasableObject)
     {
-        // Set building name and set object data.
+        // Set building name and set object.
         buildingPlacementController = controller;
-        purchasableData = data;
+        this.purchasableObject = purchasableObject;
 
         // Set UI sprite.
-        itemImage.sprite = purchasableData.Sprite;
+        itemImage.sprite = purchasableObject.Sprite;
 
         // Set UI text.
         headerText.text = buildingPlacementController.BuildingName;
-        itemText.text = purchasableData.ObjectName;
-        itemDescription.text = purchasableData.Description;
-        costText.text = purchasableData.DollarCost.ToString();
+        itemText.text = purchasableObject.ObjectName;
+        itemDescription.text = purchasableObject.Description;
+        costText.text = purchasableObject.DollarCost.ToString();
 
         // Show panel
         gameObject.SetActive(true);
@@ -49,27 +45,38 @@ public class PurchasePanelController : MonoBehaviour
     // if player has enough dollars, else show error popup panel and close purchase panel.
     public void OnPurchase()
     {
+        // Get game data.
+        GameData gameData = GameDataManager.instance.GameData;
+
         // Get dollar amount and building name.
-        int dollars = gameDataController.Dollars;
-        int objectCost = purchasableData.DollarCost;
+        int dollars = gameData.Dollars;
+        int objectCost = purchasableObject.DollarCost;
         string buildingName = buildingPlacementController.BuildingName;
 
         if (dollars >= objectCost)
         {
             // Set object as bought, subtract cost, play building placement sound,
             // create popup panel showing success, update dollar amounts on dollar UI, and close purchase panel.
-            purchasableData.SetBought(true);
-            gameDataController.SubtractDollars(objectCost);
-            SoundManager.instance.PlaySoundEffect(placementSoundEffect, transform, 1f);
-            messagePopupPanelController.ShowPanel("Item Purchased", "You have bought " + buildingName + " for " + objectCost.ToString() + " dollars!");
-            buildingSceneUIController.UpdateDollarUI();
+            if (purchasableObject is DefenseObject defenseObject)
+            {
+                gameData.CreateDefenseData(defenseObject);
+            }
+            else if (purchasableObject is BonusObject bonusObject)
+            {
+                gameData.CreateBonusData(bonusObject);
+            }
+
+            gameData.SubtractDollars(objectCost);
+            SoundManager.instance.PlaySoundEffect(placementSoundEffect, transform, volume: 1f);
+            messagePopupPanelController.ShowPanel("Building Purchased", "You have bought " + buildingName + " for " + objectCost.ToString() + " dollars!");
+            BuildingSceneUIController.instance.UpdateDollarUI();
             buildingPlacementController.UpdatePlacementArea();
             ClosePanel();
         }
         else
         {
             // Show error popup panel and close purchase panel.
-            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
             messagePopupPanelController.ShowPanel("Insufficient Dollars", "You do not have enough dollars to buy " + buildingName + "!");
             ClosePanel();
         }

@@ -21,7 +21,7 @@ public class LoadingBackgroundController : MonoBehaviour
         {
             // Interpolate between the start and end colors
             image.color = Color.Lerp(startColor, endColor, timeElapsed / duration);
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.unscaledDeltaTime;
             yield return null;
         }
 
@@ -46,7 +46,7 @@ public class LoadingBackgroundController : MonoBehaviour
         {
             // Interpolate between the start and end colors
             image.color = Color.Lerp(startColor, endColor, timeElapsed / duration);
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.unscaledDeltaTime;
             yield return null;
         }
 

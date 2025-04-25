@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637175a8e599b204fbdb4e6f9dd3c859, type: 3}
+  m_Name: IceSheetDefense
+  m_EditorClassIdentifier: 
+  objectName: Ice Sheet
+  description: Slows down enemies walking on the ice sheet, and lowers their HP.
+  dollarCost: 100
+  unlockRound: 5
+  bought: 0
+  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
+  sprite: {fileID: 1513631292, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  isShownInDefensePanel: 1
+  coinCost: 20
+  level1UpgradeDollarCost: 0
+  level2UpgradeDollarCost: 0
+  level3UpgradeDollarCost: 0
+  level: 1
+  prefab: {fileID: 5472060738618537860, guid: 78c738e9591c76944b96413f9c505efb, type: 3}

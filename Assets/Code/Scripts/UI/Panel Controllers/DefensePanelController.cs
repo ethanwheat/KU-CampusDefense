@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,30 +7,21 @@ public class DefensePanelController : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject defensePlacementButtonPrefab;
 
-    [Header("UI Controllers")]
-    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
-
     [Header("UI Transforms")]
     [SerializeField] private Transform placementButtonsParent;
+
+    [Header("UI Controllers")]
+    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
+    [Header("Game Data Object")]
+    [SerializeField] private GameDataObject gameDataObject;
 
-    private DefenseData[] defenseData;
+    private List<DefenseObject> defenseObjects;
     private GameObject selectedPlacementButton;
     private GameObject currentDefensePlacement;
-
-    void Update()
-    {
-        // Cancel selection is escape pressed.
-        if (Input.GetKeyDown("escape"))
-        {
-            CancelPlacement();
-        }
-    }
 
     // Load defenses in UI.
     public void ShowPanel()
@@ -44,14 +36,17 @@ public class DefensePanelController : MonoBehaviour
         }
 
         // Get updated defenses.
-        defenseData = gameDataController.DefenseData;
+        defenseObjects = gameDataObject.DefenseObjects;
 
         // Set intial index to 0.
         int index = 0;
 
-        foreach (var defense in defenseData)
+        foreach (var defense in defenseObjects)
         {
-            if (defense.Bought && defense.IsShownInDefensePanel)
+            // Get defense data.
+            DefenseData defenseData = GameDataManager.instance.GameData.GetDefenseData(defense.ObjectName);
+
+            if (defenseData != null && defense.IsShownInDefensePanel)
             {
                 // Create defense button and add listeners.
                 GameObject placementButton = Instantiate(defensePlacementButtonPrefab, placementButtonsParent);
@@ -68,7 +63,7 @@ public class DefensePanelController : MonoBehaviour
     }
 
     // Select a defense in the UI and create placement.
-    void StartPlacement(GameObject placementButton, DefenseData defense)
+    void StartPlacement(GameObject placementButton, DefenseObject defense)
     {
         // Cancel previous placement.
         CancelPlacement();
@@ -97,9 +92,9 @@ public class DefensePanelController : MonoBehaviour
     }
 
     // Show error popup message and close panel.
-    void PlacementFailed(DefenseData defenseData)
+    void PlacementFailed(DefenseObject defenseData)
     {
-        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
         messagePopupPanelController.ShowPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.ObjectName + "!");
         ClosePanel();
     }

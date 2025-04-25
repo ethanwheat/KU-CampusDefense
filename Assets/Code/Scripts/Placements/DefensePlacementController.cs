@@ -25,7 +25,7 @@ public class DefensePlacementController : MonoBehaviour
 
     private Camera mainCamera;
     private Outline outline;
-    private DefenseData defenseData;
+    private DefenseObject defenseData;
     private bool dataLoaded = false;
     private bool placed;
     private bool validPlacement;
@@ -102,7 +102,7 @@ public class DefensePlacementController : MonoBehaviour
     }
 
     // Load data to be used in the placement.
-    public void LoadData(DefenseData data)
+    public void LoadData(DefenseObject data)
     {
         // Set data.
         defenseData = data;
@@ -132,7 +132,7 @@ public class DefensePlacementController : MonoBehaviour
                 enabled = false;
 
                 // Play placement sound effect.
-                SoundManager.instance.PlaySoundEffect(placementSoundEffect, transform, .5f);
+                SoundManager.instance.PlaySoundEffect(placementSoundEffect, transform);
 
                 // Call onPlacementSuccess.
                 onPlacementSuccess.Invoke();

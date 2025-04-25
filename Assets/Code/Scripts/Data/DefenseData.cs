@@ -1,50 +1,25 @@
-using UnityEngine;
-
-[CreateAssetMenu(fileName = "DefenseData", menuName = "Scriptable Objects/DefenseData")]
-
+[System.Serializable]
 public class DefenseData : PurchasableData
 {
-    [Header("Defense Information")]
-    [SerializeField] private bool isShownInDefensePanel;
-    [SerializeField] private int coinCost;
-    [SerializeField] private int level1UpgradeDollarCost;
-    [SerializeField] private int level2UpgradeDollarCost;
-    [SerializeField] private int level3UpgradeDollarCost;
+    public int Level;
 
-    [Header("Defense Data")]
-    [SerializeField] private int level = 1;
-
-    [Header("Prefabs")]
-    [SerializeField] private GameObject prefab;
-
-    public bool IsShownInDefensePanel => isShownInDefensePanel;
-    public int CoinCost => coinCost;
-    public int Level => level;
-    public GameObject Prefab => prefab;
-
-    public int GetUpgradeCost()
+    public DefenseData(string name, int startingLevel = 1) : base(name)
     {
-        if (level == 1)
-        {
-            return level1UpgradeDollarCost;
-        }
-        else if (level == 2)
-        {
-            return level2UpgradeDollarCost;
-        }
-        else
-        {
-            return level3UpgradeDollarCost;
-        }
+        Level = startingLevel;
     }
 
     public void UpgradeLevel()
     {
-        level++;
+        Level++;
+    }
+
+    public void SetLevel(int newLevel)
+    {
+        Level = newLevel;
     }
 
     public void ResetLevel()
     {
-        level = 1;
+        Level = 1;
     }
 }

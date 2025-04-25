@@ -28,7 +28,7 @@ public class AbilityManager : MonoBehaviour
     }
 
     // *********** SLOW ALL ENEMIES ***********
-    private IEnumerator ApplySlowEffect(AbilityData ability)
+    private IEnumerator ApplySlowEffect(AbilityObject ability)
     {
         float multiplier = ability.SlowMultiplier; // This will be 1f for non-SlowAll Ability types
 
@@ -56,7 +56,7 @@ public class AbilityManager : MonoBehaviour
     [SerializeField] private GameObject bigJayRampagePrefab;
     [SerializeField] private PathNode[] startNodes; // Add this to reference the start nodes
 
-    private IEnumerator ActivateBigJayRampage(AbilityData ability)
+    private IEnumerator ActivateBigJayRampage(AbilityObject ability)
     {
         // If no start nodes are available, return
         if (startNodes == null || startNodes.Length == 0)
@@ -96,30 +96,30 @@ public class AbilityManager : MonoBehaviour
         yield return new WaitWhile(() => bigJay != null);
     }
 
-    public void ActivateAbility(AbilityData ability)
+    public void ActivateAbility(AbilityObject ability)
     {
         switch (ability.Type)
         {
-            case AbilityData.AbilityType.SlowAll:
+            case AbilityObject.AbilityType.SlowAll:
                 StartCoroutine(ApplySlowEffect(ability));
                 break;
 
-            case AbilityData.AbilityType.FreezeAll:
+            case AbilityObject.AbilityType.FreezeAll:
                 StartCoroutine(ApplyFreezeEffect(ability.EffectDuration));
                 break;
 
-            case AbilityData.AbilityType.BigJayRampage:
+            case AbilityObject.AbilityType.BigJayRampage:
                 StartCoroutine(ActivateBigJayRampage(ability));
                 break;
         }
     }
 
-    public void StartEffectRoutine(AbilityButtonController abilityButtonController, AbilityData abilityData)
+    public void StartEffectRoutine(AbilityButtonController abilityButtonController, AbilityObject abilityData)
     {
         StartCoroutine(EffectRoutine(abilityButtonController, abilityData));
     }
 
-    private IEnumerator EffectRoutine(AbilityButtonController abilityButtonController, AbilityData abilityData)
+    private IEnumerator EffectRoutine(AbilityButtonController abilityButtonController, AbilityObject abilityData)
     {
         float remainingEffect = abilityData.EffectDuration;
 
@@ -138,7 +138,7 @@ public class AbilityManager : MonoBehaviour
         StartCoroutine(CooldownRoutine(abilityButtonController, abilityData));
     }
 
-    private IEnumerator CooldownRoutine(AbilityButtonController abilityButtonController, AbilityData abilityData)
+    private IEnumerator CooldownRoutine(AbilityButtonController abilityButtonController, AbilityObject abilityData)
     {
         float remainingCooldown = abilityData.CooldownDuration;
 

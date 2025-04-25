@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using Mono.Cecil;
 
 public class RoundManager : MonoBehaviour
 {
@@ -28,8 +27,7 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private PathNode[] startNodes;
 
     [Header("Round Configuration")]
-    [SerializeField] private RoundData currentRound;
-    [SerializeField] private GameDataController gameData;
+    [SerializeField] private RoundObject currentRound;
     [SerializeField] private float coinMultiplier = 1;
     [SerializeField] private float dollarMultiplier = 1;
 
@@ -38,18 +36,17 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private int currentWave = 0;
     [SerializeField] private int numWaves = 0;
     [SerializeField] private int remainingEnemies;
-    private bool gameOver = false;
 
     [Header("Allen Fieldhouse")]
     [SerializeField] private float fieldhouseHealth = 1000f;
     [SerializeField] private HealthBar fieldhouseHealthBar; // Reference to UI HealthBar
-    private float maxFieldhouseHealth;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip allenFieldHouseDamageSoundEffect;
+    [SerializeField] private AudioClip roundWonMusic;
+    [SerializeField] private AudioClip roundLostMusic;
 
     [Header("UI Controllers")]
-    [SerializeField] private RoundSceneUIController roundSceneUIController;
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
 
     [Header("Parents")]
@@ -58,17 +55,24 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private Transform defensesParent;
     [SerializeField] private Transform projectilesParent;
 
+    [Header("Game Data Object")]
+    [SerializeField] private GameDataObject gameDataObject;
+
+    private GameData gameData;
+    private RoundSceneCanvasController roundSceneUIController;
+    private List<EnemyMovement> enemies = new List<EnemyMovement>();
+    private List<Defense> defenses = new List<Defense>();
+
+    private float maxFieldhouseHealth;
+    private bool isAllEnemiesSlowed = false;
+    private bool isAllEnemiesFrozen = false;
+    private float slowMultiplier = 1;
+    private bool gameOver = false;
+
     public Transform PlacementParent => placementParent;
     public Transform DefensesParent => defensesParent;
     public Transform ProjectilesParent => projectilesParent;
     public int Coins => coins;
-
-    private List<EnemyMovement> enemies = new List<EnemyMovement>();
-    private List<Defense> defenses = new List<Defense>();
-    private List<Defense> healthDefenses = new List<Defense>();
-    private bool isAllEnemiesSlowed = false;
-    private bool isAllEnemiesFrozen = false;
-    private float slowMultiplier = 1;
 
     void Awake()
     {
@@ -84,15 +88,19 @@ public class RoundManager : MonoBehaviour
 
     void Start()
     {
-        currentRound = gameData.SelectedRound;
-        fieldhouseHealth = currentRound.fieldhouseHealth;
+        GameDataManager gameDataManager = GameDataManager.instance;
+
+        gameData = gameDataManager.GameData;
+        roundSceneUIController = RoundSceneCanvasController.instance;
+        currentRound = gameDataManager.SelectedRound;
+        fieldhouseHealth = currentRound.FieldHouseHealth;
         maxFieldhouseHealth = fieldhouseHealth;
 
-        numWaves = currentRound.waves.Length;
+        numWaves = currentRound.Waves.Length;
 
-        foreach (Wave wave in currentRound.waves)
+        foreach (Wave wave in currentRound.Waves)
         {
-            remainingEnemies += wave.fans + wave.cheerleaders + wave.coaches;
+            remainingEnemies += wave.Fans + wave.Cheerleaders + wave.Coaches;
         }
 
         GetBonuses();
@@ -108,11 +116,16 @@ public class RoundManager : MonoBehaviour
 
         while (currentWave < numWaves)
         {
+            while (isAllEnemiesFrozen)
+            {
+                yield return null;
+            }
+
             WeatherManager.instance.ResetWeatherForNewRound();
             WeatherManager.instance.TryActivateWeather();
             roundSceneUIController.UpdateWaveUI(currentWave + 1, numWaves);
             roundSceneUIController.ShowWavePopupPanel((currentWave + 1).ToString());
-            yield return StartCoroutine(SpawnEnemies(currentRound.waves[currentWave]));
+            yield return StartCoroutine(SpawnEnemies(currentRound.Waves[currentWave]));
             currentWave++;
             yield return new WaitForSeconds(10f);
         }
@@ -121,7 +134,7 @@ public class RoundManager : MonoBehaviour
     public void EndRound()
     {
         StopAllCoroutines();
-        SoundManager.instance.StopMusic(.5f);
+        SoundManager.instance.StopMusic();
         roundSceneUIController.CloseExistingUI();
         StartCoroutine(EndRoundCoroutine());
     }
@@ -129,13 +142,14 @@ public class RoundManager : MonoBehaviour
     private IEnumerator EndRoundCoroutine()
     {
         yield return StartCoroutine(loadingBackgroundController.FadeInCoroutine(.5f));
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Building Scene");
     }
 
     public void RetryRound()
     {
         StopAllCoroutines();
-        SoundManager.instance.StopMusic(.5f);
+        SoundManager.instance.StopMusic();
         roundSceneUIController.CloseExistingUI();
         StartCoroutine(RetryRoundCoroutine());
     }
@@ -143,14 +157,15 @@ public class RoundManager : MonoBehaviour
     private IEnumerator RetryRoundCoroutine()
     {
         yield return StartCoroutine(loadingBackgroundController.FadeInCoroutine(0.5f));
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     IEnumerator SpawnEnemies(Wave wave)
     {
-        yield return SpawnEnemyType(fanPrefab, wave.fans, wave.spawnInterval, fanSpeed, fanHealth);
-        yield return SpawnEnemyType(coachPrefab, wave.coaches, wave.spawnInterval, coachSpeed, coachHealth);
-        yield return SpawnEnemyType(cheerleaderPrefab, wave.cheerleaders, wave.spawnInterval, cheerleaderSpeed, cheerleaderHealth);
+        yield return SpawnEnemyType(fanPrefab, wave.Fans, wave.SpawnInterval, fanSpeed, fanHealth);
+        yield return SpawnEnemyType(coachPrefab, wave.Coaches, wave.SpawnInterval, coachSpeed, coachHealth);
+        yield return SpawnEnemyType(cheerleaderPrefab, wave.Cheerleaders, wave.SpawnInterval, cheerleaderSpeed, cheerleaderHealth);
     }
 
     IEnumerator SpawnEnemyType(GameObject prefab, int count, float interval, float speed, float health)
@@ -175,7 +190,7 @@ public class RoundManager : MonoBehaviour
                 enemies.Add(enemyScript);
                 enemyScript.SetSpeed(speed);
                 enemyScript.SetHealth(health);
-                enemyScript.SetReward(currentRound.killPayout);
+                enemyScript.SetReward(currentRound.KillPayout);
 
                 if (isAllEnemiesSlowed)
                 {
@@ -200,21 +215,24 @@ public class RoundManager : MonoBehaviour
 
     void GetBonuses()
     {
-        BonusData[] bonuses = gameData.BonusData;
+        List<BonusObject> bonusObjects = gameDataObject.BonusObjects;
+        // BonusObject bonusObject = gameData.Get
 
         // Find the highest unlocked coin bonus
-        foreach (BonusData bonus in bonuses)
+        foreach (BonusObject bonusObject in bonusObjects)
         {
-            if (bonus != null && bonus.Bought) // Check if the bonus is unlocked
+            BonusData bonusData = gameData.GetBonusData(bonusObject.ObjectName);
+
+            if (bonusData != null) // Check if the bonus is unlocked
             {
-                if (bonus.CoinBonus > coinMultiplier)
+                if (bonusObject.CoinBonus > coinMultiplier)
                 {
-                    coinMultiplier = bonus.CoinBonus;
+                    coinMultiplier = bonusObject.CoinBonus;
                 }
 
-                if (bonus.DollarBonus > dollarMultiplier)
+                if (bonusObject.DollarBonus > dollarMultiplier)
                 {
-                    dollarMultiplier = bonus.DollarBonus;
+                    dollarMultiplier = bonusObject.DollarBonus;
                 }
             }
         }
@@ -249,15 +267,17 @@ public class RoundManager : MonoBehaviour
         // Check if the round is over (no remaining enemies)
         if (remainingEnemies <= 0)
         {
-            GameOver();
+            Time.timeScale = 0f;
+            PauseMenuCanvasController.instance.enabled = false;
+            SoundManager.instance.PlayMusic(roundWonMusic, transform);
 
             int debt = gameData.GetDebt();
-            int reward = (int)(currentRound.winPayout * dollarMultiplier);
+            int reward = (int)(currentRound.WinPayout * dollarMultiplier);
 
             if (debt > 0)
             {
                 int owed = Mathf.Min((int)(reward * 0.3f), debt);  // 30% debt payment
-                gameData.PayDebt(owed);
+                gameData.PayDebtOnAllLoans(owed);
                 gameData.AddDollars(reward - owed);
                 roundSceneUIController.ShowRoundWonPanel(
                     gameData.RoundNumber.ToString(),
@@ -277,7 +297,7 @@ public class RoundManager : MonoBehaviour
                 );
             }
 
-            if (gameData.RoundNumber == currentRound.roundNumber)
+            if (gameData.RoundNumber == currentRound.RoundNumber)
             {
                 gameData.IncrementRoundNumber();  // unlock next round
             }
@@ -287,7 +307,7 @@ public class RoundManager : MonoBehaviour
 
     public void DamageFieldhouse(float damage)
     {
-        SoundManager.instance.PlaySoundEffect(allenFieldHouseDamageSoundEffect, transform, .5f);
+        SoundManager.instance.PlaySoundEffect(allenFieldHouseDamageSoundEffect, transform);
 
         fieldhouseHealth -= damage;
 
@@ -298,51 +318,32 @@ public class RoundManager : MonoBehaviour
 
         if (fieldhouseHealth <= 0 && !gameOver)
         {
-            GameOver();
+            gameOver = true;
+            Time.timeScale = 0f;
+            PauseMenuCanvasController.instance.enabled = false;
+            SoundManager.instance.PlayMusic(roundLostMusic, transform);
             roundSceneUIController.ShowRoundLostPanel();
-        }
-    }
-
-    private void GameOver()
-    {
-        gameOver = true;
-
-        foreach (var enemy in enemies)
-        {
-            enemy.enabled = false;
-        }
-
-        foreach (var defense in defenses)
-        {
-            defense.enabled = false;
         }
     }
 
     public void AddDefense(Defense defense)
     {
         defenses.Add(defense);
-
-        if (defense.gameObject.CompareTag("HealthDefense"))
-        {
-            healthDefenses.Add(defense);
-        }
     }
 
     public void RemoveDefense(Defense defense)
     {
         defenses.Remove(defense);
-
-        if (healthDefenses.Contains(defense))
-        {
-            healthDefenses.Remove(defense);
-        }
     }
 
     public void RegenHealthOnDefenses()
     {
-        foreach (var healthDefense in healthDefenses)
+        foreach (var defense in defenses)
         {
-            healthDefense.ResetHealth();
+            if (defense.gameObject.CompareTag("HealthDefense"))
+            {
+                defense.ResetHealth();
+            }
         }
 
         int regenCost = GetRegenCost();
@@ -354,9 +355,12 @@ public class RoundManager : MonoBehaviour
     {
         int regenCost = 0;
 
-        foreach (var healthDefense in healthDefenses)
+        foreach (var defense in defenses)
         {
-            regenCost += healthDefense.getDefenseData().CoinCost / 2;
+            if (defense.gameObject.CompareTag("HealthDefense"))
+            {
+                regenCost += defense.DefenseObject.CoinCost / 2;
+            }
         }
 
         return regenCost;

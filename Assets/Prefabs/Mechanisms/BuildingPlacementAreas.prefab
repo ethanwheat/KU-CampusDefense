@@ -9443,6 +9443,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingGameObject
       value: 
       objectReference: {fileID: 5552260227400912914}
@@ -9590,6 +9594,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: ec452e413d43fd84ba912fbde87c7d50, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: c9dda16791d6c1e45b79fdc07b2d22be, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingGameObject
       value: 
       objectReference: {fileID: 1124255551275753144}
@@ -9726,6 +9734,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: purchasableData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
       value: 
       objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
@@ -9880,6 +9892,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: ec452e413d43fd84ba912fbde87c7d50, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 03ccf100e81c1ba45aea928dbda026f0, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingGameObject
       value: 
       objectReference: {fileID: 3201005094815068298}
@@ -10031,6 +10047,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: ec452e413d43fd84ba912fbde87c7d50, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 72bbba30305c9e540a48e1ccd2c542c2, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingGameObject
       value: 
       objectReference: {fileID: 2438790540676797992}
@@ -10167,6 +10187,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: purchasableData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
       value: 
       objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
@@ -10317,6 +10341,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: c940a34b69da34a61aec4cb686208f4b, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: c940a34b69da34a61aec4cb686208f4b, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingGameObject
       value: 
       objectReference: {fileID: 6776488725891032870}
@@ -10464,6 +10492,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 4dd9f11bfb22340619a3c88e5b4a4d7b, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 4dd9f11bfb22340619a3c88e5b4a4d7b, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingGameObject
       value: 
       objectReference: {fileID: 8628178268407334176}
@@ -10600,6 +10632,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: purchasableData
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b2d76fc4badc4cda8c0a6bd4e330677, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
       value: 
       objectReference: {fileID: 11400000, guid: 2b2d76fc4badc4cda8c0a6bd4e330677, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
@@ -10750,6 +10786,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: ec452e413d43fd84ba912fbde87c7d50, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f0a23819b0d0674c8df0cf1bcd7d2b6, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingGameObject
       value: 
       objectReference: {fileID: 4801777150104983581}
@@ -10886,6 +10926,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: purchasableData
+      value: 
+      objectReference: {fileID: 11400000, guid: 5175263242d8f9e418b2fbb6aa05f414, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
       value: 
       objectReference: {fileID: 11400000, guid: 5175263242d8f9e418b2fbb6aa05f414, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
@@ -11048,6 +11092,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 628e1d1d39bb54e4c964c113b6cc5650, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 628e1d1d39bb54e4c964c113b6cc5650, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingGameObject
       value: 
       objectReference: {fileID: 1291208493517806103}
@@ -11187,6 +11235,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 543083b899a4f4629b0a14a6e4e883c2, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 543083b899a4f4629b0a14a6e4e883c2, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingGameObject
       value: 
       objectReference: {fileID: 2752952035167492690}
@@ -11323,6 +11375,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: purchasableData
+      value: 
+      objectReference: {fileID: 11400000, guid: df3b93bc15d664bf8aa13a7b0d453fa9, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
       value: 
       objectReference: {fileID: 11400000, guid: df3b93bc15d664bf8aa13a7b0d453fa9, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
@@ -11485,6 +11541,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: e095c808540afb14598316299453f91e, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingGameObject
       value: 
       objectReference: {fileID: 1613166683239008862}
@@ -11632,6 +11692,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: ec452e413d43fd84ba912fbde87c7d50, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 8a96bcd9567a0094d8f1a0cb80ac2021, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: buildingGameObject
       value: 
       objectReference: {fileID: 8641925234504651469}
@@ -11768,6 +11832,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: purchasableData
+      value: 
+      objectReference: {fileID: 11400000, guid: f66f6dce4a0824600adf6903fcb0fbfd, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
       value: 
       objectReference: {fileID: 11400000, guid: f66f6dce4a0824600adf6903fcb0fbfd, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
@@ -11927,6 +11995,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
       propertyPath: purchasableData
+      value: 
+      objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
+    - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}
+      propertyPath: purchasableObject
       value: 
       objectReference: {fileID: 11400000, guid: 3090ea38bd43a054cb6e4b7ce88c194d, type: 2}
     - target: {fileID: 1478626356527034122, guid: 7f3d4e4f6b2ec5c449d3e6ba5d0c977a, type: 3}

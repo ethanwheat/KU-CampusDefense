@@ -7,29 +7,29 @@ public class SettingsPanelController : MonoBehaviour
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private Slider soundEffectsVolumeSlider;
 
-    [Header("Settings Data Controller")]
-    [SerializeField] private SettingsDataController settingsDataController;
-
-    private SoundManager soundManager;
-
-    void Awake()
-    {
-        soundManager = SoundManager.instance;
-    }
+    [Header("UI Controllers")]
+    [SerializeField] private PanelFadeController panelFadeController;
 
     void Start()
     {
+        SoundManager soundManager = SoundManager.instance;
+
         musicVolumeSlider.onValueChanged.AddListener(soundManager.OnMusicVolumeChange);
-        soundEffectsVolumeSlider.onValueChanged.AddListener(settingsDataController.SetSoundEffectsVolume);
+        soundEffectsVolumeSlider.onValueChanged.AddListener(soundManager.OnSoundEffectVolumeChange);
     }
 
-    // Update panel with correct music volume and sound effect volume.
-    public void UpdatePanel()
+    // ShowPanel panel with correct music volume and sound effect volume.
+    public void ShowPanel()
     {
-        float musicVolume = settingsDataController.MusicVolume;
-        float soundEffectsVolume = settingsDataController.SoundEffectsVolume;
+        musicVolumeSlider.value = SoundManager.instance.MusicVolume;
+        soundEffectsVolumeSlider.value = SoundManager.instance.SoundEffectsVolume;
 
-        musicVolumeSlider.value = musicVolume;
-        soundEffectsVolumeSlider.value = soundEffectsVolume;
+        panelFadeController.Show();
+    }
+
+    public void OnReset()
+    {
+        musicVolumeSlider.value = 1f;
+        soundEffectsVolumeSlider.value = 1f;
     }
 }

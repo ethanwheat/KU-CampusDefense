@@ -116,7 +116,7 @@ public class EnemyMovement : MonoBehaviour
       roundManager.EnemyDefeated(this);
       roundManager.AddCoins(killReward);
     }
-    SoundManager.instance.PlaySoundEffect(enemyKilledSoundEffect, transform, .5f);
+    SoundManager.instance.PlaySoundEffect(enemyKilledSoundEffect, transform);
     Destroy(gameObject); // Or trigger a death animation, effects, etc.
   }
 

@@ -9,12 +9,14 @@ public class AbilitiesPanelController : MonoBehaviour
     [SerializeField] private Transform abilitiesParent;
 
     [Header("UI Controllers")]
-    [SerializeField] private RoundSceneUIController roundSceneUIController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
-    [Header("Game Data")]
-    [SerializeField] private AbilityData[] abilityData;
-    [SerializeField] private GameDataController gameDataController;
+    [Header("Sounds")]
+    [SerializeField] private AudioClip errorSoundEffect;
+    [SerializeField] private AudioClip abilityActivatedSoundEffect;
+
+    [Header("Game Data Object")]
+    [SerializeField] private GameDataObject gameDataObject;
 
     private bool alreadyOpened = false;
 
@@ -29,13 +31,27 @@ public class AbilitiesPanelController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void ShowError(string title, string text)
+    {
+        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
+        messagePopupPanelController.ShowPanel(title, text);
+        ClosePanel();
+    }
+
+    public void ShowActivated(string title, string text)
+    {
+        SoundManager.instance.PlaySoundEffect(abilityActivatedSoundEffect, transform, volume: 1f);
+        messagePopupPanelController.ShowPanel(title, text);
+        ClosePanel();
+    }
+
     private void InitializeAbilities()
     {
         if (!alreadyOpened)
         {
             alreadyOpened = true;
 
-            foreach (var ability in abilityData)
+            foreach (var ability in gameDataObject.AbilityObjects)
             {
                 var button = Instantiate(abilityButtonPrefab, abilitiesParent);
                 button.name = "Btn_" + ability.AbilityName; // Unique name
@@ -43,7 +59,7 @@ public class AbilitiesPanelController : MonoBehaviour
                 var controller = button.GetComponent<AbilityButtonController>();
                 if (controller != null)
                 {
-                    controller.Initialize(ability, this, roundSceneUIController, messagePopupPanelController);
+                    controller.Initialize(ability, this);
                 }
 
                 // Force visible

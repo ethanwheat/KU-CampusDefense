@@ -1,12 +1,5 @@
-using UnityEngine;
-
-[CreateAssetMenu(fileName = "BonusData", menuName = "Scriptable Objects/BonusData")]
+[System.Serializable]
 public class BonusData : PurchasableData
 {
-    [Header("Currency Bonus")]
-    [SerializeField] private float dollarBonus;
-    [SerializeField] private float coinBonus;
-
-    public float DollarBonus => dollarBonus;
-    public float CoinBonus => coinBonus;
+    public BonusData(string name) : base(name) { }
 }
