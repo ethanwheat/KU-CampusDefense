@@ -127,7 +127,7 @@ public class BuildingSceneUIController : MonoBehaviour
             CloseExistingUI();
 
             // Play click sound effect.
-            SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, volume: 1f);
 
             // Show purchase panel with data if not bought.
             if (purchasableData == null)
@@ -155,7 +155,7 @@ public class BuildingSceneUIController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // Play click sound effect.
-            SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, volume: 1f);
 
             // Close existing UI and show loan panel.
             CloseExistingUI();
@@ -166,7 +166,7 @@ public class BuildingSceneUIController : MonoBehaviour
     // Start round.
     public void StartRound()
     {
-        SoundManager.instance.StopMusic(.5f);
+        SoundManager.instance.StopMusic();
         StartCoroutine(StartRoundCoroutine());
     }
 

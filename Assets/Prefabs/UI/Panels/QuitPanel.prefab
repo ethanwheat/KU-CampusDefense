@@ -543,6 +543,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4894134eef529c24e99108dc95c346d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  confirmPanelController: {fileID: 0}
+  panelFadeController: {fileID: 1764451862421142908}
   loadingBackgroundController: {fileID: 0}
 --- !u!1001 &1507916922186923600
 PrefabInstance:
@@ -684,7 +686,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -697,11 +699,11 @@ PrefabInstance:
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1686735355028760317}
+      objectReference: {fileID: 1764451862421142908}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1686735355028760317}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -712,19 +714,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: QuitGameClick
+      value: Hide
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: 
+      value: QuitGameClick
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: QuitPanelController, Assembly-CSharp
+      value: PanelFadeController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: ConfirmPanelController, Assembly-CSharp
+      value: QuitPanelController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -732,7 +734,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 958022864110113873, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_Pivot.x
@@ -878,7 +880,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -891,11 +893,11 @@ PrefabInstance:
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1686735355028760317}
+      objectReference: {fileID: 1764451862421142908}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1686735355028760317}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
@@ -906,19 +908,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: QuitToMainMenuClick
+      value: Hide
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: 
+      value: QuitToMainMenuClick
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: QuitPanelController, Assembly-CSharp
+      value: PanelFadeController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: ConfirmPanelController, Assembly-CSharp
+      value: QuitPanelController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -926,7 +928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 839427408937961923, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: 
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 958022864110113873, guid: bc7de1cafe1822c44b78d1bf070535bf, type: 3}
       propertyPath: m_Pivot.x

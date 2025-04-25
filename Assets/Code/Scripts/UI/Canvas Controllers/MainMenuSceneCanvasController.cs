@@ -56,7 +56,7 @@ public class MainMenuSceneCanvasController : MonoBehaviour
     public void StartGame()
     {
         // Stop music.
-        SoundManager.instance.StopMusic(.5f);
+        SoundManager.instance.StopMusic();
 
         // Start game coroutine.
         StartCoroutine(StartGameCoroutine());

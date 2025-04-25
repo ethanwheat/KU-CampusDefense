@@ -76,7 +76,7 @@ public class Defense : MonoBehaviour
     public virtual void OnDefenseDestroy()
     {
         roundManager.RemoveDefense(this);
-        SoundManager.instance.PlaySoundEffect(destroySoundEffect, transform, .5f);
+        SoundManager.instance.PlaySoundEffect(destroySoundEffect, transform);
         Destroy(gameObject);
     }
 

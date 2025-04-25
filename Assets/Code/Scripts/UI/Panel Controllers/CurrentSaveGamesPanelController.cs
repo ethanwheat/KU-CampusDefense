@@ -89,7 +89,7 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
     void ShowError(string title, string text)
     {
         SetInteractable(false);
-        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
         messagePopupPanelController.ShowPanel(title, text);
         messagePopupPanelController.OnClose.AddListener(() => SetInteractable(true));
     }

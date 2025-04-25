@@ -49,12 +49,12 @@ public class RegenHealthPanelController : MonoBehaviour
         if (coins >= regenCost)
         {
             roundManager.RegenHealthOnDefenses();
-            SoundManager.instance.PlaySoundEffect(regenSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(regenSoundEffect, transform, volume: 1f);
             messagePopupPanelController.ShowPanel("Defenses Health Regenerated", "You regenerated health on all defenses for " + regenCost + " coins!");
         }
         else
         {
-            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
             messagePopupPanelController.ShowPanel("Insufficient Coins", "You do not have enough coins to regen all defenses!");
         }
 

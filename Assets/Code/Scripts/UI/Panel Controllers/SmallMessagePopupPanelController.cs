@@ -6,11 +6,19 @@ public class SmallMessagePopupPanelController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI headerText;
 
+    private Coroutine fadeCoroutine;
+
     public void ShowPanel(string text)
     {
         headerText.text = text;
         gameObject.SetActive(true);
-        StartCoroutine(FadeRoutine());
+
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+        }
+
+        fadeCoroutine = StartCoroutine(FadeRoutine());
     }
 
     private IEnumerator FadeRoutine()

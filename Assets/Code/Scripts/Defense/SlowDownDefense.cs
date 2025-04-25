@@ -52,6 +52,8 @@ public class SlowDownDefense : Defense, IDefense
     {
         while (enemy != null && enemy.Health > 0)
         {
+            if (!enabled) { yield return new WaitUntil(() => enabled); }
+
             enemy.TakeDamage(damagePerSecond);
             yield return new WaitForSeconds(1f);
         }

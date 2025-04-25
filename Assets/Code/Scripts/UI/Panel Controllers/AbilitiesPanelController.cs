@@ -15,7 +15,7 @@ public class AbilitiesPanelController : MonoBehaviour
     [SerializeField] private AudioClip errorSoundEffect;
     [SerializeField] private AudioClip abilityActivatedSoundEffect;
 
-    [Header("Game Object Data")]
+    [Header("Game Data Object")]
     [SerializeField] private GameDataObject gameDataObject;
 
     private bool alreadyOpened = false;
@@ -33,14 +33,14 @@ public class AbilitiesPanelController : MonoBehaviour
 
     public void ShowError(string title, string text)
     {
-        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
         messagePopupPanelController.ShowPanel(title, text);
         ClosePanel();
     }
 
     public void ShowActivated(string title, string text)
     {
-        SoundManager.instance.PlaySoundEffect(abilityActivatedSoundEffect, transform, 1f);
+        SoundManager.instance.PlaySoundEffect(abilityActivatedSoundEffect, transform, volume: 1f);
         messagePopupPanelController.ShowPanel(title, text);
         ClosePanel();
     }

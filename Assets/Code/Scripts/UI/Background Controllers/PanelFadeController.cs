@@ -42,7 +42,7 @@ public class PanelFadeController : MonoBehaviour
         while (timer < duration)
         {
             canvasGroup.alpha = Mathf.Lerp(0f, 1f, timer / duration);
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             yield return null;
         }
 
@@ -61,7 +61,7 @@ public class PanelFadeController : MonoBehaviour
         while (timer < duration)
         {
             canvasGroup.alpha = Mathf.Lerp(startAlpha, 0f, timer / duration);
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             yield return null;
         }
 

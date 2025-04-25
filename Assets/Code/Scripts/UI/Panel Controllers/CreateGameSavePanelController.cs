@@ -21,7 +21,7 @@ public class CreateGameSavePanelController : MonoBehaviour
         }
         else
         {
-            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
             messagePopupPanelController.ShowPanel("Something went wrong!", "Game save could not be created.");
         }
     }

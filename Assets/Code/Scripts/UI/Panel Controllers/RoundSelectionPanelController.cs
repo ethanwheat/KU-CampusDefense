@@ -8,7 +8,7 @@ public class RoundSelectionPanelController : MonoBehaviour
     [SerializeField] private Transform contentParent; // Content under the ScrollView
     [SerializeField] private GameObject roundButtonPrefab; // Prefab for each round button
 
-    [Header("Game Object")]
+    [Header("Game Data Object")]
     [SerializeField] private GameDataObject gameDataObject;
 
     private void Start()

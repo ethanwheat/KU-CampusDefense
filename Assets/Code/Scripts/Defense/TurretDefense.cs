@@ -115,7 +115,7 @@ public class TurretDefense : Defense, IDefense
         {
             bulletScript.SetTarget(target);
         }
-        SoundManager.instance.PlaySoundEffect(shootSoundEffect, transform, .5f);
+        SoundManager.instance.PlaySoundEffect(shootSoundEffect, transform);
     }
 
     public void ApplyEffect(EnemyMovement enemy)

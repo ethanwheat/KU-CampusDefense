@@ -88,13 +88,13 @@ public class UpgradePanelController : MonoBehaviour
             defenseData.UpgradeLevel();
             gameData.SubtractDollars(upgradeCost);
             BuildingSceneUIController.instance.UpdateDollarUI();
-            SoundManager.instance.PlaySoundEffect(upgradeSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(upgradeSoundEffect, transform, volume: 1f);
             UpdateUI();
         }
         else
         {
             // Show error popup panel and close upgrade panel.
-            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
             messagePopupPanelController.ShowPanel("Insufficient Dollars", "You do not have enough dollars to upgrade " + buildingName + "!");
             ClosePanel();
         }

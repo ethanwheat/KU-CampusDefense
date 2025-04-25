@@ -104,7 +104,7 @@ public class RoundSceneCanvasController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // Play click sound effect.
-            SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(clickSoundEffect, transform, volume: 1f);
 
             // Close existing UI and show loan panel.
             CloseExistingUI();
@@ -172,14 +172,14 @@ public class RoundSceneCanvasController : MonoBehaviour
 
     public void ShowRoundWonPanel(string round, string reward, string loan, string total)
     {
-        string[] avoid = { "RoundWonPanel", "DollarUI", "CoinUI", "WaveCount" };
+        string[] avoid = { "RoundWonPanel" };
         HideAllUI(avoid);
         roundWonPanelController.ShowPanel(round, reward, loan, total);
     }
 
     public void ShowRoundLostPanel()
     {
-        string[] avoid = { "RoundLostPanel", "DollarUI", "CoinUI", "WaveCount" };
+        string[] avoid = { "RoundLostPanel" };
         HideAllUI(avoid);
         roundLostPanelController.ShowPanel();
     }

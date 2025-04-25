@@ -67,7 +67,7 @@ public class PurchasePanelController : MonoBehaviour
             }
 
             gameData.SubtractDollars(objectCost);
-            SoundManager.instance.PlaySoundEffect(placementSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(placementSoundEffect, transform, volume: 1f);
             messagePopupPanelController.ShowPanel("Building Purchased", "You have bought " + buildingName + " for " + objectCost.ToString() + " dollars!");
             BuildingSceneUIController.instance.UpdateDollarUI();
             buildingPlacementController.UpdatePlacementArea();
@@ -76,7 +76,7 @@ public class PurchasePanelController : MonoBehaviour
         else
         {
             // Show error popup panel and close purchase panel.
-            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
             messagePopupPanelController.ShowPanel("Insufficient Dollars", "You do not have enough dollars to buy " + buildingName + "!");
             ClosePanel();
         }

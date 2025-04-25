@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 74bff35f5617ed043a49612edc389a4c
+guid: 3ce9357d0f41b8544a4d3e17e60806c9
 AudioImporter:
   externalObjects: {}
   serializedVersion: 8
@@ -21,10 +21,3 @@ AudioImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 315925
-  packageName: Mini Retro - retro music pack
-  packageVersion: 1.0
-  assetPath: Assets/Mini Retro music/Loops/WAV_Stage3_loop.wav
-  uploadId: 745492

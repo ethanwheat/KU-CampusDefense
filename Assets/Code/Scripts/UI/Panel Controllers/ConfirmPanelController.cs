@@ -56,7 +56,11 @@ public class ConfirmPanelController : MonoBehaviour
     public void OnConfirmClick()
     {
         OnConfirm.Invoke();
-        ClosePanel();
+
+        if (!isFading)
+        {
+            ClosePanel();
+        }
     }
 
     // Called when panel is closed.

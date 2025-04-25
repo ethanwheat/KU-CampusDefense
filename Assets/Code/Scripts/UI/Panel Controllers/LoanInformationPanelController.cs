@@ -67,7 +67,7 @@ public class LoanInformationPanelController : MonoBehaviour
     // Play take loan sound effect, take loan and invoke onTakeLoan.
     public void OnTake()
     {
-        SoundManager.instance.PlaySoundEffect(takeLoanSoundEffect, transform, 1f);
+        SoundManager.instance.PlaySoundEffect(takeLoanSoundEffect, transform, volume: 1f);
         GameDataManager.instance.GameData.TakeLoan(loanObject);
         OnTakeLoan.Invoke();
     }
@@ -75,7 +75,7 @@ public class LoanInformationPanelController : MonoBehaviour
     // Play make payment sound effect, invoke onLoanPayment.
     public void OnPayment()
     {
-        SoundManager.instance.PlaySoundEffect(makePaymentSoundEffect, transform, 1f);
+        SoundManager.instance.PlaySoundEffect(makePaymentSoundEffect, transform, volume: 1f);
         OnLoanPayment.Invoke();
     }
 }

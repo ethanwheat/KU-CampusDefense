@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2356dbd71021eaf4690fbb65ee4f1e41
+guid: 3f4230ab0feb9984289e4807d45b4ea8
 AudioImporter:
   externalObjects: {}
   serializedVersion: 8
@@ -21,10 +21,3 @@ AudioImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 315925
-  packageName: Mini Retro - retro music pack
-  packageVersion: 1.0
-  assetPath: Assets/Mini Retro music/Full/WAV_Bits_and_Pieces_Full.wav
-  uploadId: 745492

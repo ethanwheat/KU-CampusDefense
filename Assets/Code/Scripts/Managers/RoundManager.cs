@@ -36,15 +36,15 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private int currentWave = 0;
     [SerializeField] private int numWaves = 0;
     [SerializeField] private int remainingEnemies;
-    private bool gameOver = false;
 
     [Header("Allen Fieldhouse")]
     [SerializeField] private float fieldhouseHealth = 1000f;
     [SerializeField] private HealthBar fieldhouseHealthBar; // Reference to UI HealthBar
-    private float maxFieldhouseHealth;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip allenFieldHouseDamageSoundEffect;
+    [SerializeField] private AudioClip roundWonMusic;
+    [SerializeField] private AudioClip roundLostMusic;
 
     [Header("UI Controllers")]
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
@@ -55,22 +55,24 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private Transform defensesParent;
     [SerializeField] private Transform projectilesParent;
 
-    [Header("Game Object")]
+    [Header("Game Data Object")]
     [SerializeField] private GameDataObject gameDataObject;
-
-    public Transform PlacementParent => placementParent;
-    public Transform DefensesParent => defensesParent;
-    public Transform ProjectilesParent => projectilesParent;
-    public int Coins => coins;
 
     private GameData gameData;
     private RoundSceneCanvasController roundSceneUIController;
     private List<EnemyMovement> enemies = new List<EnemyMovement>();
     private List<Defense> defenses = new List<Defense>();
-    private List<Defense> healthDefenses = new List<Defense>();
+
+    private float maxFieldhouseHealth;
     private bool isAllEnemiesSlowed = false;
     private bool isAllEnemiesFrozen = false;
     private float slowMultiplier = 1;
+    private bool gameOver = false;
+
+    public Transform PlacementParent => placementParent;
+    public Transform DefensesParent => defensesParent;
+    public Transform ProjectilesParent => projectilesParent;
+    public int Coins => coins;
 
     void Awake()
     {
@@ -114,6 +116,11 @@ public class RoundManager : MonoBehaviour
 
         while (currentWave < numWaves)
         {
+            while (isAllEnemiesFrozen)
+            {
+                yield return null;
+            }
+
             WeatherManager.instance.ResetWeatherForNewRound();
             WeatherManager.instance.TryActivateWeather();
             roundSceneUIController.UpdateWaveUI(currentWave + 1, numWaves);
@@ -127,7 +134,7 @@ public class RoundManager : MonoBehaviour
     public void EndRound()
     {
         StopAllCoroutines();
-        SoundManager.instance.StopMusic(.5f);
+        SoundManager.instance.StopMusic();
         roundSceneUIController.CloseExistingUI();
         StartCoroutine(EndRoundCoroutine());
     }
@@ -135,13 +142,14 @@ public class RoundManager : MonoBehaviour
     private IEnumerator EndRoundCoroutine()
     {
         yield return StartCoroutine(loadingBackgroundController.FadeInCoroutine(.5f));
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Building Scene");
     }
 
     public void RetryRound()
     {
         StopAllCoroutines();
-        SoundManager.instance.StopMusic(.5f);
+        SoundManager.instance.StopMusic();
         roundSceneUIController.CloseExistingUI();
         StartCoroutine(RetryRoundCoroutine());
     }
@@ -149,6 +157,7 @@ public class RoundManager : MonoBehaviour
     private IEnumerator RetryRoundCoroutine()
     {
         yield return StartCoroutine(loadingBackgroundController.FadeInCoroutine(0.5f));
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -258,7 +267,9 @@ public class RoundManager : MonoBehaviour
         // Check if the round is over (no remaining enemies)
         if (remainingEnemies <= 0)
         {
-            GameOver();
+            Time.timeScale = 0f;
+            PauseMenuCanvasController.instance.enabled = false;
+            SoundManager.instance.PlayMusic(roundWonMusic, transform);
 
             int debt = gameData.GetDebt();
             int reward = (int)(currentRound.WinPayout * dollarMultiplier);
@@ -296,7 +307,7 @@ public class RoundManager : MonoBehaviour
 
     public void DamageFieldhouse(float damage)
     {
-        SoundManager.instance.PlaySoundEffect(allenFieldHouseDamageSoundEffect, transform, .5f);
+        SoundManager.instance.PlaySoundEffect(allenFieldHouseDamageSoundEffect, transform);
 
         fieldhouseHealth -= damage;
 
@@ -307,51 +318,32 @@ public class RoundManager : MonoBehaviour
 
         if (fieldhouseHealth <= 0 && !gameOver)
         {
-            GameOver();
+            gameOver = true;
+            Time.timeScale = 0f;
+            PauseMenuCanvasController.instance.enabled = false;
+            SoundManager.instance.PlayMusic(roundLostMusic, transform);
             roundSceneUIController.ShowRoundLostPanel();
-        }
-    }
-
-    private void GameOver()
-    {
-        gameOver = true;
-
-        foreach (var enemy in enemies)
-        {
-            enemy.enabled = false;
-        }
-
-        foreach (var defense in defenses)
-        {
-            defense.enabled = false;
         }
     }
 
     public void AddDefense(Defense defense)
     {
         defenses.Add(defense);
-
-        if (defense.gameObject.CompareTag("HealthDefense"))
-        {
-            healthDefenses.Add(defense);
-        }
     }
 
     public void RemoveDefense(Defense defense)
     {
         defenses.Remove(defense);
-
-        if (healthDefenses.Contains(defense))
-        {
-            healthDefenses.Remove(defense);
-        }
     }
 
     public void RegenHealthOnDefenses()
     {
-        foreach (var healthDefense in healthDefenses)
+        foreach (var defense in defenses)
         {
-            healthDefense.ResetHealth();
+            if (defense.gameObject.CompareTag("HealthDefense"))
+            {
+                defense.ResetHealth();
+            }
         }
 
         int regenCost = GetRegenCost();
@@ -363,9 +355,12 @@ public class RoundManager : MonoBehaviour
     {
         int regenCost = 0;
 
-        foreach (var healthDefense in healthDefenses)
+        foreach (var defense in defenses)
         {
-            regenCost += healthDefense.DefenseObject.CoinCost / 2;
+            if (defense.gameObject.CompareTag("HealthDefense"))
+            {
+                regenCost += defense.DefenseObject.CoinCost / 2;
+            }
         }
 
         return regenCost;
