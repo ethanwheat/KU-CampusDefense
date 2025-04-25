@@ -10,7 +10,7 @@ public class RoundSelectionPanelController : MonoBehaviour
     [SerializeField] private GameObject lockedRoundPrefab; // Prefab for locked round buttons
     [SerializeField] private BuildingSceneUIController uiController;
 
-    [Header("Game Object")]
+    [Header("Game Data Object")]
     [SerializeField] private GameDataObject gameDataObject;
 
     private void Start()

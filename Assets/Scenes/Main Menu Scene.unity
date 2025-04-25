@@ -9320,7 +9320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3180673580133511187, guid: 9bf2d4192f2330a48910fa95b3b37ee9, type: 3}
       propertyPath: m_Name
-      value: MainMenuUI
+      value: MainMenuCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 4120724356599170727, guid: 9bf2d4192f2330a48910fa95b3b37ee9, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -9408,6 +9408,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4726546136686168777, guid: 9bf2d4192f2330a48910fa95b3b37ee9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802596345917877746, guid: 9bf2d4192f2330a48910fa95b3b37ee9, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5342232530025864973, guid: 9bf2d4192f2330a48910fa95b3b37ee9, type: 3}

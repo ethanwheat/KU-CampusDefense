@@ -238,6 +238,10 @@ MonoBehaviour:
   fieldhouseHealth: 1000
   fieldhouseHealthBar: {fileID: 0}
   allenFieldHouseDamageSoundEffect: {fileID: 8300000, guid: 5ccdcde176da9744d8838ca0fdd47932, type: 3}
+  roundWonSoundEffect: {fileID: 8300000, guid: f86c15022da44e14e9137b86672671df, type: 3}
+  roundLostSoundEffect: {fileID: 8300000, guid: b25450450847f49429b1adf565273633, type: 3}
+  roundWonMusic: {fileID: 8300000, guid: 3f4230ab0feb9984289e4807d45b4ea8, type: 3}
+  roundLostMusic: {fileID: 8300000, guid: 4c0af215ac9037f409bb30d3519eb9dc, type: 3}
   loadingBackgroundController: {fileID: 0}
   placementParent: {fileID: 7045058554721417536}
   enemiesParent: {fileID: 6421931705708880764}

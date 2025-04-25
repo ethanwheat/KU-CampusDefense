@@ -16,21 +16,12 @@ public class DefensePanelController : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Game Object")]
+    [Header("Game Data Object")]
     [SerializeField] private GameDataObject gameDataObject;
 
     private List<DefenseObject> defenseObjects;
     private GameObject selectedPlacementButton;
     private GameObject currentDefensePlacement;
-
-    void Update()
-    {
-        // Cancel selection is escape pressed.
-        if (Input.GetKeyDown("escape"))
-        {
-            CancelPlacement();
-        }
-    }
 
     // Load defenses in UI.
     public void ShowPanel()
@@ -103,7 +94,7 @@ public class DefensePanelController : MonoBehaviour
     // Show error popup message and close panel.
     void PlacementFailed(DefenseObject defenseData)
     {
-        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
         messagePopupPanelController.ShowPanel("Insufficient Coins", "You do not have enough coins to buy a " + defenseData.ObjectName + "!");
         ClosePanel();
     }

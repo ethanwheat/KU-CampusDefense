@@ -8,7 +8,7 @@ public class GameDataManager : MonoBehaviour
 {
     public static GameDataManager instance;
 
-    [Header("Game Object Data")]
+    [Header("Game Data")]
     [SerializeField] private GameData gameData;
     [SerializeField] private GameDataMeta gameDataMeta;
 

@@ -132,7 +132,7 @@ public class DefensePlacementController : MonoBehaviour
                 enabled = false;
 
                 // Play placement sound effect.
-                SoundManager.instance.PlaySoundEffect(placementSoundEffect, transform, .5f);
+                SoundManager.instance.PlaySoundEffect(placementSoundEffect, transform);
 
                 // Call onPlacementSuccess.
                 onPlacementSuccess.Invoke();

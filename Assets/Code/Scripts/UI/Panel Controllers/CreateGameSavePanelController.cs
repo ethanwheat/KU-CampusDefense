@@ -17,11 +17,11 @@ public class CreateGameSavePanelController : MonoBehaviour
     {
         if (GameDataManager.instance.CreateGameData(gameSaveNameInputField.text))
         {
-            MainMenuSceneUIController.instance.StartGame();
+            MainMenuSceneCanvasController.instance.StartGame();
         }
         else
         {
-            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, 1f);
+            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
             messagePopupPanelController.ShowPanel("Something went wrong!", "Game save could not be created.");
         }
     }

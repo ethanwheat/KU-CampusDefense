@@ -1768,7 +1768,7 @@ TextureImporter:
         width: 400
         height: 131
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 50, y: 50, z: 50, w: 50}
       customData: 
       outline: []
@@ -1790,7 +1790,7 @@ TextureImporter:
         width: 400
         height: 131
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 50, y: 50, z: 50, w: 50}
       customData: 
       outline: []
@@ -1799,6 +1799,72 @@ TextureImporter:
       bones: []
       spriteID: 8dec3f8e3ed40b94ea5ad08487c880ae
       internalID: -1433418488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GUI_77
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 269
+        width: 166
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad6d05de08d45e94380ec30ac43a9b87
+      internalID: -946258961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GUI_78
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 58
+        width: 205
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe5431aa0de6dd0468e5f70162154a29
+      internalID: -374382209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GUI_79
+      rect:
+        serializedVersion: 2
+        x: 1179
+        y: 93
+        width: 172
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f1a3ed2a39fa3f4486a0fd419047a11
+      internalID: 543874442
       vertices: []
       indices: 
       edges: []

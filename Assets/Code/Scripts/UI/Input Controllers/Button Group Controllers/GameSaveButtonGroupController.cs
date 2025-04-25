@@ -10,8 +10,8 @@ public class GameSaveButtonGroupController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI lastModifiedText;
 
     [Header("Unity Events")]
-    [SerializeField] public UnityEvent OnLoadGame;
-    [SerializeField] public UnityEvent OnDeleteSave;
+    public UnityEvent OnLoadGame;
+    public UnityEvent OnDeleteSave;
 
     public void SetData(GameDataMeta meta)
     {
