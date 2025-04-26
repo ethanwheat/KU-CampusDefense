@@ -22,6 +22,7 @@ public class Defense : MonoBehaviour
 
     public DefenseObject DefenseObject => defenseObject;
     public DefenseData DefenseData => defenseData;
+    public HealthBar HealthBar => healthBar;
 
     public virtual void Start()
     {
@@ -52,7 +53,7 @@ public class Defense : MonoBehaviour
     public void SetHealth(float amount)
     {
         health = Mathf.Clamp(amount, 0, maxHealth);
-        GetHealthBar().UpdateHealthBar(health, maxHealth);
+        healthBar.UpdateHealthBar(health, maxHealth);
 
         if (health == 0)
         {
@@ -78,11 +79,5 @@ public class Defense : MonoBehaviour
         roundManager.RemoveDefense(this);
         SoundManager.instance.PlaySoundEffect(destroySoundEffect, transform);
         Destroy(gameObject);
-    }
-
-    // Get health bar.
-    public HealthBar GetHealthBar()
-    {
-        return healthBar;
     }
 }

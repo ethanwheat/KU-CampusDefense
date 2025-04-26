@@ -24,7 +24,7 @@ public class RoundManager : MonoBehaviour
     [Header("Prefab Healths")]
     [SerializeField] private float fanHealth = 100;
     [SerializeField] private float coachHealth = 200;
-    [SerializeField] private float cheerleaderHealth = 50; 
+    [SerializeField] private float cheerleaderHealth = 50;
     [SerializeField] private float playerHealth = 150;
     [SerializeField] private float mascotHealth = 300;
 
@@ -106,7 +106,7 @@ public class RoundManager : MonoBehaviour
 
         foreach (Wave wave in currentRound.Waves)
         {
-            remainingEnemies += wave.Fans + wave.Cheerleaders + wave.Coaches;
+            remainingEnemies += wave.Fans + wave.Cheerleaders + wave.Coaches + wave.Players + wave.Mascots;
         }
 
         GetBonuses();
@@ -262,13 +262,8 @@ public class RoundManager : MonoBehaviour
     // Subtract coins.
     public void SubtractCoins(int amount)
     {
-        int futureAmount = coins - amount;
-
-        if (futureAmount >= 0)
-        {
-            coins = futureAmount;
-            roundSceneUIController.UpdateCoinUI();
-        }
+        coins = Mathf.Max(0, coins - amount);
+        roundSceneUIController.UpdateCoinUI();
     }
 
     public void EnemyDefeated(EnemyMovement enemyDefeated)
@@ -311,9 +306,12 @@ public class RoundManager : MonoBehaviour
                 );
             }
 
-            if (gameData.RoundNumber == currentRound.RoundNumber)
+            if (gameData.RoundNumber == currentRound.RoundNumber && currentRound.RoundNumber < gameDataObject.RoundObjects.Capacity)
             {
                 gameData.IncrementRoundNumber();  // unlock next round
+
+                RoundObject roundObject = gameDataObject.GetRoundObject(gameData.RoundNumber);
+                GameDataManager.instance.SetSelectedRound(roundObject);
             }
 
         }

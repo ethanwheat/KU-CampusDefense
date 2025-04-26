@@ -138,10 +138,6 @@ public class RoundSceneCanvasController : MonoBehaviour
     // Show defense panel.
     public void ShowDefensePanel()
     {
-        if (defensePanelController == null)
-        {
-            return;
-        }
         bool showPanel = !defensePanelController.gameObject.activeSelf;
 
         CloseExistingUI();
@@ -154,12 +150,8 @@ public class RoundSceneCanvasController : MonoBehaviour
 
     public void ShowAbilitiesPanel()
     {
-        if (abilitiesPanelController == null)
-        {
-            return;
-        }
-
         bool showPanel = !abilitiesPanelController.gameObject.activeSelf;
+
         CloseExistingUI();
 
         if (showPanel)

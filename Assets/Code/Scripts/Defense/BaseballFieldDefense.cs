@@ -37,8 +37,6 @@ public class BaseballFieldDefense : Defense, IDefense
 
     private IEnumerator FireBaseballWaves()
     {
-        HealthBar healthBar = GetHealthBar();
-
         int ballsLeft = ballsPerWave;
 
         for (int i = 0; i < ballsPerWave; i++)
@@ -46,13 +44,13 @@ public class BaseballFieldDefense : Defense, IDefense
             if (!enabled) { yield return new WaitUntil(() => enabled); }
 
             ballsLeft--;
-            healthBar.UpdateHealthBar(ballsLeft, ballsPerWave);
+            HealthBar.UpdateHealthBar(ballsLeft, ballsPerWave);
             FireRandomBaseball();
             yield return new WaitForSeconds(timeBetweenBaseballs);
         }
 
         SoundManager.instance.PlaySoundEffect(rechargeSoundEffect, transform);
-        healthBar.UpdateHealthBar(ballsPerWave, ballsPerWave);
+        HealthBar.UpdateHealthBar(ballsPerWave, ballsPerWave);
 
         yield return new WaitForSeconds(timeBetweenWaves);
 

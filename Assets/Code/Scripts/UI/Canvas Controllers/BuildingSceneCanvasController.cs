@@ -12,6 +12,7 @@ public class BuildingSceneUIController : MonoBehaviour
     [SerializeField] private PurchasePanelController purchasePanelController;
     [SerializeField] private UpgradePanelController upgradePanelController;
     [SerializeField] private LoanPanelController loanPanelController;
+    [SerializeField] private RoundSelectionPanelController roundSelectionPanelController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
     [SerializeField] private LoadingBackgroundController loadingBackgroundController;
 
@@ -112,16 +113,13 @@ public class BuildingSceneUIController : MonoBehaviour
         bool isDefenseBuilding = hit.collider.CompareTag("DefenseBuilding");
 
         // Make sure the object is not locked.
-        if (gameData.RoundNumber < purchasableObject.UnlockRound)
+        if (gameData.RoundNumber < purchasableObject.UnlockRound || (purchasableData != null && !isDefenseBuilding))
         {
             return;
         }
 
         // Show outline.
-        if (purchasableData == null || isDefenseBuilding)
-        {
-            buildingPlacementController.ShowOutline(true);
-        }
+        buildingPlacementController.ShowOutline(true);
 
         // Check if mouse is clicked.
         if (Input.GetMouseButtonDown(0))
@@ -188,9 +186,22 @@ public class BuildingSceneUIController : MonoBehaviour
         dollarText.text = GameDataManager.instance.GameData.Dollars.ToString();
     }
 
+    // Show defense panel.
+    public void ShowRoundSelectionPanel()
+    {
+        bool showPanel = !roundSelectionPanelController.gameObject.activeSelf;
+
+        CloseExistingUI();
+
+        if (showPanel)
+        {
+            roundSelectionPanelController.ShowPanel();
+        }
+    }
+
     public void UpdateSelectedRound()
     {
-        int roundNumber = GameDataManager.instance.SelectedRound.RoundNumber;    
+        int roundNumber = GameDataManager.instance.SelectedRound.RoundNumber;
         selectedText.text = "Round " + roundNumber.ToString();
     }
 
@@ -200,6 +211,7 @@ public class BuildingSceneUIController : MonoBehaviour
         purchasePanelController.ClosePanel();
         upgradePanelController.ClosePanel();
         loanPanelController.ClosePanel();
+        roundSelectionPanelController.ClosePanel();
         messagePopupPanelController.ClosePanel();
     }
 }

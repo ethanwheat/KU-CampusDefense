@@ -14,6 +14,7 @@ public class EnemyMovement : MonoBehaviour
   private float baseSpeed;
   private float maxHealth;
   private bool isBlocked = false;
+  private bool isDead = false;
   private int killReward;
 
   public float Health => health; // read only access
@@ -48,8 +49,10 @@ public class EnemyMovement : MonoBehaviour
       else  // enemy has reached Allen fieldhouse
       {
 
-        if (roundManager != null)
+        if (!isDead)
         {
+          isDead = true;
+
           roundManager.EnemyDefeated(this);
           roundManager.DamageFieldhouse(health);
         }
@@ -111,8 +114,10 @@ public class EnemyMovement : MonoBehaviour
 
   private void Die()
   {
-    if (roundManager != null)
+    if (!isDead)
     {
+      isDead = true;
+
       roundManager.EnemyDefeated(this);
       roundManager.AddCoins(killReward);
     }

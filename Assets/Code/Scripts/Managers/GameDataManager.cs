@@ -45,8 +45,8 @@ public class GameDataManager : MonoBehaviour
             gameData = new GameData()
             {
                 RoundNumber = 1,
-                Dollars = 100,
-                DefenseData = { new DefenseData("Barrier") }
+                Dollars = 0,
+                DefenseData = { new DefenseData("Mascot Distraction") }
             };
 
             // Set selected round.

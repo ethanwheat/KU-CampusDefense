@@ -14,6 +14,7 @@ public class LoanPanelController : MonoBehaviour
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
     [Header("Sounds")]
+    [SerializeField] private AudioClip makePaymentSoundEffect;
     [SerializeField] private AudioClip errorSoundEffect;
 
     [Header("Game Data Object")]
@@ -80,6 +81,9 @@ public class LoanPanelController : MonoBehaviour
         {
             // Pay what user can.
             gameData.PayDebtOnLoan(loanData, Mathf.Clamp(dollars, 0, debt));
+
+            // Play sound effect.
+            SoundManager.instance.PlaySoundEffect(makePaymentSoundEffect, transform, volume: 1f);
 
             // Refresh UI.
             RefreshUI();

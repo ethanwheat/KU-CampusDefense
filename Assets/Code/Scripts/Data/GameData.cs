@@ -27,13 +27,8 @@ public class GameData
     // Subtract dollars.
     public void SubtractDollars(int amount)
     {
-        int futureAmount = Dollars - amount;
-
-        if (futureAmount >= 0)
-        {
-            Dollars = futureAmount;
-            TriggerAutosave();
-        }
+        Dollars = Mathf.Max(0, Dollars - amount);
+        TriggerAutosave();
     }
 
     public void CreateDefenseData(DefenseObject defenseObject)
@@ -104,7 +99,12 @@ public class GameData
     {
         loanData.SubtractDebt(amount);
         SubtractDollars(amount);
-        LoanData.Remove(loanData);
+
+        if (loanData.Debt == 0)
+        {
+            LoanData.Remove(loanData);
+        }
+
         TriggerAutosave();
 
     }
@@ -122,6 +122,12 @@ public class GameData
             {
                 int payment = Mathf.Min(remaining, debt);
                 data.SetDebt(debt - payment);
+
+                if (debt == 0)
+                {
+                    LoanData.Remove(data);
+                }
+
                 remaining -= payment;
             }
         }

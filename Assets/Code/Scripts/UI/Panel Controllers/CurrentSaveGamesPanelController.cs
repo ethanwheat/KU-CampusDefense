@@ -7,6 +7,9 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private GameObject gameSaveButtonGroupPrefab;
 
+    [Header("Game Objects")]
+    [SerializeField] private GameObject noSaveText;
+
     [Header("Transforms")]
     [SerializeField] private Transform content;
 
@@ -26,13 +29,20 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
         GameDataManager gameDataManager = GameDataManager.instance;
         List<GameDataMeta> gameDataMeta = gameDataManager.GetAllGameMetaData();
 
-        foreach (var meta in gameDataMeta)
+        if (gameDataMeta.Capacity > 0)
         {
-            GameObject buttonGroup = Instantiate(gameSaveButtonGroupPrefab, content);
-            GameSaveButtonGroupController gameSaveButtonGroupController = buttonGroup.GetComponent<GameSaveButtonGroupController>();
-            gameSaveButtonGroupController.SetData(meta);
-            gameSaveButtonGroupController.OnLoadGame.AddListener(() => StartGame(meta));
-            gameSaveButtonGroupController.OnDeleteSave.AddListener(() => DeleteSave(buttonGroup, meta));
+            foreach (var meta in gameDataMeta)
+            {
+                GameObject buttonGroup = Instantiate(gameSaveButtonGroupPrefab, content);
+                GameSaveButtonGroupController gameSaveButtonGroupController = buttonGroup.GetComponent<GameSaveButtonGroupController>();
+                gameSaveButtonGroupController.SetData(meta);
+                gameSaveButtonGroupController.OnLoadGame.AddListener(() => StartGame(meta));
+                gameSaveButtonGroupController.OnDeleteSave.AddListener(() => DeleteSave(buttonGroup, meta));
+            }
+        }
+        else
+        {
+            noSaveText.SetActive(true);
         }
 
         panelFadeController.Show();
@@ -41,6 +51,8 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
     // Remove previous game saves.
     void ResetPanel()
     {
+        noSaveText.SetActive(false);
+
         foreach (Transform buttonGroup in content)
         {
             Destroy(buttonGroup.gameObject);
@@ -73,11 +85,18 @@ public class CurrentSaveGamesPanelController : MonoBehaviour
     // Called when delete confirmed.
     public void OnDelete(GameObject buttonGroup, GameDataMeta gameDataMeta)
     {
+        GameDataManager gameDataManager = GameDataManager.instance;
+
         SetInteractable(true);
 
-        if (GameDataManager.instance.DeleteGameData(gameDataMeta.Guid))
+        if (gameDataManager.DeleteGameData(gameDataMeta.Guid))
         {
             Destroy(buttonGroup);
+
+            if (gameDataManager.GetAllGameMetaData().Capacity == 0)
+            {
+                noSaveText.SetActive(true);
+            }
         }
         else
         {

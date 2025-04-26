@@ -19,7 +19,6 @@ public class LoanInformationPanelController : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioClip takeLoanSoundEffect;
-    [SerializeField] private AudioClip makePaymentSoundEffect;
 
     [Header("Unity Events")]
     public UnityEvent OnTakeLoan;
@@ -75,7 +74,6 @@ public class LoanInformationPanelController : MonoBehaviour
     // Play make payment sound effect, invoke onLoanPayment.
     public void OnPayment()
     {
-        SoundManager.instance.PlaySoundEffect(makePaymentSoundEffect, transform, volume: 1f);
         OnLoanPayment.Invoke();
     }
 }

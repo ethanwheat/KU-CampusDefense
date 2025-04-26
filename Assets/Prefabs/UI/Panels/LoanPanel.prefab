@@ -230,8 +230,8 @@ MonoBehaviour:
   debtCostText: {fileID: 4302686290354324883}
   loanInformation: {fileID: 2822098560212802655}
   loanInformationPanelPrefab: {fileID: 4340971345862549433, guid: b9fb97de9a5c147bbbf0fb5b0189ffe0, type: 3}
-  buildingSceneUIController: {fileID: 0}
   messagePopupPanelController: {fileID: 0}
+  makePaymentSoundEffect: {fileID: 8300000, guid: 94f1b0ed291d2344989879d033992c44, type: 3}
   errorSoundEffect: {fileID: 8300000, guid: d334ab6419cf84f47a7ca4e98f8d1b1c, type: 3}
   gameDataObject: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
 --- !u!1 &1792429381352113694

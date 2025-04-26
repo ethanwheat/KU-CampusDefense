@@ -14,15 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Mascot Distraction
   description: 'Blocks all types of defenders and damages them, breaks eventually '
-  dollarCost: 7
-  unlockRound: 100
-  bought: 0
-  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
+  dollarCost: 0
+  unlockRound: 1
   sprite: {fileID: 1639286842, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   isShownInDefensePanel: 1
-  coinCost: 10
+  coinCost: 25
   level1UpgradeDollarCost: 100
   level2UpgradeDollarCost: 200
   level3UpgradeDollarCost: 300
-  level: 1
   prefab: {fileID: 5025952999412305972, guid: 221d5fcd90d014a40ba8e979af0dcefc, type: 3}

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 [System.Serializable]
 public class LoanData
 {
@@ -12,14 +14,11 @@ public class LoanData
 
     public void SetDebt(int amount)
     {
-        Debt = amount;
+        Debt = Mathf.Max(0, Debt - amount);
     }
 
     public void SubtractDebt(int amount)
     {
-        if (Debt - amount >= 0)
-        {
-            Debt -= amount;
-        }
+        Debt = Mathf.Max(0, Debt - amount);
     }
 }

@@ -51,7 +51,7 @@ public class RoundSelectionPanelController : MonoBehaviour
                     gameDataManager.SetSelectedRound(round);
                     ClosePanel();
                 });
-            } 
+            }
             else
             {
                 btnObj = Instantiate(lockedRoundPrefab, contentParent);
@@ -64,7 +64,7 @@ public class RoundSelectionPanelController : MonoBehaviour
     // Show message popup panel and set message popup panel data.
     public void ShowPanel()
     {
-        gameObject.SetActive(!gameObject.activeSelf);
+        gameObject.SetActive(true);
     }
 
     // Close message popup panel.
