@@ -87,7 +87,7 @@ public class AbilityManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("BigJayRampageController missing on prefab!");
+            Debug.LogError("BigJayRampageController missing on BIG JAY prefab!");
             Destroy(bigJay);
             yield break;
         }
@@ -96,7 +96,43 @@ public class AbilityManager : MonoBehaviour
         yield return new WaitWhile(() => bigJay != null);
     }
 
-    public void ActivateAbility(AbilityObject ability)
+    // ************ BUS RIDE **************
+    [SerializeField] private GameObject busRidePrefab;
+
+    private IEnumerator ActivateBusRide(AbilityData ability)
+    {
+        if (startNodes == null || startNodes.Length == 0)
+        {
+            Debug.Log("No start nodes available for Bus Ride");
+            yield break;
+        }
+
+        int spawnIndex = Random.Range(0, startNodes.Length);
+        PathNode startNode = startNodes[spawnIndex];
+
+        var bus = Instantiate(
+            busRidePrefab,
+            startNode.transform.position,
+            Quaternion.identity
+        );
+
+        var controller = bus.GetComponent<BigJayRampageController>();
+        if (controller != null)
+        {
+            controller.Initialize(startNode, ability.BusSpeed);
+        }
+        else
+        {
+            Debug.LogError("BigJayRampageController missing on BUS prefab!");
+            Destroy(bus);
+            yield break;
+        }
+
+        // Wait until Bus Ride is destroyed
+        yield return new WaitWhile(() => bus != null);
+    }
+
+    public void ActivateAbility(AbilityData ability)
     {
         switch (ability.Type)
         {
@@ -110,6 +146,10 @@ public class AbilityManager : MonoBehaviour
 
             case AbilityObject.AbilityType.BigJayRampage:
                 StartCoroutine(ActivateBigJayRampage(ability));
+                break;
+
+            case AbilityData.AbilityType.BusRide:
+                StartCoroutine(ActivateBusRide(ability));
                 break;
         }
     }
