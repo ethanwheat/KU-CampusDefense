@@ -23,14 +23,12 @@ public class RoundObject : ScriptableObject
 {
     [SerializeField] private Wave[] waves;  // Array of waves
     [SerializeField] private int roundNumber;
-    [SerializeField] private float fieldHouseHealth;
     [SerializeField] private int winPayout;
     [SerializeField] private int killPayout;
     [SerializeField] private Sprite opponentImage;
 
     public Wave[] Waves => waves;
     public int RoundNumber => roundNumber;
-    public float FieldHouseHealth => fieldHouseHealth;
     public int WinPayout => winPayout;
     public int KillPayout => killPayout;
     public Sprite OpponentImage => opponentImage;

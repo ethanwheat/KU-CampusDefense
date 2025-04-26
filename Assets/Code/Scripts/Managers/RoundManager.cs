@@ -44,7 +44,7 @@ public class RoundManager : MonoBehaviour
     [SerializeField] private int remainingEnemies;
 
     [Header("Allen Fieldhouse")]
-    [SerializeField] private float fieldhouseHealth = 1000f;
+    [SerializeField] private float fieldhouseHealth;
     [SerializeField] private HealthBar fieldhouseHealthBar; // Reference to UI HealthBar
 
     [Header("Sounds")]
@@ -99,15 +99,18 @@ public class RoundManager : MonoBehaviour
         gameData = gameDataManager.GameData;
         roundSceneUIController = RoundSceneCanvasController.instance;
         currentRound = gameDataManager.SelectedRound;
-        fieldhouseHealth = currentRound.FieldHouseHealth;
-        maxFieldhouseHealth = fieldhouseHealth;
 
         numWaves = currentRound.Waves.Length;
+
+        fieldhouseHealth = 0f;
 
         foreach (Wave wave in currentRound.Waves)
         {
             remainingEnemies += wave.Fans + wave.Cheerleaders + wave.Coaches + wave.Players + wave.Mascots;
+            fieldhouseHealth += (wave.Fans * fanHealth + wave.Cheerleaders * cheerleaderHealth + wave.Coaches * coachHealth + wave.Players * playerHealth + wave.Mascots * mascotHealth) / 2;
         }
+
+        maxFieldhouseHealth = fieldhouseHealth;
 
         GetBonuses();
 
@@ -313,7 +316,6 @@ public class RoundManager : MonoBehaviour
                 RoundObject roundObject = gameDataObject.GetRoundObject(gameData.RoundNumber);
                 GameDataManager.instance.SetSelectedRound(roundObject);
             }
-
         }
     }
 

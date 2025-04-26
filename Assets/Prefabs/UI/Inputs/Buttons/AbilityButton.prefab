@@ -1171,8 +1171,8 @@ MonoBehaviour:
   unlockedContent: {fileID: 1959415917657736842}
   abilityIcon: {fileID: 4146925056246613309}
   costText: {fileID: 7621020551186671541}
-  lockedAbilityNameText: {fileID: 7678673172848512562}
   unlockedAbilityNameText: {fileID: 8223932237520952747}
+  lockedAbilityNameText: {fileID: 2060351417126922941}
   lockedText: {fileID: 7678673172848512562}
   timerText: {fileID: 8886074603237928336}
   abilityButton: {fileID: 8580375070634766513}
