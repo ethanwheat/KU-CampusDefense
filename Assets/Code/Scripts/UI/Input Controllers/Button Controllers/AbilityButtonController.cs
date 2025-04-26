@@ -5,9 +5,13 @@ using TMPro;
 public class AbilityButtonController : MonoBehaviour
 {
     [Header("UI References")]
+    [SerializeField] private GameObject lockedContent;
+    [SerializeField] private GameObject unlockedContent;
     [SerializeField] private Image abilityIcon;
     [SerializeField] private TextMeshProUGUI costText;
-    [SerializeField] private TextMeshProUGUI abilityNameText;
+    [SerializeField] private TextMeshProUGUI unlockedAbilityNameText;
+    [SerializeField] private TextMeshProUGUI lockedAbilityNameText;
+    [SerializeField] private TextMeshProUGUI lockedText;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private Button abilityButton;
     [SerializeField] private Color effectColor = Color.white;
@@ -18,6 +22,8 @@ public class AbilityButtonController : MonoBehaviour
     private bool isEffectActive = false;
     private AbilitiesPanelController abilitiesPanelController;
     private RoundSceneCanvasController roundSceneUIController;
+
+    private bool isLocked;
 
     private void Awake()
     {
@@ -30,14 +36,32 @@ public class AbilityButtonController : MonoBehaviour
         this.abilityObject = abilityObject;
         abilitiesPanelController = abilities;
         roundSceneUIController = RoundSceneCanvasController.instance;
-        if (abilityIcon != null) abilityIcon.sprite = abilityObject.Icon;
-        if (costText != null) costText.text = abilityObject.DollarCost.ToString();
-        if (abilityNameText != null) abilityNameText.text = abilityObject.AbilityName;
+        isLocked = abilityObject.UnlockRound > GameDataManager.instance.GameData.RoundNumber;
+
+        if (isLocked)
+        {
+            lockedContent.SetActive(true);
+            lockedAbilityNameText.text = abilityObject.AbilityName;
+            lockedText.text = "Unlocks at round " + abilityObject.UnlockRound.ToString();
+
+            return;
+        }
+
+        unlockedContent.SetActive(true);
+        abilityIcon.sprite = abilityObject.Icon;
+        costText.text = abilityObject.DollarCost.ToString();
+        unlockedAbilityNameText.text = abilityObject.AbilityName;
     }
 
     private void OnAbilityClicked()
     {
         GameData gameData = GameDataManager.instance.GameData;
+
+        if (isLocked)
+        {
+            abilitiesPanelController.ShowError("Ability Locked", "The " + abilityObject.AbilityName + " ability will unlock at round " + abilityObject.UnlockRound.ToString() + "!");
+            return;
+        }
 
         if (isEffectActive)
         {
