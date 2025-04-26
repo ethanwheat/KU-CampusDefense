@@ -76,7 +76,10 @@ public class PauseMenuCanvasController : MonoBehaviour
     // Quit to main menu coroutine.
     private IEnumerator QuitToMainMenuCoroutine()
     {
+        enabled = false;
+
         yield return StartCoroutine(loadingBackgroundController.FadeInCoroutine(.5f));
+
         Time.timeScale = 1f;
         SceneManager.LoadScene("Main Menu Scene");
     }

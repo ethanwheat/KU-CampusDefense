@@ -14,7 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loanName: Small Loan
   amount: 100
-  unlockRound: 1
+  unlockRound: 5
   sprite: {fileID: -1060430459, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
-  debt: 0
-  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}

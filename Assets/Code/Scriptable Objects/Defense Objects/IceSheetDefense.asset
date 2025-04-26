@@ -19,7 +19,7 @@ MonoBehaviour:
   sprite: {fileID: 1513631292, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   isShownInDefensePanel: 1
   coinCost: 30
-  level1UpgradeDollarCost: 150
-  level2UpgradeDollarCost: 300
-  level3UpgradeDollarCost: 450
+  level1UpgradeDollarCost: 100
+  level2UpgradeDollarCost: 200
+  level3UpgradeDollarCost: 300
   prefab: {fileID: 5472060738618537860, guid: 78c738e9591c76944b96413f9c505efb, type: 3}

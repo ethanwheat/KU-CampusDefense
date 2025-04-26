@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Big Jay Rampage
   icon: {fileID: 1639286842, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   dollarCost: 300
-  unlockRound: 10
+  unlockRound: 15
   cooldownDuration: 60
   effectDuration: 1
   type: 2

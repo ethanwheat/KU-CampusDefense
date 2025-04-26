@@ -14,15 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: T-Shirt Cannon
   description: Shoots T-Shirts at enemies and lowers their HP.
-  dollarCost: 100
-  unlockRound: 5
-  bought: 0
-  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
+  dollarCost: 200
+  unlockRound: 3
   sprite: {fileID: 1697800366, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   isShownInDefensePanel: 1
   coinCost: 50
-  level1UpgradeDollarCost: 0
-  level2UpgradeDollarCost: 0
-  level3UpgradeDollarCost: 0
-  level: 1
+  level1UpgradeDollarCost: 150
+  level2UpgradeDollarCost: 300
+  level3UpgradeDollarCost: 450
   prefab: {fileID: 6275403238126932213, guid: 8d82c162b0e69488c98b2fb79b282eae, type: 3}

@@ -14,15 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Baseball Fields
   description: Infinite range attack that goes across campus randomly.
-  dollarCost: 100
+  dollarCost: 400
   unlockRound: 5
-  bought: 0
-  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
   sprite: {fileID: 1605249850, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   isShownInDefensePanel: 0
-  coinCost: 50
-  level1UpgradeDollarCost: 0
-  level2UpgradeDollarCost: 0
-  level3UpgradeDollarCost: 0
-  level: 1
+  coinCost: 0
+  level1UpgradeDollarCost: 150
+  level2UpgradeDollarCost: 300
+  level3UpgradeDollarCost: 450
   prefab: {fileID: 0}

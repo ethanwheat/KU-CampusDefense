@@ -32,7 +32,6 @@ MonoBehaviour:
     mascots: 0
     spawnInterval: 1.1
   roundNumber: 9
-  fieldHouseHealth: 1800
-  winPayout: 1300
-  killPayout: 70
+  winPayout: 900
+  killPayout: 25
   opponentImage: {fileID: -1143796489, guid: eb038eb5317cb6d42851593c51243de4, type: 3}

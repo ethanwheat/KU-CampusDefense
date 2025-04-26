@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Medium Loan
   m_EditorClassIdentifier: 
   loanName: Medium Loan
-  amount: 1000
-  unlockRound: 2
+  amount: 500
+  unlockRound: 10
   sprite: {fileID: -314362509, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
-  debt: 0
-  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}

@@ -174,6 +174,8 @@ public class BuildingSceneUIController : MonoBehaviour
     // Fade background in and load round scene.
     IEnumerator StartRoundCoroutine()
     {
+        PauseMenuCanvasController.instance.enabled = false;
+
         yield return StartCoroutine(loadingBackgroundController.FadeInCoroutine(.5f));
 
         SceneManager.LoadScene("Round Scene");

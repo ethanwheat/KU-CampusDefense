@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Freeze All
   icon: {fileID: -1746348965, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   dollarCost: 200
-  unlockRound: 5
+  unlockRound: 10
   cooldownDuration: 60
   effectDuration: 10
   type: 1

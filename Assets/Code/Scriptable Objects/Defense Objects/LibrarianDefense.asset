@@ -14,15 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Librarian
   description: Shoots Books at enemies and lowers their HP.
-  dollarCost: 150
-  unlockRound: 10
-  bought: 0
-  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
+  dollarCost: 1500
+  unlockRound: 15
   sprite: {fileID: 143446417, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   isShownInDefensePanel: 1
-  coinCost: 50
-  level1UpgradeDollarCost: 0
-  level2UpgradeDollarCost: 0
-  level3UpgradeDollarCost: 0
-  level: 1
+  coinCost: 100
+  level1UpgradeDollarCost: 150
+  level2UpgradeDollarCost: 300
+  level3UpgradeDollarCost: 450
   prefab: {fileID: 6672386744193232199, guid: 3615d6176185e430f999bd614703a89a, type: 3}
