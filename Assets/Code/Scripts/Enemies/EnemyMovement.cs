@@ -1,3 +1,4 @@
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -9,6 +10,9 @@ public class EnemyMovement : MonoBehaviour
 
   [Header("Sounds")]
   [SerializeField] private AudioClip enemyKilledSoundEffect;
+
+  [Header("Animator")]
+  [SerializeField] private Animator animator;
 
   private RoundManager roundManager;
   private float baseSpeed;
@@ -137,6 +141,7 @@ public class EnemyMovement : MonoBehaviour
 
   public void BlockMovement(bool isBlocked)
   {
+    animator.SetBool("Idle", isBlocked);
     this.isBlocked = isBlocked;
   }
 }
