@@ -14,11 +14,14 @@ public class AbilityObject : ScriptableObject
     [Header("Ability Type")]
     [SerializeField] private AbilityType type;
 
+    [Header("Ability Settings")]
+    [SerializeField] private float speed = 50f;
+
     [Header("Slow Parameters")]
     [Range(0.1f, 0.9f)]
     [SerializeField] private float slowMultiplier = 0.5f;
 
-    public enum AbilityType { SlowAll, FreezeAll, BigJayRampage, BusRide, Other }
+    public enum AbilityType { SlowAll, FreezeAll, BigJayRampage, BusRide }
 
     // Public properties
     public string AbilityName => abilityName;
@@ -29,11 +32,5 @@ public class AbilityObject : ScriptableObject
     public float EffectDuration => effectDuration;
     public AbilityType Type => type;
     public float SlowMultiplier => type == AbilityType.SlowAll ? slowMultiplier : 1f;
-
-    [Header("Big Jay Parameters")]
-    [SerializeField] private float bigJaySpeed = 50f;
-    public float BigJaySpeed => bigJaySpeed;
-
-    [Header("Bus Ride Settings")]
-    public float BusSpeed = 50f;
+    public float Speed => speed;
 }

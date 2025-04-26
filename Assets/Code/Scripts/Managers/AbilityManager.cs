@@ -80,14 +80,14 @@ public class AbilityManager : MonoBehaviour
         bigJay.transform.position = startNode.transform.position;
         bigJay.transform.rotation = Quaternion.identity;
 
-        var controller = bigJay.GetComponent<BigJayRampageController>();
+        var controller = bigJay.GetComponent<AbilityController>();
         if (controller != null)
         {
-            controller.Initialize(startNode, ability.BigJaySpeed);
+            controller.Initialize(ability, startNode);
         }
         else
         {
-            Debug.LogError("BigJayRampageController missing on BIG JAY prefab!");
+            Debug.LogError("AbilityController missing on BIG JAY prefab!");
             Destroy(bigJay);
             yield break;
         }
@@ -99,7 +99,7 @@ public class AbilityManager : MonoBehaviour
     // ************ BUS RIDE **************
     [SerializeField] private GameObject busRidePrefab;
 
-    private IEnumerator ActivateBusRide(AbilityData ability)
+    private IEnumerator ActivateBusRide(AbilityObject ability)
     {
         if (startNodes == null || startNodes.Length == 0)
         {
@@ -116,14 +116,14 @@ public class AbilityManager : MonoBehaviour
             Quaternion.identity
         );
 
-        var controller = bus.GetComponent<BigJayRampageController>();
+        var controller = bus.GetComponent<AbilityController>();
         if (controller != null)
         {
-            controller.Initialize(startNode, ability.BusSpeed);
+            controller.Initialize(ability, startNode);
         }
         else
         {
-            Debug.LogError("BigJayRampageController missing on BUS prefab!");
+            Debug.LogError("AbilityController missing on BUS prefab!");
             Destroy(bus);
             yield break;
         }
@@ -132,7 +132,7 @@ public class AbilityManager : MonoBehaviour
         yield return new WaitWhile(() => bus != null);
     }
 
-    public void ActivateAbility(AbilityData ability)
+    public void ActivateAbility(AbilityObject ability)
     {
         switch (ability.Type)
         {
@@ -148,7 +148,7 @@ public class AbilityManager : MonoBehaviour
                 StartCoroutine(ActivateBigJayRampage(ability));
                 break;
 
-            case AbilityData.AbilityType.BusRide:
+            case AbilityObject.AbilityType.BusRide:
                 StartCoroutine(ActivateBusRide(ability));
                 break;
         }

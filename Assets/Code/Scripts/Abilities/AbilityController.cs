@@ -1,22 +1,18 @@
+using System.Collections;
 using UnityEngine;
 
-public class BigJayRampageController : MonoBehaviour
+public class AbilityController : MonoBehaviour
 {
     [SerializeField] private float movementSpeed;
-    //[SerializeField] private ParticleSystem trailEffect;
-    //[SerializeField] private AudioClip rampageSound;
 
+    private AbilityObject abilityObject;
     private PathNode currentNode;
-    //private AudioSource audioSource;
 
-    public void Initialize(PathNode startNode, float speed)
+    public void Initialize(AbilityObject abilityObject, PathNode startNode)
     {
+        this.abilityObject = abilityObject;
         currentNode = startNode;
-        movementSpeed = speed;
-        //audioSource = GetComponent<AudioSource>();
-
-        //if (trailEffect != null) trailEffect.Play();
-        //if (rampageSound != null) audioSource.PlayOneShot(rampageSound);
+        movementSpeed = abilityObject.Speed;
 
         transform.position = currentNode.transform.position;
         // Face first path node
@@ -56,7 +52,26 @@ public class BigJayRampageController : MonoBehaviour
     {
         if (other.TryGetComponent<EnemyMovement>(out var enemy))
         {
-            enemy.TakeDamage(enemy.Health); // Instant kill
+            if (abilityObject.Type == AbilityObject.AbilityType.BigJayRampage)
+            {
+                StartCoroutine(BigJayRampageCoroutine(enemy));
+                return;
+            }
+
+            if (abilityObject.Type == AbilityObject.AbilityType.BusRide)
+            {
+                enemy.TakeDamage(enemy.Health); // Instant kill
+                return;
+            }
         }
+    }
+
+    IEnumerator BigJayRampageCoroutine(EnemyMovement enemyMovement)
+    {
+        enemyMovement.SetSpeedMultiplier(.5f);
+
+        yield return new WaitForSeconds(30f);
+
+        enemyMovement.ResetSpeedMultiplier();
     }
 }

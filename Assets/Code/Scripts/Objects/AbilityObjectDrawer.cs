@@ -25,6 +25,16 @@ public class AbilityObjectDrawer : Editor
             EditorGUILayout.PropertyField(serializedObject.FindProperty("slowMultiplier"));
         }
 
+        if ((AbilityObject.AbilityType)typeProperty.enumValueIndex == AbilityObject.AbilityType.BigJayRampage)
+        {
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("speed"));
+        }
+
+        if ((AbilityObject.AbilityType)typeProperty.enumValueIndex == AbilityObject.AbilityType.BusRide)
+        {
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("speed"));
+        }
+
         serializedObject.ApplyModifiedProperties();
     }
 }
