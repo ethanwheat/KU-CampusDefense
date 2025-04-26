@@ -1,12 +1,5 @@
 fileFormatVersion: 2
 guid: 4c9fd1ffa9af6a24baa9905dab517e4d
-AssetOrigin:
-  serializedVersion: 1
-  productId: 257881
-  packageName: TDG Italian Ice Cart
-  packageVersion: 1.0
-  assetPath: Assets/TDG Italian Ice/Models/Cart.fbx
-  uploadId: 603010
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -23,6 +16,8 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -37,7 +32,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -112,3 +107,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 257881
+  packageName: TDG Italian Ice Cart
+  packageVersion: 1.0
+  assetPath: Assets/TDG Italian Ice/Models/Cart.fbx
+  uploadId: 603010

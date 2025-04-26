@@ -111,9 +111,9 @@ public class TurretDefense : Defense, IDefense
 
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.transform.parent = RoundManager.instance.ProjectilesParent;
-        if (bullet.TryGetComponent(out TrackedProjectile bulletScript))
+        if (bullet.TryGetComponent(out TrackedProjectile projectileScript))
         {
-            bulletScript.SetTarget(target);
+            projectileScript.SetTarget(target);
         }
         SoundManager.instance.PlaySoundEffect(shootSoundEffect, transform);
     }
