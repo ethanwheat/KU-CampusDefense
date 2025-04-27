@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Bus Ride
   icon: {fileID: 21300000, guid: 662cb95df3fa1493b978beb15a439239, type: 3}
-  dollarCost: 300
-  unlockRound: 10
+  dollarCost: 400
+  unlockRound: 20
   cooldownDuration: 60
   effectDuration: 1
   type: 3
+  speed: 50
   slowMultiplier: 0.5
-  bigJaySpeed: 50
-  BusSpeed: 50

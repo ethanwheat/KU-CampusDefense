@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ParkingPoliceDefense : Defense, IDefense
@@ -6,29 +7,19 @@ public class ParkingPoliceDefense : Defense, IDefense
     [Header("Ticket Settings")]
     [SerializeField] private float ticketDelay = 1.0f; // time before sending enemy back
     [SerializeField] private float blockDuration = 2.0f; // how long they’re blocked total
-
-    public void ApplyEffect(EnemyMovement enemy)
-    {
-        if (enemy != null)
-        {
-            StartCoroutine(TicketAndSendBack(enemy));
-        }
-    }
-
-    public void RemoveEffect(EnemyMovement enemy)
-    {
-        // No ongoing effect to remove
-    }
+    [SerializeField] private int coinReward = 10;
 
     private IEnumerator TicketAndSendBack(EnemyMovement enemy)
     {
         enemy.BlockMovement(true); // Stop them
+        RoundManager.instance.AddCoins(coinReward);
+        RoundSceneCanvasController.instance.UpdateCoinUI();
         yield return new WaitForSeconds(ticketDelay);
 
         // Try to send them back
-        if (enemy != null && enemy.currentNode != null)
+        if (enemy.currentNode != null)
         {
-            var prev = GetPreviousNode(enemy);
+            var prev = enemy.PreviousNode;
             if (prev != null)
             {
                 enemy.currentNode = prev;
@@ -36,16 +27,18 @@ public class ParkingPoliceDefense : Defense, IDefense
         }
 
         yield return new WaitForSeconds(blockDuration - ticketDelay);
-        if (enemy != null)
-        {
-            enemy.BlockMovement(false);
-        }
+
+        enemy.BlockMovement(false);
     }
 
-    private PathNode GetPreviousNode(EnemyMovement enemy)
+    public void ApplyEffect(EnemyMovement enemy)
     {
-        var field = typeof(EnemyMovement).GetField("previousNode", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        return field?.GetValue(enemy) as PathNode;
+        StartCoroutine(TicketAndSendBack(enemy));
+    }
+
+    public void RemoveEffect(EnemyMovement enemy)
+    {
+        // No ongoing effect to remove
     }
 
     public override void OnDefenseDestroy()

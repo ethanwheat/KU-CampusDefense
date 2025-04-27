@@ -388,9 +388,9 @@ GameObject:
   - component: {fileID: 5472205729699404295}
   - component: {fileID: 4148845793801870841}
   - component: {fileID: -9019292628046269684}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cheerleader
-  m_TagString: Untagged
+  m_TagString: NormalEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

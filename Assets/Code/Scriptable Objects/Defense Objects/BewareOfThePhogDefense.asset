@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Beware of the Phog
   description: 'Slows all types of defenders and damges them, breaks eventually '
-  dollarCost: 0
-  unlockRound: 0
+  dollarCost: 2800
+  unlockRound: 29
   sprite: {fileID: 543874442, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   isShownInDefensePanel: 1
-  coinCost: 10
-  level1UpgradeDollarCost: 100
-  level2UpgradeDollarCost: 200
-  level3UpgradeDollarCost: 300
+  coinCost: 200
+  level1UpgradeDollarCost: 150
+  level2UpgradeDollarCost: 300
+  level3UpgradeDollarCost: 350
   prefab: {fileID: 2335412097033395711, guid: 5c13dbce878a6ea41828f08242a8803f, type: 3}

@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Defense : MonoBehaviour
@@ -13,11 +12,12 @@ public class Defense : MonoBehaviour
     [SerializeField] private AudioClip destroySoundEffect;
 
     [Header("Defense Settings")]
+    [SerializeField] private bool timedHealth = true;
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float healthIncreasePerLevel = 50f;
 
     private float health;
-    private RoundManager roundManager;
+    private float timeElapsed = 0f;
     private DefenseData defenseData;
 
     public DefenseObject DefenseObject => defenseObject;
@@ -26,7 +26,7 @@ public class Defense : MonoBehaviour
 
     public virtual void Start()
     {
-        roundManager = RoundManager.instance;
+        RoundManager roundManager = RoundManager.instance;
         defenseData = GameDataManager.instance.GameData.GetDefenseData(defenseObject.ObjectName);
 
         if (defenseData == null)
@@ -41,6 +41,20 @@ public class Defense : MonoBehaviour
 
         transform.parent = roundManager.DefensesParent;
         roundManager.AddDefense(this);
+    }
+
+    void Update()
+    {
+        if (timedHealth)
+        {
+            timeElapsed += Time.deltaTime;
+
+            if (timeElapsed >= 1f)
+            {
+                SubtractHealth(1);
+                timeElapsed = 0f;
+            }
+        }
     }
 
     // Get health.
@@ -76,7 +90,7 @@ public class Defense : MonoBehaviour
     // Called when defense is out of health.
     public virtual void OnDefenseDestroy()
     {
-        roundManager.RemoveDefense(this);
+        RoundManager.instance.RemoveDefense(this);
         SoundManager.instance.PlaySoundEffect(destroySoundEffect, transform);
         Destroy(gameObject);
     }

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: CampusSecurityStopDefense
   m_EditorClassIdentifier: 
   objectName: Campus Security Stop
-  description: 'Blocks all types of defenders, breaks eventually. Bufed Barrier. '
-  dollarCost: 1500
-  unlockRound: 10
+  description: 'Blocks all types of defenders, breaks eventually. Buffed Barrier. '
+  dollarCost: 700
+  unlockRound: 8
   sprite: {fileID: -374382209, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   isShownInDefensePanel: 1
   coinCost: 20

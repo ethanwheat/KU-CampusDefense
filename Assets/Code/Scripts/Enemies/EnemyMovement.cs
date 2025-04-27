@@ -20,8 +20,11 @@ public class EnemyMovement : MonoBehaviour
   private bool isBlocked = false;
   private bool isDead = false;
   private int killReward;
+  private PathNode distractionNode;
+  private PathNode previousNode;
 
   public float Health => health; // read only access
+  public PathNode PreviousNode => previousNode;
 
   void Start()
   {
@@ -32,22 +35,40 @@ public class EnemyMovement : MonoBehaviour
   {
     if (currentNode == null || isBlocked) return;
 
+    Vector3 direction;
+
+    // Move toward the current waypoint
+    if (distractionNode != null)
+    {
+      // Rotate toward the next waypoint
+      direction = distractionNode.transform.position - transform.position;
+      if (direction != Vector3.zero)
+      {
+        transform.forward = Vector3.Lerp(transform.forward, direction.normalized, Time.deltaTime * 5f);
+      }
+
+      transform.position = Vector3.MoveTowards(transform.position, distractionNode.transform.position, speed * Time.deltaTime);
+
+      return;
+    }
+
     // Rotate toward the next waypoint
-    Vector3 direction = currentNode.transform.position - transform.position;
+    direction = currentNode.transform.position - transform.position;
     if (direction != Vector3.zero)
     {
       transform.forward = Vector3.Lerp(transform.forward, direction.normalized, Time.deltaTime * 5f);
     }
 
-    // Move toward the current waypoint
     transform.position = Vector3.MoveTowards(transform.position, currentNode.transform.position, speed * Time.deltaTime);
 
     // If close enough, pick the next waypoint
     if (Vector3.Distance(transform.position, currentNode.transform.position) < 0.1f)
     {
       var nextNode = currentNode.GetNextNode();
+
       if (nextNode != null)
       {
+        previousNode = currentNode;
         currentNode = currentNode.GetNextNode();
       }
       else  // enemy has reached Allen fieldhouse
@@ -141,7 +162,21 @@ public class EnemyMovement : MonoBehaviour
 
   public void BlockMovement(bool isBlocked)
   {
-    animator.SetBool("Idle", isBlocked);
+    if (animator)
+    {
+      animator.SetBool("Idle", isBlocked);
+    }
+
     this.isBlocked = isBlocked;
+  }
+
+  public void SetDistraction(PathNode distraction)
+  {
+    distractionNode = distraction;
+  }
+
+  public void ClearDistraction()
+  {
+    distractionNode = null;
   }
 }

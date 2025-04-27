@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637175a8e599b204fbdb4e6f9dd3c859, type: 3}
+  m_Name: ParkingPoliceDefense
+  m_EditorClassIdentifier: 
+  objectName: Parking Police
+  description: Hands out parking tickets to enemies and sends them back  Give a coin
+    reward for each enemy that is given a ticket.
+  dollarCost: 1300
+  unlockRound: 14
+  sprite: {fileID: -1231506490, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  isShownInDefensePanel: 1
+  coinCost: 150
+  level1UpgradeDollarCost: 100
+  level2UpgradeDollarCost: 200
+  level3UpgradeDollarCost: 300
+  prefab: {fileID: 6897253531488988786, guid: 26ace42e0fa2e445ea1301dc25d992fc, type: 3}

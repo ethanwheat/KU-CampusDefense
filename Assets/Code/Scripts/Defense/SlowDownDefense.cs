@@ -5,27 +5,23 @@ using System.Collections.Generic;
 public class SlowDownDefense : Defense, IDefense
 {
     [Header("Settings")]
-    [SerializeField] private float slowMultiplier = 0.2f;
-    [SerializeField] private float damagePerSecond = 5f;
-
-    private float timeElapsed = 0f;
+    [SerializeField] private float normalSlowMultiplier = 0.2f;
+    [SerializeField] private float sensitiveSlowMultiplier = 0.2f;
+    [SerializeField] private float normalDamagePerSecond = 5f;
+    [SerializeField] private float sensitiveDamagePerSecond = 5f;
 
     private Dictionary<EnemyMovement, Coroutine> activeCoroutines = new Dictionary<EnemyMovement, Coroutine>();
 
-    private void Update()
-    {
-        timeElapsed += Time.deltaTime;
-
-        if (timeElapsed >= 1f)
-        {
-            SubtractHealth(1);
-            timeElapsed = 0f;
-        }
-    }
-
     public void ApplyEffect(EnemyMovement enemy)
     {
-        enemy.SetSpeedMultiplier(slowMultiplier);
+        if (enemy.CompareTag("SensitiveEnemy"))
+        {
+            enemy.SetSpeedMultiplier(sensitiveSlowMultiplier);
+        }
+        else
+        {
+            enemy.SetSpeedMultiplier(normalSlowMultiplier);
+        }
 
         // Start a new coroutine if this enemy isn’t already tracked
         if (!activeCoroutines.ContainsKey(enemy))
@@ -52,9 +48,15 @@ public class SlowDownDefense : Defense, IDefense
     {
         while (enemy != null && enemy.Health > 0)
         {
-            if (!enabled) { yield return new WaitUntil(() => enabled); }
+            if (enemy.CompareTag("SensitiveEnemy"))
+            {
+                enemy.TakeDamage(sensitiveDamagePerSecond);
+            }
+            else
+            {
+                enemy.TakeDamage(normalDamagePerSecond);
+            }
 
-            enemy.TakeDamage(damagePerSecond);
             yield return new WaitForSeconds(1f);
         }
     }

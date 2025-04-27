@@ -21,5 +21,5 @@ MonoBehaviour:
   coinCost: 0
   level1UpgradeDollarCost: 150
   level2UpgradeDollarCost: 300
-  level3UpgradeDollarCost: 450
+  level3UpgradeDollarCost: 350
   prefab: {fileID: 0}

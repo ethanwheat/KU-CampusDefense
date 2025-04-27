@@ -13,17 +13,13 @@ MonoBehaviour:
   m_Name: ChemicalSpillDefense
   m_EditorClassIdentifier: 
   objectName: Chemical Spill
-  description: 'similar to ICE sheet but affects specific types differently '
-  dollarCost: 100
-  unlockRound: 5
-  boughtAtStart: 0
-  bought: 1
-  gameDataController: {fileID: 11400000, guid: 2a740c75b3547154dbc4d70096dcc32b, type: 2}
-  sprite: {fileID: 1513631292, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
-  coinCost: 20
-  showInDefensePanel: 1
-  level1UpgradeDollarCost: 0
-  level2UpgradeDollarCost: 0
-  level3UpgradeDollarCost: 0
-  level: 1
-  prefab: {fileID: 2595171433322968291, guid: 07e0b55a3409e4ab0a143606616a3feb, type: 3}
+  description: 'Similar to ICE sheet but affects specific types differently '
+  dollarCost: 1600
+  unlockRound: 17
+  sprite: {fileID: 166936016, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  isShownInDefensePanel: 1
+  coinCost: 50
+  level1UpgradeDollarCost: 100
+  level2UpgradeDollarCost: 200
+  level3UpgradeDollarCost: 300
+  prefab: {fileID: 2729023713992580946, guid: 0777c33c44f8f4446ab1dd04be6b5574, type: 3}

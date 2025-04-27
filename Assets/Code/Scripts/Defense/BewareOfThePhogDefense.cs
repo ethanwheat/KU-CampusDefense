@@ -9,23 +9,10 @@ public class BewareOfThePhogDefense : Defense, IDefense
     [SerializeField] private GameObject fogPrefab;
     [SerializeField] private Transform fogSpawnPoint;
 
-    private float timeElapsed = 0f;
-
     public override void Start()
     {
         base.Start();
         StartCoroutine(SpawnPhog());
-    }
-
-    void Update()
-    {
-        timeElapsed += Time.deltaTime;
-
-        if (timeElapsed >= 1f)
-        {
-            SubtractHealth(1);
-            timeElapsed = 0f;
-        }
     }
 
     IEnumerator SpawnPhog()

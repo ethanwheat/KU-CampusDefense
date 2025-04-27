@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: db17bf6cb14fc49b3b0bc85ea3915bf6
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308063
+  packageName: Minimal Poly Free
+  packageVersion: 1.0.0
+  assetPath: Assets/MinimalPolyFree/Models/MP_Hair_Type1_CrewCut2.fbx
+  uploadId: 729075
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -30,7 +37,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -105,10 +112,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 308063
-  packageName: Minimal Poly Free
-  packageVersion: 1.0.0
-  assetPath: Assets/MinimalPolyFree/Models/MP_Hair_Type1_CrewCut2.fbx
-  uploadId: 729075

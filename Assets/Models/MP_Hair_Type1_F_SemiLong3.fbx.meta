@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 1058f2d17066c4ac2a9b0b6e97cb34b1
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308063
+  packageName: Minimal Poly Free
+  packageVersion: 1.0.0
+  assetPath: Assets/MinimalPolyFree/Models/MP_Hair_Type1_F_SemiLong3.fbx
+  uploadId: 729075
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -30,7 +37,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -105,10 +112,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 308063
-  packageName: Minimal Poly Free
-  packageVersion: 1.0.0
-  assetPath: Assets/MinimalPolyFree/Models/MP_Hair_Type1_F_SemiLong3.fbx
-  uploadId: 729075

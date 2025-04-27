@@ -41,8 +41,6 @@ public class BaseballFieldDefense : Defense, IDefense
 
         for (int i = 0; i < ballsPerWave; i++)
         {
-            if (!enabled) { yield return new WaitUntil(() => enabled); }
-
             ballsLeft--;
             HealthBar.UpdateHealthBar(ballsLeft, ballsPerWave);
             FireRandomBaseball();

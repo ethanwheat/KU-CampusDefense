@@ -16,18 +16,9 @@ public class TurretDefense : Defense, IDefense
 
     private List<EnemyMovement> enemiesInRange = new List<EnemyMovement>();
     private float fireCountdown = 0f;
-    private float timeElapsed = 0f;
 
     void Update()
     {
-        timeElapsed += Time.deltaTime;
-
-        if (timeElapsed >= 1f)
-        {
-            SubtractHealth(1);
-            timeElapsed = 0f;
-        }
-
         // Find the nearest enemy in range
         EnemyMovement nearestEnemy = GetNearestEnemy();
 

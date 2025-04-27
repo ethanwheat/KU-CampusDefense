@@ -1476,6 +1476,7 @@ MonoBehaviour:
   defenseObject: {fileID: 11400000, guid: c940a34b69da34a61aec4cb686208f4b, type: 2}
   healthBar: {fileID: 6703927081420386987}
   destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
+  timedHealth: 1
   maxHealth: 30
   healthIncreasePerLevel: 10
   bulletPrefab: {fileID: 7060852915085511669, guid: 3736b943e986a7640a18d0c4a67adb1d, type: 3}

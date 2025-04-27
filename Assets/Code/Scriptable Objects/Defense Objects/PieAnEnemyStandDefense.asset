@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectName: Pie an enemy stand
   description: Shoots Pies at enemies and lowers their HP.
-  dollarCost: 150
-  unlockRound: 10
+  dollarCost: 1900
+  unlockRound: 20
   sprite: {fileID: -946258961, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   isShownInDefensePanel: 1
-  coinCost: 50
-  level1UpgradeDollarCost: 0
-  level2UpgradeDollarCost: 0
-  level3UpgradeDollarCost: 0
+  coinCost: 150
+  level1UpgradeDollarCost: 150
+  level2UpgradeDollarCost: 300
+  level3UpgradeDollarCost: 350
   prefab: {fileID: 8136593637354477638, guid: 8ae0f7f7ffcf88547aebd772b1dc52cf, type: 3}

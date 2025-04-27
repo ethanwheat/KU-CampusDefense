@@ -137,9 +137,9 @@ GameObject:
   - component: {fileID: 8628010544422905914}
   - component: {fileID: 1118997694600902204}
   - component: {fileID: -3527269124120565750}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Coach
-  m_TagString: Untagged
+  m_TagString: NormalEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
