@@ -34,4 +34,4 @@ MonoBehaviour:
   roundNumber: 15
   winPayout: 1500
   killPayout: 25
-  opponentImage: {fileID: -377596456, guid: c75d3aec49cf32f409308e4f2e3bd846, type: 3}
+  opponentImage: {fileID: -1053543085, guid: eb321af716b0bc74693557a583eed4fe, type: 3}
