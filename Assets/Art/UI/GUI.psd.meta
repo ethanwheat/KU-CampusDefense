@@ -1917,10 +1917,10 @@ TextureImporter:
       name: GUI_82
       rect:
         serializedVersion: 2
-        x: 1380
-        y: 114
-        width: 144
-        height: 96
+        x: 1386
+        y: 112
+        width: 142
+        height: 94
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

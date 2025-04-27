@@ -354,7 +354,7 @@ public class RoundManager : MonoBehaviour
     {
         foreach (var defense in defenses)
         {
-            if (defense.gameObject.CompareTag("HealthDefense"))
+            if (defense != null && defense.gameObject.CompareTag("HealthDefense"))
             {
                 defense.ResetHealth();
             }
@@ -371,7 +371,7 @@ public class RoundManager : MonoBehaviour
 
         foreach (var defense in defenses)
         {
-            if (defense.gameObject.CompareTag("HealthDefense"))
+            if (defense != null && defense.gameObject.CompareTag("HealthDefense"))
             {
                 regenCost += defense.DefenseObject.CoinCost / 2;
             }
