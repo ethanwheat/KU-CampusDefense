@@ -388,9 +388,9 @@ GameObject:
   - component: {fileID: 5472205729699404295}
   - component: {fileID: 4148845793801870841}
   - component: {fileID: -9019292628046269684}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cheerleader
-  m_TagString: Untagged
+  m_TagString: NormalEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -474,6 +474,7 @@ MonoBehaviour:
   health: 0
   healthBar: {fileID: 742259188535242057}
   enemyKilledSoundEffect: {fileID: 8300000, guid: 66773880d0c8b0640a7c2187b40e04db, type: 3}
+  animator: {fileID: 6252356961367914557}
 --- !u!54 &-9019292628046269684
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class LoadingBackgroundController : MonoBehaviour
 {
     // Fade background in slowly.
-    public IEnumerator fadeInCoroutine(float duration)
+    public IEnumerator FadeInCoroutine(float duration)
     {
         gameObject.SetActive(true);
 
@@ -21,7 +21,7 @@ public class LoadingBackgroundController : MonoBehaviour
         {
             // Interpolate between the start and end colors
             image.color = Color.Lerp(startColor, endColor, timeElapsed / duration);
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.timeScale != 0f ? Time.deltaTime : Time.unscaledDeltaTime;
             yield return null;
         }
 
@@ -30,7 +30,7 @@ public class LoadingBackgroundController : MonoBehaviour
     }
 
     // Fade background out slowly.
-    public IEnumerator fadeOutCoroutine(float duration)
+    public IEnumerator FadeOutCoroutine(float duration)
     {
         gameObject.SetActive(true);
 
@@ -46,7 +46,7 @@ public class LoadingBackgroundController : MonoBehaviour
         {
             // Interpolate between the start and end colors
             image.color = Color.Lerp(startColor, endColor, timeElapsed / duration);
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.timeScale != 0f ? Time.deltaTime : Time.unscaledDeltaTime;
             yield return null;
         }
 

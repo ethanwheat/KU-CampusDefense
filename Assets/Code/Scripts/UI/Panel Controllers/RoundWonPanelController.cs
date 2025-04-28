@@ -9,9 +9,9 @@ public class RoundWonPanelController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI totalText;
 
     // Show message popup panel and set message popup panel data.
-    public void showPanel(string round, string reward, string loan, string total)
+    public void ShowPanel(string round, string reward, string loan, string total)
     {
-        roundText.text = "Congrats, you have completed Round " + round ;
+        roundText.text = "Congrats, you have completed Round " + round;
         rewardText.text = "$" + reward;
         loanText.text = loan;
         totalText.text = total;
@@ -20,7 +20,7 @@ public class RoundWonPanelController : MonoBehaviour
     }
 
     // Close message popup panel.
-    public void closePanel()
+    public void ClosePanel()
     {
         gameObject.SetActive(false);
     }

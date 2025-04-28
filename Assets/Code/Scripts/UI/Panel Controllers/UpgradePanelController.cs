@@ -15,52 +15,52 @@ public class UpgradePanelController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI costText;
 
     [Header("UI Controllers")]
-    [SerializeField] private BuildingSceneUIController buildingSceneUIController;
-    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
     [SerializeField] private StarImagesController starImagesController;
+    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip upgradeSoundEffect;
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
-
     private string buildingName;
+    private DefenseObject defenseObject;
     private DefenseData defenseData;
 
     // Load purchase panel data.
-    public void showPanel(string name, DefenseData data)
+    public void ShowPanel(string name, DefenseObject defenseObject, DefenseData defenseData)
     {
-        // Set building name and object data.
+        // Set building name.
         buildingName = name;
-        defenseData = data;
+
+        // Set defense object and defense data.
+        this.defenseObject = defenseObject;
+        this.defenseData = defenseData;
 
         // Set UI text.
         headerText.text = buildingName;
-        itemImage.sprite = defenseData.getSprite();
-        itemText.text = defenseData.getName();
-        itemDescription.text = defenseData.getDescription();
+        itemImage.sprite = defenseObject.Sprite;
+        itemText.text = defenseObject.ObjectName;
+        itemDescription.text = defenseObject.Description;
 
         // Set stars, level, and cost.
-        updateUI();
+        UpdateUI();
 
         // Show panel
         gameObject.SetActive(true);
     }
 
     // Set stars, level, and cost.
-    void updateUI()
+    void UpdateUI()
     {
-        int defenseLevel = defenseData.getLevel();
+        int defenseLevel = defenseData.Level;
 
-        starImagesController.updateStars(defenseLevel);
+        starImagesController.UpdateStars(defenseLevel);
 
         itemLevelText.text = "Level " + defenseLevel.ToString();
 
         if (defenseLevel < 3)
         {
-            costText.text = defenseData.getUpgradeCost().ToString();
+            costText.text = defenseObject.GetUpgradeCost(defenseLevel).ToString();
             upgradeContent.SetActive(true);
             fullyUpgradedText.SetActive(false);
         }
@@ -73,32 +73,35 @@ public class UpgradePanelController : MonoBehaviour
 
     // Set object to bought, subtract dollars, create message popup panel, and update dollar UI
     // if player has enough dollars, else show error popup panel and close purchase panel.
-    public void onUpgrade()
+    public void OnUpgrade()
     {
-        // Get dollar amount and building name.
-        int dollars = gameDataController.getDollarAmount();
-        int upgradeCost = defenseData.getUpgradeCost();
+        // Get game data.
+        GameData gameData = GameDataManager.instance.GameData;
+
+        // Get dollar amount, and building name.
+        int dollars = gameData.Dollars;
+        int upgradeCost = defenseObject.GetUpgradeCost(defenseData.Level);
 
         if (dollars >= upgradeCost)
         {
             // Upgrade object, subtract cost, update dollar amounts on dollar UI, play upgrade sound, and update upgrade panel.
-            defenseData.upgradeLevel();
-            gameDataController.subtractDollars(upgradeCost);
-            buildingSceneUIController.updateDollarUI();
-            SoundManager.instance.playSoundEffect(upgradeSoundEffect, transform, 1f);
-            updateUI();
+            defenseData.UpgradeLevel();
+            gameData.SubtractDollars(upgradeCost);
+            BuildingSceneUIController.instance.UpdateDollarUI();
+            SoundManager.instance.PlaySoundEffect(upgradeSoundEffect, transform, volume: 1f);
+            UpdateUI();
         }
         else
         {
             // Show error popup panel and close upgrade panel.
-            SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
-            messagePopupPanelController.showPanel("Insufficient Dollars", "You do not have enough dollars to upgrade " + buildingName + "!");
-            closePanel();
+            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
+            messagePopupPanelController.ShowPanel("Insufficient Dollars", "You do not have enough dollars to upgrade " + buildingName + "!");
+            ClosePanel();
         }
     }
 
     // Close purchase panel.
-    public void closePanel()
+    public void ClosePanel()
     {
         gameObject.SetActive(false);
     }

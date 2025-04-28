@@ -1,75 +1,24 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-[CreateAssetMenu(fileName = "LoanData", menuName = "Scriptable Objects/LoanData")]
-public class LoanData : ScriptableObject
+[System.Serializable]
+public class LoanData
 {
-    [Header("Loan Information")]
-    [SerializeField] private string loanName;
-    [SerializeField] private int amount;
-    [SerializeField] private int unlockRound;
+    public string LoanName;
+    public int Debt;
 
-    [Header("Sprites")]
-    [SerializeField] private Sprite sprite;
-
-    [Header("Loan Data")]
-    [SerializeField] private int debt;
-
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
-
-    public string getName()
+    public LoanData(string loanName, int debt)
     {
-        return loanName;
+        LoanName = loanName;
+        Debt = debt;
     }
 
-    public int getAmount()
+    public void SetDebt(int amount)
     {
-        return amount;
+        Debt = Mathf.Max(0, Debt - amount);
     }
 
-    public int getUnlockRound()
+    public void SubtractDebt(int amount)
     {
-        return unlockRound;
-    }
-
-    public bool isLocked()
-    {
-        return unlockRound > gameDataController.getRoundNumber();
-    }
-
-    public Sprite getSprite()
-    {
-        return sprite;
-    }
-
-    public void takeLoan()
-    {
-        gameDataController.addDollars(amount);
-        debt += amount;
-    }
-
-    public int getDebt()
-    {
-        return debt;
-    }
-
-    public void payDebt(int amount)
-    {
-        if (debt - amount >= 0)
-        {
-            gameDataController.subtractDollars(amount);
-            debt -= amount;
-        }
-    }
-
-    public void setDebt(int amount)
-    {
-        debt = amount;
-    }
-
-    public void resetLoan()
-    {
-        debt = 0;
+        Debt = Mathf.Max(0, Debt - amount);
     }
 }

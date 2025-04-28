@@ -15,13 +15,12 @@ public class RegenHealthPanelController : MonoBehaviour
     [SerializeField] private AudioClip regenSoundEffect;
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Round Manager")]
-    [SerializeField] private RoundManager roundManager;
-
     // Show health regen panel.
-    public void showPanel()
+    public void ShowPanel()
     {
-        int regenCost = roundManager.getRegenCost();
+        RoundManager roundManager = RoundManager.instance;
+
+        int regenCost = roundManager.GetRegenCost();
 
         if (regenCost > 0)
         {
@@ -40,28 +39,30 @@ public class RegenHealthPanelController : MonoBehaviour
     }
 
     // Regen health.
-    public void regenHealth()
+    public void RegenHealth()
     {
-        int coins = roundManager.getCoinAmount();
-        int regenCost = roundManager.getRegenCost();
+        RoundManager roundManager = RoundManager.instance;
+
+        int coins = roundManager.Coins;
+        int regenCost = roundManager.GetRegenCost();
 
         if (coins >= regenCost)
         {
-            roundManager.regenHealthOnDefenses();
-            SoundManager.instance.playSoundEffect(regenSoundEffect, transform, 1f);
-            messagePopupPanelController.showPanel("Defenses Health Regenerated", "You regenerated health on all defenses for " + regenCost + " coins!");
+            roundManager.RegenHealthOnDefenses();
+            SoundManager.instance.PlaySoundEffect(regenSoundEffect, transform, volume: 1f);
+            messagePopupPanelController.ShowPanel("Defenses Health Regenerated", "You regenerated health on all defenses for " + regenCost + " coins!");
         }
         else
         {
-            SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
-            messagePopupPanelController.showPanel("Insufficient Coins", "You do not have enough coins to regen all defenses!");
+            SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
+            messagePopupPanelController.ShowPanel("Insufficient Coins", "You do not have enough coins to regen all defenses!");
         }
 
-        closePanel();
+        ClosePanel();
     }
 
     // Close panel.
-    public void closePanel()
+    public void ClosePanel()
     {
         // Hide panel.
         gameObject.SetActive(false);

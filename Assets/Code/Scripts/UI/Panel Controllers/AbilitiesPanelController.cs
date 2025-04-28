@@ -4,59 +4,67 @@ public class AbilitiesPanelController : MonoBehaviour
 {
     [Header("Prefabs")]
     [SerializeField] private GameObject abilityButtonPrefab;
-    
+
     [Header("UI Transforms")]
     [SerializeField] private Transform abilitiesParent;
-    
-    [Header("Game Data")]
-    [SerializeField] private AbilityData[] abilityData;
-    [SerializeField] private RoundManager roundManager;
-    [SerializeField] private GameDataController gameDataController; 
-    
-    public void ShowAbilitiesPanel()
+
+    [Header("UI Controllers")]
+    [SerializeField] private MessagePopupPanelController messagePopupPanelController;
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip errorSoundEffect;
+    [SerializeField] private AudioClip abilityActivatedSoundEffect;
+
+    [Header("Game Data Object")]
+    [SerializeField] private GameDataObject gameDataObject;
+
+    private bool alreadyOpened = false;
+
+    public void ShowPanel()
     {
         gameObject.SetActive(true);
         InitializeAbilities();
     }
-    
-    public void CloseAbilitiesPanel()
+
+    public void ClosePanel()
     {
         gameObject.SetActive(false);
     }
 
+    public void ShowError(string title, string text)
+    {
+        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
+        messagePopupPanelController.ShowPanel(title, text);
+        ClosePanel();
+    }
+
+    public void ShowActivated(string title, string text)
+    {
+        SoundManager.instance.PlaySoundEffect(abilityActivatedSoundEffect, transform, volume: 1f);
+        messagePopupPanelController.ShowPanel(title, text);
+        ClosePanel();
+    }
+
     private void InitializeAbilities()
     {
-        //Debug.Log($"Initializing abilities. Parent: {abilitiesParent.name}");
-
-        // Clear existing
-        foreach (Transform child in abilitiesParent)
+        if (!alreadyOpened)
         {
-            //Debug.Log($"Destroying old button: {child.name}");
-            Destroy(child.gameObject);
-        }
+            alreadyOpened = true;
 
-        foreach (var ability in abilityData)
-        {
-            //Debug.Log($"Creating button for: {ability.AbilityName}");
-            
-            var button = Instantiate(abilityButtonPrefab, abilitiesParent);
-            button.name = "Btn_" + ability.AbilityName; // Unique name
-            
-            //Debug.Log($"Button created: {button.name} Active: {button.activeSelf}");
-
-            var controller = button.GetComponent<AbilityButtonController>();
-            if (controller != null)
+            foreach (var ability in gameDataObject.AbilityObjects)
             {
-                controller.Initialize(ability);
-                //Debug.Log($"Controller initialized for {ability.AbilityName}");
-            }
-            else
-            {
-                //Debug.LogError($"No controller on button prefab!");
-            }
+                var button = Instantiate(abilityButtonPrefab, abilitiesParent);
+                button.name = "Btn_" + ability.AbilityName; // Unique name
 
-            // Force visible
-            button.SetActive(true);
+                var controller = button.GetComponent<AbilityButtonController>();
+                if (controller != null)
+                {
+                    controller.Initialize(ability, this);
+                }
+
+                // Force visible
+                button.SetActive(true);
+            }
         }
     }
 }

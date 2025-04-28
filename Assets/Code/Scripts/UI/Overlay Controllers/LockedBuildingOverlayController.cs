@@ -5,7 +5,7 @@ public class LockedBuildingOverlayController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI buildingText;
 
-    public void setData(string buildingName)
+    public void SetData(string buildingName)
     {
         buildingText.text = buildingName;
     }

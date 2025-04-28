@@ -12,7 +12,7 @@ public class StarImagesController : MonoBehaviour
     [SerializeField] private Sprite unfilledStarSprite;
     [SerializeField] private Sprite filledStarSprite;
 
-    public void updateStars(int level)
+    public void UpdateStars(int level)
     {
         if (level >= 1)
         {

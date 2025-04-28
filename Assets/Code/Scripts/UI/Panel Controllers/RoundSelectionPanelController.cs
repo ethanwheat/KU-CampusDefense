@@ -1,19 +1,18 @@
-using TMPro;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class RoundSelectionPanelController : MonoBehaviour
 {
-    [Header("Round Configuration")]
-    [SerializeField] private RoundData[] allRounds;
-    
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
-
     [Header("UI References")]
     [SerializeField] private Transform contentParent; // Content under the ScrollView
     [SerializeField] private GameObject roundButtonPrefab; // Prefab for each round button
-      
+    [SerializeField] private GameObject lockedRoundPrefab; // Prefab for locked round buttons
+    [SerializeField] private BuildingSceneUIController uiController;
+
+    [Header("Game Data Object")]
+    [SerializeField] private GameDataObject gameDataObject;
+
     private void Start()
     {
         PopulateScrollView();
@@ -21,38 +20,57 @@ public class RoundSelectionPanelController : MonoBehaviour
 
     private void PopulateScrollView()
     {
-        int maxUnlocked = gameDataController.getRoundNumber();
+        GameDataManager gameDataManager = GameDataManager.instance;
+        GameData gameData = gameDataManager.GameData;
+        List<RoundObject> roundObjects = gameDataObject.RoundObjects;
 
-        foreach (var round in allRounds)
+        int maxUnlocked = gameData.RoundNumber;
+
+        foreach (var round in roundObjects)
         {
-            bool isUnlocked = round.roundNumber <= maxUnlocked;
-            if (isUnlocked) {
-                GameObject btnObj = Instantiate(roundButtonPrefab, contentParent);
+            bool isUnlocked = round.RoundNumber <= maxUnlocked;
+
+            GameObject btnObj;
+
+            if (isUnlocked)
+            {
+                btnObj = Instantiate(roundButtonPrefab, contentParent);
 
                 // set button label
-                btnObj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Round " + round.roundNumber;
+                btnObj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Round " + round.RoundNumber;
 
-                RoundData capturedRound = round; // closure-safe
+                // set button image
+                if (round.OpponentImage != null)
+                {
+                    Image btnImg = btnObj.transform.Find("TeamImage")?.GetComponent<Image>();
+                    btnImg.sprite = round.OpponentImage;
+                }
 
                 btnObj.GetComponent<Button>().onClick.AddListener(() =>
                 {
-                    gameDataController.setSelectedRound(capturedRound);
-                    Debug.Log("Selected Round " + capturedRound.roundNumber);
-                    closePanel();
+                    gameDataManager.SetSelectedRound(round);
+                    ClosePanel();
                 });
+            }
+            else
+            {
+                btnObj = Instantiate(lockedRoundPrefab, contentParent);
+                // set button label
+                btnObj.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = "Round " + round.RoundNumber;
             }
         }
     }
 
     // Show message popup panel and set message popup panel data.
-    public void showPanel()
+    public void ShowPanel()
     {
         gameObject.SetActive(true);
     }
 
     // Close message popup panel.
-    public void closePanel()
+    public void ClosePanel()
     {
         gameObject.SetActive(false);
+        uiController.UpdateSelectedRound();
     }
 }

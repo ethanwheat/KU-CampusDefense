@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637175a8e599b204fbdb4e6f9dd3c859, type: 3}
+  m_Name: BewareOfThePhogDefense
+  m_EditorClassIdentifier: 
+  objectName: Beware of the Phog
+  description: 'Slows all types of defenders and damges them, breaks eventually '
+  dollarCost: 2800
+  unlockRound: 29
+  sprite: {fileID: 543874442, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  isShownInDefensePanel: 1
+  coinCost: 300
+  level1UpgradeDollarCost: 150
+  level2UpgradeDollarCost: 300
+  level3UpgradeDollarCost: 350
+  prefab: {fileID: 2335412097033395711, guid: 5c13dbce878a6ea41828f08242a8803f, type: 3}

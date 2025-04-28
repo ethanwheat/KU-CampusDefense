@@ -19,61 +19,61 @@ public class LoanInformationPanelController : MonoBehaviour
 
     [Header("Sounds")]
     [SerializeField] private AudioClip takeLoanSoundEffect;
-    [SerializeField] private AudioClip makePaymentSoundEffect;
 
     [Header("Unity Events")]
-    public UnityEvent onTakeLoan;
-    public UnityEvent onLoanPayment;
+    public UnityEvent OnTakeLoan;
+    public UnityEvent OnLoanPayment;
 
-    private LoanData loanData;
+    private LoanObject loanObject;
 
-    public void setData(LoanData data)
+    public void SetData(LoanObject loanObject, LoanData loanData)
     {
         // Set loan data.
-        loanData = data;
-
-        // Set isLocked and debt.
-        bool isLocked = loanData.isLocked();
-        int debt = loanData.getDebt();
+        this.loanObject = loanObject;
 
         // Set title text and cost text.
-        titleText.text = loanData.getName();
-        costText.text = loanData.getAmount().ToString();
+        titleText.text = loanObject.LoanName;
+        costText.text = loanObject.Amount.ToString();
+
+        // Set unlock round.
+        int unlockRound = loanObject.UnlockRound;
 
         // Show locked content.
-        if (isLocked)
+        if (GameDataManager.instance.GameData.RoundNumber < unlockRound)
         {
-            lockedText.text = "Unlocks at round " + loanData.getUnlockRound() + ".";
+            lockedText.text = "Unlocks at round " + unlockRound + ".";
             lockedContent.SetActive(true);
             return;
         }
+
+        // Set debt.
+        int debt = loanData != null ? loanData.Debt : 0;
 
         // Show taken content.
         if (debt > 0)
         {
             takenDebtCost.text = debt.ToString();
-            takenLoanImage.sprite = loanData.getSprite();
+            takenLoanImage.sprite = loanObject.Sprite;
             takenContent.SetActive(true);
             return;
         }
 
         // Show unlocked content.
-        unlockedLoanImage.sprite = loanData.getSprite();
+        unlockedLoanImage.sprite = loanObject.Sprite;
         unlockedContent.SetActive(true);
     }
 
     // Play take loan sound effect, take loan and invoke onTakeLoan.
-    public void onTake()
+    public void OnTake()
     {
-        SoundManager.instance.playSoundEffect(takeLoanSoundEffect, transform, 1f);
-        loanData.takeLoan();
-        onTakeLoan.Invoke();
+        SoundManager.instance.PlaySoundEffect(takeLoanSoundEffect, transform, volume: 1f);
+        GameDataManager.instance.GameData.TakeLoan(loanObject);
+        OnTakeLoan.Invoke();
     }
 
     // Play make payment sound effect, invoke onLoanPayment.
-    public void onPayment()
+    public void OnPayment()
     {
-        SoundManager.instance.playSoundEffect(makePaymentSoundEffect, transform, 1f);
-        onLoanPayment.Invoke();
+        OnLoanPayment.Invoke();
     }
 }

@@ -1,13 +1,8 @@
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-  // Start is called once before the first execution of Update after the MonoBehaviour is created
-  void Start()
-  {
-    roundManager = GameObject.Find("RoundManager").GetComponent<RoundManager>();
-  }
-
   public PathNode currentNode; // The waypoint the object is moving toward
   [SerializeField] private float speed;
   [SerializeField] private float health;
@@ -16,44 +11,75 @@ public class EnemyMovement : MonoBehaviour
   [Header("Sounds")]
   [SerializeField] private AudioClip enemyKilledSoundEffect;
 
+  [Header("Animator")]
+  [SerializeField] private Animator animator;
+
   private RoundManager roundManager;
   private float baseSpeed;
   private float maxHealth;
   private bool isBlocked = false;
+  private bool isDead = false;
   private int killReward;
+  private PathNode distractionNode;
+  private PathNode previousNode;
 
   public float Health => health; // read only access
+  public PathNode PreviousNode => previousNode;
 
-  // Update is called once per frame
+  void Start()
+  {
+    roundManager = RoundManager.instance;
+  }
+
   void FixedUpdate()
   {
     if (currentNode == null || isBlocked) return;
 
+    Vector3 direction;
+
+    // Move toward the current waypoint
+    if (distractionNode != null)
+    {
+      // Rotate toward the next waypoint
+      direction = distractionNode.transform.position - transform.position;
+      if (direction != Vector3.zero)
+      {
+        transform.forward = Vector3.Lerp(transform.forward, direction.normalized, Time.deltaTime * 5f);
+      }
+
+      transform.position = Vector3.MoveTowards(transform.position, distractionNode.transform.position, speed * Time.deltaTime);
+
+      return;
+    }
+
     // Rotate toward the next waypoint
-    Vector3 direction = currentNode.transform.position - transform.position;
+    direction = currentNode.transform.position - transform.position;
     if (direction != Vector3.zero)
     {
       transform.forward = Vector3.Lerp(transform.forward, direction.normalized, Time.deltaTime * 5f);
     }
 
-    // Move toward the current waypoint
     transform.position = Vector3.MoveTowards(transform.position, currentNode.transform.position, speed * Time.deltaTime);
 
     // If close enough, pick the next waypoint
     if (Vector3.Distance(transform.position, currentNode.transform.position) < 0.1f)
     {
       var nextNode = currentNode.GetNextNode();
+
       if (nextNode != null)
       {
+        previousNode = currentNode;
         currentNode = currentNode.GetNextNode();
       }
       else  // enemy has reached Allen fieldhouse
       {
 
-        if (roundManager != null)
+        if (!isDead)
         {
-          roundManager.EnemyDefeated();
-          roundManager.damageFieldhouse(health);
+          isDead = true;
+
+          roundManager.DamageFieldhouse(health);
+          roundManager.EnemyDefeated(this);
         }
 
         Destroy(gameObject);
@@ -65,7 +91,7 @@ public class EnemyMovement : MonoBehaviour
   private void OnTriggerEnter(Collider other)
   {
     if (!other.TryGetComponent(out DefensePlacementController placementController)) return;
-    if (!placementController.isPlaced()) return;
+    if (!placementController.Placed) return;
 
     if (other.TryGetComponent(out IDefense defenseEffect))
     {
@@ -76,7 +102,7 @@ public class EnemyMovement : MonoBehaviour
   private void OnTriggerExit(Collider other)
   {
     if (!other.TryGetComponent(out DefensePlacementController placementController)) return;
-    if (!placementController.isPlaced()) return;
+    if (!placementController.Placed) return;
 
     if (other.TryGetComponent(out IDefense defenseEffect))
     {
@@ -104,7 +130,6 @@ public class EnemyMovement : MonoBehaviour
   public void TakeDamage(float amount)
   {
     health -= amount;
-    //Debug.Log("Enemy took damage. Current Health: " + health);
     healthBar.UpdateHealthBar(health, maxHealth);
     if (health <= 0)
     {
@@ -114,20 +139,19 @@ public class EnemyMovement : MonoBehaviour
 
   private void Die()
   {
-    Debug.Log("Enemy died.");
-
-    if (roundManager != null)
+    if (!isDead)
     {
-      roundManager.EnemyDefeated();
-      roundManager.addCoins(killReward);
+      isDead = true;
+
+      roundManager.EnemyDefeated(this);
+      roundManager.AddCoins(killReward);
     }
-    SoundManager.instance.playSoundEffect(enemyKilledSoundEffect, transform, .5f);
+    SoundManager.instance.PlaySoundEffect(enemyKilledSoundEffect, transform);
     Destroy(gameObject); // Or trigger a death animation, effects, etc.
   }
 
   public void SetSpeedMultiplier(float multiplier)
   {
-    Debug.Log($"Enemy speed changed to: {speed * multiplier}");
     speed = baseSpeed * multiplier;
   }
 
@@ -138,31 +162,21 @@ public class EnemyMovement : MonoBehaviour
 
   public void BlockMovement(bool isBlocked)
   {
+    if (animator)
+    {
+      animator.SetBool("Idle", isBlocked);
+    }
+
     this.isBlocked = isBlocked;
   }
 
-  /*private void OnEnable()
+  public void SetDistraction(PathNode distraction)
   {
-      if (AbilityManager.Instance != null)
-      {
-          AbilityManager.Instance.RegisterEnemy(this);
-      }
+    distractionNode = distraction;
   }
 
-  private void OnDisable()
+  public void ClearDistraction()
   {
-      if (AbilityManager.Instance != null)
-      {
-          AbilityManager.Instance.UnregisterEnemy(this);
-      }
-  }*/
-  private void OnEnable()
-{
-    AbilityManager.Instance?.RegisterEnemy(this);
-}
-
-private void OnDisable()
-{
-    AbilityManager.Instance?.UnregisterEnemy(this);
-}
+    distractionNode = null;
+  }
 }

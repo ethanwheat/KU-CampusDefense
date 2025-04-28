@@ -11,29 +11,32 @@ public class LoanPanelController : MonoBehaviour
     [SerializeField] private GameObject loanInformationPanelPrefab;
 
     [Header("UI Controllers")]
-    [SerializeField] private BuildingSceneUIController buildingSceneUIController;
     [SerializeField] private MessagePopupPanelController messagePopupPanelController;
 
     [Header("Sounds")]
+    [SerializeField] private AudioClip makePaymentSoundEffect;
     [SerializeField] private AudioClip errorSoundEffect;
 
-    [Header("Game Data Controller")]
-    [SerializeField] private GameDataController gameDataController;
+    [Header("Game Data Object")]
+    [SerializeField] private GameDataObject gameDataObject;
 
     // Load purchase panel data.
-    public void showPanel()
+    public void ShowPanel()
     {
         // Update loan information panels.
-        updatePanel();
+        UpdatePanel();
 
         // Show panel
         gameObject.SetActive(true);
     }
 
-    void updatePanel()
+    void UpdatePanel()
     {
+        // Get game data.
+        GameData gameData = GameDataManager.instance.GameData;
+
         // Set debt text.
-        debtCostText.text = gameDataController.getDebt().ToString();
+        debtCostText.text = gameData.GetDebt().ToString();
 
         // Destroy previous loan information panels.
         foreach (Transform loanInformationPanel in loanInformation)
@@ -41,58 +44,61 @@ public class LoanPanelController : MonoBehaviour
             Destroy(loanInformationPanel.gameObject);
         }
 
-        // Get loan data.
-        LoanData[] loanData = gameDataController.getLoanData();
-
         // Create loan information panels.
-        for (int i = 0; i < loanData.Length; i++)
+        foreach (var loanObject in gameDataObject.LoanObjects)
         {
             // Create loan information panel, set position, set data, add onTakeLoan listener, onLoanPayment listener.
-            LoanData data = loanData[i];
+            LoanData loanData = gameData.GetLoanData(loanObject.LoanName);
             GameObject loanInformationPanel = Instantiate(loanInformationPanelPrefab, loanInformation);
             LoanInformationPanelController loanInformationPanelController = loanInformationPanel.GetComponent<LoanInformationPanelController>();
-            loanInformationPanel.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, -80 * i - 37.5f, 0);
-            loanInformationPanelController.setData(data);
-            loanInformationPanelController.onTakeLoan.AddListener(refreshUI);
-            loanInformationPanelController.onLoanPayment.AddListener(() => onPayment(data));
+
+            loanInformationPanelController.SetData(loanObject, loanData);
+            loanInformationPanelController.OnTakeLoan.AddListener(RefreshUI);
+            loanInformationPanelController.OnLoanPayment.AddListener(() => OnPayment(loanObject, loanData));
         }
     }
 
     // Update dollar UI and update panel.
-    void refreshUI()
+    void RefreshUI()
     {
-        buildingSceneUIController.updateDollarUI();
-        updatePanel();
+        BuildingSceneUIController.instance.UpdateDollarUI();
+        UpdatePanel();
     }
 
     // Make payment
-    void onPayment(LoanData loanData)
+    void OnPayment(LoanObject loanObject, LoanData loanData)
     {
+        // Get game data.
+        GameData gameData = GameDataManager.instance.GameData;
+
         // Get loan name, dollars, and debt.
-        string loanName = loanData.getName();
-        int dollars = gameDataController.getDollarAmount();
-        int debt = loanData.getDebt();
+        string loanName = loanObject.LoanName;
+        int dollars = gameData.Dollars;
+        int debt = loanData.Debt;
 
         // Check if user has money.
         if (dollars > 0)
         {
             // Pay what user can.
-            loanData.payDebt(Mathf.Clamp(dollars, 0, debt));
+            gameData.PayDebtOnLoan(loanData, Mathf.Clamp(dollars, 0, debt));
+
+            // Play sound effect.
+            SoundManager.instance.PlaySoundEffect(makePaymentSoundEffect, transform, volume: 1f);
 
             // Refresh UI.
-            refreshUI();
+            RefreshUI();
 
             return;
         }
 
         // Show error popup panel if user has no money and close panel.
-        SoundManager.instance.playSoundEffect(errorSoundEffect, transform, 1f);
-        messagePopupPanelController.showPanel("Insufficient Dollars", "You do not have enough dollars to make a payment on " + loanName + "!");
-        closePanel();
+        SoundManager.instance.PlaySoundEffect(errorSoundEffect, transform, volume: 1f);
+        messagePopupPanelController.ShowPanel("Insufficient Dollars", "You do not have enough dollars to make a payment on " + loanName + "!");
+        ClosePanel();
     }
 
     // Close purchase panel.
-    public void closePanel()
+    public void ClosePanel()
     {
         gameObject.SetActive(false);
     }

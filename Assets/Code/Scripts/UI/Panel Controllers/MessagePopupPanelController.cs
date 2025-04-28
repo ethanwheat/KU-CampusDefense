@@ -1,14 +1,21 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class MessagePopupPanelController : MonoBehaviour
 {
+    [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI headerText;
     [SerializeField] private TextMeshProUGUI messageText;
 
+    [Header("Unity Events")]
+    public UnityEvent OnClose;
+
     // Show message popup panel and set message popup panel data.
-    public void showPanel(string title, string message)
+    public void ShowPanel(string title, string message)
     {
+        OnClose.RemoveAllListeners();
+
         headerText.text = title;
         messageText.text = message;
 
@@ -16,8 +23,9 @@ public class MessagePopupPanelController : MonoBehaviour
     }
 
     // Close message popup panel.
-    public void closePanel()
+    public void ClosePanel()
     {
+        OnClose.Invoke();
         gameObject.SetActive(false);
     }
 }

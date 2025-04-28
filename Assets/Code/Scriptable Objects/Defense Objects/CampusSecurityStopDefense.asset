@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637175a8e599b204fbdb4e6f9dd3c859, type: 3}
+  m_Name: CampusSecurityStopDefense
+  m_EditorClassIdentifier: 
+  objectName: Campus Security Stop
+  description: 'Blocks all types of defenders, breaks eventually. Buffed Barrier. '
+  dollarCost: 700
+  unlockRound: 8
+  sprite: {fileID: -374382209, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
+  isShownInDefensePanel: 1
+  coinCost: 20
+  level1UpgradeDollarCost: 100
+  level2UpgradeDollarCost: 200
+  level3UpgradeDollarCost: 300
+  prefab: {fileID: 2140155049482576194, guid: 85aba6bc07ee65b428df036642398227, type: 3}
