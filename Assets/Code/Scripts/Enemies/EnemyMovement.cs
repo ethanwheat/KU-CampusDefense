@@ -78,8 +78,8 @@ public class EnemyMovement : MonoBehaviour
         {
           isDead = true;
 
-          roundManager.EnemyDefeated(this);
           roundManager.DamageFieldhouse(health);
+          roundManager.EnemyDefeated(this);
         }
 
         Destroy(gameObject);

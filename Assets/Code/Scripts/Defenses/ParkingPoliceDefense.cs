@@ -7,13 +7,11 @@ public class ParkingPoliceDefense : Defense, IDefense
     [Header("Ticket Settings")]
     [SerializeField] private float ticketDelay = 1.0f; // time before sending enemy back
     [SerializeField] private float blockDuration = 2.0f; // how long they’re blocked total
-    [SerializeField] private int coinReward = 10;
 
     private IEnumerator TicketAndSendBack(EnemyMovement enemy)
     {
         enemy.BlockMovement(true); // Stop them
-        RoundManager.instance.AddCoins(coinReward);
-        RoundSceneCanvasController.instance.UpdateCoinUI();
+
         yield return new WaitForSeconds(ticketDelay);
 
         // Try to send them back

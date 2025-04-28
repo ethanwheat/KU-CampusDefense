@@ -2440,6 +2440,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2674702369896114624, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 709661163}
     - target: {fileID: 3108418566794125900, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: roundScene
       value: 1
@@ -2452,6 +2456,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 709661163}
+    - target: {fileID: 3162527399280923777, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: m_VersionIndex
+      value: 5530
+      objectReference: {fileID: 0}
+    - target: {fileID: 3788346218951016818, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1482966795}
     - target: {fileID: 4114736801110063640, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: roundScene
       value: 1
@@ -2460,10 +2472,18 @@ PrefabInstance:
       propertyPath: isRoundScene
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4157022734586193034, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1405187016}
     - target: {fileID: 4239162906248363795, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1482966795}
+    - target: {fileID: 4239162906248363795, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: m_VersionIndex
+      value: 4521
+      objectReference: {fileID: 0}
     - target: {fileID: 4391478199591739696, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: roundScene
       value: 1
@@ -2472,6 +2492,14 @@ PrefabInstance:
       propertyPath: isRoundScene
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4597816594094251284, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1405187016}
+    - target: {fileID: 4862563130582249995, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1482966795}
     - target: {fileID: 5270084209560974742, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: roundScene
       value: 1
@@ -2520,6 +2548,10 @@ PrefabInstance:
       propertyPath: defenseData
       value: 
       objectReference: {fileID: 11400000, guid: 628e1d1d39bb54e4c964c113b6cc5650, type: 2}
+    - target: {fileID: 7900247741278158953, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 709661163}
     - target: {fileID: 8264010799865620296, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
       propertyPath: roundScene
       value: 1
@@ -2556,6 +2588,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1405187016}
+    - target: {fileID: 9006412169711066408, guid: 057c98b846982ec47be0cd75cd7d8936, type: 3}
+      propertyPath: m_VersionIndex
+      value: 4994
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
