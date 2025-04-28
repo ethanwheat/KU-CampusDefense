@@ -14,7 +14,7 @@ public class LoanData
 
     public void SetDebt(int amount)
     {
-        Debt = Mathf.Max(0, Debt - amount);
+        Debt = Mathf.Max(0, amount);
     }
 
     public void SubtractDebt(int amount)

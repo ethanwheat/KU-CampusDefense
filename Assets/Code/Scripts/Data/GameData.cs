@@ -131,6 +131,8 @@ public class GameData
                 remaining -= payment;
             }
         }
+
+        TriggerAutosave();
     }
 
     public void TriggerAutosave()
