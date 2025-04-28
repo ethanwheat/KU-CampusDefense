@@ -63,7 +63,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 2
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -131,7 +131,7 @@ MonoBehaviour:
       m_Rotation: 0
       m_Anchor: 9
     m_Material: {fileID: 0}
-    m_SubmeshIndex: 0
+    m_SubmeshIndex: 3
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
@@ -405,10 +405,10 @@ MonoBehaviour:
   - {x: -0.57357633, y: 0, z: 0.8191521, w: -1}
   - {x: -0.57357633, y: 0, z: 0.8191521, w: -1}
   - {x: -0.57357633, y: 0, z: 0.8191521, w: -1}
-  - {x: 0.8191521, y: 0, z: 0.5735764, w: -1}
-  - {x: 0.8191521, y: 0, z: 0.5735764, w: -1}
-  - {x: 0.8191521, y: 0, z: 0.5735764, w: -1}
-  - {x: 0.8191521, y: 0, z: 0.5735764, w: -1}
+  - {x: 0.8191521, y: 0, z: 0.57357633, w: -1}
+  - {x: 0.8191521, y: 0, z: 0.57357633, w: -1}
+  - {x: 0.8191521, y: 0, z: 0.57357633, w: -1}
+  - {x: 0.8191521, y: 0, z: 0.57357633, w: -1}
   - {x: 0.5735764, y: 0, z: -0.8191521, w: -1}
   - {x: 0.5735764, y: 0, z: -0.8191521, w: -1}
   - {x: 0.5735764, y: 0, z: -0.8191521, w: -1}
@@ -416,11 +416,11 @@ MonoBehaviour:
   - {x: 0.8191521, y: 0, z: 0.5735764, w: -1}
   - {x: 0.8191521, y: 0, z: 0.5735764, w: -1}
   - {x: 0.8191521, y: 0, z: 0.5735764, w: -1}
-  - {x: 0.8191521, y: 0, z: 0.5735764, w: -1}
-  - {x: -0.8191521, y: 0, z: -0.5735764, w: -1}
-  - {x: -0.8191521, y: 0, z: -0.5735764, w: -1}
-  - {x: -0.8191521, y: 0, z: -0.5735764, w: -1}
-  - {x: -0.8191521, y: 0, z: -0.5735764, w: -1}
+  - {x: 0.8191521, y: 0, z: 0.57357633, w: -1}
+  - {x: -0.819152, y: 0, z: -0.57357657, w: -1}
+  - {x: -0.81915194, y: 0, z: -0.5735766, w: -1}
+  - {x: -0.81915194, y: 0, z: -0.5735766, w: -1}
+  - {x: -0.81915194, y: 0, z: -0.5735766, w: -1}
   m_Colors: []
   m_UnwrapParameters:
     m_HardAngle: 88
@@ -430,7 +430,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 5361
+  m_VersionIndex: 5369
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -482,8 +482,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7eefb4196483b409581af3fad54f1b9b, type: 2}
-  - {fileID: 2100000, guid: 7eefb4196483b409581af3fad54f1b9b, type: 2}
+  - {fileID: 2100000, guid: 22523b2bed9954cde88eea801fb383d0, type: 2}
+  - {fileID: 2100000, guid: a973d03f1e38e4e119252054091e98a7, type: 2}
+  - {fileID: 2100000, guid: 22523b2bed9954cde88eea801fb383d0, type: 2}
+  - {fileID: 2100000, guid: 34d20173b95334880be4bcf1b18aa110, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
