@@ -19,6 +19,7 @@ public class BlockadeDefense : Defense, IDefense
             {
                 enemy.TakeDamage(damageToEnemy * Time.deltaTime);
             }
+
         }
     }
 
