@@ -11,11 +11,14 @@ public class BlockadeDefense : Defense, IDefense
 
     private void OnTriggerStay(Collider other)
     {
-        SubtractHealth(damageToDefense * Time.deltaTime);
-
-        if (other.TryGetComponent(out EnemyMovement enemy))
+        if (enabled)
         {
-            enemy.TakeDamage(damageToEnemy * Time.deltaTime);
+            SubtractHealth(damageToDefense * Time.deltaTime);
+
+            if (other.TryGetComponent(out EnemyMovement enemy))
+            {
+                enemy.TakeDamage(damageToEnemy * Time.deltaTime);
+            }
         }
     }
 
