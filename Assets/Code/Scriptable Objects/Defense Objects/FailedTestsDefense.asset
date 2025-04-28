@@ -19,7 +19,7 @@ MonoBehaviour:
   unlockRound: 26
   sprite: {fileID: -817306887, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
   isShownInDefensePanel: 1
-  coinCost: 100
+  coinCost: 250
   level1UpgradeDollarCost: 150
   level2UpgradeDollarCost: 300
   level3UpgradeDollarCost: 350
