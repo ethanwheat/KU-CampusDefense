@@ -525,6 +525,7 @@ MonoBehaviour:
   defenseObject: {fileID: 11400000, guid: df3b93bc15d664bf8aa13a7b0d453fa9, type: 2}
   healthBar: {fileID: 3961962012459600086}
   destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
+  timedHealth: 0
   maxHealth: 100
   healthIncreasePerLevel: 50
   damageToDefense: 10
