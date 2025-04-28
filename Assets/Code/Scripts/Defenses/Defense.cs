@@ -45,6 +45,11 @@ public class Defense : MonoBehaviour
 
     public virtual void Update()
     {
+        DefenseUpdate();
+    }
+
+    public void DefenseUpdate()
+    {
         if (timedHealth)
         {
             timeElapsed += Time.deltaTime;

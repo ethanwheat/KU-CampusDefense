@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 85849238900327038}
   - component: {fileID: 883008618684172463}
   m_Layer: 0
-  m_Name: BusRide
+  m_Name: BusRideAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

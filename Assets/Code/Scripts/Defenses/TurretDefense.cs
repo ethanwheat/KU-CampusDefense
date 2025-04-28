@@ -4,7 +4,10 @@ using UnityEngine;
 public class TurretDefense : Defense, IDefense
 {
     [Header("Turret Prefabs")]
-    [SerializeField] private GameObject bulletPrefab; // Reference to the bullet prefab
+    [SerializeField] private GameObject projectilePrefab; // Reference to the projectile prefab
+
+    [Header("Turrent Game Objects")]
+    [SerializeField] private Transform firePoint; // Point where projectiles are spawned
 
     [Header("Turret Sounds")]
     [SerializeField] private AudioClip shootSoundEffect;
@@ -12,7 +15,6 @@ public class TurretDefense : Defense, IDefense
     [Header("Turret Settings")]
     [SerializeField] private bool faceEnemy = true;
     [SerializeField] private float fireRate = 1f; // Shots per second
-    [SerializeField] private Transform firePoint; // Point where bullets are spawned
 
     private List<EnemyMovement> enemiesInRange = new List<EnemyMovement>();
     private float fireCountdown = 0f;
@@ -96,28 +98,28 @@ public class TurretDefense : Defense, IDefense
         }
     }
 
-    private void Shoot(EnemyMovement target)
+    public void Shoot(EnemyMovement target)
     {
         if (target == null)
         {
             return;
         }
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        bullet.transform.parent = RoundManager.instance.ProjectilesParent;
-        if (bullet.TryGetComponent(out TrackedProjectile projectileScript))
+        GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        projectile.transform.parent = RoundManager.instance.ProjectilesParent;
+        if (projectile.TryGetComponent(out TrackedProjectile projectileScript))
         {
             projectileScript.SetTarget(target);
         }
         SoundManager.instance.PlaySoundEffect(shootSoundEffect, transform);
     }
 
-    public void ApplyEffect(EnemyMovement enemy)
+    public virtual void ApplyEffect(EnemyMovement enemy)
     {
         // Not needed for turret, but required by IDefense
     }
 
-    public void RemoveEffect(EnemyMovement enemy)
+    public virtual void RemoveEffect(EnemyMovement enemy)
     {
         // Not needed for turret, but required by IDefense
     }

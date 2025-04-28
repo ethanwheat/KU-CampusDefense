@@ -1479,11 +1479,11 @@ MonoBehaviour:
   timedHealth: 1
   maxHealth: 30
   healthIncreasePerLevel: 10
-  bulletPrefab: {fileID: 7060852915085511669, guid: 3736b943e986a7640a18d0c4a67adb1d, type: 3}
-  shootSoundEffect: {fileID: 8300000, guid: 4e1bcd796b2fdfb4c87a08dca80651c3, type: 3}
+  projectilePrefab: {fileID: 7060852915085511669, guid: 3736b943e986a7640a18d0c4a67adb1d, type: 3}
+  firePoint: {fileID: 9147194605902880378}
+  shootSoundEffect: {fileID: 8300000, guid: 765296e36813ce243af94f3d30f5358b, type: 3}
   faceEnemy: 0
   fireRate: 1
-  firePoint: {fileID: 9147194605902880378}
 --- !u!1 &8138106750974390294
 GameObject:
   m_ObjectHideFlags: 0

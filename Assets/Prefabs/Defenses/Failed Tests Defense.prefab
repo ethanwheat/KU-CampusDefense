@@ -198,6 +198,7 @@ Transform:
   - {fileID: 6362546557881779375}
   - {fileID: 7909737463671845885}
   - {fileID: 68160039524736108}
+  - {fileID: 5917075396016368805}
   m_Father: {fileID: 638891184736530112}
   m_LocalEulerAnglesHint: {x: 0, y: -0.65, z: 0}
 --- !u!1 &1053641176157614273
@@ -542,7 +543,12 @@ MonoBehaviour:
   timedHealth: 1
   maxHealth: 30
   healthIncreasePerLevel: 10
-  eliminatePercent: 0.1
+  projectilePrefab: {fileID: 3333216577341784471, guid: f4f59fbfe838a994ab264103522ad355, type: 3}
+  firePoint: {fileID: 5917075396016368805}
+  shootSoundEffect: {fileID: 8300000, guid: 9c5cdca2f60ff354ca507eff513c4213, type: 3}
+  faceEnemy: 1
+  fireRate: 1
+  eliminatePercent: 0.25
 --- !u!1 &2046196867319474922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1765,6 +1771,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2928550270272428438}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5857146178763989702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5917075396016368805}
+  m_Layer: 7
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5917075396016368805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857146178763989702}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.0056722527, z: -0, w: 0.99998397}
+  m_LocalPosition: {x: -1.5, y: 3.5, z: 0}
+  m_LocalScale: {x: 3.3333337, y: 3.3333335, z: 3.3333337}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5023495347914513407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5880421529008322668
 GameObject:

@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 3605942521483058560}
   - component: {fileID: 4124577006885858301}
   m_Layer: 7
-  m_Name: Bullet
+  m_Name: Bullet Projectile
   m_TagString: NoHealthDefense
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,21 +1,26 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))] // optional but helpful
-public class FailedTestsDefense : Defense, IDefense
+public class FailedTestsDefense : TurretDefense, IDefense
 {
     [Header("Failed Tests Settings")]
-    [SerializeField] private float eliminatePercent = 0.1f;
+    [SerializeField] private float eliminatePercent = 0.25f;
 
-    public void ApplyEffect(EnemyMovement enemy)
+    public override void Update()
+    {
+        DefenseUpdate();
+    }
+
+    public override void ApplyEffect(EnemyMovement enemy)
     {
         float roll = Random.value;
         if (roll < eliminatePercent)
         {
-            enemy.TakeDamage(enemy.Health);
+            Shoot(enemy);
         }
     }
 
-    public void RemoveEffect(EnemyMovement enemy)
+    public override void RemoveEffect(EnemyMovement enemy)
     {
         // Not needed for librarian, but required by IDefense
     }
