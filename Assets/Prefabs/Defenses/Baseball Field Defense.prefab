@@ -48,8 +48,9 @@ MonoBehaviour:
   defenseObject: {fileID: 11400000, guid: 628e1d1d39bb54e4c964c113b6cc5650, type: 2}
   healthBar: {fileID: 815069342759200676}
   destroySoundEffect: {fileID: 8300000, guid: 412f51b852eebf346a897f9a64f708dd, type: 3}
+  timedHealth: 0
   maxHealth: 100
-  healthIncreasePerLevel: 50
+  healthIncreasePerLevel: 0
   ballsPerWave: 6
   ballsIncreasePerLevel: 2
   timeBetweenBaseballs: 1
