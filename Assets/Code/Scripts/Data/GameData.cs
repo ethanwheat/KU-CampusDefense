@@ -112,24 +112,24 @@ public class GameData
     // Pay debt on all loans.
     public void PayDebtOnAllLoans(int amount)
     {
-        List<LoanData> loanDataCopy = new List<LoanData>();
-
         int remaining = amount;
 
-        foreach (var data in loanDataCopy)
+        for (int i = LoanData.Count - 1; i >= 0; i--)
         {
-            int debt = data.Debt;
+            LoanData loanData = LoanData[i];
+
+            int debt = loanData.Debt;
 
             if (remaining > 0 && debt > 0)
             {
                 int payment = Mathf.Min(remaining, debt);
                 int newDebt = debt - payment;
 
-                data.SetDebt(newDebt);
+                loanData.SetDebt(newDebt);
 
                 if (newDebt == 0)
                 {
-                    LoanData.Remove(data);
+                    LoanData.Remove(loanData);
                 }
 
                 remaining -= payment;
