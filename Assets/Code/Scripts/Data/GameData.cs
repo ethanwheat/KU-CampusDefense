@@ -117,6 +117,8 @@ public class GameData
         for (int i = LoanData.Count - 1; i >= 0; i--)
         {
             LoanData loanData = LoanData[i];
+
+
             int debt = loanData.Debt;
 
             if (remaining > 0 && debt > 0)
