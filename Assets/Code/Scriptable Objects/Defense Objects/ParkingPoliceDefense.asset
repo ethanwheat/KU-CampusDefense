@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: ParkingPoliceDefense
   m_EditorClassIdentifier: 
   objectName: Parking Police
-  description: Hands out parking tickets to enemies and sends them back  Give a coin
-    reward for each enemy that is given a ticket.
+  description: Hands out parking tickets to enemies and sends them back.
   dollarCost: 1300
   unlockRound: 14
   sprite: {fileID: -1231506490, guid: cd2150555e15ee240baf623d7b7afb24, type: 3}
