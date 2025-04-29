@@ -118,7 +118,6 @@ public class GameData
         {
             LoanData loanData = LoanData[i];
 
-
             int debt = loanData.Debt;
 
             if (remaining > 0 && debt > 0)
